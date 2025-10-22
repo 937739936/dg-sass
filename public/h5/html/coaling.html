@@ -1,0 +1,127 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="数链科技"/>
+  <meta name="description" content="数链科技"/>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="x-rim-auto-match" content="none">
+  <meta name="format-detection" content="telephone=no,address=no,email=no">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="handheldFriendly" content="true">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Cache" content="no-cache">
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <link rel="stylesheet" href="../css/common/alertTips.css">
+  <link rel="stylesheet" href="../css/coaling.css">
+  <title>数链科技</title>
+</head>
+<body class="none">
+  <div class="global-resize-page" @vue:mounted='mounted'>
+    <div class="body-content">
+      <section class="compay-card">
+        <div class="row title">
+          <span class="coal" v-if="data.type =='IN'">入库：{{data.coalType}}</span>
+          <span class="coal out" v-if="data.type =='OUT'">出库：{{data.coalType}}</span>
+          <span class="station">{{data.stationName}}</span>
+        </div>
+        <div class="row line">
+          <i class="icon receive-icon"></i>
+          <span>{{data.receivingCompanyName}}</span>
+        </div>
+        <div class="row">
+          <i class="icon send-icon"></i>
+          <span>{{data.deliveryCompanyName}}</span>
+        </div>
+        <!-- <div class="text">
+          {{data.sendStation}}  {{data.stationName}} 
+        </div>
+        <div class="text">
+          {{data.house}} {{data.goodsAllocation}} {{data.coalType}} 
+          <span v-if="data.shipperMobile">货主电话:{{data.shipperMobile}}</span>
+        </div>
+        <div class="text" v-if="data.remark">
+          备注：{{data.remark}}
+        </div> -->
+      </section>
+      <div class="form">
+        <div class="form-item">
+          <span class="label">车牌号码</span>
+          <div class="input license-input" >
+            <div 
+              class="key" 
+              v-for="item,index in submitData.licensePlateNumber"
+              @click="showLicense(index==0?'province':'code',index)" 
+              :tabindex="index"
+            >{{item}}</div>
+          </div>
+        </div>
+      </div>
+      <a 
+        href="javascript:;" 
+        class="submit-btn disabled" 
+        v-if="data.status == 'FINISHED'"
+        @click="onConfirm"
+      >提交</a>
+      <a 
+        href="javascript:;" 
+        class="submit-btn" 
+        @click="onConfirm"
+        v-if="data.status != 'FINISHED'"
+      >{{saveLoading ? '提交中...':'提交'}}</a>
+    </div>
+    
+    <div class="bottom-text">创建时间：{{data.createdDate}}</div>
+    <div class="bottom-text">编号：{{data.serialNo}}</div>
+    <div class="pd27"></div>
+    
+  </div>
+  <div :class="{'modal-wrap':true,'show':visible=='success'}">
+    <div class="modal success">
+      <div class="content">
+          <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="128" height="128" fill="white" fill-opacity="0.01"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6362 65.3868C11.6362 35.7117 35.6988 11.6367 65.3863 11.6367C95.0738 11.6367 119.136 35.6992 119.136 65.3868C119.136 95.0743 95.0613 119.137 65.3863 119.137C35.7113 119.137 11.6362 95.0618 11.6362 65.3868ZM63.1363 80.4368L91.1988 52.3743C92.6863 50.8743 92.6863 48.4493 91.1863 46.9493C89.6863 45.4493 87.2613 45.4493 85.7613 46.9493L59.9738 72.7493C58.7238 73.9993 56.6988 73.9993 55.4488 72.7493L46.8488 64.1493C45.3488 62.6493 42.9238 62.6493 41.4238 64.1493C39.9238 65.6493 39.9238 68.0743 41.4238 69.5743L53.1863 81.3368C55.6863 83.8368 59.7363 83.8368 62.2363 81.3368L63.1363 80.4368Z" fill="#4988FF"/>
+          </svg>
+          <div class="text">提交成功</div>
+      </div>
+      <div class="footer">
+        <a href="javascript:;" class="btn ok" @click="onOk">确定</a>
+      </div>
+    </div>
+  </div>
+  <div :class="{'modal-wrap':true,'show':visible=='confirm'}">
+    <div class="modal confirm">
+      <div class="content">
+        确认运输货物为{{data.coalType}}?
+      </div>
+      <div class="footer">
+        <a href="javascript:;" class="btn cancel" @click="onCancel">取消</a>
+        <a href="javascript:;" class="btn ok" @click="save">确定</a>
+      </div>
+    </div>
+  </div> 
+  <div :class="['license-modal',licenseVisiable ?'show':'']">
+    <div class="actions">
+      <span class="done" @click="closeLicenceModal">完成</span>
+    </div>
+    <div class="content">
+      <div class="row" v-for="row ,index in licenceData[licenceKey]">
+        <a href="javascript:;" class="key" v-for="key in row" @click="changeLicense(key)" >{{key}}</a>
+        <a  href="javascript:;" class="key close" v-if="index == licenceData[licenceKey].length -1" @click="delLicence">
+          <svg width="65" height="64" viewBox="0 0 65 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30.9287 27.0503C30.343 26.4645 30.343 25.5148 30.9287 24.929C31.5146 24.3431 32.4644 24.3431 33.05 24.929L38 29.8788L42.9497 24.929C43.5354 24.3431 44.4851 24.3431 45.071 24.929C45.6567 25.5146 45.6567 26.4645 45.071 27.0503L40.1211 32L45.071 36.9498C45.6567 37.5355 45.6567 38.4854 45.071 39.071C44.4851 39.6569 43.5354 39.6569 42.9497 39.071L38 34.1213L33.05 39.071C32.4644 39.6569 31.5146 39.6569 30.929 39.071C30.343 38.4852 30.343 37.5355 30.929 36.9497L35.8787 32.0001L30.9287 27.0503Z" fill="black" fill-opacity="0.8"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M24.7427 16.7573L9.5 32L24.7427 47.2427C25.8679 48.3679 27.394 49 28.9854 49H49.5C52.8137 49 55.5 46.3137 55.5 43V21C55.5 17.6863 52.8137 15 49.5 15H28.9854C27.394 15 25.8679 15.6322 24.7427 16.7573ZM49.5 46.4H28.9854C28.0835 46.4 27.2188 46.0417 26.5811 45.4042L13.177 32L26.5811 18.5958C27.2188 17.9583 28.0835 17.6 28.9854 17.6H49.5C51.3777 17.6 52.8999 19.1222 52.8999 21V43C52.8999 44.8778 51.3777 46.4 49.5 46.4Z" fill="black" fill-opacity="0.8"/>
+          </svg>
+        </a>
+      </ul>
+    </div>
+  </div>
+  <script src="../../jquery.min.js"></script>
+  <script src="../js/common/alertTips.js"></script>
+  <script src="../js/petite-vue/petite-vue.umd.js"></script>
+  <script src="../js/coaling.js"></script>
+</body>
+</html>

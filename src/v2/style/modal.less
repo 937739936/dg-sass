@@ -1,0 +1,47 @@
+.modal-wrap {
+  /deep/ .anticon-close {
+    display: none;
+  }
+  /deep/ .ant-modal-close-x {
+    background-image: url('~v2/assets/imgs/common/close_modal_icon.png');
+    background-position: center;
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+  }
+  /deep/ .ant-modal-header {
+    height: 58px;
+    background: rgba(243, 245, 246, 1);
+    border: none;
+  }
+  /deep/ .ant-modal-title {
+    font-weight: 500;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.8);
+    font-family: PingFang SC;
+  }
+  /deep/ .ant-modal-body {
+    padding: 0;
+  }
+  /deep/ .ant-modal-footer {
+    height: 64px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    .ant-btn {
+      min-width: 88px;
+    }
+  }
+  /deep/ .ant-modal-footer button + button {
+    margin-left: 20px;
+  }
+}
+.modal-wrap-no-cancel {
+  /deep/.ant-modal-footer {
+    .ant-btn:first-child {
+      display: none;
+    }
+  }
+}

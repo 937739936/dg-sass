@@ -1,0 +1,228 @@
+/** detail通用页面结构
+    <div class="new-detail">
+        <div class="top-box">
+            <div class="page-title">
+                xxx
+                <div class="back-icon" @click="$router.back()">返回</div>
+            </div>
+        </div>
+        <div class="divider"></div>
+            <div class="new-detail-content detail-form">
+                <a-row>
+                    <a-col span="6">
+                        <a-row>
+                            <a-form-item label="xxx">
+                            xxx
+                            </a-form-item>
+                        </a-row>
+                        <a-row>
+                            <a-form-item label="xxx">
+                            xxx
+                            </a-form-item>
+                        </a-row>
+                    </a-col>
+                </a-row>
+            </div>
+
+        <div class="new-detail-content"">
+            <h2>xxx</h2>
+            ...
+        </div>
+        ...
+        <div class="btn-box">
+            <div class="btn-wrap">
+                <a-button  type="primary" ghost>提交</a-button>
+            </div>
+        </div>
+    </div>
+*/
+
+.new-detail {
+    .top-box {
+        overflow: hidden;
+        background: #fff;
+        .page-title {
+            // margin-left: 15px;
+            margin-top: 17px;
+            margin-bottom: 10px;
+            color: rgba(0, 0, 0, 0.8);
+            ;
+            line-height: 24px;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .back-icon {
+            float: right;
+            font-size: 15px;
+            font-weight: normal;
+            margin-top: 5px;
+            margin-right: 8px;
+            cursor: pointer;
+            &::before {
+                content:'';
+                width: 18px;
+                height: 18px;
+                display: inline-block;
+                background-size: cover;
+                vertical-align: -3px;
+                background-image: url("~@/v2/assets/imgs/common/back.png");
+            }
+        }
+    }
+    .new-detail-content {
+        background: #fff;
+        margin-bottom: 20px;
+        padding: 14px 16px 17px 16px;
+        &.detail-form {
+            margin-bottom: 0;
+        }
+        h2,.title {
+            text-align: left;
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.8);
+            margin-bottom: 26px;
+            font-weight: 600;
+
+            &::before {
+                content: '';
+                width: 2px;
+                height: 16px;
+                background: @primary-color;
+                display: inline-block;
+                vertical-align: -3px;
+                margin-right: 12px;
+                border-top-left-radius: 2px;
+                border-bottom-left-radius: 2px;
+            }
+        }
+        
+    }
+    .new-table {
+        .ant-table-thead > tr > th {
+            background: #F5F7FD;
+            color: #8B9DB8;
+        }
+        .ant-table-body tr th {
+            color: #8B9DB8;
+        }
+        .ant-table-thead > tr > th {
+            border: none;
+        }
+        .ant-table-tbody > tr > td {
+            border-bottom: 1px solid #E9EFFC;
+        }
+        .ant-table-body > table {
+            border: none;
+        }
+        .ant-table-fixed {
+            border: none;
+        }
+        .ant-empty-normal {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 80px;
+        }
+        .ant-empty-image {
+            width: 120px;
+            height: 95px;
+            margin-bottom: 0;
+            svg {
+              display: none;
+            }
+        }
+        .ant-empty-image::before {
+            content: "";
+            width: 109px;
+            height: 81px;
+            display: inline-block;
+            background-image: url("~@/v2/assets/imgs/invoicetools/table-empty.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .ant-empty-image::after {
+            content: "当前没有任何数据哦去看看其他吧";
+            width: 127px;
+            height: auto;
+            display: inline-block;
+            text-align: center;
+            word-break: break-all;
+            position: relative;
+            top: 12px;
+            font-size: 14px;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: #8B9DB8;
+        }
+        .ant-empty-description {
+            display: none;
+        }
+    }
+    .divider {
+        width: 100%;
+        height: 1px;
+        background-color: #E9EFFC;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .detail-form .ant-form-item-label {
+        label {
+            color: #8495AA;
+            font-size: 14px;
+        }
+        label::after {
+            display:none;
+        }
+
+        margin-bottom: 0;
+    }
+    .detail-form .ant-form-item-children {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    .detail-form .ant-form-item-control {
+        min-height: 21px;
+    }
+
+    .detail-form .ant-table-column-title {
+        color: #8495AA;
+    }
+    .detail-form .ant-form-item {
+        margin-bottom: 12px;
+    }
+    .btn-box {
+        background: #ffffff !important;
+        border-radius: 8px;
+        padding: 20px 0;
+    }
+    .btn-box .btn-wrap {
+        margin: 0;
+    }
+    .ipt {
+        width: 364px;
+        height: 40px;
+        background: #F0F3FB;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #8495AA;
+        border: 0;
+      }
+      .fake-ipt {
+        width: 364px;
+        height: 40px;
+        background: #F0F3FB;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #8495AA;
+        border: 0;
+        padding: 4px 11px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+}
+
+

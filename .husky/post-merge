@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+
+const { execSync, spawn, exec } = require('child_process');
+
+
+
+function getMergeBranch() {
+  // 从 reflog 提取合并进来的分支名
+  function getBranchNameFromReflog(reflogMessage) {
+    const reg = /@\{\d+\}: merge (.*):/;
+    if(reflogMessage && reg.exec(reflogMessage)) {
+      return reg.exec(reflogMessage)[1];
+    }
+    return ''
+  }
+
+  const reflogMessage = execSync('git reflog -1', { encoding: 'utf8' });
+  const mergedBranchName = getBranchNameFromReflog(reflogMessage);
+  return mergedBranchName;
+}
+
+let  branchName = getMergeBranch()
+
+// 使用exec执行命令，并通过cwd选项设置工作目录
+const command = `git merge ${branchName}`;
+
+
+// 目标目录
+const cwd = 'submodules';
+
+if(branchName) {
+  exec(command, { cwd }, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`执行出错: ${error}`);
+      return;
+    }
+    console.log(`标准输出: ${stdout}`);
+    if (stderr) {
+      console.error(`标准错误: ${stderr}`);
+    }
+  });
+}
+
+
+

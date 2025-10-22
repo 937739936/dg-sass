@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "data": {
+    "totalLoanAmount": 1926661.90,
+    "loanInfoVoList": [{
+      "bankName": "善美保理",
+      "loanAmount": 308265.90,
+      "percentage": 0.16
+    }, {
+      "bankName": "北京银行",
+      "loanAmount": 154132.95,
+      "percentage": 0.08
+    }, {
+      "bankName": "平安银行",
+      "loanAmount": 327532.52,
+      "percentage": 0.17
+    }, {
+      "bankName": "光大银行",
+      "loanAmount": 404599.00,
+      "percentage": 0.21
+    }, {
+      "bankName": "自有资金",
+      "loanAmount": 732131.52,
+      "percentage": 0.38
+    }]
+  }
+}

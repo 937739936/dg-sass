@@ -1,0 +1,25 @@
+<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 654">
+<g id="&#229;&#143;&#145;&#232;&#191;&#144;">
+<circle id="&#230;&#164;&#173;&#229;&#156;&#134;&#229;&#189;&#162;" cx="36" cy="36" r="36" fill="#FFEAE1"/>
+</g>
+<g id="&#229;&#143;&#145;&#232;&#181;&#183;&#229;&#144;&#136;&#229;&#144;&#140;">
+<rect id="&#229;&#134;&#133;&#233;&#131;&#168;2" x="19.125" y="17.1094" width="33.75" height="37.7778" rx="4.5" fill="#ED5151"/>
+<g id="Mask group">
+<mask id="mask0_2886_53670" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="19" y="17" width="34" height="38">
+<rect id="&#229;&#134;&#133;&#233;&#131;&#168;" x="19.125" y="17.1133" width="33.75" height="37.7778" rx="4.5" fill="#FCD309"/>
+</mask>
+<g mask="url(#mask0_2886_53670)">
+<ellipse id="&#230;&#164;&#173;&#229;&#156;&#134;&#229;&#189;&#162;_2" opacity="0.2" cx="27.5625" cy="23.2235" rx="20.8125" ry="20.5556" fill="white"/>
+<ellipse id="&#230;&#164;&#173;&#229;&#156;&#134;&#229;&#189;&#162;_3" opacity="0.3" cx="27.5627" cy="23.224" rx="10.8225" ry="10.6889" fill="white"/>
+<path id="Vector 49" opacity="0.7" d="M27 26.0039H45" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 50" opacity="0.7" d="M27 32H39" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 54" opacity="0.7" d="M27 38H33" stroke="white" stroke-width="2" stroke-linecap="round"/>
+</g>
+</g>
+<rect id="&#230;&#143;&#143;&#232;&#190;&#185;" x="19" y="17" width="34" height="38" rx="3.5" stroke="#AA4A4A" stroke-width="2"/>
+<circle id="Ellipse 9" opacity="0.7" cx="44" cy="46" r="4.2" stroke="#FBD5D5" stroke-width="1.6"/>
+<path id="Vector 57" opacity="0.7" d="M43 46H45" stroke="#FBD5D5" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+</g>
+</svg>

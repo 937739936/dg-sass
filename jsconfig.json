@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "assets/*": ["src/assets/*"],
+            "imgs/*": ["src/assets/imgs/*"],
+            "views/*": ["src/views/*"],
+            "untils/*": ["src/untils/*"],
+            "api/*": ["src/api/*"],
+            "api*": ["src/api/*"],
+            "components/*": ["src/components/*"],
+        },
+        "target": "es6",
+        "allowSyntheticDefaultImports": true
+    },
+    "include": ["src/**/*.js","src/**/*.vue"],
+    "exclude": ["node_modules"]
+}

@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="数链科技"/>
+  <meta name="description" content="数链科技"/>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="x-rim-auto-match" content="none">
+  <meta name="format-detection" content="telephone=no,address=no,email=no">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="handheldFriendly" content="true">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Cache" content="no-cache">
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <link rel="stylesheet" href="../css/common/alertTips.css">
+  <link rel="stylesheet" href="../css/write_vehicle.css">
+  <title>数链科技</title>
+</head>
+<body>
+  <div class="global-resize-page none" @vue:mounted='mounted'>
+    <div class="body-content">
+      <section class="compay-card">
+        <div class="row">
+          <i class="icon receive-icon"></i>
+          <span>{{data.receivingCompanyName}}</span>
+        </div>
+        <div class="row">
+          <i class="icon send-icon"></i>
+          <span>{{data.deliveryCompanyName}}</span>
+        </div>
+        <div class="text">
+          {{data.sendStation}}  {{data.stationName}} 
+        </div>
+        <div class="text">
+          {{data.house}} {{data.goodsAllocation}} {{data.coalType}} 
+          <span v-if="data.shipperMobile">货主电话:{{data.shipperMobile}}</span>
+        </div>
+        <div class="text" v-if="data.remark">
+          备注：{{data.remark}}
+        </div>
+      </section>
+      <div class="form">
+        <div class="form-item">
+          <span class="label">车牌号</span>
+          <div class="input">
+            <input type="text" placeholder="请输入车牌号" v-model="submitData.licensePlateNumber" @blur="changeLicense" />
+          </div>
+        </div>
+        <div class="form-item">
+          <span class="label">手机号</span>
+          <div class="input">
+            <input type="text" placeholder="请输入手机号" v-model="submitData.driverMobile" />
+          </div>
+        </div>
+        <div class="form-item">
+          <span class="label">姓名</span>
+          <div class="input">
+            <input type="text" placeholder="请输入姓名" v-model="submitData.driverName" />
+          </div>
+        </div>
+      </div>
+      <a 
+        href="javascript:;" 
+        class="submit-btn disabled" 
+        v-if="data.status == 'FINISHED'"
+        @click="add"
+      >提交</a>
+      <a 
+        href="javascript:;" 
+        class="submit-btn" 
+        @click="add"
+        v-if="data.status != 'FINISHED'"
+      >{{saveLoading ? '提交中...':'提交'}}</a>
+    </div>
+    
+    <div class="bottom-text">创建时间：{{data.createdDate}}</div>
+    <div class="bottom-text">编号：{{data.serialNo}}</div>
+    <div class="pd27"></div>
+    
+  </div>
+  
+  <script src="../../jquery.min.js"></script>
+  <script src="../js/common/alertTips.js"></script>
+  <script src="../js/petite-vue/petite-vue.umd.js"></script>
+  <script src="../js/write_vehicle.js"></script>
+</body>
+</html>

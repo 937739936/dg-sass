@@ -1,0 +1,7 @@
+[auth]
+token=9e6681e476a648d6a2ea3a8edab9eb2b9dcff4a53d644737b984baf5ee117e7c
+
+[defaults]
+url=https://sentry.shanghaishulian.com/
+org=sentry
+project=rest

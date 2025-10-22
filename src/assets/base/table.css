@@ -1,0 +1,27 @@
+/*
+* @Author: zhangyazhou
+* @Date:   2021-03-19 14:03:10
+* @Last Modified by:   zhangyazhou
+* @Last Modified time: 2021-06-04 08:54:40
+*/
+.ant-table-body > table,.ant-table-fixed-left table,.ant-table-fixed-right table{
+  border: 1px solid #EEF0F2;
+  border-bottom: 0;
+  border-radius: 4px;
+}
+.ant-table-fixed-left table{
+  border-right: 0;
+}
+.ant-table-fixed-right table{
+  border: none;
+}
+.ant-table-thead > tr{
+  background: #F7F8FA;
+}
+.ant-table-thead > tr > th{
+  background: #F7F8FA;
+  padding:  12px 16px;
+}
+.ant-table-body tr th {
+  color: #333;
+}

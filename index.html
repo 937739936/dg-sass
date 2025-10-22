@@ -1,0 +1,79 @@
+<!--
+    注意：此index.html只在vite的本地dev环境下使用，真正需要修改请在public/index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="/public/favicon.ico">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>数链科技-大宗商品数字供应链服务平台</title>
+	  <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+	  <meta name="keywords" content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+    <script type="text/javascript">
+      window._AMapSecurityConfig = {
+          securityJsCode:'2a9b356fdcf67a0c59ba0ba6da137539', 
+      }
+    </script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c4aeac2b33af41a72874473226613edb"></script>
+    <script src="https://www.shdatalink.com/jquery.min.js"></script>
+
+
+  </head>
+  <body>
+    <div id="app">
+      <a>1111</a>
+    </div>
+    <script src="https://api.shipxy.com/h5/api/?v=3.0&k=7fe28a0f7dd74ae1a42732bf72fec752"></script>
+    <script type="module" src="/src/main.js"></script>
+    <!-- built files will be auto injected -->
+    <!-- <script src="https://turing.captcha.qcloud.com/TCaptcha.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/6.0.0/video.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="<%= BASE_URL %>hikvisionVideo/jsencrypt.min.js"></script> -->
+    <!-- <script src="<%= BASE_URL %>hikvisionVideo/jsWebControl-1.0.0.min.js"></script> -->
+    <script>
+      class MyClass {
+    constructor() {
+        this.element = document.querySelector('#app');
+        // 确保不在这里重复添加事件监听器
+        // this.addEventListeners();
+    }
+ 
+    addEventListeners() {
+        this.element.addEventListener('click', () => this.handleClick());
+    }
+ 
+    removeEventListeners() {
+        this.element.removeEventListener('click', () => this.handleClick());
+        // 注意：这种写法是错误的，因为你无法准确指定你想移除的箭头函数，因为每个箭头函数都是不同的函数对象。
+    }
+ 
+    handleClick() {
+        console.info('Clicked!');
+    }
+ 
+    render() {
+      console.info('Rendering...');
+        // 在重新渲染前移除事件监听器
+        this.removeEventListeners();
+ 
+        // ... 这里进行DOM的更新和重新渲染
+ 
+        // 在重新渲染后添加事件监听器
+        this.addEventListeners();
+    }
+}
+new MyClass().render();
+new MyClass().render();
+new MyClass().render();
+    </script>
+  </body>
+
+</html>

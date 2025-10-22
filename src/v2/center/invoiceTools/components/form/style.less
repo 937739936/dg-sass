@@ -1,0 +1,294 @@
+.method-btn-wrap {
+	width: 100%;
+	height: 32px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+.search-form {
+	font-size: 14px;
+	.ant-tag {
+		color: rgba(0, 0, 0, 0.8);
+	}
+	p {
+		width: 100%;
+		min-height: 32px;
+		height: auto;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		position: relative;
+		.search-form-label {
+			width: 75px;
+			display: inline-block;
+			margin-right: 10px;
+			font-weight: 400;
+			color: #8b9db8;
+		}
+		.search-input,
+		.search-input-active {
+			width: 230px;
+		}
+		.more-methods {
+			position: absolute;
+			right: 0;
+			margin-right: 0;
+		}
+	}
+	.selected-tag,
+	.finance-tag,
+	.sell-tag,
+	.invoicing-time-tag,
+	.register-time-tag,
+	.invoice-type-tag,
+	.file-type-tag {
+		display: flex;
+	}
+	.more-btn {
+		margin-left: 40px;
+	}
+	.divider-line {
+		margin: 5px 0;
+	}
+	ul {
+		width: auto;
+		max-width: 80%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	.finance-tag,
+	.sell-tag,
+	.invoicing-time-tag,
+	.register-time-tag,
+	.invoice-type-tag,
+	.file-type-tag {
+		margin-left: -7px;
+	}
+	.selected-tag {
+		/deep/ .ant-tag {
+			border: none;
+			color: rgba(0, 0, 0, 0.8);
+		}
+	}
+	.sell-tag-cancel {
+		// margin-top: 10px;
+	}
+	/deep/ .ant-tag:hover {
+		color: #8191a9;
+	}
+	.ant-tag-checkable-checked {
+		background: #f5f8fd;
+		color: #8191a9;
+	}
+	/deep/ .ant-input {
+		border: 1px solid #c5ccdc;
+	}
+	/deep/ .ant-btn {
+		font-size: 12px;
+	}
+	/deep/ .ant-checkbox-wrapper {
+		font-size: 12px;
+	}
+	/deep/ .ant-checkbox-inner {
+		width: 14px;
+		height: 14px;
+	}
+}
+.table-wrap {
+	margin-top: 20px;
+}
+.filter-more {
+	width: 100%;
+	height: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+}
+.filter-more-text {
+	cursor: pointer;
+	color: #8b9db8;
+}
+.more-icon {
+	margin-right: 5px;
+}
+/deep/ .ant-table-thead {
+	tr:nth-child(1) {
+		.ant-table-selection-column-custom {
+			padding-left: 6px;
+		}
+	}
+}
+.sell-tag {
+	align-items: center;
+}
+
+.search-form-label-100px {
+	p {
+		.search-form-label {
+			width: 100px;
+		}
+	}
+}
+.search-form-no-margin-left {
+	.sell-tag {
+		// margin-left: 0;
+	}
+}
+/deep/ .search-input {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	position: relative;
+	.ant-input-suffix {
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+		background-color: #fff !important;
+		border: 1px solid rgba(129, 145, 169, 0.3);
+		background: url('~@/v2/assets/imgs/invoicetools/enter-normal.png');
+		background-size: 22px 22px;
+		background-position: center;
+		background-repeat: no-repeat;
+		box-sizing: border-box;
+		position: absolute;
+		right: 2px;
+		border-radius: 0 4px 4px 0;
+		overflow: hidden;
+		i {
+			width: 30px;
+			height: 30px;
+			opacity: 0;
+		}
+	}
+}
+
+/deep/ .search-input-active {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	position: relative;
+	.ant-input-suffix {
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+		background-color: #4682f3 !important;
+		border: 1px solid #4682f3;
+		background: url('~@/v2/assets/imgs/invoicetools/enter-active.png');
+		background-size: 22px 22px;
+		background-position: center;
+		background-repeat: no-repeat;
+		box-sizing: border-box;
+		position: absolute;
+		right: 2px;
+		border-radius: 0 4px 4px 0;
+		overflow: hidden;
+		i {
+			width: 30px;
+			height: 30px;
+			opacity: 0;
+		}
+	}
+}
+
+/deep/ input::placeholder {
+	font-size: 14px !important;
+	line-height: 24px;
+	color: rgba(184, 194, 210, 0.8);
+}
+
+.in-entry-month,
+.out-list-input,
+.trans-list-input,
+.trans-input-entry {
+	.ant-space {
+		margin-left: 7px;
+	}
+}
+
+.contract-input {
+	.ant-space {
+		margin-left: -7px;
+	}
+}
+
+.more-methods {
+	/deep/ .ant-btn-sm {
+		width: 78px;
+		height: 30px;
+		background: #ffffff;
+		border-radius: 4px;
+		border: 1px solid #c5ccdc;
+	}
+}
+
+.more-btn {
+	/deep/ .anticon-caret-down {
+		width: 10px;
+		height: 6px;
+		display: inline-block;
+		background-image: url('~@/v2/assets/imgs/invoicetools/more.png');
+		background-size: 10px 6px;
+		background-repeat: no-repeat;
+		position: relative;
+		top: -2px;
+		svg {
+			display: none;
+		}
+	}
+	/deep/ .anticon-caret-up {
+		width: 10px;
+		height: 6px;
+		display: inline-block;
+		background-image: url('~@/v2/assets/imgs/invoicetools/more.png');
+		background-size: 10px 6px;
+		background-repeat: no-repeat;
+		transform: rotateX(180deg);
+		position: relative;
+		top: -2px;
+		svg {
+			display: none;
+		}
+	}
+}
+.mutil-btn {
+	/deep/ .anticon-plus {
+		width: 14px;
+		height: 14px;
+		display: inline-block;
+		background-image: url('~@/v2/assets/imgs/invoicetools/mutil.png');
+		background-size: 14px 14px;
+		background-repeat: no-repeat;
+		position: relative;
+		top: 1px;
+		svg {
+			display: none;
+		}
+	}
+}
+
+.search-more-button {
+	width: 78px;
+	height: 30px;
+}
+.input-search-wrap {
+	/deep/ .ant-input-sm {
+		height: 30px;
+	}
+	/deep/ .ant-input-suffix {
+		right: 0;
+	}
+}
+/deep/ .ant-checkbox-group {
+	span {
+		color: rgba(0, 0, 0, 0.8);
+	}
+}
+/deep/ .ant-checkbox-inner {
+	border-radius: 4px;
+}
+/deep/ .ant-checkbox-checked::after {
+	border-radius: 4px;
+}

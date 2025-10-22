@@ -1,0 +1,210 @@
+.new-table,.new-table-file {
+  border-radius: 4px;
+  // border: 1px solid #E5E6EB;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.8);
+  font-size: 14px;
+  line-height: 22px;
+  border: 1px solid #E5E6EB;
+  ::v-deep .ant-table-body {
+    .ant-table-thead {
+      height: 40px;
+    }
+  }
+  ::v-deep .ant-table-body > table, .ant-table-fixed-left table, .ant-table-fixed-right table {
+    border: none!important;
+  }
+  ::v-deep .ant-table-thead > tr > th {
+    height: 40px;
+    padding:  10px 12px;
+    background: #F3F5F6;
+    font-weight: 500;
+    color: #77889D;
+    border: none;
+    border-radius: 0;
+  }
+  ::v-deep .ant-table-tbody > tr > td {
+    border-bottom: none
+  }
+  ::v-deep .ant-table-tbody > tr:nth-child(2n) {
+    background: #F3F5F6;
+  }
+  ::v-deep.ant-table-tbody > tr:hover:not(.ant-table-expanded-row) > td {
+    background-color: #E4EBF4 !important;
+  }
+  ::v-deep.ant-table-body .ant-table-row-hover {
+    background: #E4EBF4 !important;
+  }
+  ::v-deep.ant-table-body .ant-table-row-hover > td {
+    background: #E4EBF4!important;
+  }
+  ::v-deep.ant-table-fixed .ant-table-row-hover {
+    background: #E4EBF4 !important;
+  }
+  ::v-deep.ant-table-fixed .ant-table-row-hover > td {
+    background: #E4EBF4 !important;
+  }
+  ::v-deep .ant-table-thead > tr > th {
+    border: none;
+  }
+  ::v-deep .ant-table-thead  > tr > th:first-child{
+    border-radius: 4px 0 0 0;
+  }
+  ::v-deep .ant-table-thead  > tr > th:last-child{
+    border-radius: 0 4px 0 0;
+  }
+  ::v-deep .ant-table-tbody > tr:last-child{
+    td:first-child {
+      border-radius: 0 0 0 4px ;
+    }
+    td:last-child {
+      border-radius: 0 0 4px 0;
+    }
+  }
+  ::v-deep.ant-table-thead {
+    border-radius: 4px 4px 0 0;
+  }
+  ::v-deep .ant-table-tbody > tr > td {
+    padding: 12px;
+  }
+  ::v-deep .ant-table-tbody {
+    .fixedTr {
+      position: sticky !important;
+      z-index: 9999;
+      bottom: 0;
+      background: #fff;
+    }
+  }
+  ::v-deep .ant-table-tbody {
+    tr {
+      td {
+        .ant-form-item {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  ::v-deep .ant-table {
+    .ant-table-content {
+      .ant-table-placeholder {
+        // height: 240px;
+        padding: 40px 0;
+        border: 1px solid #E5E6EB;
+        border-top: none;
+      }
+      .ant-empty-normal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+      }
+      .ant-empty-image {
+        // width: 128px;
+        // height: 97px;
+        // svg {
+        //   display: none;
+        // }
+      }
+      // .ant-empty-image::before {
+      //   content: "";
+      //   width: 128px;
+      //   height: 97px;
+      //   display: inline-block;
+      //   background-image: url("~@/v2/assets/imgs/invoicetools/table-empty.png");
+      //   background-size: 128px 97px;
+      //   background-repeat: no-repeat;
+      // }
+      // .ant-empty-image::after {
+      //   content: "当前没有任何数据哦去看看其他吧";
+      //   width: 127px;
+      //   height: auto;
+      //   display: inline-block;
+      //   text-align: center;
+      //   word-break: break-all;
+      //   position: relative;
+      //   top: 12px;
+      //   font-size: 14px;
+      //   font-family: PingFangSC-Regular, PingFang SC;
+      //   font-weight: 400;
+      //   color: #8B9DB8;
+      // }
+      .ant-empty-description {
+        // display: none;
+      }
+    }
+  }
+  ::v-deep .ant-table-tbody > tr.ant-table-row-selected td {
+    background: rgba(70,130,243,0);
+  }
+  ::v-deep.ant-table-column-title {
+    font-family: PingFangSC-Medium, PingFang SC!important;
+  }
+  ::v-deep.ant-table-placeholder {
+    border: none!important;
+  }
+}
+.new-table-file{
+  // ::v-deep .ant-table {
+  //   .ant-table-content {
+  //     .ant-empty-image {
+  //       width: 182px;
+  //       height: 89px;
+  //       &::before {
+  //         content: "";
+  //         width: 83px;
+  //         height: 89px;
+  //         background-image: url("~@/v2/assets/imgs/invoicetools/table-empty.png");
+  //         background-size: 83px 89px;
+  //         background-repeat: no-repeat;
+  //       }
+  //       &::after {
+  //         content: "暂无数据";
+  //         // width: 182px;
+  //       }
+  //     }
+  //   }
+  // }
+}
+::v-deep.ant-dropdown-menu-item-active>a{
+  color: #4682F3;
+}
+.table-box.fixedBottom {
+  .new-table {
+    margin-bottom: 2px;
+  }
+  .slPagination {
+    margin-top: 10px;
+    width: calc(100% - 254px);
+    min-width: 1186px;
+    background: #fff;
+    padding: 10px 30px;
+    position: fixed;
+    bottom: 0;
+    left: 228px;
+    z-index: 100;
+  }
+}
+.table-box {
+  position: relative;
+  margin-top: 30px;
+  .export-box {
+    position: absolute;
+    right: 0;
+    top: -25px;
+    text-align: right;
+    cursor: pointer;
+    .export-icon {
+      width: 14px;
+      height: 14px;
+      margin-right: 5px;
+      position: relative;
+      top: -2px;
+    }
+    .export-text {
+      font-family: PingFangSC-Regular, PingFang SC;
+      color: #4682F3;
+      line-height: 20px;
+    }
+  }
+}

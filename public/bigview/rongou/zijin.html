@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>蓉欧瑞易供应链管理平台</title>
+    <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+    <meta name="keywords" content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+
+    <script src="../../jquery.min.js"></script>
+    <script src="../../echarts.min.js"></script>
+    <style>
+        .one-line {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            /* Firefox */
+            -webkit-box-sizing: border-box;
+            /* Safari */
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #101216;
+        }
+
+        body {
+            background-image: url('../imgs/smbg.png');
+            background-size: 100% 100%;
+        }
+
+        #main-box {
+            width: 1920px;
+            height: 1080px;
+            transform-origin: 0 0;
+            position: relative;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            box-sizing: border-box;
+        }
+
+        .title {
+            font-size: 36px;
+            color: #fff;
+            height: 77px;
+            width: 100%;
+            padding: 8px 0;
+            background-image: url('../imgs/sm-title-bg-k.png');
+            background-size: 100% 100%;
+            text-align: center;
+            font-size: 36px;
+            color: #FFFFFF;
+            line-height: 47px;
+        }
+
+        .bottom-content {
+            padding: 0 20px 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+            margin-top: 10px;
+            height: 990px;
+        }
+
+        .bottom-content>.content-one {
+            width: 100%;
+            height: 140px;
+            display: flex;
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+            background-image: url('../imgs/sm-bg-one.png');
+            background-size: 518px 126px;
+            background-repeat: no-repeat;
+        }
+
+        .content-one-title {
+            width: 200px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-one-title>.content-one-title-img {
+            width: 47px;
+            height: 47px;
+            background-image: url('../imgs/sm-content-one-title.png');
+            background-size: 100%;
+        }
+
+        .content-one-title>.content-one-title-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 28px;
+            margin-top: 10px;
+        }
+
+        .content-one-main {
+            width: 1680px;
+            padding: 0 40px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            ;
+            align-items: center;
+        }
+
+        .content-one-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-one-item>span {
+            display: inline-block;
+            margin-left: 16px;
+        }
+
+        .content-one-item>.content-one-item-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 25px;
+        }
+
+        .content-one-item>.content-one-item-con {
+            font-size: 28px;
+            font-weight: 400;
+            color: #97EEED;
+            line-height: 28px;
+        }
+
+        .content-one-item>.content-one-item-unit {
+            margin-left: 0;
+        }
+
+        .content-one-item>.content-one-item-sum {
+            font-size: 28px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 40px;
+        }
+
+        .content-one-interval {
+            width: 1px;
+            height: 66px;
+            border: 1px solid;
+            border-image: linear-gradient(180deg, rgba(207, 250, 255, 0), rgba(182, 246, 255, 1), rgba(162, 243, 255, 0)) 1 1;
+        }
+
+        .content-two {
+            height: 790px;
+            background: rgba(16, 43, 67, 0.32);
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+        }
+
+        .content-two .content-two-title {
+            width: 100%;
+            height: 52px;
+            padding: 6px 23px;
+            background-image: url('../imgs/sm-content-two-title-f.png');
+            background-size: 100%;
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 28px;
+        }
+
+        .content-two-655 {
+            width: 655px;
+        }
+
+        .content-two-655 .content-two-title {
+            background-image: url('../imgs/sm-content-two-title-655.png');
+            background-size: 100%;
+        }
+
+        .content-two-500 {
+            width: 500px;
+        }
+
+        .content-two-500 .content-two-title {
+            background-image: url('../imgs/sm-content-two-title-500.png');
+            background-size: 100%;
+        }
+
+        .content-two-706 {
+            width: 706px;
+        }
+
+        .content-three-title {
+            margin-top: 10px;
+            width: 100%;
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 28px;
+            padding-left: 12px;
+            height: 28px;
+            border-left: #00B6E4 solid 4px;
+        }
+
+        .content-two-main {
+            width: 100%;
+            height: 730px;
+        }
+
+        .sm-bottom-tag {
+            width: 100%;
+            height: 37px;
+            background-image: url('../imgs/sm-bottom-tag.png');
+            background-size: 100% 100%;
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-box">
+        <div class="title">蓉欧瑞易供应链资金管理</div>
+        <div class="bottom-content">
+            <div class="content-one">
+                <div class="content-one-title">
+                    <div class="content-one-title-img"></div>
+                    <div class="content-one-title-text">融资数据</div>
+                </div>
+                <div class="content-one-main">
+                    <div class="content-one-item">
+                        <img src="../imgs/sm-content-one.png" width="60" height="60">
+                        <span class="content-one-item-title">融资累积</span>
+                        <span class="content-one-item-con" id="totalFinAmount">0</span>
+                        <span class="content-one-item-unit">(万元)</span>
+                        <span class="content-one-item-sum" id="totalFinCount">0</span>
+                        <span class="content-one-item-unit">(笔)</span>
+                    </div>
+                    <div class="content-one-interval"></div>
+                    <div class="content-one-item">
+                        <img src="../imgs/sm-content-one.png" width="60" height="60">
+                        <span class="content-one-item-title">当年融资</span>
+                        <span class="content-one-item-con" id="yearTotalFinAmount">0</span>
+                        <span class="content-one-item-unit">(万元)</span>
+                        <span class="content-one-item-sum" id="yearTotalFinCount">0</span>
+                        <span class="content-one-item-unit">(笔)</span>
+                    </div>
+                    <div class="content-one-interval"></div>
+                    <div class="content-one-item">
+                        <img src="../imgs/sm-content-one.png" width="60" height="60">
+                        <span class="content-one-item-title">本月融资</span>
+                        <span class="content-one-item-con" id="monthTotalFinAmount">0</span>
+                        <span class="content-one-item-unit">(万元)</span>
+                        <span class="content-one-item-sum" id="monthTotalFinCount">0</span>
+                        <span class="content-one-item-unit">(笔)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-two content-two-655">
+                <div class="content-two-title">统计额度</div>
+                <div class="content-two-main" id="statisticalQuota"></div>
+            </div>
+            <div class="content-two content-two-500">
+                <div class="content-two-title">业务融资情况</div>
+                <div class="content-two-main" id="financeVO">
+                </div>
+            </div>
+            <div class="content-two content-two-706">
+                <div class="content-three-title">资金使用情况</div>
+                <div class="content-two-main" id="monthlyLoanAmountVo">
+                </div>
+            </div>
+        </div>
+        <div class="sm-bottom-tag"></div>
+    </div>
+    <script>
+        $(function () {
+
+            var changeSize = function () {
+                const percentW = document.documentElement.clientWidth / 1920
+                const percentH = document.documentElement.clientHeight / 1080
+                $('#main-box')[0].style.transform = 'scale(' + percentW + ',' + percentH + ')'
+            }
+
+            window.addEventListener('resize', changeSize)
+
+            changeSize()
+
+            var getQueryString = function (name) {
+                var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) {
+                    return unescape(r[2]);
+                }
+                return null;
+            }
+            var baseUrl = '/dg-trade-api/api'
+            //单位换算
+            function unit(sum) {
+                if (sum) {
+                    return Math.round(Number(sum) / 100) / 100
+                } else {
+                    return 0
+                }
+            }
+            //千分位
+            function thousand(sum) {
+                return String(sum).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,')
+            }
+            //将十六进制颜色值转换为rgba
+            var HexToRGB = function (color, opacity) {
+                let newColor = 'rgba(';
+                //判断是三位还是六位
+                if (color.length === 4) {
+                    let arry = [];
+                    for (let i = 1; i < color.length; i++) {
+                        arry.push(parseInt("0x" + color[i] + color[i]));
+                    }
+                    arry.forEach(function (item) {
+                        newColor += item + ', ';
+                    });
+                    newColor += opacity + ')';
+                    return newColor;
+                } else {
+                    let arry = [];
+                    for (let i = 1; i < color.length; i += 2) {
+                        arry.push(parseInt("0x" + color.slice(i, i + 2)));
+                    }
+                    arry.forEach(function (item) {
+                        newColor += item + ', ';
+                    });
+                    newColor += opacity + ')';
+                    return newColor;
+                }
+            }
+            var uscc = getQueryString('uscc') || ''
+            var _get = function (url, callback) { // 网络请求
+                url = baseUrl + url+ "?uscc=" + uscc
+                let token = null
+                try {
+                    token = window.parent.sessionStorage.getItem('VUEX_ST_TOKEN')
+                } catch (e) { }
+
+                $.ajax({
+                    headers: {
+                        'Authorization': token,
+                        Source: 'PC',
+                    },
+                    url: url,
+                    type: 'GET',
+                    success: callback,
+                    dataType: 'json',
+
+                });
+            }
+            _get('/data/screen/fund/used/data', function (result) {
+                if(!result.success){
+                    return
+                }
+                var res = result.data ||{};
+                if (res.financeVO) {
+                    for (key in res.financeVO) {
+                        if (key.indexOf("FinCount") > -1) {
+                            $(`#${key}`).text(res.financeVO[key] || 0)
+                        } else {
+                            $(`#${key}`).text(thousand(unit(res.financeVO[key])))
+                        }
+                    }
+                }
+                let statisticalQuota = $('#statisticalQuota')[0];
+                // 指定图表的配置项和数据
+                let statisticalQuotaData = {
+                    data1: [],
+                    data2: [],
+                    data3: [],
+                    datacity: []
+                }
+                res.creditLineVO.forEach(item => {
+                    statisticalQuotaData.data1.push(unit(item.totalAmount))
+                    statisticalQuotaData.data2.push(unit(item.availableAmount))
+                    statisticalQuotaData.data3.push(unit(item.usedAmount))
+                    statisticalQuotaData.datacity.push(item.bankName)
+                });
+                let statisticalQuotaOption = {
+                    color: ["#388BFF", "#F6931C", "#FFD52E"],
+                    title: {
+                        text: "单位/万元",
+                        left: "4%",
+                        top: "60",
+                        textStyle: {
+                            color: "#80D0FE",
+                            fontSize: 16,
+                            fontWeight: "normal",
+                        },
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                        borderWidth: '1', //边框宽度设置1
+                        borderColor: '#81D1FF', //设置边框颜色
+                        borderRadius: '12',
+                        extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                        textStyle: {
+                            color: '#FFFFFF'
+                        },
+                        formatter: function (params) { // 鼠标移入展示百分比
+                            var tip = ""
+                            if (params != null && params.length > 0) {
+                                tip = params[0].name + '<br/>'
+                                var total = 0
+                                for (var i = 0; i < params.length; i++) {
+                                    total += params[i].value
+                                    if (i == params.length - 1) {
+                                        for (var j = 0; j < params.length; j++) {
+                                            tip += params[j].marker + params[j].seriesName + ': ' + params[j].value + '万元<br/>'
+                                        }
+                                    }
+                                }
+                            }
+                            return tip
+                        },
+                    },
+                    legend: {
+                        top: "0%",
+                        right: "4%",
+                        data: ["授信总额度", "融资存量", "剩余额度"],
+                        textStyle: {
+                            color: "#80D0FE",
+                            fontSize: 16,
+                            fontWeight: "normal",
+                        },
+                    },
+                    grid: {
+                        //图表的位置
+                        top: "20%",
+                        left: "3%",
+                        right: "4%",
+                        bottom: 32,
+                        containLabel: true,
+                    },
+                    yAxis: [
+                        {
+                            show: false,
+                        },
+                    ],
+                    xAxis: [
+                        {
+                            type: "category",
+                            axisLabel: {
+                                interval: 0,
+                                width: 150,
+                                overflow: "breakAll",
+                                textStyle: {
+                                    lineHeight: 30,
+                                    fontSize: 16,
+                                    fontWeight: "normal",
+                                    color: "#80D0FE"
+                                },
+                            },
+                            axisTick: {
+                                show: false
+                            },
+
+                            axisLine: {
+                                lineStyle: {
+                                    color: "rgba(128, 208, 254, 0.5)",
+                                },
+                            },
+                            data: statisticalQuotaData.datacity,
+                        },
+                    ],
+
+                    dataZoom:
+                    //滑块的属性
+                    {
+                        type: "slider",
+                        show: true,
+                        // 开始位置的数值
+                        startValue: 0,
+                        maxValueSpan: 2, //显示数据的条数(默认显示10个)
+                        // 结束位置的数值
+                        endValue: 3,
+                        bottom: 0,
+                        height: 0,
+                        borderColor: "rgba(43,48,67,0.8)",
+                        fillerColor: "#33384b", //滑动块的颜色
+                        showDataShadow: false, //是否显示数据阴影 默认auto
+                        showDetail: false, //即拖拽时候是否显示详细数值信息 默认true
+                    },
+                    series: [
+                        {
+                            name: "授信总额度",
+                            type: "bar",
+                            symbol: "triangle",
+                            stack: "sum",
+                            barWidth: "50px",
+                            barGap: "0%",
+                            data: statisticalQuotaData.data1,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: "top",
+                                    textStyle: {
+                                        color: "#fff",
+                                    },
+                                },
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: {
+                                        type: "linear",
+                                        x: 0,
+                                        y: 0,
+                                        x2: 0,
+                                        y2: 1,
+                                        colorStops: [
+                                            {
+                                                offset: 0,
+                                                color: "rgba(23, 153, 254, 1)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "rgba(23, 153, 254, 0.2)",
+                                            },
+                                        ],
+                                        globalCoord: false,
+                                    },
+                                },
+                            },
+                        },
+                        {
+                            name: "融资存量",
+                            type: "bar",
+                            symbol: "triangle",
+                            stack: "sum1",
+                            barWidth: "50px",
+                            barGap: "0%",
+                            data: statisticalQuotaData.data3,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: "top",
+                                    textStyle: {
+                                        color: "#fff",
+                                    },
+                                },
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: {
+                                        type: "linear",
+                                        x: 0,
+                                        y: 0,
+                                        x2: 0,
+                                        y2: 1,
+                                        colorStops: [
+                                            {
+                                                offset: 0,
+                                                color: "rgba(165, 255, 253, 1)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "rgba(94, 210, 207, 0.2)",
+                                            },
+                                        ],
+                                        globalCoord: false,
+                                    },
+                                },
+                            },
+                        },
+                        {
+                            name: "剩余额度",
+                            type: "bar",
+                            symbol: "triangle",
+                            barWidth: "50px",
+                            stack: "sum2",
+                            barGap: "0%",
+                            data: statisticalQuotaData.data2,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: "top",
+                                    textStyle: {
+                                        color: "#fff",
+                                    },
+                                },
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: {
+                                        type: "linear",
+                                        x: 0,
+                                        y: 0,
+                                        x2: 0,
+                                        y2: 1,
+                                        colorStops: [
+                                            {
+                                                offset: 0,
+                                                color: "rgba(207, 220, 237, 1)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "rgba(207, 220, 237, 0.2)",
+                                            },
+                                        ],
+                                        globalCoord: false,
+                                    },
+                                },
+                            },
+                        },
+                    ],
+                };
+                let statisticalQuotaDiv = echarts.init(statisticalQuota);
+                statisticalQuotaDiv.setOption(statisticalQuotaOption);
+                setInterval(function () {
+                    if (statisticalQuotaOption.dataZoom.endValue == statisticalQuotaData.datacity.length) {
+                        statisticalQuotaOption.dataZoom.startValue = 0;
+                        statisticalQuotaOption.dataZoom.endValue = 3;
+                    } else {
+                        statisticalQuotaOption.dataZoom.startValue = statisticalQuotaOption.dataZoom.startValue + 1;
+                        statisticalQuotaOption.dataZoom.endValue = statisticalQuotaOption.dataZoom.endValue + 1;
+                    }
+                    statisticalQuotaDiv.setOption(statisticalQuotaOption);
+                }, 5000)
+                let optionData = [];
+                res.businessTypePayVO.forEach(item => {
+                    optionData.push({
+                        name: item.businessTypeText === "仓押" ? "应付" : item.businessTypeText,
+                        value: item.payAmount
+                    })
+                });
+                let color = [["rgba(23, 153, 254, 1)", "rgba(17, 57, 90, 1)"],
+                ["rgba(165, 255, 253, 1)", "rgba(51, 100, 105, 1)"],
+                ["rgba(212, 236, 255, 1)", "rgba(98, 114, 127, 1)"],
+                ["rgba(64, 56, 150, 1)", "rgba(91, 143, 249, 1)"],
+                ["rgba(255, 227, 163, 1)", "rgba(255, 195, 106, 1)"]]
+                color = color.map((item) => {
+                    return {
+                        type: "linear",
+                        x: 0,
+                        y: 0,
+                        x2: 1,
+                        y2: 1,
+                        colorStops: [
+                            {
+                                offset: 0,
+                                color: item[0], // 0% 处的颜色
+                            },
+                            {
+                                offset: 1,
+                                color: item[1], // 100% 处的颜色
+                            },
+                        ],
+                        globalCoord: false, // 缺省为 false
+                    }
+                });
+                const sum = optionData.reduce((per, cur) => per + cur.value, 0);
+                let financeVOOption = {
+                    legend: {
+                        bottom: "5%",
+                        orient: "vertical",
+                        itemGap: 18,
+                        itemWidth: 20,
+                        itemHeight: 20,
+                        shadowBlur: 10,
+                        shadowOffsetY: 0,
+                        shadowOffsetX: 0,
+                        textStyle: {
+                            color: "#D8DDE3",
+                            rich: {
+                                name: {
+                                    fontSize: 16,
+                                    color: "#80D0FE",
+                                },
+                                percent: {
+                                    color: "#80D0FE",
+                                    fontSize: 23,
+                                    width: 90,
+                                },
+                                bg: {
+                                    width: 130,
+                                    height: 3,
+                                    backgroundColor: {
+                                        image: "../imgs/sm-zijin-per.png"
+                                    }
+                                },
+                            },
+                        },
+                        formatter: (name) => {
+                            const item = optionData.find((i) => {
+                                return i.name === name;
+                            });
+                            const p = ((item.value / sum) * 100).toFixed(2);
+                            return "{percent|" + p + "%}" + "{bg|}{name|" + name + unit(item.value) + "万元}";
+                        },
+                    },
+                    color: color,
+                    series: [
+                        {
+                            type: "pie",
+                            radius: "60%",
+                            center: ["50%", "40%"],
+                            clockwise: true,
+                            avoidLabelOverlap: true,
+                            label: {
+                                show: false,
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: function (params) {
+                                        return color[params.dataIndex];
+                                    },
+                                },
+                            },
+                            data: optionData,
+                            // roseType: "radius",
+                        },
+                    ],
+                };
+                let financeVO = $('#financeVO')[0];
+                let financeVODiv = echarts.init(financeVO);
+                financeVODiv.setOption(financeVOOption)
+                //资金使用情况
+                var monthlyLoanAmountVo = $('#monthlyLoanAmountVo')[0];
+                var monthlyLoanAmountVoDiv = echarts.init(monthlyLoanAmountVo);
+                let monthlyLoanAmountVoOption;
+                var xData = []
+                var yData = []
+                let resultData = res.monthlyLoanAmountVo
+                var bankData = []
+                var monthData = []
+                resultData.forEach((item) => {
+                    if (item) {
+                        bankData.push(item.bankName)
+                        monthData.push(item.monthlyList)
+                    }
+                })
+                let arr = []
+                for (i = 0; i < monthData.length; i++) {
+                    let item = monthData[i]
+                    let currentIndex = null
+                    let length = item.length
+                    for (j = 0; j < item.length; j++) {
+                        let pro = item[j]
+                        currentIndex = j
+                        if (currentIndex != null && currentIndex != 0) {
+                            arr.push(currentIndex)
+                        }
+                    }
+                }
+                if (arr.length > 0 && arr.length == monthData.length) {
+                    let minIndex = Math.min(...arr)
+                    monthData.forEach(item => {
+                        item.splice(0, minIndex)
+                    })
+                }
+                if (monthData.length != 0 && bankData.length != 0) {
+                    monthData[0].forEach((item) => {
+                        if (item) {
+                            xData.push(item.month)
+                        }
+                    })
+                    let monthlyLoanAmountVoColor = ["#5B8FF9", "#5AD8A6", "#49FFE0", "#43C1FF", "#C1F4FF", "#FFD9A3"]
+                    monthlyLoanAmountVoColor = monthlyLoanAmountVoColor.map((item) => {
+                        return {
+                            normal: {
+                                color: item,
+                                lineStyle: {
+                                    color: item,
+                                    width: 1,
+                                },
+                                areaStyle: {
+                                    color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                        {
+                                            offset: 0,
+                                            color: HexToRGB(item, 0),
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: HexToRGB(item, 0.9),
+                                        },
+                                    ]),
+                                },
+                            },
+                        }
+                    });
+                    bankData.forEach((item, index) => {
+                        if (item) {
+                            let obj = {}
+                            obj.name = item
+                            obj.type = 'line';
+                            obj.symbolSize = 0;
+                            obj.itemStyle = monthlyLoanAmountVoColor[index];
+                            monthlyLoanAmountVoColor[index] ? obj.itemStyle.emphasis = monthlyLoanAmountVoColor[index].normal : "";
+                            obj.data = []
+                            resultData.forEach(pro => {
+                                if (pro.bankName === item) {
+                                    pro.monthlyList.forEach((text, index) => {
+                                        obj.data.push(unit(text.loanAmount))
+                                        if (index === pro.monthlyList.length - 1) {
+                                            yData.push(obj)
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+                monthlyLoanAmountVoOption = {
+                    legend: {
+                        show: true,
+                        type: "scroll",
+                        y: "10",
+                        width: "80%",
+                        right: "4%",
+                        icon: "stack",
+                        itemWidth: 10,
+                        itemHeight: 10,
+                        textStyle: {
+                            color: "#80D0FE",
+                        },
+                        data: bankData,
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        triggerOn: "none",
+                        backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                        borderWidth: '1', //边框宽度设置1
+                        borderColor: '#81D1FF', //设置边框颜色
+                        borderRadius: '12',
+                        extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                        textStyle: {
+                            color: '#FFFFFF'
+                        },
+                        formatter: function (params) { // 鼠标移入展示百分比
+                            var tip = ""
+                            if (params != null && params.length > 0) {
+                                tip = params[0].name + '<br/>'
+                                var total = 0
+                                for (var i = 0; i < params.length; i++) {
+                                    total += params[i].value
+                                    if (i == params.length - 1) {
+                                        for (var j = 0; j < params.length; j++) {
+                                            tip += params[j].marker + params[j].seriesName + ': ' + (params[j].value || 0) + '万元 ' + (params[j].value ? (params[j].value / total * 100).toFixed(2) : 0) + '%<br/>'
+                                        }
+                                    }
+                                }
+                            }
+                            return tip
+                        },
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        top: 80,
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: xData,
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "#5A91AB",
+                            },
+                        },
+                        axisLabel: {
+                            color: '#5CDBF7',
+                            showMinLabel: true,
+                            showMaxLabel: true,
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: "万元",
+                        nameTextStyle: {
+                            color: "#5CDBF7",
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: "#5CDBF7",
+                            },
+                        },
+                        axisLine: {
+                            show: false,
+                        },
+                        splitLine: {
+                            show: false,
+                        },
+                    },
+                    series: yData,
+                };
+                monthlyLoanAmountVoDiv.setOption(monthlyLoanAmountVoOption);
+                let monthlyLoanAmountVoDivDataIndex = 0;
+                monthlyLoanAmountVoDiv.dispatchAction({
+                    type: 'showTip',
+                    dataIndex: monthlyLoanAmountVoDivDataIndex,
+                    seriesIndex: 0,
+                })
+                setInterval(function () {
+                    monthlyLoanAmountVoDivDataIndex++
+                    if (monthlyLoanAmountVoDivDataIndex == xData.length) {
+                        monthlyLoanAmountVoDivDataIndex = 0;
+                    }
+                    monthlyLoanAmountVoDiv.dispatchAction({
+                        type: 'showTip',
+                        dataIndex: monthlyLoanAmountVoDivDataIndex,
+                        seriesIndex: 0,
+                    })
+                }, 5000)
+            })
+        })
+    </script>
+</body>
+</html>

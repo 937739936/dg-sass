@@ -1,0 +1,195 @@
+﻿<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        span{
+            background-color: #fff !important;
+        }
+        @page {
+            size: A4;
+            margin: 60px 70px 50px 70px;
+            padding-top: 10px;
+
+            @top-right {
+                content: "[[${mainContractNo != null ? '合同编号：'+mainContractNo : ''}]]";
+                font-family: 'STXihei';
+                font-size: 12px;
+                padding-top: 40px;
+            }
+
+            border-top: 1px solid black;
+
+            @bottom-center {
+                content: counter(page) "/" counter(pages);
+            }
+        }
+        * {
+            font-family: 'STXihei' !important;
+        }
+        html,
+        body {
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+            font-family: 'STXihei';
+        }
+
+        table {
+            margin-right: auto;
+            margin-left: auto;
+            width: 100%;
+            font-size: 14px;
+            border-collapse: collapse;
+            -fs-table-paginate: paginate;
+        }
+
+        td,th {
+            padding: 6px;
+            border: 1px solid #000000;
+        }
+
+        p {
+            margin: 0;
+        }
+        div {
+            text-indent: 2em;
+            line-height: 28px;
+        }
+
+        table div {
+            text-indent: 0px;
+            max-width: 330px;
+            padding: 0px;
+            margin: 0px;
+            word-break: break-all;
+            line-height: 18px;
+        }
+
+        table td.nowrap div {
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <div style="text-align: center;font-weight: bold;font-size: 20px;margin-top: 20px;">煤炭买卖合同</div>
+    <div style="text-align: right;">签约时间：<span th:text="${signTime}"></span></div>
+    <div style="text-align: right;">签约地：<span th:text="${signLocation}"></span></div>
+    <div>买方：<span th:text="${buyerCompanyName}"></span></div>
+    <div>卖方：<span th:text="${sellerCompanyName}"></span></div>
+    <div>买卖双方本着平等自愿、互惠互利和共同发展的原则，根据《中华人民共和国民法典》等有关法律法规，经充分友好协商，特订立购销合同。</div>
+    <table cellpadding="0" cellspacing="0" width="100%" style="margin-top: 20px;">
+        <tr width="100%">
+            <td style="width: 25%">
+                <div>煤炭品种</div>
+            </td>
+            <td style="width:25%">
+                <div>含税单价（元/吨）（不含港建）</div>
+            </td>
+            <td style="width:25%">
+                <div>不含税单价（元/吨）（不含港建）</div>
+            </td>
+            <td style="width: 25%">
+                <div>数量（吨）</div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%">
+                <div th:text="${goodsName}"></div>
+            </td>
+            <td style="width: 25%">
+                <div th:text="${basePrice}"></div>
+            </td>
+            <td style="width: 25%">
+                <div th:text="${unitPriceExcludeTax}"></div>
+            </td>
+            <td th:if="${isQuantityOffsetEmpty} == false" style="width: 25%">
+                <span th:text="${quantity}"></span>
+                <span>(</span>
+                <span>±</span>
+                <span th:text="${quantityOffset}"></span>
+                <span>%</span>
+                <span>)</span>
+            </td>
+            <td th:text="${quantity}" th:if="${isQuantityOffsetEmpty} == true" style="width: 25%"> </td>
+        </tr>
+        <tr>
+            <td rowspan="2" width="25%">
+                <div>合同总额</div>
+            </td>
+            <td colspan="3" width="75%">
+                <div style="max-width: 100%;">不含税总额：<span th:text="${totalAmountExcludeTax}"></span>元（大写：<span th:text="${totalAmountExcludeTaxChinese}"></span>）</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" width="75%">
+                <div style="max-width: 100%;">含税总额：<span th:text="${totalAmountIncludeTax}"></span>元（大写：<span th:text="${totalAmountIncludeTaxChinese}"></span>）</div>
+            </td>
+        </tr>
+    </table>
+    <table cellpadding="0" cellspacing="0" width="100%" style="margin-top: 20px;">
+        <tr width="100%">
+            <td colspan="3">
+                <strong>合同基准质量标准：</strong>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 33.3%">
+                <div>质量项目</div>
+            </td>
+            <td style="width: 33.3%">
+                <div>单位</div>
+            </td>
+            <td style="width: 33.3%">
+                <div>标准规格</span></div>
+            </td>
+        </tr>
+    </table>
+    <div th:if="${indicatorExists} == true" id="huaTaiIndicatorTable">
+        <table th:each="indicator : ${indicatorList}">
+            <tr th:each="obj: ${indicator}">
+                <td th:text="${obj.nameExcludeUnit}" style="width: 33.3%">
+                </td>
+                <td th:text="${obj.unitName}" style="width: 33.3%">
+                </td>
+                <td th:text="${obj.value}" style="width: 33.3%">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin-top: 20px;"><strong>第一条 交货地点以及方式</strong></div>
+    <div>1.1交货地点：<span th:text="${deliveryPickUpPlace}"></span></div>
+    <div>1.2交货方式：<span th:text="${deliveryModeName}"></span></div>
+    <div th:utext="${customHtmlStr}"></div>
+    <div>
+        <strong>
+            <span>第</span>
+            <span><span th:text="${customCountCn_1}" data-flag="customCount"></span></span>
+
+            <span>条 其它事项</span>
+        </strong>
+    </div>
+    <div><span th:text="${customCount+1}"></span>.1 本合同未尽事宜，由双方另行协商并签订补充协议，补充协议与本合同合并执行，具有同等法律效力。</div>
+    <div><span th:text="${customCount+1}"></span>.2 本合同经买卖双方盖章后生效，本合同一式两份，双方各执一份，具有同等法律效力。</div>
+    <div>本合同扫描件、传真件与原件具有同等法律效力</div>
+    <div>（以下无正文）</div>
+    <div style="margin-top: 100px;page-break-inside:avoid;">
+        <div>买方：<span th:text="${buyerCompanyName}"></span></div>
+        <div>法定代表人(甲方)：<span th:text="${buyPersonName}"></span></div>
+        <div>地址：<span th:text="${buyContactArea}"></span><span th:text="${buyContactAddress}"></span></div>
+        <div>开户行名称：<span th:text="${buySubbranchName}"></span></div>
+        <div>银行账号：<span th:text="${buyBankNo}"></span></div>
+        <div>电话：<span th:text="${buyContactPhone}"></span></div>
+    </div>
+    <div style="margin-top: 100px;page-break-inside:avoid;">
+        <div>卖方：<span th:text="${sellerCompanyName}"></span></div>
+        <div>法定代表人(乙方)：<span th:text="${sellerPersonName}"></span></div>
+        <div>地址：<span th:text="${sellerContactArea}"></span><span th:text="${sellerContactAddress}"></span></div>
+        <div>开户行名称：<span th:text="${sellerSubbranchName}"></span></div>
+        <div>银行账号：<span th:text="${sellerBankNo}"></span></div>
+        <div>电话：<span th:text="${sellerContactPhone}"></span></div>
+    </div>
+</div>
+</body>
+</html>

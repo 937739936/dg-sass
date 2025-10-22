@@ -1,0 +1,147 @@
+<template>
+  <div class="slMain">
+    <WarehouseList 
+      type='in' 
+      :listFn='getInOutList' 
+      :houseApi='getHouseListNew'
+      :statisticsApi='getInOutStatistics'
+      :delApi='delInOut'
+      :modifyInOutRecordPriceApi="modifyInOutRecordPrice"
+      @export='exportData'
+      @detail='goDetail'
+      auth="logisticsStorageCenter:inManage:storage:add"
+      @add='add'
+      @edit='edit'
+      :isCoreCompany="isCoreCompany"
+      :isManager="isManager"
+    >
+    </WarehouseList> 
+    <RelationContract
+      ref="relationContract" 
+      @relation='goAdd'
+      source='list'
+      type="IN"
+    >
+    </RelationContract>
+  </div>
+</template>
+
+<script>
+import WarehouseList from '@sub/logisticsPlatform/warehouseList.vue'
+import {getInOutStatistics,getInOutList, exportInOutList, delInOut, existRelOrder, modifyInOutRecordPrice} from "../../api/inout.js";
+import {getHouseListNew} from "../../api/selectData";
+import comDownload from "@sub/utils/comDownload.js";
+import moment from "moment";
+import { mapGetters } from "vuex";
+import RelationContract from './components/relationContract.vue';
+
+export default {
+  data() {
+    return {
+      path: '',
+      type: '',
+      typeRecord: ''
+    }
+  },
+  computed: {
+    ...mapGetters("user", {
+      VUEX_ST_COMPANYSUER: "VUEX_ST_COMPANYSUER",
+      VUEX_CURRENT_PLATEFORM: 'VUEX_CURRENT_PLATEFORM',
+      VUEX_COMPANY_SERVICES: 'VUEX_COMPANY_SERVICES',
+    }),
+    // 是否是仓储企业
+    isWarehouseCompany() {
+      return this.VUEX_ST_COMPANYSUER.companyType == 'WAREHOUSE'
+    },
+    // 是否是仓储企业
+    isCoreCompany() {
+      return this.VUEX_ST_COMPANYSUER.companyType == 'CORE_COMPANY'
+    },
+    //是否是站台管理服务
+    isManager(){
+      return this.VUEX_COMPANY_SERVICES.includes("LOGISTICS_STATION_MANAGE");
+    }
+  },
+  created(){
+  },
+  methods: {
+    getHouseListNew,
+    getInOutStatistics,
+    getInOutList,
+    delInOut,
+    modifyInOutRecordPrice,
+    async exportData(params) {
+      const res = await exportInOutList(params)
+      const name = `入库管理-${this.VUEX_ST_COMPANYSUER.companyName}-${this.VUEX_CURRENT_PLATEFORM.label}-${moment().format('YYYY-MM-DD')}.xls`
+      comDownload(res, undefined, name)
+    },
+    // 新增
+    async add({ type, typeRecord, path }) {
+      this.path = path;
+      this.type = type;
+      this.typeRecord = typeRecord;
+      if(this.isWarehouseCompany){
+        this.$router.push({
+          path: path,
+          query: {
+            typeRecord: this.typeRecord
+          }
+        })
+        return;
+      }
+      const params = {
+        stationId: this.VUEX_CURRENT_PLATEFORM.stationId,
+        inOutTypeEnum: 'IN'
+      }
+      const res = await existRelOrder(params)
+      if(res.data) {
+        this.$refs.relationContract.show()
+      } else {
+         this.$router.push({
+          path: path,
+          query: {
+            typeRecord: this.typeRecord
+          }
+        })
+      }
+    },
+    // 关联合同新增
+    goAdd(info = {}) {
+      this.$router.push({
+        path: this.path,
+        query: {
+          serialNo: info.serialNo,
+          orderTypeEnum: info.contractType,
+          typeRecord: this.typeRecord
+        }
+      })
+    },
+    edit(item) {
+      this.$router.push({
+        path: '/center/logisticsPlatform/in/add',
+        query: {
+          id: item.id
+        }
+      })
+    },
+    goDetail(item) {
+      this.$router.push({
+        path: '/center/logisticsPlatform/in/detail',
+        query: {
+          id: item.id
+        }
+      })
+    }
+  },
+  components: {
+    WarehouseList,
+    RelationContract,
+  }
+}
+</script>
+
+<style scoped  lang='less' >
+.slMain {
+  margin-top: -10px;
+}
+</style>

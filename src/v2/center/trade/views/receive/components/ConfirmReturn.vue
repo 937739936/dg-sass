@@ -1,0 +1,118 @@
+<template>
+	<a-modal
+		:visible="visible"
+		:footer="null"
+		width="460px"
+		centered
+		@cancel="handleCancel"
+		:title="null"
+	>
+		<div class="title">
+			<ConfirmIcon></ConfirmIcon>确认返回列表页
+		</div>
+		<div style="padding: 0 20px 20px">
+			<div class="note">确认返回该页面信息将不会存储</div>
+			<div class="footer">
+				<a-button @click="handleCancel">取消</a-button>
+				<a-button
+					type="primary"
+					@click="goOn"
+					>确定</a-button
+				>
+			</div>
+		</div>
+	</a-modal>
+</template>
+
+<script>
+import { ConfirmIcon } from '@sub/components/svg'
+export default {
+	data() {
+		return {
+			visible: false,
+			url: ''
+		};
+	},
+	methods: {
+		goOn() {
+			this.visible = false;
+			this.$router.push(this.url);
+		},
+		init(url) {
+			this.visible = true;
+			this.url = url;
+		},
+		handleCancel() {
+			this.visible = false;
+		}
+	},
+	components: {
+		ConfirmIcon
+	}
+};
+</script>
+<style lang="less" scoped>
+.title {
+	font-family: 'PingFang SC';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 28px;
+	padding-top: 30px;
+	margin-left: 30px;
+	color: rgba(0, 0, 0, 0.8);
+	margin-bottom: 20px;
+	svg {
+		position: relative;
+		top: 3px;
+		margin-right: 4px;
+	}
+	img {
+		width: 20px;
+		margin-right: 4px;
+		margin-bottom: 4px;
+	}
+}
+
+/deep/ .ant-modal-body {
+	padding: 0;
+}
+/deep/ .ant-modal-content {
+	border-radius: 10px;
+}
+/deep/ .ant-modal-close-x {
+	background: url('~@/v2/assets/imgs/receive/icon_delete.png') no-repeat;
+	background-size: cover;
+	.ant-modal-close-icon {
+		display: none;
+	}
+}
+
+.footer {
+	text-align: right;
+
+	.ant-btn {
+		margin-left: 20px;
+		width: 90px;
+		color: rgba(0, 0, 0, 0.8);
+		border: 1px solid #c6cdd8;
+		height: 34px;
+	}
+
+	.ant-btn-primary {
+		color: #ffffff;
+		border: none;
+	}
+}
+
+.note {
+	font-family: 'PingFang SC';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	padding-left: 10px;
+	line-height: 22px;
+	color: rgba(0, 0, 0, 0.5);
+	margin-bottom: 48px;
+}
+</style>

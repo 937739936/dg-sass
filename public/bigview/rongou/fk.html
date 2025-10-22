@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>蓉欧瑞易供应链管理平台</title>
+    <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+    <meta name="keywords"
+        content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+
+    <script src="../../jquery.min.js"></script>
+    <script src="../../echarts.min.js"></script>
+    <script src="../../china.js"></script>
+    <link rel="stylesheet" href="../../swiper-bundle.min.css" />
+    <script src="../../swiper-bundle.min.js"></script>
+    <style>
+        .one-line {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            /* Firefox */
+            -webkit-box-sizing: border-box;
+            /* Safari */
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #101216;
+        }
+
+        body {
+            background-image: url('../imgs/smbg.png');
+            background-size: 100% 100%;
+        }
+
+        #main-box {
+            width: 1920px;
+            height: 1080px;
+            transform-origin: 0 0;
+            position: relative;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            box-sizing: border-box;
+        }
+
+        .title {
+            font-size: 36px;
+            color: #fff;
+            height: 77px;
+            width: 100%;
+            padding: 8px 0;
+            background-image: url('../imgs/sm-title-bg-k.png');
+            background-size: 100% 100%;
+            text-align: center;
+            font-size: 36px;
+            color: #FFFFFF;
+            line-height: 47px;
+        }
+
+        .bottom-content {
+            padding: 0 20px 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+            margin-top: 10px;
+            height: 990px;
+        }
+
+        .bottom-content>.content-one {
+            width: 100%;
+            height: 140px;
+            display: flex;
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+            background-image: url('../imgs/sm-bg-one.png');
+            background-size: 518px 126px;
+            background-repeat: no-repeat;
+        }
+
+        .content-one-title {
+            width: 200px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-one-title>.content-one-title-img {
+            width: 47px;
+            height: 47px;
+            background-image: url('../imgs/sm-content-one-title.png');
+            background-size: 100%;
+        }
+
+        .content-one-title>.content-one-title-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 28px;
+            margin-top: 10px;
+        }
+
+        .content-one-main {
+            width: 1680px;
+            padding: 0 40px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            ;
+            align-items: center;
+        }
+
+        .content-one-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-one-item>span {
+            display: inline-block;
+            margin-left: 16px;
+        }
+
+        .content-one-item>.content-one-item-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 25px;
+        }
+
+        .content-one-item>.content-one-item-con {
+            font-size: 28px;
+            font-weight: 400;
+            color: #97EEED;
+            line-height: 28px;
+        }
+
+        .content-one-item>.content-one-item-unit {
+            margin-left: 0;
+        }
+
+        .content-one-item>.content-one-item-sum {
+            font-size: 28px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 40px;
+        }
+
+        .content-one-interval {
+            width: 1px;
+            height: 66px;
+            border: 1px solid;
+            border-image: linear-gradient(180deg, rgba(207, 250, 255, 0), rgba(182, 246, 255, 1), rgba(162, 243, 255, 0)) 1 1;
+        }
+
+        .content-two {
+            height: 700px;
+        }
+
+        .content-two-item {
+
+            background: rgba(16, 43, 67, 0.32);
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+        }
+
+        .content-two-table .content-two-item {
+            padding-top: 10px;
+        }
+
+        .content-two-chart .content-two-title {
+            width: 100%;
+            height: 52px;
+            padding: 6px 23px;
+            background-image: url('../imgs/sm-content-two-title-f.png');
+            background-size: 100%;
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 28px;
+        }
+
+        .content-two-table .content-two-title {
+            /* margin-top:10px; */
+            width: 100%;
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            line-height: 28px;
+            padding-left: 12px;
+            height: 28px;
+            border-left: #00b6e4 solid 4px;
+        }
+
+        .content-two-632 {
+            width: 632px;
+        }
+
+        .content-two-632 .content-two-title {
+            background-image: url('../imgs/sm-content-two-title-632.png');
+            background-size: 100%;
+        }
+
+        .content-two-530 {
+            width: 530px;
+        }
+
+        .content-two-530 .content-two-title {
+            background-image: url('../imgs/sm-content-two-title-530.png');
+            background-size: 100%;
+        }
+
+        .content-two-main {
+            width: 100%;
+            padding: 8px;
+            height: 270px;
+            overflow: hidden;
+        }
+
+        #upCustomerDataList.content-two-main {
+            height: 130px;
+        }
+
+        #downCustomerDataList.content-two-main {
+            height: 130px;
+        }
+
+        #terminalRepayDetailList.content-two-main {
+            height: 620px;
+        }
+
+        .content-two-main>table {
+            width: 100%;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: center;
+            color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        .content-two-main>table thead {
+            display: table;
+            width: 100%;
+            padding: 5px 0;
+            table-layout: fixed;
+            background: #1387E4;
+        }
+
+        .content-two-main>table tbody {
+            display: block;
+            overflow-y: scroll;
+            position: relative;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .content-two-main>table tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            padding: 5px 0;
+        }
+
+        .content-two-main>table tbody tr:nth-child(odd) {
+            background: rgba(19, 135, 228, 0.4);
+        }
+
+        .content-two-main>table tbody tr:nth-child(even) {
+            background: rgba(19, 135, 228, 0.3);
+        }
+
+
+        .content-two-item-two {
+            margin-top: 10px;
+            height: 330px;
+            padding-top: 1px;
+        }
+
+        .content-two-item-two .content-two-main>table thead {
+            background: rgba(8, 225, 210, 0.17);
+        }
+
+        .content-two-item-two .content-two-main>table tbody tr {
+            padding: 8px 0;
+        }
+
+        .content-two-item-two .content-two-main>table tbody tr:nth-child(odd) {
+            background: rgba(129, 255, 254, 0.6);
+        }
+
+        .content-two-item-two .content-two-main>table tbody tr:nth-child(even) {
+            background: rgba(129, 255, 254, 0.7);
+        }
+
+        #terminalRepayDayList {
+            width: 100%;
+            height: 648px;
+        }
+
+        .content-two-530 .content-two-main>table thead {
+            background: rgba(255, 255, 255, 0.13);
+            font-size: 16px;
+            font-weight: 400;
+            color: #66D9FF;
+            line-height: 22px;
+        }
+
+        .content-two-530 .content-two-main>table tbody tr {
+            padding: 18px 0;
+        }
+
+        .content-two-530 .content-two-main>table tbody tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.13);
+        }
+
+        .content-three {
+            width: 100%;
+            height: 90px;
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+            border-radius: 2px;
+        }
+
+        .content-three-title {
+            /* margin-top: 10px; */
+            width: 100%;
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 28px;
+            padding-left: 12px;
+            height: 28px;
+            border-left: #00B6E4 solid 4px;
+        }
+
+        .content-three>.content-three-main {
+            font-size: 16px;
+            font-weight: 400;
+            color: #81FFFE;
+            line-height: 22px;
+            padding: 5px 24px;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .sm-bottom-tag {
+            width: 100%;
+            height: 37px;
+            background-image: url('../imgs/sm-bottom-tag.png');
+            background-size: 100% 100%;
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-box">
+        <div class="title">蓉欧瑞易供应链风控数据</div>
+        <div class="bottom-content">
+            <div class="content-one">
+                <div class="content-one-title">
+                    <div class="content-one-title-img"></div>
+                    <div class="content-one-title-text">回款数据</div>
+                </div>
+                <div class="content-one-main">
+                    <div class="content-one-item">
+                        <img src="../imgs/sm-content-one.png" width="60" height="60">
+                        <span class="content-one-item-title">累积回款</span>
+                        <span class="content-one-item-con" id="totalRepayAmount">0</span>
+                        <span class="content-one-item-unit">(万元)</span>
+                        <span class="content-one-item-sum" id="totalRepayCount">0</span>
+                        <span class="content-one-item-unit">(笔)</span>
+                    </div>
+                    <div class="content-one-interval"></div>
+                    <div class="content-one-item">
+                        <img src="../imgs/sm-content-one.png" width="60" height="60">
+                        <span class="content-one-item-title">当年累积回款</span>
+                        <span class="content-one-item-con" id="currentYearRepayAmount">0</span>
+                        <span class="content-one-item-unit">(万元)</span>
+                        <span class="content-one-item-sum" id="currentYearRepayCount">0</span>
+                        <span class="content-one-item-unit">(笔)</span>
+                    </div>
+                    <div class="content-one-interval"></div>
+                    <div class="content-one-item">
+                        <img src="../imgs/sm-content-one.png" width="60" height="60">
+                        <span class="content-one-item-title">本月累积回款</span>
+                        <span class="content-one-item-con" id="currentMonthAmount">0</span>
+                        <span class="content-one-item-unit">(万元)</span>
+                        <span class="content-one-item-sum" id="currentMonthRepayCount">0</span>
+                        <span class="content-one-item-unit">(笔)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 煤炭采购情况 -->
+            <div class="content-two content-two-table" style="width: 694px;">
+                <div class="content-two-item" style="height: 175px;">
+                    <div class="content-two-title">上游供应商</div>
+                    <div class="content-two-main" id="upCustomerDataList">
+                        <table cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <td width="70">序号</td>
+                                    <td>客户名称</td>
+                                    <td>实控人</td>
+                                    <td>注册资本(万元)</td>
+                                    <td>成立时间</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table cellspacing="0" cellpadding="0" class="table">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="content-two-item" style="margin-top:10px;height: 175px;">
+                    <div class="content-two-title">下游客户</div>
+                    <div class="content-two-main" id="downCustomerDataList">
+                        <table cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <td width="70">序号</td>
+                                    <td>客户名称</td>
+                                    <td>实控人</td>
+                                    <td>注册资本(万元)</td>
+                                    <td>成立时间</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table cellspacing="0" cellpadding="0" class="table">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="content-two-item content-two-item-two">
+                    <div class="content-three-title">发票验真</div>
+                    <div class="content-two-main" id="invoiceDataList">
+                        <table cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <td width="70">序号</td>
+                                    <td width="220">发票代码及发票号码</td>
+                                    <td>开票日期</td>
+                                    <td>价税合计(元)</td>
+                                    <td>验真结果</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table cellspacing="0" cellpadding="0" class="table">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="content-two content-two-chart  content-two-632">
+                <div class="content-two-item" style="height: 700px;">
+                    <div class="content-two-title">终端用户回款天数</div>
+                    <div class="content-two-main" id="terminalRepayDayList"></div>
+                </div>
+            </div>
+            <div class="content-two content-two-chart content-two-530">
+                <div class="content-two-item" style="height: 700px;">
+                    <div class="content-two-title">终端用户回款</div>
+                    <div class="content-two-main" id="terminalRepayDetailList">
+                        <table cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <td width="50">序号</td>
+                                    <td>终端客户</td>
+                                    <td>近一年回款金额(万元)</td>
+                                    <td>累计回款金额(万元)</td>
+                                    <td>平均回款天数</td>
+                                    <td>近一年回款笔数</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table cellspacing="0" cellpadding="0" class="table">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="content-three">
+                <div class="content-three-title">融资预警</div>
+                <div class="content-three-main">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sm-bottom-tag"></div>
+    </div>
+    <script>
+        $(function () {
+
+            var changeSize = function () {
+                const percentW = document.documentElement.clientWidth / 1920
+                const percentH = document.documentElement.clientHeight / 1080
+                $('#main-box')[0].style.transform = 'scale(' + percentW + ',' + percentH + ')'
+            }
+
+            window.addEventListener('resize', changeSize)
+
+            changeSize()
+
+            var getQueryString = function (name) {
+                var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) {
+                    return unescape(r[2]);
+                }
+                return null;
+            }
+            var baseUrl = '/dg-trade-api/api'
+            //单位换算
+            function unit(sum) {
+                if (sum) {
+                    return Math.round(Number(sum) / 100) / 100
+                } else {
+                    return 0
+                }
+            }
+            //千分位
+            function thousand(sum) {
+                return String(sum).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,')
+            }
+
+            function appendCustomerTable(key, data) {
+                $('#' + key + ' tbody').empty();
+                let str = "";
+                data.forEach((item, index) => {
+                    str += "<tr><td width='70'>"
+                    str += index + 1
+                    str += "</td><td>"
+                    str += item.name || ''
+                    str += "</td><td>"
+                    str += item.controllerName || ''
+                    str += "</td><td>"
+                    str += item.registerCap || ''
+                    str += "</td><td>"
+                    str += item.establishedDate || ''
+                    str += "</td></tr>"
+                })
+                $('#' + key + ' tbody').append(str);
+                //内容超出高度后滚动轮播
+                let tblBodyHeight = $('#' + key + ' .table').outerHeight()
+                let tableInnerHeight = $('#' + key).outerHeight()
+                if (tblBodyHeight > tableInnerHeight) {
+                    $('#' + key + ' tbody').css('top', '0');
+                    let tblTop = 0;
+                    let speedhq = 50; // 数值越大越慢
+                    let outerHeight = tableInnerHeight - tblBodyHeight - 50
+                    function Marqueehq() {
+                        if (tblTop <= outerHeight) {
+                            tblTop = 0;
+                        } else {
+                            tblTop -= 1;
+                        }
+                        $('#' + key + ' tbody').css('top', tblTop + 'px');
+                    }
+                    setInterval(Marqueehq, speedhq);
+                }
+            }
+
+            var uscc = getQueryString('uscc') || ''
+            var _get = function (url, callback) { // 网络请求
+                url = baseUrl + url + "?uscc=" + uscc
+                let token = null
+                try {
+                    token = window.parent.sessionStorage.getItem('VUEX_ST_TOKEN')
+                } catch (e) { }
+
+                $.ajax({
+                    headers: {
+                        'Authorization': token,
+                        Source: 'PC',
+                    },
+                    url: url,
+                    type: 'GET',
+                    success: callback,
+                    dataType: 'json',
+
+                });
+            }
+            _get('/data/screen/repay/data', function (result) {
+                if (!result.success) {
+                    return
+                }
+                var res = result.data || {};
+                if (res) {
+                    for (key in res) {
+                        if (key.indexOf("RepayCount") > -1) {
+                            $(`#${key}`).text(res[key] || 0)
+                        } else {
+                            $(`#${key}`).text(unit(res[key]))
+                        }
+                    }
+                }
+            })
+            _get('/data/screen/up/customer/data', function (result) {
+                if (!result.success) {
+                    return
+                }
+                //上游客户管理
+                if (result.data) {
+                    appendCustomerTable('upCustomerDataList', result.data)
+                }
+            })
+            _get('/data/screen/down/customer/data', function (result) {
+                if (!result.success) {
+                    return
+                }
+                //下游客户管理
+                if (result.data) {
+                    appendCustomerTable('downCustomerDataList', result.data)
+                }
+            })
+            _get('/data/screen/invoice/data', function (result) {
+                if (!result.success) {
+                    return
+                }
+                //发票数据
+                if (result.data && result.data.length) {
+                    $('#invoiceDataList tbody').empty();
+                    let str = "";
+                    result.data.forEach((item, index) => {
+                        let code = item.code || ''
+                        if (code) {
+                            code += '、'
+                        }
+                        code += item.no || ''
+                        str += "<tr><td width='70'>"
+                        str += index + 1
+                        str += "</td><td  width='220'>"
+                        str += code
+                        str += "</td><td>"
+                        str += item.issuedDate
+                        str += "</td><td>"
+                        str += item.totalAmount
+                        str += "</td><td>"
+                        str += item.stateDesc
+                        str += "</td></tr>"
+                    })
+                    $('#invoiceDataList tbody').append(str);
+                    //内容超出高度后滚动轮播
+                    let tblBodyHeight1 = $('#invoiceDataList .table').outerHeight()
+                    let tableInnerHeight1 = $('#invoiceDataList').outerHeight()
+                    if (tblBodyHeight1 > tableInnerHeight1) {
+                        $('#invoiceDataList tbody').css('top', '0');
+                        let tblTop1 = 0;
+                        let speedhq1 = 50; // 数值越大越慢
+                        let outerHeight1 = tableInnerHeight1 - tblBodyHeight1 - 50
+                        function Marqueehq1() {
+                            if (tblTop1 <= outerHeight1) {
+                                tblTop1 = 0;
+                            } else {
+                                tblTop1 -= 1;
+                            }
+                            $('#invoiceDataList tbody').css('top', tblTop1 + 'px');
+                        }
+                        MyMarhq1 = setInterval(Marqueehq1, speedhq1);
+                    }
+                }
+            })
+            _get('/data/screen/risk/data', function (result) {
+                if (!result.success) {
+                    return
+                }
+                var res = result.data || {};
+                var MyMarhq, MyMarhq1, MyMarhq2;
+                //用户回款
+                if (res.terminalRepayDetailList && res.terminalRepayDetailList.length) {
+                    $('#terminalRepayDetailList tbody').empty();
+                    let str = "";
+                    res.terminalRepayDetailList.forEach((item, index) => {
+                        str += "<tr><td width='50'>"
+                        str += index + 1
+                        str += "</td><td>"
+                        str += item.terminalCompanyName || ''
+                        str += "</td><td>"
+                        str += unit(item.terminalRepayAmount) || ''
+                        str += "</td><td>"
+                        str += unit(item.terminalRepayTotalAmount) || ''
+                        str += "</td><td>"
+                        str += item.repayAverageDay
+                        str += "</td><td>"
+                        str += item.terminalRepayNum
+                        str += "</td></tr>"
+                    })
+                    $('#terminalRepayDetailList tbody').append(str);
+                    //内容超出高度后滚动轮播
+                    let tblBodyHeight2 = $('#terminalRepayDetailList .table').outerHeight()
+                    let tableInnerHeight2 = $('#terminalRepayDetailList').outerHeight()
+                    if (tblBodyHeight2 > tableInnerHeight2) {
+                        $('#terminalRepayDetailList tbody').css('top', '0');
+                        let tblTop2 = 0;
+                        let speedhq2 = 50; // 数值越大越慢
+                        let outerHeight2 = tableInnerHeight2 - tblBodyHeight2 - 50
+                        function Marqueehq2() {
+                            if (tblTop2 <= outerHeight2) {
+                                tblTop2 = 0;
+                            } else {
+                                tblTop2 -= 1;
+                            }
+                            $('#terminalRepayDetailList tbody').css('top', tblTop2 + 'px');
+                        }
+                        MyMarhq2 = setInterval(Marqueehq2, speedhq2);
+                    }
+                }
+                //预警信息
+                if (res.warnDataList && res.warnDataList.length) {
+                    $('.swiper-wrapper').empty();
+                    let str = ""
+                    res.warnDataList.forEach((item, index) => {
+                        str += "<div class='swiper-slide'>"
+                        str += item.alertContent
+                        str += "</div>"
+                    })
+                    $('.swiper-wrapper').append(str);
+                    new Swiper(".mySwiper", {
+                        direction: "vertical",
+                        autoplay: true,
+                        loop: true,
+                    });
+                }
+                //渲染图像
+                let dayData = {
+                    name: [],
+                    data: [],
+                    maxData: [],
+                    max: 0,
+                };
+                res.terminalRepayDayList.forEach(item => {
+                    dayData.data.push(item.ratio)
+                    dayData.name.push(item.name)
+                })
+                let maxData = Math.ceil(Math.max(...dayData.data) / 10) * 10
+                maxData = maxData > 100 ? 100 : maxData;
+                maxData = maxData < 1 ? 10 : maxData;
+                dayData.data.forEach(item => {
+                    dayData.maxData.push(maxData)
+                })
+                let dayList = $('#terminalRepayDayList')[0];
+                let dayListOption = {
+                    grid: {
+                        left: "3%",
+                        top: "10%",
+                        right: "2%",
+                        bottom: "5%",
+                        containLabel: true,
+                    },
+                    xAxis: [
+                        {
+                            type: "category",
+                            axisTick: {
+                                show: false,
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "rgba(128, 208, 254, 0.5)",
+                                },
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: "#80D0FE",
+                                    fontSize: 16,
+                                },
+                            },
+                            data: dayData.name,
+                        },
+                        {
+                            type: "category",
+                            axisLine: {
+                                show: false,
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                            axisLabel: {
+                                show: false,
+                            },
+                            splitArea: {
+                                show: false,
+                            },
+                            splitLine: {
+                                show: false,
+                            },
+                            data: dayData.maxData,
+                        },
+                    ],
+                    yAxis: {
+                        type: "value",
+                        max: maxData,
+                        splitLine: {
+                            show: false,
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: "#80D0FE",
+                                fontSize: 16,
+                            },
+                            formatter: function (value) {
+                                return value + "%";
+                            },
+                        },
+                    },
+                    series: [
+                        {
+                            type: "bar",
+                            xAxisIndex: 1,
+                            itemStyle: {
+                                normal: {
+                                    show: true,
+                                    color: "rgba(80, 128, 159, 0.09)",
+                                },
+                            },
+                            label: {
+                                normal: {
+                                    show: false,
+                                },
+                            },
+                            barWidth: "40%",
+                            data: dayData.maxData,
+                        },
+                        {
+                            type: "bar",
+                            itemStyle: {
+                                normal: {
+                                    show: true,
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                        {
+                                            offset: 0,
+                                            color: "rgba(21, 143, 244, 0)",
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: "rgba(20, 146, 247, 1)",
+                                        },
+                                    ]),
+                                },
+                            },
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: "top",
+                                    textStyle: {
+                                        color: "#80D0FE",
+                                    },
+                                    formatter: '{c}%'
+                                },
+                            },
+                            barWidth: "40%",
+                            data: dayData.data,
+                        },
+                    ],
+                };
+                var dayListDiv = echarts.init(dayList);
+                dayListDiv.setOption(dayListOption);
+
+            })
+        })
+    </script>
+</body>
+
+</html>

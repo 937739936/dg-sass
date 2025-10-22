@@ -1,0 +1,473 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <title>
+    </title>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 30px;
+
+        }
+        html,
+        body {
+            padding: 0px;
+            margin: 0px;
+            font-family: 'STXihei';
+        }
+        table {
+            width: 700px;
+            margin-right: auto;
+            margin-left: auto;
+            border-collapse: collapse;
+            border-spacing: 0;
+
+        }
+
+        table p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        tr,
+
+
+        td {
+            padding: 5px;
+            border: 1px solid #000000;
+        }
+        input[type=checkbox]{
+            cursor: pointer;
+            position: relative;
+            width: 12px;
+            height: 12px;
+            font-size: 14px;
+            border: 1px solid #000;
+        }
+
+        input[type=checkbox]::after{
+            position: absolute;
+            top: 0;
+            background-color: #fff;
+            border: 1px solid #000;
+            color: #000;
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            visibility: visible;
+            padding-left: 0px;
+            text-align: center;
+            content: ' ';
+        }
+        input[type=checkbox]:checked::after{
+            content: "✓";
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<p style="text-align: center;"><strong>数字证书申请表</strong></p>
+<table>
+    <tbody>
+    <tr>
+        <td colspan="14" width="489">
+            <p style="text-align: center;">
+                <strong>
+                    数字证书申请信息
+                </strong>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                申请日期
+            </p>
+        </td>
+        <td width="115">
+            <p><span th:text="${time}"></span>
+            </p>
+        </td>
+        <td colspan="6" width="396">
+            <p>
+                证书期限
+            </p>
+        </td>
+        <td colspan="6" width="396">
+            <p>
+                5年
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                证书数量
+            </p>
+        </td>
+        <td width="115">
+            <p>[&nbsp;&nbsp;&nbsp;&nbsp;]个</p>
+        </td>
+        <td colspan="12" width="396">
+            <p>
+                备注：如果选择Ukey方式则证书数量为1个；如果选择证书托管方式，则证书数量与申请的电子印章数量相等。请您根据实际需求填写证书数量。
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="2" width="100">
+            <p>
+                证书种类
+            </p>
+        </td>
+        <td colspan="13" width="396">
+            <p>
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>机构普通证书
+                <input type="checkbox" disabled="disabled" checked="checked" th:readonly="true"/>机构高级证书
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>普通服务器证书
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>设备证书
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="13" width="396">
+            <p>
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>安全邮件证书
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>代码签名证书
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>VPN证书
+                <br/>
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>其它证书，请注明：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td rowspan="4" width="100">
+            <p>
+                签名算法
+            </p>
+        </td>
+        <td colspan="13" width="396">
+            <p>
+                <input type="checkbox" disabled="disabled" checked="checked" th:readonly="true"/>SHA256withRSA (国际RSA非对称加密算法，SHA256杂凑算法）
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="13" width="396">
+            <p>
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>SHA1withRSA (国际RSA非对称加密算法，SHA1杂凑算法）
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="13" width="396">
+            <p>
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>SM3withSM2 (国密SM2非对称加密算法，SM3杂凑算法）
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="13" width="396">
+            <p>
+                RSA证书默认密钥长度为2048位，SM2证书默认密钥长度为256位，其他需求请标明：
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                业务类型
+            </p>
+        </td>
+        <td colspan="3" width="155">
+            <p>
+                <input type="checkbox" disabled="disabled" checked="checked" th:readonly="true"/>新申请
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>更新
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>吊销
+            </p>
+        </td>
+        <td colspan="4" width="91">
+            <p>
+                证书用于何种项目/系统
+            </p>
+        </td>
+        <td colspan="6" width="149">
+            <p>
+                　数链科技项目
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                签章方式
+            </p>
+        </td>
+        <td colspan="13" width="396">
+            <p>
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>UKey（U盾）
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>证书托管（由数链科技托管数字证书）
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="14" width="489">
+            <p style="text-align: center;">
+                <strong>
+                    电子印章申请信息
+                </strong>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                电子印章类型
+            </p>
+        </td>
+        <td colspan="13" width="396">
+            <p>
+                <input type="checkbox" disabled="disabled" checked="checked" th:readonly="true"/>公章
+                <input type="checkbox" disabled="disabled" checked="checked" th:readonly="true"/>法定代表人印章
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>合同专用章 
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>财务专用章 
+            </p>
+            <p>
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>业务专用章 
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>其他印章，印章名称：<span style="text-decoration:underline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="14" width="489">
+            <p style="text-align: center;">
+                <strong>
+                    申请机构信息
+                </strong>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                机构名称
+            </p>
+        </td>
+        <td colspan="13" width="396">
+            <p>
+                　<span th:text="${company.name}"></span>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                机构证件类型
+            </p>
+        </td>
+        <td colspan="13" width="396">
+            <p>
+                <input type="checkbox" disabled="disabled" checked="checked" th:readonly="true"/>企业营业执照
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>组织机构代码证
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>其它，请注明：
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                机构证件号码
+            </p>
+        </td>
+        <td colspan="13" width="396">
+            <p>
+                　<span th:text="${company.uscc}"></span>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="14" width="489">
+            <p style="text-align: center;">
+                <strong>
+                    申请机构经办人信息
+                </strong>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                经办人姓名
+            </p>
+        </td>
+        <td width="115">
+            <p><span th:text="${personal.name}"></span>
+            </p>
+        </td>
+        <td colspan="2" width="49">
+            <p>
+                电话
+            </p>
+        </td>
+        <td colspan="4" width="91">
+            <p>
+                　<span th:text="${personal.mobile}"></span>
+            </p>
+        </td>
+        <td width="60">
+            <p>
+                邮箱
+            </p>
+        </td>
+        <td colspan="5" width="104">
+            <p>
+
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                经办人证件类型
+            </p>
+        </td>
+        <td colspan="13" width="396">
+            <p>
+                <input type="checkbox" checked="checked" disabled="disabled" th:readonly="true"/>身份证
+                <input type="checkbox" disabled="disabled" th:readonly="true"/>护照
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                经办人证件号码
+            </p>
+        </td>
+        <td colspan="13" width="396">
+            <p>
+                　<span th:text="${personal.idCard}"></span>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                证件邮寄地址
+            </p>
+        </td>
+        <td colspan="7" width="247">
+            <p>
+                　<span th:text="${data.linkmanArea}"></span>
+                 <span th:text="${data.linkmanAddress}"></span>
+            </p>
+        </td>
+        <td colspan="2" width="52">
+            <p>
+                邮政编码
+            </p>
+        </td>
+        <td colspan="4" width="96">
+            <p>
+                &nbsp;
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="14" width="489">
+            <p style="text-align: center;">
+                <strong>
+                    申请机构声明
+                </strong>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="14" width="489">
+            <p>
+                本机构承诺以上信息资料真实、有效。本机构已认真阅读并同意遵守中金金融认证中心有限公司（CFCA）网站（http://www.cfca.com.cn)发布的《CFCA数字证书服务协议》、《电子认证业务规则（CPS））》中规定的相关义务。
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td width="100">
+            <p>
+                <strong>
+                    申请机构盖章
+                </strong>
+            </p>
+        </td>
+        <td colspan="7" width="247">
+            <p>
+                <strong>
+                    　
+                </strong>
+            </p>
+        </td>
+        <td colspan="6" width="149">
+            <p>
+                　<span th:text="${time}"></span>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td rowspan="2" width="100">
+            <p>
+                备注
+            </p>
+        </td>
+        <td colspan="13" rowspan="2" width="396">
+            <p>
+                <strong>
+                    　
+                </strong>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+
+    </tr>
+    <tr>
+        <td colspan="14" rowspan="4" width="489">
+            <p>
+                <strong>
+                    注：本表需加盖申请机构公章。申请机构须同时提供机构证件复印件（加盖公章）、法定代表人身份证复印件、经办人身份证件复印件、机构授予经办人的授权书原件，本申请表传真件、扫描件和复印件与原件具有同等法律效力。
+                </strong>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+
+    </tr>
+    <tr>
+
+    </tr>
+    <tr>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

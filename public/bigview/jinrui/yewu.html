@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>数链科技-大宗商品数字供应链服务平台</title>
+    <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+    <meta name="keywords" content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+
+    <script src="../../jquery.min.js"></script>
+    <script src="../../echarts.min.js"></script>
+    <script src="../../china.js"></script>
+    <style>
+        .one-line {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            /* Firefox */
+            -webkit-box-sizing: border-box;
+            /* Safari */
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #101216;
+        }
+
+        body {
+            background-image: url('../imgs/smbg.png');
+            background-size: 100% 100%;
+        }
+
+        #main-box {
+            width: 1920px;
+            height: 1080px;
+            transform-origin: 0 0;
+            overflow: hidden;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            box-sizing: border-box;
+        }
+
+        .title {
+            color: #fff;
+            height: 77px;
+            width: 100%;
+            padding: 8px 0;
+            background-image: url('../imgs/sm-title-bg-k.png');
+            background-size: 100% 100%;
+            text-align: center;
+            font-size: 36px;
+            color: #FFFFFF;
+            line-height: 47px;
+        }
+
+        /* 采购销售情况 */
+        .bottom-content {
+            padding: 0 20px 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+            margin-top: 10px;
+            height: 990px;
+        }
+
+        .bottom-content>.content-one {
+            width: 925px;
+            height: 200px;
+            display: flex;
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+            background-image: url('../imgs/sm-bg-one.png');
+            background-size: 518px 200px;
+            background-repeat: no-repeat;
+        }
+
+        .content-one-title {
+            width: 200px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-one-title>.content-one-title-img {
+            width: 47px;
+            height: 47px;
+            background-image: url('../imgs/sm-content-one-title.png');
+            background-size: 100%;
+        }
+
+        .content-one-title>.content-one-title-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 28px;
+            margin-top: 10px;
+        }
+
+        .content-one-main {
+            width: 725px;
+            padding: 10px 20px 24px 0px;
+            color: #fff;
+        }
+
+        .content-one-main>table {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .content-one-main>table th {
+            height: 14px;
+            font-size: 10px;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 14px;
+        }
+
+        .content-one-main>table td {
+            height: 28px;
+            font-size: 28px;
+            font-weight: 400;
+            color: #FBC578;
+            font-family: ZhenyanGB-Regular, ZhenyanGB;
+            line-height: 28px;
+            background: linear-gradient(180deg, #B4E4FF 0%, #56EBDD 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-one-main>table td .main-table-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 25px;
+            -webkit-text-fill-color: #fff
+        }
+
+        .content-one-main>table td .main-table-title>.main-table-title-img {
+            width: 36px;
+            height: 36px;
+            background-image: url('../imgs/sm-content-one-table.png');
+            background-size: 100%;
+            margin-right: 8px;
+        }
+
+        .content-one-main-2>table td {
+            background: linear-gradient(180deg, #FFE3A3 0%, #FFC36A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 煤炭采购情况 */
+        .content-two {
+            width: 925px;
+            height: 406px;
+            background: rgba(16, 43, 67, 0.32);
+        }
+
+        .content-two>.content-two-title {
+            width: 100%;
+            height: 74px;
+            padding: 16px 23px;
+            background-image: url('../imgs/sm-content-two-title.png');
+            background-size: 100%;
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 28px;
+        }
+
+        .content-two-main {
+            width: 100%;
+            height: 332px;
+        }
+
+        .content-three {
+            width: 925px;
+            height: 300px;
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+            border-radius: 2px;
+        }
+
+        .content-three>.content-three-title {
+            margin-top: 10px;
+            width: 100%;
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 28px;
+            padding-left: 12px;
+            height: 28px;
+            border-left: #00B6E4 solid 4px;
+        }
+
+        .content-three>.content-three-main {
+            width: 100%;
+            height: 250px;
+            margin-top: 12px
+        }
+
+        .sm-bottom-tag {
+            width: 100%;
+            height: 37px;
+            background-image: url('../imgs/sm-bottom-tag.png');
+            background-size: 100% 100%;
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-box">
+        <div class="title">晋瑞能源供应链业务实况</div>
+        <div class="bottom-content">
+            <div class="content-one">
+                <div class="content-one-title">
+                    <div class="content-one-title-img"></div>
+                    <div class="content-one-title-text">采购情况</div>
+                </div>
+                <div class="content-one-main">
+                    <table border="0">
+                        <tr>
+                            <th></th>
+                            <th>汽运(万吨)</th>
+                            <th>火运(万吨)</th>
+                            <th>船运(万吨)</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="main-table-title">
+                                    <div class="main-table-title-img"></div>
+                                    <span>累计发运</span>
+                                </div>
+                            </td>
+                            <td><span id="buyautomobileTotalQuantity"></span></td>
+                            <td><span id="buytrainTotalQuantity"></span></td>
+                            <td><span id="buyshipTotalQuantity"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="main-table-title">
+                                    <div class="main-table-title-img"></div>
+                                    <span>当年发运</span>
+                                </div>
+                            </td>
+                            <td><span id="buyautomobileCurrentYearQuantity"></span></td>
+                            <td><span id="buytrainCurrentYearQuantity"></span></td>
+                            <td><span id="buyshipCurrentYearQuantity"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="main-table-title">
+                                    <div class="main-table-title-img"></div>
+                                    <span>本月发运</span>
+                                </div>
+                            </td>
+                            <td><span id="buyautomobileCurrentMonthQuantity"></span></td>
+                            <td><span id="buytrainCurrentMonthQuantity"></span></td>
+                            <td><span id="buyshipCurrentMonthQuantity"></span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="content-one">
+                <div class="content-one-title">
+                    <div class="content-one-title-img"></div>
+                    <div class="content-one-title-text">销售情况</div>
+                </div>
+                <div class="content-one-main content-one-main-2">
+                    <table border="0">
+                        <tr>
+                            <th></th>
+                            <th>汽运(万吨)</th>
+                            <th>火运(万吨)</th>
+                            <th>船运(万吨)</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="main-table-title">
+                                    <div class="main-table-title-img"></div>
+                                    <span>累计收货</span>
+                                </div>
+                            </td>
+                            <td><span id="sellautomobileTotalQuantity"></span></td>
+                            <td><span id="selltrainTotalQuantity"></span></td>
+                            <td><span id="sellshipTotalQuantity"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="main-table-title">
+                                    <div class="main-table-title-img"></div>
+                                    <span>当年收货</span>
+                                </div>
+                            </td>
+                            <td><span id="sellautomobileCurrentYearQuantity"></span></td>
+                            <td><span id="selltrainCurrentYearQuantity"></span></td>
+                            <td><span id="sellshipCurrentYearQuantity"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="main-table-title">
+                                    <div class="main-table-title-img"></div>
+                                    <span>本月收货</span>
+                                </div>
+                            </td>
+                            <td><span id="sellautomobileCurrentMonthQuantity"></span></td>
+                            <td><span id="selltrainCurrentMonthQuantity"></span></td>
+                            <td><span id="sellshipCurrentMonthQuantity"></span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- 煤炭采购情况 -->
+            <div class="content-two">
+                <div class="content-two-title">煤炭采购情况</div>
+                <div class="content-two-main" id="content-two-main-buy"></div>
+            </div>
+            <!-- 煤炭销售情况 -->
+            <div class="content-two">
+                <div class="content-two-title">煤炭销售情况</div>
+                <div class="content-two-main" id="content-two-main-sell"></div>
+            </div>
+            <!-- 上游供应商累计发运明细 -->
+            <div class="content-three">
+                <div class="content-three-title">上游供应商累计发运明细</div>
+                <div class="content-three-main" id="content-three-main-up"></div>
+            </div>
+            <!-- 下游客户累计发运明细 -->
+            <div class="content-three">
+                <div class="content-three-title">下游客户累计收货明细</div>
+                <div class="content-three-main" id="content-three-main-down"></div>
+            </div>
+        </div>
+        <div class="sm-bottom-tag"></div>
+    </div>
+    <script>
+        $(function () {
+
+            var changeSize = function () {
+                const percentW = document.documentElement.clientWidth / 1920
+                const percentH = document.documentElement.clientHeight / 1080
+                $('#main-box')[0].style.transform = 'scale(' + percentW + ',' + percentH + ')'
+            }
+
+            window.addEventListener('resize', changeSize)
+
+            changeSize()
+
+            var getQueryString = function (name) {
+                var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) {
+                    return unescape(r[2]);
+                }
+                return null;
+            }
+            var baseUrl = '/dg-trade-api/api'
+            //单位换算
+            function unit(sum) {
+                if (sum) {
+                    return Math.round(Number(sum) / 100) / 100
+                } else {
+                    return 0
+                }
+            }
+            var uscc = getQueryString('uscc') || ''
+            var _get = function (url, callback) { // 网络请求
+                url = baseUrl + url+ "?uscc=" + uscc
+                let token = null
+                try {
+                    token = window.parent.sessionStorage.getItem('VUEX_ST_TOKEN')
+                } catch (e) { }
+
+                $.ajax({
+                    headers: {
+                        'Authorization': token,
+                        Source: 'PC',
+                    },
+                    url: url,
+                    type: 'GET',
+                    success: callback,
+                    dataType: 'json',
+
+                });
+            }
+
+            _get('/data/screen/business/data', function (result) {
+                if(!result.success){
+                    return
+                }
+                var res = result.data||{};
+                //采购情况
+                if (res.buyData) {
+                    for (key in res.buyData) {
+                        $(`#buy${key}`).text(unit(res.buyData[key]))
+                    }
+                }
+                //销售
+                if (res.sellData) {
+                    for (key in res.sellData) {
+                        $(`#sell${key}`).text(unit(res.sellData[key]))
+                    }
+                }
+                let colorList = [{
+                    normal: {
+                        color: "#1799FE",
+                        lineStyle: {
+                            color: "#1799FE",
+                            width: 1,
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                {
+                                    offset: 0,
+                                    color: "rgba(23, 153, 254, 0)",
+                                },
+                                {
+                                    offset: 1,
+                                    color: "rgba(23, 153, 254, 0.9)",
+                                },
+                            ]),
+                        },
+                    },
+                }, {
+                    normal: {
+                        color: "#CFDCED",
+                        lineStyle: {
+                            color: "#CFDCED",
+                            width: 1,
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                {
+                                    offset: 0,
+                                    color: "rgba(207, 220, 237, 0)",
+                                },
+                                {
+                                    offset: 1,
+                                    color: "rgba(207, 220, 237, 0.9)",
+                                },
+                            ]),
+                        },
+                    },
+                }, {
+                    normal: {
+                        color: "#A5FFFD",
+                        lineStyle: {
+                            color: "#A5FFFD",
+                            width: 1,
+                        },
+                        areaStyle: {
+                            //color: '#94C9EC'
+                            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                {
+                                    offset: 0,
+                                    color: "rgba(94, 210, 207, 0)",
+                                },
+                                {
+                                    offset: 1,
+                                    color: "rgba(94, 210, 207, 0.9)",
+                                },
+                            ]),
+                        },
+                    },
+                }];
+                //采购图像
+                let buyData = { xAxis: [], data: [[], [], []] };
+                res.buyLineChart.forEach(item => {
+                    buyData.xAxis.push(item.month)
+                    buyData.data[0].push(unit(item.automobileQuantity))
+                    buyData.data[1].push(unit(item.trainQuantity))
+                    buyData.data[2].push(unit(item.shipQuantity))
+                });
+                let contentTwoMainBuy = $('#content-two-main-buy')[0];
+                let contentTwoMainBuyOption = {
+                    grid: {
+                        left: "4%",
+                        right: "4%",
+                        top: "20%",
+                        bottom: "5%",
+                        containLabel: true,
+                    },
+                    title: {
+                        text: `近一年上游供应商发运量:${unit(res.buyCurrentYearTotalDeliverQuantity)}万吨`,
+                        textStyle: {
+                            fontSize: 16,
+                            fontWeight: 400,
+                            color: "#80D0FE"
+                        },
+                        left: "center",
+                        top: "0",
+                    },
+                    legend: {
+                        show: true,
+                        x: "right",
+                        y: "0",
+                        icon: "stack",
+                        itemWidth: 10,
+                        itemHeight: 10,
+                        textStyle: {
+                            color: "#80D0FE",
+                        },
+                        data: ["汽运", "火运", "船运"],
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        triggerOn: "none",
+                        backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                        borderWidth: '1', //边框宽度设置1
+                        borderColor: '#81D1FF', //设置边框颜色
+                        borderRadius: '12',
+                        extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                        textStyle: {
+                            color: '#FFFFFF'
+                        },
+                        formatter: function (params) { // 鼠标移入展示百分比
+                            var tip = ""
+                            if (params != null && params.length > 0) {
+                                tip = params[0].name + '<br/>'
+                                var total = 0
+                                for (var i = 0; i < params.length; i++) {
+                                    total += params[i].value
+                                    if (i == params.length - 1) {
+                                        for (var j = 0; j < params.length; j++) {
+                                            tip += params[j].marker + params[j].seriesName + ': ' + params[j].value + '万吨<br/>'
+                                        }
+                                    }
+                                }
+                            }
+                            return tip
+                        },
+                    },
+                    xAxis: [
+                        {
+                            type: "category",
+                            boundaryGap: false,
+                            axisLabel: {
+                                color: "#00B6E4",
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                            axisLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: "#5A91AB",
+                                },
+                            },
+                            data: buyData.xAxis
+                        },
+                    ],
+                    yAxis: [
+                        {
+                            type: "value",
+                            name: "月度发运情况（万吨）",
+                            nameTextStyle: {
+                                color: "#00B6E4",
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                            axisLabel: {
+                                formatter: "{value}",
+                                textStyle: {
+                                    color: "#00B6E4",
+                                },
+                            },
+                            axisLine: {
+                                show: false,
+                            },
+                            splitLine: {
+                                show: false,
+                            },
+                        },
+                    ],
+                    series: [
+                        {
+                            name: "汽运",
+                            type: "line",
+                            symbolSize: 0,
+                            itemStyle: colorList[0],
+                            emphasis: colorList[0].normal,
+                            data: buyData.data[0],
+                        },
+                        {
+                            name: "火运",
+                            type: "line",
+                            symbolSize: 0,
+                            itemStyle: colorList[1],
+                            emphasis: colorList[1].normal,
+                            data: buyData.data[1],
+                        },
+                        {
+                            name: "船运",
+                            type: "line",
+                            symbolSize: 0,
+                            itemStyle: colorList[2],
+                            emphasis: colorList[2].normal,
+                            data: buyData.data[2],
+                        },
+                    ],
+                };
+                var contentTwoMainBuyDiv = echarts.init(contentTwoMainBuy);
+                contentTwoMainBuyDiv.setOption(contentTwoMainBuyOption);
+                let contentTwoMainBuyOptionDataIndex = 0;
+                contentTwoMainBuyDiv.dispatchAction({
+                    type: 'showTip',
+                    dataIndex: contentTwoMainBuyOptionDataIndex,
+                    seriesIndex: 0,
+                })
+                setInterval(function () {
+                    contentTwoMainBuyOptionDataIndex++
+                    if (contentTwoMainBuyOptionDataIndex == sellData.xAxis.length) {
+                        contentTwoMainBuyOptionDataIndex = 0;
+                    }
+                    contentTwoMainBuyDiv.dispatchAction({
+                        type: 'showTip',
+                        dataIndex: contentTwoMainBuyOptionDataIndex,
+                        seriesIndex: 0,
+                    })
+                }, 5000)
+                //销售图像
+                let sellData = { xAxis: [], data: [[], [], []] };
+                res.sellLineChart.forEach(item => {
+                    sellData.xAxis.push(item.month)
+                    sellData.data[0].push(unit(item.automobileQuantity))
+                    sellData.data[1].push(unit(item.trainQuantity))
+                    sellData.data[2].push(unit(item.shipQuantity))
+                });
+                var contentTwoMainSell = $('#content-two-main-sell')[0];
+                let contentTwoMainSellOption = {
+                    grid: {
+                        left: "4%",
+                        right: "4%",
+                        top: "20%",
+                        bottom: "5%",
+                        containLabel: true,
+                    },
+                    title: {
+                        text: `近一年下游客户收货量:${unit(res.sellCurrentYearTotalReceiveQuantity)}万吨`,
+                        textStyle: {
+                            fontSize: 16,
+                            fontWeight: 400,
+                            color: "#80D0FE"
+                        },
+                        left: "center",
+                        top: "0",
+                    },
+                    legend: {
+                        show: true,
+                        x: "right",
+                        y: "0",
+                        icon: "stack",
+                        itemWidth: 10,
+                        itemHeight: 10,
+                        textStyle: {
+                            color: "#80D0FE",
+                        },
+                        data: ["汽运", "火运", "船运"],
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        triggerOn: "none",
+                        backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                        borderWidth: '1', //边框宽度设置1
+                        borderColor: '#81D1FF', //设置边框颜色
+                        borderRadius: '12',
+                        extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                        textStyle: {
+                            color: '#FFFFFF'
+                        },
+                        formatter: function (params) { // 鼠标移入展示百分比
+                            var tip = ""
+                            if (params != null && params.length > 0) {
+                                tip = params[0].name + '<br/>'
+                                var total = 0
+                                for (var i = 0; i < params.length; i++) {
+                                    total += params[i].value
+                                    if (i == params.length - 1) {
+                                        for (var j = 0; j < params.length; j++) {
+                                            tip += params[j].marker + params[j].seriesName + ': ' + params[j].value + '万吨<br/>'
+                                        }
+                                    }
+                                }
+                            }
+                            return tip
+                        },
+                    },
+                    xAxis: [
+                        {
+                            type: "category",
+                            boundaryGap: false,
+                            axisLabel: {
+                                color: "#00B6E4",
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                            axisLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: "#5A91AB",
+                                },
+                            },
+                            data: sellData.xAxis
+                        },
+                    ],
+                    yAxis: [
+                        {
+                            type: "value",
+                            name: "月度收货情况（万吨）",
+                            nameTextStyle: {
+                                color: "#00B6E4",
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                            axisLabel: {
+                                formatter: "{value}",
+                                textStyle: {
+                                    color: "#00B6E4",
+                                },
+                            },
+                            axisLine: {
+                                show: false,
+                            },
+                            splitLine: {
+                                show: false,
+                            },
+                        },
+                    ],
+                    series: [
+                        {
+                            name: "汽运",
+                            type: "line",
+                            symbolSize: 0,
+                            itemStyle: colorList[0],
+                            emphasis: colorList[0].normal,
+                            data: sellData.data[0]
+                        },
+                        {
+                            name: "火运",
+                            type: "line",
+                            symbolSize: 0,
+                            itemStyle: colorList[1],
+                            emphasis: colorList[1].normal,
+                            data: sellData.data[1]
+                        },
+                        {
+                            name: "船运",
+                            type: "line",
+                            symbolSize: 0,
+                            itemStyle: colorList[2],
+                            emphasis: colorList[2].normal,
+                            data: sellData.data[2]
+                        },
+                    ],
+                };
+                var contentTwoMainSellDiv = echarts.init(contentTwoMainSell);
+                contentTwoMainSellDiv.setOption(contentTwoMainSellOption);
+                let contentTwoMainSellDivDataIndex = 0;
+                contentTwoMainSellDiv.dispatchAction({
+                    type: 'showTip',
+                    dataIndex: contentTwoMainSellDivDataIndex,
+                    seriesIndex: 0,
+                })
+                setInterval(function () {
+                    contentTwoMainSellDivDataIndex++
+                    if (contentTwoMainSellDivDataIndex == sellData.xAxis.length) {
+                        contentTwoMainSellDivDataIndex = 0;
+                    }
+                    contentTwoMainSellDiv.dispatchAction({
+                        type: 'showTip',
+                        dataIndex: contentTwoMainSellDivDataIndex,
+                        seriesIndex: 0,
+                    })
+                }, 5000)
+
+                //上游供应商累计发运情况
+                let upData = { yAxis: [], data: [], maxdata: [] };
+                res.upDespatchItem.forEach(item => {
+                    upData.yAxis.push(item.name)
+                    upData.data.push(unit(item.quantity))
+                    upData.maxdata.push(unit(upData.data[0]))
+                });
+                var contentThreeMainUp = $('#content-three-main-up')[0];
+                let contentThreeMainUpOption = {
+                    grid: {
+                        left: "2%",
+                        right: "2%",
+                        bottom: "2%",
+                        top: "5%",
+                        containLabel: true,
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                        borderWidth: '1', //边框宽度设置1
+                        borderColor: '#81D1FF', //设置边框颜色
+                        borderRadius: '12',
+                        extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                        textStyle: {
+                            color: '#FFFFFF'
+                        },
+                        formatter: function (params) {
+                            return params[0].name + " : " + params[0].value + "万吨";
+                        },
+                    },
+                    xAxis: {
+                        show: false,
+                    },
+                    yAxis: [
+                        {
+                            type: "category",
+                            inverse: true,
+                            axisLabel: {
+                                show: false,
+                            },
+                            splitLine: {
+                                show: false,
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                            axisLine: {
+                                show: false,
+                            },
+                            data: upData.yAxis
+                        },
+                        {
+                            type: "category",
+                            inverse: true,
+                            axisTick: "none",
+                            axisLine: "none",
+                            show: true,
+                            axisLabel: {
+                                textStyle: {
+                                    color: "#80D0FE",
+                                    fontSize: "12",
+                                },
+                                formatter: function (value) {
+                                    return value + "万吨";
+                                },
+                            },
+                            data: upData.data,
+                        },
+                    ],
+                    dataZoom:
+                    {
+                        // 开始位置的数值
+                        startValue: 0,
+                        // 结束位置的数值
+                        endValue: 4,
+                        type: "slider",
+                        maxValueSpan: 5, //显示数据的条数(默认显示10个)
+                        show: false,
+                        yAxisIndex: [0],
+                        handleSize: 0, //滑动条的 左右2个滑动条的大小
+                        borderColor: "rgba(43,48,67,0.8)",
+                        fillerColor: "#33384b", //滑动块的颜色
+                        showDataShadow: false, //是否显示数据阴影 默认auto
+                        showDetail: false, //即拖拽时候是否显示详细数值信息 默认true
+                        yAxisIndex: [0, 1], //控制的y轴
+                    },
+                    series: [
+                        {
+                            name: "值",
+                            type: "bar",
+                            zlevel: 1,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                        {
+                                            offset: 0,
+                                            color: "rgb(57,89,255,0)",
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: "#9AEFED",
+                                        },
+                                    ]),
+                                },
+                            },
+                            barWidth: "12",
+                            borderColor: "#314656",
+                            data: upData.data,
+                            label: {
+                                normal: {
+                                    color: "#80D0FE",
+                                    show: true,
+                                    position: [0, "-24px"],
+                                    textStyle: {
+                                        fontSize: 14,
+                                    },
+                                    formatter: function (a, b) {
+                                        return a.name;
+                                    },
+                                },
+                            },
+                        },
+                        {
+                            name: "背景",
+                            type: "bar",
+                            barWidth: "25",
+                            barGap: "-100%",
+                            yAxisIndex: 1,
+                            data: upData.maxdata,
+                            itemStyle: {
+                                normal: {
+                                    color: "#0C1D2E",
+                                },
+                            },
+                        },
+                    ],
+                };
+                var contentThreeMainUpDiv = echarts.init(contentThreeMainUp);
+                contentThreeMainUpDiv.setOption(contentThreeMainUpOption);
+                setInterval(function () {
+                    contentThreeMainUpOption.dataZoom.startValue++;
+                    contentThreeMainUpOption.dataZoom.endValue++;
+                    if (contentThreeMainUpOption.dataZoom.endValue == upData.data.length) {
+                        contentThreeMainUpOption.dataZoom.startValue = 0;
+                        contentThreeMainUpOption.dataZoom.endValue = 4;
+                    }
+                    contentThreeMainUpDiv.setOption(contentThreeMainUpOption);
+                }, 5000)
+                //下游客户累计发运情况
+                var contentThreeMainDown = $('#content-three-main-down')[0];
+                let downData = { yAxis: [], data: [], maxdata: [] };
+                res.downDespatchItem.forEach(item => {
+                    downData.yAxis.push(item.name)
+                    downData.data.push(unit(item.quantity))
+                    downData.maxdata.push(unit(downData.data[0]))
+                });
+                let contentThreeMainDownOption = {
+                    grid: {
+                        left: "2%",
+                        right: "2%",
+                        bottom: "2%",
+                        top: "5%",
+                        containLabel: true,
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                        borderWidth: '1', //边框宽度设置1
+                        borderColor: '#81D1FF', //设置边框颜色
+                        borderRadius: '12',
+                        extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                        textStyle: {
+                            color: '#FFFFFF'
+                        },
+                        formatter: function (params) {
+                            return params[0].name + " : " + params[0].value + "万吨";
+                        },
+                    },
+                    xAxis: {
+                        show: false,
+                    },
+                    yAxis: [
+                        {
+                            type: "category",
+                            inverse: true,
+                            axisLabel: {
+                                show: false,
+                            },
+                            splitLine: {
+                                show: false,
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                            axisLine: {
+                                show: false,
+                            },
+                            data: downData.yAxis
+                        },
+                        {
+                            type: "category",
+                            inverse: true,
+                            axisTick: "none",
+                            axisLine: "none",
+                            show: true,
+                            axisLabel: {
+                                textStyle: {
+                                    color: "#80D0FE",
+                                    fontSize: "12",
+                                },
+                                formatter: function (value) {
+                                    return value + "万吨";
+                                },
+                            },
+                            data: downData.data
+                        },
+                    ],
+                    dataZoom:
+                    {
+                        // 开始位置的数值
+                        startValue: 0,
+                        // 结束位置的数值
+                        endValue: 4,
+                        type: "slider",
+                        maxValueSpan: 5, //显示数据的条数(默认显示10个)
+                        show: false,
+                        yAxisIndex: [0],
+                        handleSize: 0, //滑动条的 左右2个滑动条的大小
+                        borderColor: "rgba(43,48,67,0.8)",
+                        fillerColor: "#33384b", //滑动块的颜色
+                        // backgroundColor: "rgba(13,33,117,0.5)", //两边未选中的滑动条区域的颜色
+                        showDataShadow: false, //是否显示数据阴影 默认auto
+                        showDetail: false, //即拖拽时候是否显示详细数值信息 默认true
+                        yAxisIndex: [0, 1], //控制的y轴
+                    },
+                    series: [
+                        {
+                            name: "值",
+                            type: "bar",
+                            zlevel: 1,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                        {
+                                            offset: 0,
+                                            color: "rgb(57,89,255,0)",
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: "#1496F9",
+                                        },
+                                    ]),
+                                },
+                            },
+                            barWidth: "12",
+                            borderColor: "#314656",
+                            data: downData.data,
+                            label: {
+                                normal: {
+                                    color: "#80D0FE",
+                                    show: true,
+                                    position: [0, "-24px"],
+                                    textStyle: {
+                                        fontSize: 14,
+                                    },
+                                    formatter: function (a, b) {
+                                        return a.name;
+                                    },
+                                },
+                            },
+                        },
+                        {
+                            name: "背景",
+                            type: "bar",
+                            barWidth: "25",
+                            barGap: "-100%",
+                            yAxisIndex: 1,
+                            data: downData.maxdata,
+                            itemStyle: {
+                                normal: {
+                                    color: "#0C1D2E",
+                                },
+                            },
+                        },
+                    ],
+                };
+                var contentThreeMainDownDiv = echarts.init(contentThreeMainDown);
+                contentThreeMainDownDiv.setOption(contentThreeMainDownOption);
+                setInterval(function () {
+                    contentThreeMainDownOption.dataZoom.startValue++;
+                    contentThreeMainDownOption.dataZoom.endValue++;
+                    if (contentThreeMainDownOption.dataZoom.endValue == downData.data.length) {
+                        contentThreeMainDownOption.dataZoom.startValue = 0;
+                        contentThreeMainDownOption.dataZoom.endValue = 4;
+                    }
+                    contentThreeMainDownDiv.setOption(contentThreeMainDownOption);
+                }, 5000)
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,2580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>蓉欧瑞易供应链管理平台</title>
+    <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+    <meta name="keywords" content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+
+    <script src="../../jquery.min.js"></script>
+    <script src="../../echarts.min.js"></script>
+    <script src="../../china.js"></script>
+    <link rel="stylesheet" href="../../swiper-bundle.min.css" />
+    <script src="../../swiper-bundle.min.js"></script>
+    <style>
+        .one-line {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            /* Firefox */
+            -webkit-box-sizing: border-box;
+            /* Safari */
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #101216;
+        }
+
+        body {
+            background-image: url('../imgs/map-bg-m.png');
+            background-size: 100% 100%;
+        }
+
+        #main-box {
+            width: 1920px;
+            height: 1080px;
+            transform-origin: 0 0;
+            position: relative;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            box-sizing: border-box;
+        }
+
+        .title {
+            color: #fff;
+            height: 77px;
+            width: 100%;
+            padding: 8px 0;
+            background-image: url('../imgs/sm-title-bg-k.png');
+            background-size: 100% 100%;
+            text-align: center;
+            font-size: 36px;
+            color: #FFFFFF;
+            line-height: 47px;
+        }
+
+        .bottom-content {
+            position: relative;
+            height: 990px;
+        }
+
+        .bottom-content>.content-map {
+            position: absolute;
+            width: 900px;
+            height: 700px;
+            left: 500px;
+            top: -40px;
+        }
+
+        .bottom-content>.content-table {
+            width: 706px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            bottom: 123px;
+        }
+
+        .content-left {
+            position: absolute;
+            width: 594px;
+            height: 928px;
+            left: 12px;
+            top: -10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+        }
+
+        .content-right {
+            position: absolute;
+            width: 594px;
+            height: 928px;
+            right: 12px;
+            top: -10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+        }
+
+        .content-one {
+            width: 292px;
+            height: 200px;
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+        }
+
+        .content-one-title {
+            width: 100%;
+            height: 37px;
+            padding: 6px 15px;
+            background-image: url('../imgs/sm-yy-content-one-title.png');
+            background-size: 100%;
+            font-size: 12px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 17px;
+        }
+
+        .content-one-main {
+            width: 100%;
+            height: 163px;
+            color: #fff;
+            padding: 0px 0 20px;
+            background-image: url('../imgs/sm-content-one-table-bg.png');
+            background-size: 100% 76px;
+            background-repeat: no-repeat;
+            background-position: 0% 100%;
+        }
+
+        .content-one-main>table {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .content-one-main>table th {
+            height: 11px;
+            font-size: 8px;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 11px;
+        }
+
+        .content-one-main>table td {
+            height: 22px;
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFFFFF;
+            font-family: ZhenyanGB-Regular, ZhenyanGB;
+            line-height: 22px;
+        }
+
+        .content-one-main>table td.main-table-sum {
+            color: #FBC578;
+            background: linear-gradient(180deg, #FFE3A3 0%, #FFC36A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-right .content-one-main>table td {
+            background: linear-gradient(180deg, #B4E4FF 0%, #56EBDD 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-right .content-one-main>table td .main-table-title>.main-table-title-img {
+            background-image: url('../imgs/sm-content-one-table.png');
+            background-size: 100% 100%;
+        }
+
+        .content-one-main>table td .main-table-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 17px;
+            -webkit-text-fill-color: #fff
+        }
+
+        .content-one-main>table td .main-table-title>.main-table-title-img {
+            width: 23px;
+            height: 23px;
+            background-image: url('../imgs/sm-content-one.png');
+            background-size: 100% 100%;
+            margin-right: 6px;
+        }
+
+        .content-two {
+            width: 292px;
+        }
+
+        .content-two-main {
+            width: 100%;
+            height: 130px;
+        }
+
+        .content-gap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-gap-d {
+            width: 4px;
+            height: 4px;
+            background: #80D0FE;
+        }
+
+        .content-gap-c {
+            width: 576px;
+            height: 1px;
+            background: linear-gradient(270deg, rgba(183, 234, 255, 0) 0%, #99DCFE 53%, rgba(128, 208, 254, 0) 100%);
+            opacity: 0.26;
+        }
+
+        .content-three {
+            width: 292px;
+        }
+
+        .content-three-title {
+            width: 100%;
+            height: 17px;
+            font-size: 12px;
+            font-family: PingFangSC-Semibold, PingFang SC;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 17px;
+            padding: 0 6px;
+            border-left: #00B6E4 solid 2px;
+        }
+
+        .content-three-main {
+            width: 100%;
+            height: 170px;
+            overflow: hidden;
+        }
+
+        .content-three-main>table {
+            margin-top: 10px;
+            max-height: 170px;
+            width: 100%;
+            font-size: 10px;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 14px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .content-three-main>.table {
+            margin-top: 0px;
+        }
+
+        .content-three-main>table thead {
+            display: table;
+            width: 100%;
+            padding: 4px 0;
+            table-layout: fixed;
+            background: #1387E4;
+        }
+
+        .content-three-main>table tbody {
+            display: block;
+            position: relative;
+            overflow-y: scroll;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .content-three-main>table tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            padding: 8px 0;
+        }
+
+        .content-three-main>table tbody tr:nth-child(odd) {
+            background: rgba(19, 135, 228, 0.3);
+        }
+
+        .content-three-main>table tbody tr:nth-child(even) {
+            background: rgba(19, 135, 228, 0.4);
+        }
+
+        .content-four {
+            width: 100%;
+        }
+
+        .content-four-main {
+            width: 100%;
+            height: 280px;
+        }
+
+        .content-warn {
+            margin-top: 4px;
+            background: rgba(19, 135, 228, 0.3);
+            padding: 15px 18px;
+            font-size: 10px;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 14px;
+            height: 45px;
+            overflow: hidden;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .content-right-two {
+            width: 100%;
+        }
+
+        .content-right-two-title {
+            width: 100%;
+            height: 37px;
+            padding: 6px 15px;
+            background-image: url('../imgs/ro-yy-content-two-title.png');
+            background-size: 100%;
+            font-size: 12px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 17px;
+        }
+
+        .content-right-two-main {
+            width: 100%;
+            height: 160px;
+        }
+
+        .sm-bottom-tag {
+            width: 100%;
+            height: 37px;
+            background-image: url('../imgs/sm-bottom-tag.png');
+            background-size: 100% 100%;
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-box">
+        <div class="title">蓉欧瑞易供应链运营数据</div>
+        <div class="bottom-content">
+            <div class="content-map" id="content-map"></div>
+            <div class="content-table">
+                <div class="content-three-title">
+                    在途货物明细
+                </div>
+                <div class="content-three-main">
+                    <table cellspacing="0" cellpadding="0" class="tableTitle">
+                        <thead>
+                            <tr>
+                                <td>发站</td>
+                                <td>到站</td>
+                                <td>货物数量(吨)</td>
+                                <td>运输方式</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table cellspacing="0" cellpadding="0" class="table">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="content-three-title">
+                    融资预警
+                </div>
+                <div class="content-warn">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-left">
+                <div class="content-one">
+                    <div class="content-one-title">融资数据</div>
+                    <div class="content-one-main">
+                        <table border="0">
+                            <tr>
+                                <th></th>
+                                <th>金融(万元)</th>
+                                <th>笔数</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>融资累计</span>
+                                    </div>
+                                </td>
+                                <td class="main-table-sum"><span id="totalFinAmount"></span></td>
+                                <td><span id="totalFinCount"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>当年融资</span>
+                                    </div>
+                                </td>
+                                <td class="main-table-sum"><span id="yearTotalFinAmount"></span></td>
+                                <td><span id="yearTotalFinCount"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>本月融资</span>
+                                    </div>
+                                </td>
+                                <td class="main-table-sum"><span id="monthTotalFinAmount"></span></td>
+                                <td><span id="monthTotalFinCount"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="content-one">
+                    <div class="content-one-title">回款情况</div>
+                    <div class="content-one-main">
+                        <table border="0">
+                            <tr>
+                                <th></th>
+                                <th>金融(万元)</th>
+                                <th>笔数</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>融资回款</span>
+                                    </div>
+                                </td>
+                                <td class="main-table-sum"><span id="totalRepayAmount"></span></td>
+                                <td><span id="totalRepayCount"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>当年回款</span>
+                                    </div>
+                                </td>
+                                <td class="main-table-sum"><span id="currentYearRepayAmount"></span></td>
+                                <td><span id="currentYearRepayCount"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>本月回款</span>
+                                    </div>
+                                </td>
+                                <td class="main-table-sum"><span id="currentMonthAmount"></span></td>
+                                <td><span id="currentMonthRepayCount"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="content-two">
+                    <div class="content-one-title">额度统计</div>
+                    <div class="content-two-main" id="statisticalQuota">
+                    </div>
+                </div>
+                <div class="content-two">
+                    <div class="content-one-title">终端用户回款天数</div>
+                    <div class="content-two-main" id="terminalRepayDayList">
+                    </div>
+                </div>
+                <div class="content-gap">
+                    <div class="content-gap-d"></div>
+                    <div class="content-gap-c"></div>
+                    <div class="content-gap-d"></div>
+                </div>
+                <div class="content-three">
+                    <div class="content-three-title">业务融资</div>
+                    <div class="content-three-main" id="financeVO">
+                    </div>
+                </div>
+                <div class="content-three">
+                    <div class="content-three-title">终端用户回款</div>
+                    <div class="content-three-main" id="terminalRepayDetailList">
+                        <table cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <td width="50">序号</td>
+                                    <td>终端客户</td>
+                                    <td>平均回款天数</td>
+                                    <td>累计回款金额(万元)</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table cellspacing="0" cellpadding="0" class="table">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="content-gap">
+                    <div class="content-gap-d"></div>
+                    <div class="content-gap-c"></div>
+                    <div class="content-gap-d"></div>
+                </div>
+                <div class="content-four">
+                    <div class="content-three-title">资金使用情况</div>
+                    <div class="content-four-main" id="monthlyLoanAmountVo"></div>
+                </div>
+            </div>
+            <div class="content-right">
+                <div class="content-one">
+                    <div class="content-one-title">采购情况</div>
+                    <div class="content-one-main">
+                        <table border="0">
+                            <tr>
+                                <th></th>
+                                <th>汽运(万吨)</th>
+                                <th>火运(万吨)</th>
+                                <th>船运(万吨)</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>累计发运</span>
+                                    </div>
+                                </td>
+                                <td><span id="buyautomobileTotalQuantity"></span></td>
+                                <td><span id="buytrainTotalQuantity"></span></td>
+                                <td><span id="buyshipTotalQuantity"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>当年发运</span>
+                                    </div>
+                                </td>
+                                <td><span id="buyautomobileCurrentYearQuantity"></span></td>
+                                <td><span id="buytrainCurrentYearQuantity"></span></td>
+                                <td><span id="buyshipCurrentYearQuantity"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>本月发运</span>
+                                    </div>
+                                </td>
+                                <td><span id="buyautomobileCurrentMonthQuantity"></span></td>
+                                <td><span id="buytrainCurrentMonthQuantity"></span></td>
+                                <td><span id="buyshipCurrentMonthQuantity"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="content-one">
+                    <div class="content-one-title">销售情况</div>
+                    <div class="content-one-main">
+                        <table border="0">
+                            <tr>
+                                <th></th>
+                                <th>汽运(万吨)</th>
+                                <th>火运(万吨)</th>
+                                <th>船运(万吨)</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>累计收货</span>
+                                    </div>
+                                </td>
+                                <td><span id="sellautomobileTotalQuantity"></span></td>
+                                <td><span id="selltrainTotalQuantity"></span></td>
+                                <td><span id="sellshipTotalQuantity"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>当年收货</span>
+                                    </div>
+                                </td>
+                                <td><span id="sellautomobileCurrentYearQuantity"></span></td>
+                                <td><span id="selltrainCurrentYearQuantity"></span></td>
+                                <td><span id="sellshipCurrentYearQuantity"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-title">
+                                        <div class="main-table-title-img"></div>
+                                        <span>本月收货</span>
+                                    </div>
+                                </td>
+                                <td><span id="sellautomobileCurrentMonthQuantity"></span></td>
+                                <td><span id="selltrainCurrentMonthQuantity"></span></td>
+                                <td><span id="sellshipCurrentMonthQuantity"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="content-gap">
+                    <div class="content-gap-d"></div>
+                    <div class="content-gap-c"></div>
+                    <div class="content-gap-d"></div>
+                </div>
+                <div class="content-right-two">
+                    <div class="content-right-two-title">煤炭、钢材采购情况</div>
+                    <div class="content-right-two-main" id="content-two-main-buy">
+                    </div>
+                </div>
+                <div class="content-gap">
+                    <div class="content-gap-d"></div>
+                    <div class="content-gap-c"></div>
+                    <div class="content-gap-d"></div>
+                </div>
+                <div class="content-right-two">
+                    <div class="content-right-two-title">煤炭、钢材销售情况</div>
+                    <div class="content-right-two-main" id="content-two-main-sell">
+                    </div>
+                </div>
+                <div class="content-gap">
+                    <div class="content-gap-d"></div>
+                    <div class="content-gap-c"></div>
+                    <div class="content-gap-d"></div>
+                </div>
+                <div class="content-three">
+                    <div class="content-three-title">上游供应商累计发运明细</div>
+                    <div class="content-three-main" id="content-three-main-up">
+                    </div>
+                </div>
+                <div class="content-three">
+                    <div class="content-three-title">下游客户累计收货明细</div>
+                    <div class="content-three-main" id="content-three-main-down">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sm-bottom-tag"></div>
+        <script>
+            $(function () {
+
+                var changeSize = function () {
+                    const percentW = document.documentElement.clientWidth / 1920
+                    const percentH = document.documentElement.clientHeight / 1080
+                    $('#main-box')[0].style.transform = 'scale(' + percentW + ',' + percentH + ')'
+                }
+
+                window.addEventListener('resize', changeSize)
+
+                changeSize()
+
+                var getQueryString = function (name) {
+                    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+                    var r = window.location.search.substr(1).match(reg);
+                    if (r != null) {
+                        return unescape(r[2]);
+                    }
+                    return null;
+                }
+                var baseUrl = '/dg-trade-api/api'
+                var uscc = getQueryString('uscc') || ''
+                var _get = function (url, callback) { // 网络请求
+                    url = baseUrl + url+ "?uscc=" + uscc
+                    let token = null
+                    try {
+                        token = window.parent.sessionStorage.getItem('VUEX_ST_TOKEN')
+                    } catch (e) { }
+
+                    $.ajax({
+                        headers: {
+                            'Authorization': token,
+                            Source: 'PC',
+                        },
+                        url: url,
+                        type: 'GET',
+                        success: callback,
+                        dataType: 'json',
+
+                    });
+                }
+
+                var MyMarhq, MyMarhq1, MyMarhq2;
+                //单位换算
+                function unit(sum) {
+                    if (sum) {
+                        return Math.round(Number(sum) / 100) / 100
+                    } else {
+                        return 0
+                    }
+                }
+                //单位换算
+                function unitTwo(sum) {
+                    if (sum) {
+                        if (Number(sum) > 100000000) {
+                            return Math.round(Number(sum) / 1000000) / 100 + '亿'
+                        } else if (Number(sum) > 10000) {
+                            return Math.round(Number(sum) / 100) / 100 + '万'
+                        } else {
+                            return Math.round(Number(sum) * 100) / 100
+                        }
+                    } else {
+                        return "0"
+                    }
+                }
+                //将十六进制颜色值转换为rgba
+                var HexToRGB = function (color, opacity) {
+                    let newColor = 'rgba(';
+                    //判断是三位还是六位
+                    if (color.length === 4) {
+                        let arry = [];
+                        for (let i = 1; i < color.length; i++) {
+                            arry.push(parseInt("0x" + color[i] + color[i]));
+                        }
+                        arry.forEach(function (item) {
+                            newColor += item + ', ';
+                        });
+                        newColor += opacity + ')';
+                        return newColor;
+                    } else {
+                        let arry = [];
+                        for (let i = 1; i < color.length; i += 2) {
+                            arry.push(parseInt("0x" + color.slice(i, i + 2)));
+                        }
+                        arry.forEach(function (item) {
+                            newColor += item + ', ';
+                        });
+                        newColor += opacity + ')';
+                        return newColor;
+                    }
+                }
+                //资金
+                _get('/data/screen/fund/used/data', function (result) {
+                    if(!result.success){
+                        return
+                    }
+                    var res = result.data ||{};
+                    if (res.financeVO) {
+                        for (key in res.financeVO) {
+                            if (key.indexOf("FinCount") > -1) {
+                                $(`#${key}`).text(res.financeVO[key] || 0)
+                            } else {
+                                $(`#${key}`).text(unit(res.financeVO[key]))
+                            }
+                        }
+                    }
+                    let statisticalQuota = $('#statisticalQuota')[0];
+                    // 指定图表的配置项和数据
+                    let statisticalQuotaData = {
+                        data1: [],
+                        data2: [],
+                        data3: [],
+                        datacity: []
+                    }
+                    res.creditLineVO.forEach(item => {
+                        statisticalQuotaData.data1.push(unit(item.totalAmount))
+                        statisticalQuotaData.data2.push(unit(item.availableAmount))
+                        statisticalQuotaData.data3.push(unit(item.usedAmount))
+                        statisticalQuotaData.datacity.push(item.bankName)
+                    });
+                    let statisticalQuotaOption = {
+                        color: ["#388BFF", "#F6931C", "#FFD52E"],
+                        title: {
+                            text: "单位/万元",
+                            left: "4%",
+                            top: "60",
+                            textStyle: {
+                                color: "#80D0FE",
+                                fontSize: 8,
+                                fontWeight: "normal",
+                            },
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                            borderWidth: '1', //边框宽度设置1
+                            borderColor: '#81D1FF', //设置边框颜色
+                            borderRadius: '3',
+                            padding: 4,
+                            // position: {
+                            //     right: "5",
+                            //     top: "30%"
+                            // },
+                            extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                            // triggerOn: "none",
+                            textStyle: {
+                                color: '#FFFFFF',
+                                fontSize: 8,
+                            },
+                            formatter: function (params) { // 鼠标移入展示百分比
+                                var tip = ""
+                                if (params != null && params.length > 0) {
+                                    // tip = params[0].name + '<br/>'
+                                    var total = 0
+                                    for (var i = 0; i < params.length; i++) {
+                                        total += params[i].value
+                                        if (i == params.length - 1) {
+                                            for (var j = 0; j < params.length; j++) {
+                                                tip += params[j].marker + params[j].value + '万元<br/>'
+                                            }
+                                        }
+                                    }
+                                }
+                                return tip
+                            },
+                            axisPointer: {
+                                type: "none"
+                            }
+                        },
+                        legend: {
+                            top: "0%",
+                            right: "4%",
+                            data: ["授信总额度", "融资存量", "剩余额度"],
+                            itemWidth: 10,
+                            itemHeight: 10,
+                            textStyle: {
+                                color: "#80D0FE",
+                                fontSize: 8,
+                                fontWeight: "normal",
+                            },
+                        },
+                        grid: {
+                            //图表的位置
+                            top: "20%",
+                            left: "3%",
+                            right: "4%",
+                            bottom: 16,
+                            containLabel: true,
+                        },
+                        yAxis: [
+                            {
+                                show: false,
+                            },
+                        ],
+                        xAxis: [
+                            {
+                                type: "category",
+                                axisLabel: {
+                                    interval:0,
+                                    width: 80,
+                                    overflow: "breakAll",
+                                    textStyle: {
+                                        lineHeight: 12,
+                                        fontSize: 8,
+                                        fontWeight: "normal",
+                                        color: "#80D0FE"
+                                    },
+                                },
+                                axisTick: {
+                                    show: false,
+                                },
+
+                                axisLine: {
+                                    lineStyle: {
+                                        color: "rgba(128, 208, 254, 0.5)",
+                                    },
+                                },
+                                data: statisticalQuotaData.datacity,
+                            },
+                        ],
+
+                        dataZoom:
+                        //滑块的属性
+                        {
+                            type: "slider",
+                            show: false,
+                            // 开始位置的数值
+                            startValue: 0,
+                            endValue: 1,
+                            maxValueSpan: 1, //显示数据的条数(默认显示10个)
+                            // 结束位置的数值
+                            borderColor: "rgba(43,48,67,0.8)",
+                            fillerColor: "#33384b", //滑动块的颜色
+                            showDataShadow: false, //是否显示数据阴影 默认auto
+                            showDetail: false, //即拖拽时候是否显示详细数值信息 默认true
+                        },
+                        series: [
+                            {
+                                name: "授信总额度",
+                                stack: "sum",
+                                type: "bar",
+                                symbol: "triangle",
+                                barWidth: "20px",
+                                data: statisticalQuotaData.data1,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: "top",
+                                        textStyle: {
+                                            color: "#fff",
+                                            fontSize: 6
+                                        },
+                                        formatter: function (value) {
+                                            return unitTwo(value.data)
+                                        },
+                                    },
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        color: {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 0,
+                                            x2: 0,
+                                            y2: 1,
+                                            colorStops: [
+                                                {
+                                                    offset: 0,
+                                                    color: "rgba(23, 153, 254, 1)",
+                                                },
+                                                {
+                                                    offset: 1,
+                                                    color: "rgba(23, 153, 254, 0.2)",
+                                                },
+                                            ],
+                                            globalCoord: false,
+                                        },
+                                    },
+                                },
+                                barGap: "10%",
+                            },
+                            {
+                                name: "融资存量",
+                                type: "bar",
+                                symbol: "triangle",
+                                stack: "sum1",
+                                barWidth: "20px",
+                                data: statisticalQuotaData.data3,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: "top",
+                                        textStyle: {
+                                            color: "#fff",
+                                            fontSize: 6,
+                                        },
+                                        formatter: function (value) {
+                                            return unitTwo(value.data)
+                                        },
+                                    },
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        color: {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 0,
+                                            x2: 0,
+                                            y2: 1,
+                                            colorStops: [
+                                                {
+                                                    offset: 0,
+                                                    color: "rgba(165, 255, 253, 1)",
+                                                },
+                                                {
+                                                    offset: 1,
+                                                    color: "rgba(94, 210, 207, 0.2)",
+                                                },
+                                            ],
+                                            globalCoord: false,
+                                        },
+                                    },
+                                },
+                                barGap: "10%",
+                            },
+                            {
+                                name: "剩余额度",
+                                type: "bar",
+                                symbol: "triangle",
+                                barWidth: "20px",
+                                stack: "sum2",
+                                data: statisticalQuotaData.data2,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: "top",
+                                        textStyle: {
+                                            color: "#fff",
+                                            fontSize: 6,
+                                        },
+                                        formatter: function (value) {
+                                            return unitTwo(value.data)
+                                        },
+                                    },
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        color: {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 0,
+                                            x2: 0,
+                                            y2: 1,
+                                            colorStops: [
+                                                {
+                                                    offset: 0,
+                                                    color: "rgba(207, 220, 237, 1)",
+                                                },
+                                                {
+                                                    offset: 1,
+                                                    color: "rgba(207, 220, 237, 0.2)",
+                                                },
+                                            ],
+                                            globalCoord: false,
+                                        },
+                                    },
+                                },
+                                barGap: "10%",
+                            },
+                        ],
+                    };
+                    let statisticalQuotaDiv = echarts.init(statisticalQuota);
+                    statisticalQuotaDiv.setOption(statisticalQuotaOption);
+                    setInterval(function () {
+                        statisticalQuotaOption.dataZoom.startValue++;
+                        statisticalQuotaOption.dataZoom.endValue++;
+                        if (statisticalQuotaOption.dataZoom.endValue == statisticalQuotaData.datacity.length) {
+                            statisticalQuotaOption.dataZoom.startValue = 0;
+                            statisticalQuotaOption.dataZoom.endValue = 1;
+                        }
+                        statisticalQuotaDiv.setOption(statisticalQuotaOption);
+                    }, 5000)
+                    let optionData = [];
+                    res.businessTypePayVO.forEach(item => {
+                        optionData.push({
+                            name: item.businessTypeText === "仓押" ? "应付" : item.businessTypeText,
+                            value: item.payAmount
+                        })
+                    });
+                    let color = [
+                        {
+                            type: "linear",
+                            x: 0,
+                            y: 0,
+                            x2: 1,
+                            y2: 1,
+                            colorStops: [
+                                {
+                                    offset: 0,
+                                    color: "rgba(23, 153, 254, 1)", // 0% 处的颜色
+                                },
+                                {
+                                    offset: 1,
+                                    color: "rgba(17, 57, 90, 1)", // 100% 处的颜色
+                                },
+                            ],
+                            globalCoord: false, // 缺省为 false
+                        },
+                        {
+                            type: "linear",
+                            x: 1,
+                            y: 0,
+                            x2: 0,
+                            y2: 1,
+                            colorStops: [
+                                {
+                                    offset: 0,
+                                    color: "rgba(165, 255, 253, 1)", // 0% 处的颜色
+                                },
+                                {
+                                    offset: 1,
+                                    color: "rgba(51, 100, 105, 1)", // 100% 处的颜色
+                                },
+                            ],
+                            globalCoord: false, // 缺省为 false
+                        },
+                        {
+                            type: "linear",
+                            x: 1,
+                            y: 0,
+                            x2: 0,
+                            y2: 0,
+                            colorStops: [
+                                {
+                                    offset: 0,
+                                    color: "rgba(212, 236, 255, 1)", // 0% 处的颜色
+                                },
+                                {
+                                    offset: 1,
+                                    color: "rgba(98, 114, 127, 1)", // 100% 处的颜色
+                                },
+                            ],
+                            globalCoord: false, // 缺省为 false
+                        },
+                        {
+                            type: "linear",
+                            x: 0,
+                            y: 1,
+                            x2: 0,
+                            y2: 0,
+                            colorStops: [
+                                {
+                                    offset: 0,
+                                    color: "rgba(64, 56, 150, 1)", // 0% 处的颜色
+                                },
+                                {
+                                    offset: 1,
+                                    color: "rgba(91, 143, 249, 1)", // 100% 处的颜色
+                                },
+                            ],
+                            globalCoord: false, // 缺省为 false
+                        },
+                        {
+                            type: "linear",
+                            x: 0,
+                            y: 1,
+                            x2: 0,
+                            y2: 0,
+                            colorStops: [
+                                {
+                                    offset: 0,
+                                    color: "rgba(255, 227, 163, 1)", // 0% 处的颜色
+                                },
+                                {
+                                    offset: 1,
+                                    color: "rgba(255, 195, 106, 1)", // 100% 处的颜色
+                                },
+                            ],
+                            globalCoord: false, // 缺省为 false
+                        },
+                    ];
+                    const sum = optionData.reduce((per, cur) => per + cur.value, 0);
+                    let financeVOOption = {
+
+                        legend: {
+                            right: "0%",
+                            top: "middle",
+                            bottom: "middle",
+                            orient: "vertical",
+                            itemGap: 18,
+                            itemWidth: 10,
+                            itemHeight: 10,
+                            shadowBlur: 10,
+                            shadowOffsetY: 0,
+                            shadowOffsetX: 0,
+                            textStyle: {
+                                color: "#D8DDE3",
+                                rich: {
+                                    name: {
+                                        padding: [0, 0, 0, 10],
+                                        fontSize: 10,
+                                        color: "#80D0FE",
+                                    },
+                                    percent: {
+                                        color: "#80D0FE",
+                                        fontSize: 14,
+                                    },
+                                },
+                            },
+                            formatter: (name) => {
+                                const item = optionData.find((i) => {
+                                    return i.name === name;
+                                });
+                                const p = ((item.value / sum) * 100).toFixed(2);
+                                return "{percent|" + p + "%}" + "{name|" + name + unit(item.value) + "万元}";
+                            },
+                        },
+                        color: color,
+                        series: [
+                            {
+                                type: "pie",
+                                radius: "50%",
+                                center: ["25%", "50%"],
+                                clockwise: true,
+                                avoidLabelOverlap: true,
+                                label: {
+                                    show: false,
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        color: function (params) {
+                                            return color[params.dataIndex];
+                                        },
+                                    },
+                                },
+                                data: optionData,
+                                // roseType: "radius",
+                            },
+                        ],
+                    }
+                    let financeVO = $('#financeVO')[0];
+                    let financeVODiv = echarts.init(financeVO);
+                    financeVODiv.setOption(financeVOOption)
+
+                    //资金使用情况
+
+                    var monthlyLoanAmountVo = $('#monthlyLoanAmountVo')[0];
+                    var monthlyLoanAmountVoDiv = echarts.init(monthlyLoanAmountVo);
+                    let monthlyLoanAmountVoOption;
+                    var xData = []
+                    var yData = []
+                    let resultData = res.monthlyLoanAmountVo
+                    var bankData = []
+                    var monthData = []
+                    resultData.forEach((item) => {
+                        if (item) {
+                            bankData.push(item.bankName)
+                            monthData.push(item.monthlyList)
+                        }
+                    })
+
+                    let arr = []
+                    for (i = 0; i < monthData.length; i++) {
+                        let item = monthData[i]
+                        let currentIndex = null
+                        let length = item.length
+                        for (j = 0; j < item.length; j++) {
+                            let pro = item[j]
+
+                            currentIndex = j
+                            if (currentIndex != null && currentIndex != 0) {
+                                arr.push(currentIndex)
+                            }
+                            break;
+                        }
+                    }
+                    if (arr.length > 0 && arr.length == monthData.length) {
+                        let minIndex = Math.min(...arr)
+                        monthData.forEach(item => {
+                            item.splice(0, minIndex)
+                        })
+                    }
+                    if (monthData.length != 0 && bankData.length != 0) {
+                        monthData[0].forEach((item) => {
+                            if (item) {
+                                xData.push(item.month)
+                            }
+                        })
+                        let monthlyLoanAmountVoColor = ["#5B8FF9", "#5AD8A6", "#49FFE0", "#43C1FF", "#C1F4FF", "#FFD9A3"]
+                        monthlyLoanAmountVoColor = monthlyLoanAmountVoColor.map((item) => {
+                            return {
+                                normal: {
+                                    color: item,
+                                    lineStyle: {
+                                        color: item,
+                                        width: 1,
+                                    },
+                                    areaStyle: {
+                                        color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                            {
+                                                offset: 0,
+                                                color: HexToRGB(item, 0),
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: HexToRGB(item, 0.9),
+                                            },
+                                        ]),
+                                    },
+                                },
+                            }
+                        });
+                        bankData.forEach((item, index) => {
+                            if (item) {
+                                let obj = {}
+                                obj.name = item
+                                obj.type = 'line';
+                                obj.symbolSize = 0;
+                                obj.itemStyle = monthlyLoanAmountVoColor[index];
+                                obj.data = []
+                                resultData.forEach(pro => {
+                                    if (pro.bankName === item) {
+                                        pro.monthlyList.forEach((text, index) => {
+                                            obj.data.push(unit(text.loanAmount))
+                                            if (index === pro.monthlyList.length - 1) {
+                                                yData.push(obj)
+                                            }
+                                        })
+
+                                    }
+
+                                })
+                            }
+                        })
+                    }
+                    monthlyLoanAmountVoOption = {
+                        legend: {
+                            show: true,
+                            x: "right",
+                            type: "scroll",
+                            y: "10",
+                            width: "80%",
+                            icon: "stack",
+                            itemWidth: 10,
+                            itemHeight: 10,
+                            textStyle: {
+                                color: "#80D0FE",
+                            },
+                            data: bankData,
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                            borderWidth: '1', //边框宽度设置1
+                            borderColor: '#81D1FF', //设置边框颜色
+                            borderRadius: '12',
+                            extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                            textStyle: {
+                                color: '#FFFFFF'
+                            },
+                            formatter: function (params) { // 鼠标移入展示百分比
+                                var tip = ""
+                                if (params != null && params.length > 0) {
+                                    tip = params[0].name + '<br/>'
+                                    var total = 0
+                                    for (var i = 0; i < params.length; i++) {
+                                        total += params[i].value
+                                        if (i == params.length - 1) {
+                                            for (var j = 0; j < params.length; j++) {
+                                                tip += params[j].marker + params[j].seriesName + ': ' + (params[j].value || 0) + '万元 ' + (params[j].value ? (params[j].value / total * 100).toFixed(2) : 0) + '%<br/>'
+                                            }
+                                        }
+                                    }
+                                }
+                                return tip
+                            },
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: xData,
+                            axisLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: "#5A91AB",
+                                },
+                            },
+                            axisLabel: {
+                                color: '#5CDBF7',
+                                showMinLabel: true,
+                                showMaxLabel: true,
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
+                        yAxis: {
+                            type: 'value',
+                            name: "万元",
+                            nameTextStyle: {
+                                color: "#5CDBF7",
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: "#5CDBF7",
+                                },
+                            },
+                            axisLine: {
+                                show: false,
+                            },
+                            splitLine: {
+                                show: false,
+                            },
+                        },
+                        series: yData,
+                    };
+                    monthlyLoanAmountVoDiv.setOption(monthlyLoanAmountVoOption);
+                })
+                _get('/data/screen/repay/data', function(result) {
+                    if(!result.success){
+                        return
+                    }
+                    var res = result.data||{};
+                    if (res) {
+                        for (key in res) {
+                            if (key.indexOf("RepayCount") > -1) {
+                                $(`#${key}`).text(res[key] || 0)
+                            } else {
+                                $(`#${key}`).text(unit(res[key]))
+                            }
+                        }
+                    }
+                })
+                //风控
+                _get('/data/screen/risk/data', function (result) {
+                    if(!result.success){
+                        return
+                    }
+                    var res = result.data ||{};
+
+                    //预警信息
+                    if (res.warnDataList && res.warnDataList.length) {
+                        $('.swiper-wrapper').empty();
+                        let str = ""
+                        res.warnDataList.forEach((item, index) => {
+                            str += "<div class='swiper-slide'>"
+                            str += item.alertContent
+                            str += "</div>"
+                        })
+                        $('.swiper-wrapper').append(str);
+                        new Swiper(".mySwiper", {
+                            direction: "vertical",
+                            autoplay: true,
+                            loop: true,
+                        });
+                    }
+                    //渲染图像
+                    let dayData = {
+                        name: [],
+                        data: [],
+                        maxData: [],
+                        max: 0,
+                    };
+                    res.terminalRepayDayList.forEach(item => {
+                        dayData.data.push(item.ratio)
+                        dayData.name.push(item.name)
+                    })
+                    let maxData = Math.ceil(Math.max(...dayData.data) / 10) * 10
+                    maxData = maxData > 100 ? 100 : maxData;
+                    maxData = maxData < 1 ? 10 : maxData;
+                    dayData.data.forEach(item => {
+                        dayData.maxData.push(maxData)
+                    })
+                    let dayList = $('#terminalRepayDayList')[0];
+                    let dayListOption = {
+                        grid: {
+                            left: "3%",
+                            top: "10%",
+                            right: "2%",
+                            bottom: "5%",
+                            containLabel: true,
+                        },
+                        xAxis: [
+                            {
+                                type: "category",
+                                axisTick: {
+                                    show: false,
+                                },
+                                axisLine: {
+                                    lineStyle: {
+                                        color: "rgba(128, 208, 254, 0.5)",
+                                    },
+                                },
+                                axisLabel: {
+                                    textStyle: {
+                                        color: "#80D0FE",
+                                        fontSize: 8,
+                                    },
+                                },
+                                data: dayData.name,
+                            },
+                            {
+                                type: "category",
+                                axisLine: {
+                                    show: false,
+                                },
+                                axisTick: {
+                                    show: false,
+                                },
+                                axisLabel: {
+                                    show: false,
+                                },
+                                splitArea: {
+                                    show: false,
+                                },
+                                splitLine: {
+                                    show: false,
+                                },
+                                data: dayData.maxData,
+                            },
+                        ],
+                        yAxis: {
+                            type: "value",
+                            max: maxData,
+                            splitLine: {
+                                show: false,
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: "#80D0FE",
+                                    fontSize: 8,
+                                },
+                                formatter: function (value) {
+                                    return value + "%";
+                                },
+                            },
+                        },
+                        series: [
+                            {
+                                type: "bar",
+                                xAxisIndex: 1,
+                                itemStyle: {
+                                    normal: {
+                                        show: true,
+                                        color: "rgba(80, 128, 159, 0.09)",
+                                    },
+                                },
+                                label: {
+                                    normal: {
+                                        show: false,
+                                    },
+                                },
+                                barWidth: "40%",
+                                data: dayData.maxData,
+                            },
+                            {
+                                type: "bar",
+                                itemStyle: {
+                                    normal: {
+                                        show: true,
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                            {
+                                                offset: 0,
+                                                color: "rgba(21, 143, 244, 0)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "rgba(20, 146, 247, 1)",
+                                            },
+                                        ]),
+                                    },
+                                },
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: "top",
+                                        textStyle: {
+                                            color: "#80D0FE",
+                                            fontSize: 8,
+                                        },
+                                        formatter: '{c}%'
+                                    },
+                                },
+                                barWidth: "40%",
+                                data: dayData.data,
+                            },
+                        ],
+                    };
+                    var dayListDiv = echarts.init(dayList);
+                    dayListDiv.setOption(dayListOption);
+
+
+                    //用户回款
+                    if (res.terminalRepayDetailList && res.terminalRepayDetailList.length) {
+                        $('#terminalRepayDetailList tbody').empty();
+                        let str = "";
+                        res.terminalRepayDetailList.forEach((item, index) => {
+                            str += "<tr><td width='50'>"
+                            str += index + 1
+                            str += "</td><td>"
+                            str += item.terminalCompanyName || ''
+                            str += "</td><td>"
+                            str += item.repayAverageDay || ''
+                            str += "</td><td>"
+                            str += unit(item.terminalRepayAmount)
+                            str += "</td></tr>"
+                        })
+                        $('#terminalRepayDetailList tbody').append(str);
+                        //内容超出高度后滚动轮播
+                        let tblBodyHeight2 = $('#terminalRepayDetailList .table').outerHeight()
+                        let tableInnerHeight2 = $('#terminalRepayDetailList').outerHeight()
+                        if (tblBodyHeight2 > tableInnerHeight2) {
+                            $('#terminalRepayDetailList tbody').css('top', '0');
+                            let tblTop2 = 0;
+                            let speedhq2 = 50; // 数值越大越慢
+                            let outerHeight2 = tableInnerHeight2 - tblBodyHeight2 - 50
+                            function Marqueehq2() {
+                                if (tblTop2 <= outerHeight2) {
+                                    tblTop2 = 0;
+                                } else {
+                                    tblTop2 -= 1;
+                                }
+                                $('#terminalRepayDetailList tbody').css('top', tblTop2 + 'px');
+                            }
+                            MyMarhq2 = setInterval(Marqueehq2, speedhq2);
+                        }
+                    }
+                })
+                //物流
+                let map = $('#content-map')[0];
+                //地图标注图标
+                let smMapTip1 = 'image://data:image/png;base64,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'
+                let smMapTip2 = 'image://data:image/png;base64,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'
+                let smMapTip3 = 'image://data:image/png;base64,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'
+                let smMapTip4 = 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAGqADAAQAAAABAAAAGgAAAABMybYKAAAE5klEQVRIDc1Vb0xbVRQ/97W8ttBCaeeAUQEdI25IAmHgtjjNnMumi4nGmZgli18WdAFJNhcTs8yY6AcSE404MqdGF3UfjMs0McGxuGyYCC6Mf3MbcxtuOAcItNDR0lL67vWc+3orxULwm+flvXPv+fe759x77mOwDBJdR6vAAs+B4E8CsCIQwgOMBQDEHyDYWXxPsZp9vUuFYkspxYUjZWC1vI2BnwImGAYUkqd3aoW4OMweabieTr0okOg68jRoWgtmkZXO8V8yhqEEhHFR9aymoXWhPi2Q6G7ZgU4fkyeWKuGjxsTT0Hy1xupYdf3p+VYqSlKGIKW4qpMocKTgYN0QFMMRR1JlJE5EUgXGIIKCXQh2U+rwY1WDJOfiIHpouNlRM2giUDKzxNokw09iKv3VGHcS56/hu0/FVSo5Fxc/rMBVfaqUKRyPAj4MHzMDNTaDppgmJwz2svWv/krzBRmJR1GGaRPRGgQc/uSs76u2nkIpmvcp8LqiHcde6Se73W99XdZ5eSh3S/Vq/2dvPD9omgkBnG3GcRogLh7Gk4YlU8SgttznP97aXTgRDNsrSwsCzz6+boS0+R5XbGPdRxW+/JyZkfFpfTQQsmfq1lncX3OhGi5U8HIVSVMDyRlzomE08UaIt/cOZhFIVqYea9i14dqJM32rTrT1Fdau9Y1f+n3UbdW0uTvjQTv5lxTkBjHBqHwJkDGXip9aOiEsWAozI4apC8Y+b+1ZQ8bhmZi+t+nbTcrx+45r2ZwLrcDrvDc+GS4m+QM+D94WzMxIyNOZTCQViGljIIxcGQwPHsfnzZee6LDrVuOn/lv5OU5HzJvtiGba9fhczJAHCS+MmBBojLSueKUf/f8pPWOTMhZ+UoE4/xNlDqnEjG4PTzpC0VljYGjMdar9qqz3nh1VXcV51sj4VFjazRk8TvZWixZfW7wigGsziaA5UDxJqUDA+7Cu90sNHuOT568UvXP8/NaErWRfnu6tocG2mgfxxAEYhjFH3JuTGQSeOAgkkICij4ZEyRrKmQ49KArJOhs8enD35kvBHw41vbi1op30LoctFGw71ESvPxi103x0MmQj3crcrIBscmp0+WphkPFIu6B0rGr/lOj44GfQRC31R2f/UG7Pjbve7uvDPjLmgrPtB77Y7s22T1c/tOpmZWne4IWBu6tJl+dxTuB5ptvEbOi41sVq90+Rjig1I5Lcx87hlTYMjEfq3v3umdePntkz9Few0O2y+90uhz8wHbV73c5Ac+POdpueEb5ya6wML26+pbJkAPsbWwKwl2BExqF4CZInR00UF73vu2GOvfDb0ITHt8I1iz1kmGuiwqu1cei8esdtxLmW73ZGS4u8M9KfypYhvqHqqHjE0wKRQnS85wHNshNEXDYj3hh4pXAmORksJNJZLBGI81a26QD2UyotCkRmMrMY24Zlt4PGEQjvFeKSsLcBE8V/vCSO+2ODHxdmYiqXyEgZiF+as3G/HpNgSkjcQBALghDnYhYybO1sQ+O9+Sbzx0tmpAzFuRYnZEQ2QoZFBwNLRKQS0hDE5ehk5fXYFovTsoDIXVw8lglGuBoMoctw1Oocb2urvYetf9k8CFKR/rNsIHLHA4K/d46/Eq4D12NY0su48Yn/V3oAJf1PQBLsRrMNpngJuLXbbE3jrAr0v+F/A/G473gYxIwGAAAAAElFTkSuQmCC'
+                let option = {
+                    geo: {
+                        map: "china",
+                        aspectScale: 0.9, //长宽比
+                        zoom: 1.05,
+                        roam: false,
+                        label: {
+                            normal: {
+                                show: true,
+                                color: "#04A3BF"
+                            },
+                        },
+                        itemStyle: {
+                            normal: {
+                                areaColor: "rgba(37, 142, 217, 0.3)",
+                                borderColor: "#04A3BF",
+                            },
+                            emphasis: {
+                                areaColor: "rgba(37, 142, 217, 0.3)",
+                                borderColor: "#04A3BF",
+                                // color: "green",
+                                label: {
+                                    show: false,
+                                },
+                            },
+                        },
+                    },
+                    legend: {
+                        orient: "vertical",
+                        id: 1,
+                        bottom: "15%",
+                        left: "15%",
+                        itemWidth: 15,
+                        height: 60,
+                        itemGap: 20,
+                        itemWidth: 20,
+                        itemHeight: 20,
+                        data: [
+                            {
+                                name: "站台",
+                                icon: smMapTip1,
+                                textStyle: {
+                                    fontSize: 16,
+                                    padding: [0, 0, 0, 10],
+                                    color: "#7AFFFD"
+                                }
+                            },
+                            {
+                                name: "港口",
+                                icon: smMapTip2,
+                                textStyle: {
+                                    fontSize: 16,
+                                    padding: [0, 0, 0, 10],
+                                    color: "#FFDE2F"
+                                }
+                            },
+                            {
+                                name: "发站",
+                                icon: smMapTip3,
+                                textStyle: {
+                                    fontSize: 16,
+                                    padding: [0, 0, 0, 10],
+                                    color: "#FFFFFF"
+                                },
+                            },
+                            {
+                                name: "到站",
+                                icon: smMapTip4,
+                                textStyle: {
+                                    fontSize: 16,
+                                    padding: [0, 0, 0, 10],
+                                    color: "#FFFFFF"
+                                },
+                            },
+                        ],
+                    },
+                    series: [
+                        {
+                            type: "effectScatter",
+                            coordinateSystem: "geo",
+                            showEffectOn: "render",
+                            zlevel: 1,
+                            rippleEffect: {
+                                period: 15,
+                                scale: 4,
+                                brushType: "fill",
+                            },
+                            hoverAnimation: true,
+                            label: {
+                                normal: {
+                                    formatter: "{b}",
+                                    position: "right",
+                                    offset: [15, 0],
+                                    color: "#1DE9B6",
+                                    show: true,
+                                },
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: "#fff",
+                                    shadowBlur: 5,
+                                    shadowColor: "#333",
+                                },
+                            },
+                            symbolSize: 12,
+                            data: [],
+                        }, //地图线的动画效果
+                        {
+                            type: "lines",
+                            zlevel: 2,
+                            effect: {
+                                show: true,
+                                period: 1,
+                                trailLength: 0.7,
+                                color: '#fff',
+                                symbolSize: 3
+                            },
+                            lineStyle: {
+                                normal: {
+                                    color: '#00BFFF',
+                                    width: 0,
+                                    curveness: 0.2
+                                }
+                            },
+                            data: [],
+                        }, {
+                            name: "站台",
+                            type: "scatter",
+                            coordinateSystem: "geo",
+                            label: {
+                                formatter: "{b}",
+                                position: "bottom",
+                                fontSize: 8,
+                                lineHeight: 10,
+                                fontFamily: "PingFangSC-Medium, PingFang SC",
+                                color: "#7AFFFD",
+                                show: true,
+                            },
+                            data: [],
+                            symbol: smMapTip1,
+                            symbolSize: [16, 16],
+                            itemStyle: {
+                                opacity: 1
+                            },
+                            z: 10
+                        }, {
+                            name: "港口",
+                            type: "scatter",
+                            coordinateSystem: "geo",
+                            label: {
+                                formatter: "{b}",
+                                position: "bottom",
+                                fontSize: 8,
+                                lineHeight: 10,
+                                fontFamily: "PingFangSC-Medium, PingFang SC",
+                                color: "#FFDE2F",
+                                show: true,
+                            },
+                            data: [],
+                            symbol: smMapTip2,
+                            symbolSize: [16, 16],
+                            itemStyle: {
+                                opacity: 1
+                            },
+                            z: 10
+                        }, {
+                            name: "发站",
+                            type: "scatter",
+                            coordinateSystem: "geo",
+                            label: {
+                                formatter: "{b}",
+                                position: "bottom",
+                                fontSize: 8,
+                                lineHeight: 10,
+                                fontFamily: "PingFangSC-Medium, PingFang SC",
+                                color: "#ffffff",
+                                show: true,
+                            },
+                            data: [],
+                            symbol: smMapTip3,
+                            symbolSize: [14, 14],
+                            itemStyle: {
+                                opacity: 1
+                            },
+                            z: 10
+                        }, {
+                            name: "到站",
+                            type: "scatter",
+                            coordinateSystem: "geo",
+                            label: {
+                                formatter: "{b}",
+                                position: "bottom",
+                                fontSize: 8,
+                                lineHeight: 10,
+                                fontFamily: "PingFangSC-Medium, PingFang SC",
+                                color: "#ffffff",
+                                show: true,
+                            },
+                            data: [],
+                            symbol: smMapTip4,
+                            symbolSize: [14, 14],
+                            itemStyle: {
+                                opacity: 1
+                            },
+                            z: 10
+                        }
+                    ],
+                };
+                var mapDiv = echarts.init(map);
+                mapDiv.setOption(option);
+                //大屏站点数据
+                _get('/data/screen/getScreenData', function (res) {
+                    if (res.success) {
+                        let arriveStationList = [],//到站
+                            departureStationList = [],//发站
+                            platformList = [],//站台
+                            portList = [];//港口
+                        arriveStationList = res.result.arriveStationList.map(item => {
+                            return { name: item.name, value: [item.longitude, item.latitude] }
+                        })
+                        departureStationList = res.result.departureStationList.map(item => {
+                            return { name: item.name, value: [item.longitude, item.latitude] }
+                        })
+                        platformList = res.result.platformList.map(item => {
+                            return { name: item.name, value: [item.longitude, item.latitude] }
+                        })
+                        portList = res.result.portList.map(item => {
+                            return { name: item.name, value: [item.longitude, item.latitude] }
+                        })
+                        option.series[2].data = platformList;
+                        option.series[3].data = portList;
+                        option.series[4].data = departureStationList;
+                        option.series[5].data = arriveStationList;
+                        mapDiv.setOption(option);
+                    }
+                })
+                _get('/data/screen/logistics/data', function (result) {
+                    if(!result.success){
+                        return
+                    }
+                    var res = result.data ||{};
+                    let mapData = {
+                        line: [],
+                        data: [],
+                    }
+                    if (res.coordinateList && res.coordinateList.length > 0) {
+                        res.coordinateList.forEach(item => {
+                            mapData.line.push({
+                                coords: [[item.deliveryStation.longitude, item.deliveryStation.latitude], [item.arriveStation.longitude, item.arriveStation.latitude]]
+                            })
+                            mapData.data.push([item.arriveStation.longitude, item.arriveStation.latitude])
+                        })
+                    }
+                    //到站标记不再展示
+                    // option.series[0].data = mapData.data;
+                    option.series[1].data = mapData.line;
+                    //渲染地图
+                    mapDiv.setOption(option);
+                    if (res.transGoodsDetailList && res.transGoodsDetailList.length) {
+                        $('.content-table tbody').empty();
+                        let str = "";
+                        res.transGoodsDetailList.forEach(item => {
+                            str += "<tr><td>"
+                            str += item.deliveryStation
+                            str += "</td><td>"
+                            str += item.arriveStation
+                            str += "</td><td>"
+                            str += item.deliverQuantity
+                            str += "</td><td>"
+                            str += item.despatchTypeDesc
+                            str += "</td></tr>"
+                        })
+                        $('.content-table tbody').append(str);
+                        //内容超出高度后滚动轮播
+                        let tblBodyHeight = $('.content-table .table').outerHeight() + $('.content-table .tableTitle').outerHeight()
+                        let tableInnerHeight = $('.content-table .content-three-main').outerHeight()
+                        if (tblBodyHeight > tableInnerHeight) {
+                            $('.content-table tbody').css('top', '0');
+                            let tblTop = 0;
+                            let speedhq = 50; // 数值越大越慢
+                            let outerHeight = tableInnerHeight - tblBodyHeight - 50
+                            function Marqueehq() {
+                                if (tblTop <= outerHeight) {
+                                    tblTop = 0;
+                                } else {
+                                    tblTop -= 1;
+                                }
+                                $('.content-table tbody').css('top', tblTop + 'px');
+                            }
+                            MyMarhq = setInterval(Marqueehq, speedhq);
+                        }
+                    }
+                })
+
+                //业务
+                _get('/data/screen/business/data', function (result) {
+                    if(!result.success){
+                        return
+                    }
+                    var res = result.data ||{};
+                    //采购情况
+                    if (res.buyData) {
+                        for (key in res.buyData) {
+                            $(`#buy${key}`).text(unit(res.buyData[key]))
+                        }
+                    }
+                    //销售
+                    if (res.sellData) {
+                        for (key in res.sellData) {
+                            $(`#sell${key}`).text(unit(res.sellData[key]))
+                        }
+                    }
+                    let colorList = [{
+                        normal: {
+                            color: "#1799FE",
+                            lineStyle: {
+                                color: "#1799FE",
+                                width: 1,
+                            },
+                            areaStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                    {
+                                        offset: 0,
+                                        color: "rgba(23, 153, 254, 0)",
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: "rgba(23, 153, 254, 0.9)",
+                                    },
+                                ]),
+                            },
+                        },
+                    }, {
+                        normal: {
+                            color: "#CFDCED",
+                            lineStyle: {
+                                color: "#CFDCED",
+                                width: 1,
+                            },
+                            areaStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                    {
+                                        offset: 0,
+                                        color: "rgba(207, 220, 237, 0)",
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: "rgba(207, 220, 237, 0.9)",
+                                    },
+                                ]),
+                            },
+                        },
+                    }, {
+                        normal: {
+                            color: "#A5FFFD",
+                            lineStyle: {
+                                color: "#A5FFFD",
+                                width: 1,
+                            },
+                            areaStyle: {
+                                //color: '#94C9EC'
+                                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                    {
+                                        offset: 0,
+                                        color: "rgba(94, 210, 207, 0)",
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: "rgba(94, 210, 207, 0.9)",
+                                    },
+                                ]),
+                            },
+                        },
+                    }];
+                    //采购图像
+                    let buyData = { xAxis: [], data: [[], [], []] };
+                    res.buyLineChart.forEach(item => {
+                        buyData.xAxis.push(item.month)
+                        buyData.data[0].push(unit(item.automobileQuantity))
+                        buyData.data[1].push(unit(item.trainQuantity))
+                        buyData.data[2].push(unit(item.shipQuantity))
+                    });
+                    let contentTwoMainBuy = $('#content-two-main-buy')[0];
+                    let contentTwoMainBuyOption = {
+                        grid: {
+                            left: "4%",
+                            right: "4%",
+                            top: "20%",
+                            bottom: "5%",
+                            containLabel: true,
+                        },
+                        title: {
+                            text: `近一年上游供应商发运量:${unit(res.buyCurrentYearTotalDeliverQuantity)}万吨`,
+                            textStyle: {
+                                fontSize: 12,
+                                fontWeight: 400,
+                                color: "#80D0FE"
+                            },
+                            left: "center",
+                            top: "0",
+                        },
+                        legend: {
+                            show: true,
+                            x: "right",
+                            y: "0",
+                            icon: "stack",
+                            itemWidth: 10,
+                            itemHeight: 10,
+                            textStyle: {
+                                color: "#80D0FE",
+                            },
+                            data: ["汽运", "火运", "船运"],
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                            borderWidth: '1', //边框宽度设置1
+                            borderColor: '#81D1FF', //设置边框颜色
+                            borderRadius: '12',
+                            extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                            textStyle: {
+                                color: '#FFFFFF'
+                            },
+                            formatter: function (params) { // 鼠标移入展示百分比
+                                var tip = ""
+                                if (params != null && params.length > 0) {
+                                    tip = params[0].name + '<br/>'
+                                    var total = 0
+                                    for (var i = 0; i < params.length; i++) {
+                                        total += params[i].value
+                                        if (i == params.length - 1) {
+                                            for (var j = 0; j < params.length; j++) {
+                                                tip += params[j].marker + params[j].seriesName + ': ' + params[j].value + '万吨<br/>'
+                                            }
+                                        }
+                                    }
+                                }
+                                return tip
+                            },
+                        },
+                        xAxis: [
+                            {
+                                type: "category",
+                                boundaryGap: false,
+                                axisLabel: {
+                                    color: "#00B6E4",
+                                    showMinLabel: true,
+                                    showMaxLabel: true,
+                                },
+                                axisTick: {
+                                    show: false,
+                                },
+                                axisLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        color: "#5A91AB",
+                                    },
+                                },
+                                data: buyData.xAxis
+                            },
+                        ],
+                        yAxis: [
+                            {
+                                type: "value",
+                                name: "月度发运情况（万吨）",
+                                nameTextStyle: {
+                                    color: "#00B6E4",
+                                    align: "left",
+                                },
+                                axisTick: {
+                                    show: false,
+                                },
+                                axisLabel: {
+                                    formatter: "{value}",
+                                    textStyle: {
+                                        color: "#00B6E4",
+                                    },
+                                },
+                                axisLine: {
+                                    show: false,
+                                },
+                                splitLine: {
+                                    show: false,
+                                },
+                            },
+                        ],
+                        series: [
+                            {
+                                name: "汽运",
+                                type: "line",
+                                symbolSize: 0,
+                                itemStyle: colorList[0],
+                                data: buyData.data[0],
+                            },
+                            {
+                                name: "火运",
+                                type: "line",
+                                symbolSize: 0,
+                                itemStyle: colorList[1],
+                                data: buyData.data[1],
+                            },
+                            {
+                                name: "船运",
+                                type: "line",
+                                symbolSize: 0,
+                                itemStyle: colorList[2],
+                                data: buyData.data[2],
+                            },
+                        ],
+                    };
+                    var contentTwoMainBuyDiv = echarts.init(contentTwoMainBuy);
+                    contentTwoMainBuyDiv.setOption(contentTwoMainBuyOption);
+                    //销售图像
+                    let sellData = { xAxis: [], data: [[], [], []] };
+                    res.sellLineChart.forEach(item => {
+                        sellData.xAxis.push(item.month)
+                        sellData.data[0].push(unit(item.automobileQuantity))
+                        sellData.data[1].push(unit(item.trainQuantity))
+                        sellData.data[2].push(unit(item.shipQuantity))
+                    });
+                    var contentTwoMainSell = $('#content-two-main-sell')[0];
+                    let contentTwoMainSellOption = {
+                        grid: {
+                            left: "4%",
+                            right: "4%",
+                            top: "20%",
+                            bottom: "5%",
+                            containLabel: true,
+                        },
+                        title: {
+                            text: `近一年下游客户收货量:${unit(res.sellCurrentYearTotalReceiveQuantity)}万吨`,
+                            textStyle: {
+                                fontSize: 12,
+                                fontWeight: 400,
+                                color: "#80D0FE"
+                            },
+                            left: "center",
+                            top: "0",
+                        },
+                        legend: {
+                            show: true,
+                            x: "right",
+                            y: "0",
+                            icon: "stack",
+                            itemWidth: 10,
+                            itemHeight: 10,
+                            textStyle: {
+                                color: "#80D0FE",
+                            },
+                            data: ["汽运", "火运", "船运"],
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                            borderWidth: '1', //边框宽度设置1
+                            borderColor: '#81D1FF', //设置边框颜色
+                            borderRadius: '12',
+                            extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                            textStyle: {
+                                color: '#FFFFFF'
+                            },
+                            formatter: function (params) { // 鼠标移入展示百分比
+                                var tip = ""
+                                if (params != null && params.length > 0) {
+                                    tip = params[0].name + '<br/>'
+                                    var total = 0
+                                    for (var i = 0; i < params.length; i++) {
+                                        total += params[i].value
+                                        if (i == params.length - 1) {
+                                            for (var j = 0; j < params.length; j++) {
+                                                tip += params[j].marker + params[j].seriesName + ': ' + params[j].value + '万吨<br/>'
+                                            }
+                                        }
+                                    }
+                                }
+                                return tip
+                            },
+                        },
+                        xAxis: [
+                            {
+                                type: "category",
+                                boundaryGap: false,
+                                axisLabel: {
+                                    color: "#00B6E4",
+                                    showMinLabel: true,
+                                    showMaxLabel: true,
+                                },
+                                axisTick: {
+                                    show: false,
+                                },
+                                axisLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        color: "#5A91AB",
+                                    },
+                                },
+                                data: sellData.xAxis
+                            },
+                        ],
+                        yAxis: [
+                            {
+                                type: "value",
+                                name: "月度收货情况（万吨）",
+                                nameTextStyle: {
+                                    color: "#00B6E4",
+                                    align: "left",
+                                },
+                                axisTick: {
+                                    show: false,
+                                },
+                                axisLabel: {
+                                    formatter: "{value}",
+                                    textStyle: {
+                                        color: "#00B6E4",
+                                    },
+                                },
+                                axisLine: {
+                                    show: false,
+                                },
+                                splitLine: {
+                                    show: false,
+                                },
+                            },
+                        ],
+                        series: [
+                            {
+                                name: "汽运",
+                                type: "line",
+                                symbolSize: 0,
+                                itemStyle: colorList[0],
+                                data: sellData.data[0]
+                            },
+                            {
+                                name: "火运",
+                                type: "line",
+                                symbolSize: 0,
+                                itemStyle: colorList[1],
+                                data: sellData.data[1]
+                            },
+                            {
+                                name: "船运",
+                                type: "line",
+                                symbolSize: 0,
+                                itemStyle: colorList[2],
+                                data: sellData.data[2]
+                            },
+                        ],
+                    };
+                    var contentTwoMainSellDiv = echarts.init(contentTwoMainSell);
+                    contentTwoMainSellDiv.setOption(contentTwoMainSellOption)
+
+                    //上游供应商累计发运情况
+                    let upData = { yAxis: [], data: [], maxdata: [] };
+                    res.upDespatchItem.forEach(item => {
+                        upData.yAxis.push(item.name)
+                        upData.data.push(unit(item.quantity))
+                        upData.maxdata.push(unit(upData.data[0]))
+                    });
+                    var contentThreeMainUp = $('#content-three-main-up')[0];
+                    let contentThreeMainUpOption = {
+                        grid: {
+                            left: "2%",
+                            right: "20",
+                            bottom: "2%",
+                            top: "10%",
+                            containLabel: true,
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                            borderWidth: '1', //边框宽度设置1
+                            borderColor: '#81D1FF', //设置边框颜色
+                            borderRadius: '12',
+                            extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                            textStyle: {
+                                color: '#FFFFFF'
+                            },
+                            position: function (point, params, dom, rect, size) {
+                                // 固定在顶部
+                                return ["0%", point[1]];
+                            },
+                            formatter: function (params) {
+                                return params[0].name + " : " + params[0].value + "万吨";
+                            },
+                        },
+                        xAxis: {
+                            show: false,
+                        },
+                        yAxis: [
+                            {
+                                type: "category",
+                                inverse: true,
+                                axisLabel: {
+                                    show: false,
+                                },
+                                splitLine: {
+                                    show: false,
+                                },
+                                axisTick: {
+                                    show: false,
+                                },
+                                axisLine: {
+                                    show: false,
+                                },
+                                data: upData.yAxis
+                            },
+                            {
+                                type: "category",
+                                inverse: true,
+                                axisTick: "none",
+                                axisLine: "none",
+                                show: true,
+                                axisLabel: {
+                                    textStyle: {
+                                        color: "#80D0FE",
+                                        fontSize: 12,
+                                    },
+                                    formatter: function (value) {
+                                        return value + "万吨";
+                                    },
+                                },
+                                data: upData.data,
+                            },
+                        ],
+                        dataZoom:
+                        {
+                            // 开始位置的数值
+                            startValue: 0,
+                            // 结束位置的数值
+                            endValue: 3,
+                            type: "slider",
+                            maxValueSpan: 4, //显示数据的条数(默认显示10个)
+                            show: false,
+                            yAxisIndex: [0],
+                            handleSize: 0, //滑动条的 左右2个滑动条的大小
+                            borderColor: "rgba(43,48,67,0.8)",
+                            fillerColor: "#33384b", //滑动块的颜色
+                            showDataShadow: false, //是否显示数据阴影 默认auto
+                            showDetail: false, //即拖拽时候是否显示详细数值信息 默认true
+                            yAxisIndex: [0, 1], //控制的y轴
+                        },
+                        series: [
+                            {
+                                name: "值",
+                                type: "bar",
+                                zlevel: 1,
+                                itemStyle: {
+                                    normal: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                            {
+                                                offset: 0,
+                                                color: "rgb(57,89,255,0)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "#9AEFED",
+                                            },
+                                        ]),
+                                    },
+                                },
+                                barWidth: "7",
+                                borderColor: "#314656",
+                                data: upData.data,
+                                label: {
+                                    normal: {
+                                        color: "#80D0FE",
+                                        show: true,
+                                        position: [0, "-24px"],
+                                        textStyle: {
+                                            fontSize: 12,
+                                        },
+                                        formatter: function (a, b) {
+                                            return a.name;
+                                        },
+                                    },
+                                },
+                            },
+                            {
+                                name: "背景",
+                                type: "bar",
+                                barWidth: "15",
+                                barGap: "-100%",
+                                yAxisIndex: 1,
+                                data: upData.maxdata,
+                                itemStyle: {
+                                    normal: {
+                                        color: "#0C1D2E",
+                                    },
+                                },
+                            },
+                        ],
+                    };
+                    var contentThreeMainUpDiv = echarts.init(contentThreeMainUp);
+                    contentThreeMainUpDiv.setOption(contentThreeMainUpOption);
+                    setInterval(function () {
+                        contentThreeMainUpOption.dataZoom.startValue++;
+                        contentThreeMainUpOption.dataZoom.endValue++;
+                        if (contentThreeMainUpOption.dataZoom.endValue == upData.data.length) {
+                            contentThreeMainUpOption.dataZoom.startValue = 0;
+                            contentThreeMainUpOption.dataZoom.endValue = 3;
+                        }
+                        contentThreeMainUpDiv.setOption(contentThreeMainUpOption);
+                    }, 5000)
+                    //下游客户累计发运情况
+                    var contentThreeMainDown = $('#content-three-main-down')[0];
+                    let downData = { yAxis: [], data: [], maxdata: [] };
+                    res.downDespatchItem.forEach(item => {
+                        downData.yAxis.push(item.name)
+                        downData.data.push(unit(item.quantity))
+                        downData.maxdata.push(unit(downData.data[0]))
+                    });
+                    let contentThreeMainDownOption = {
+                        grid: {
+                            left: "2%",
+                            right: "20",
+                            bottom: "2%",
+                            top: "10%",
+                            containLabel: true,
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                            borderWidth: '1', //边框宽度设置1
+                            borderColor: '#81D1FF', //设置边框颜色
+                            borderRadius: '12',
+                            extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                            textStyle: {
+                                color: '#FFFFFF'
+                            },
+                            position: function (point, params, dom, rect, size) {
+                                // 固定在顶部
+                                return ["0%", point[1]];
+                            },
+                            formatter: function (params) {
+                                return params[0].name + " : " + params[0].value + "万吨";
+                            },
+                        },
+                        xAxis: {
+                            show: false,
+                        },
+                        yAxis: [
+                            {
+                                type: "category",
+                                inverse: true,
+                                axisLabel: {
+                                    show: false,
+                                },
+                                splitLine: {
+                                    show: false,
+                                },
+                                axisTick: {
+                                    show: false,
+                                },
+                                axisLine: {
+                                    show: false,
+                                },
+                                data: downData.yAxis
+                            },
+                            {
+                                type: "category",
+                                inverse: true,
+                                axisTick: "none",
+                                axisLine: "none",
+                                show: true,
+                                axisLabel: {
+                                    textStyle: {
+                                        color: "#80D0FE",
+                                        fontSize: "12",
+                                    },
+                                    formatter: function (value) {
+                                        return value + "万吨";
+                                    },
+                                },
+                                data: downData.data
+                            },
+                        ],
+                        dataZoom:
+                        {
+                            // 开始位置的数值
+                            startValue: 0,
+                            // 结束位置的数值
+                            endValue: 3,
+                            type: "slider",
+                            maxValueSpan: 4, //显示数据的条数(默认显示10个)
+                            show: false,
+                            yAxisIndex: [0],
+                            handleSize: 0, //滑动条的 左右2个滑动条的大小
+                            borderColor: "rgba(43,48,67,0.8)",
+                            fillerColor: "#33384b", //滑动块的颜色
+                            // backgroundColor: "rgba(13,33,117,0.5)", //两边未选中的滑动条区域的颜色
+                            showDataShadow: false, //是否显示数据阴影 默认auto
+                            showDetail: false, //即拖拽时候是否显示详细数值信息 默认true
+                            yAxisIndex: [0, 1], //控制的y轴
+                        },
+                        series: [
+                            {
+                                name: "值",
+                                type: "bar",
+                                zlevel: 1,
+                                itemStyle: {
+                                    normal: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                            {
+                                                offset: 0,
+                                                color: "rgb(57,89,255,0)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "#1496F9",
+                                            },
+                                        ]),
+                                    },
+                                },
+                                barWidth: "7",
+                                borderColor: "#314656",
+                                data: downData.data,
+                                label: {
+                                    normal: {
+                                        color: "#80D0FE",
+                                        show: true,
+                                        position: [0, "-24px"],
+                                        textStyle: {
+                                            fontSize: 12,
+                                        },
+                                        formatter: function (a, b) {
+                                            return a.name;
+                                        },
+                                    },
+                                },
+                            },
+                            {
+                                name: "背景",
+                                type: "bar",
+                                barWidth: "15",
+                                barGap: "-100%",
+                                yAxisIndex: 1,
+                                data: downData.maxdata,
+                                itemStyle: {
+                                    normal: {
+                                        color: "#0C1D2E",
+                                    },
+                                },
+                            },
+                        ],
+                    };
+                    var contentThreeMainDownDiv = echarts.init(contentThreeMainDown);
+                    contentThreeMainDownDiv.setOption(contentThreeMainDownOption);
+                    setInterval(function () {
+                        contentThreeMainDownOption.dataZoom.startValue++;
+                        contentThreeMainDownOption.dataZoom.endValue++;
+                        if (contentThreeMainDownOption.dataZoom.endValue == downData.data.length) {
+                            contentThreeMainDownOption.dataZoom.startValue = 0;
+                            contentThreeMainDownOption.dataZoom.endValue = 3;
+                        }
+                        contentThreeMainDownDiv.setOption(contentThreeMainDownOption);
+                    }, 5000)
+                })
+            })
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+  <title>货权转移证明</title>
+  <style>
+      @page {
+          size: A4;
+          margin: 50px;
+      }
+
+      html, body {
+          padding: 0px;
+          margin: 0px;
+          line-height: 30px;
+          font-family:"SimSun";
+      }
+      h2{
+          margin-block-end: 0px;
+      }
+      .wrapper{
+          /*max-width: 650px;*/
+          margin: auto;
+      }
+      .text-center{
+          text-align: center;
+      }
+      .text-indent2{
+          text-indent: 2em;
+          /*line-height: 30px;*/
+      }
+      .quantity{
+          color:red;
+          font-size: 18px;
+          font-weight: bold;
+      }
+      .wrapper-footer{
+          width: fit-content;
+          float: right;
+          text-align: center;
+          /*line-height: 30px;*/
+          margin-top: 10px;
+      }
+      table.wrapper-table-container .table-bg{
+          background: #ccc;
+      }
+      .wrapper-table-container th{
+          font-weight: bold;
+          width: 20%;
+      }
+      .wrapper-table-container td{
+          width: 30%;
+      }
+      table.wrapper-table-container,
+      .wrapper-table-container th,
+      .wrapper-table-container td {
+          border: 1px solid #999;
+          text-align: left;
+          padding: 0px 5px;
+      }
+      table.wrapper-table-container{
+          border-collapse:collapse;
+          width: 100%;
+          margin: 10px 0px;
+      }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <h2 class="text-center">所有权转移证明</h2>
+  <div class="text-center">编号：<span th:text="${no}"></span></div>
+  <div class="company-seller"><span th:text="${buyer}"></span>：</div>
+  <div class="text-indent2">
+    鉴于贵司与我司签订的编号&nbsp;<u><span th:text="${contractNo}"></span></u>《煤炭买卖合同》，我司同意将下列货物的所有权转移给贵司，
+    货物数量共计&nbsp;<u class="quantity"><span th:text="${totalQuantity}"></span></u>&nbsp;吨，货物所对应详情如下：
+  </div>
+  <!-- 汽运 -->
+  <table class="wrapper-table-container">
+    <tbody th:each="item:${list}">
+    <tr class="table-bg">
+      <th>批次号</th>
+      <td colspan="3"><span th:text="${item.batchNo}"></span></td>
+    </tr>
+    <tr>
+      <th>收货编号</th>
+      <td><span th:text="${item.receiveNo}"></span></td>
+      <th>品名</th>
+      <td><span th:text="${item.goodsName}"></span></td>
+    </tr>
+    <tr>
+      <th>发货矿点</th>
+      <td><span th:text="${item.kdkk}"></span></td>
+      <th>验收日期</th>
+      <td><span th:text="${item.receiveDate}"></span></td>
+    </tr>
+    <tr>
+      <th>收货人</th>
+      <td><span th:text="${item.receiverName}"></span></td>
+      <th>验收吨位</th>
+      <td><span th:text="${item.receiveQuantity}"></span></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="text-indent2">贵我双方的最终结算吨位以贵司出具的结算单为准。</div>
+  <div class="text-indent2">特此证明</div>
+  <div class="text-indent2">传真件、扫描件、复印件同原件具有相同法律效力。</div>
+  <div class="wrapper-footer">
+    <div><span th:text="${seller}"></span></div>
+    <div><span th:text="${time}"></span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jsencrypt/3.3.2/jsencrypt.js"></script>
+  <script>
+    function stringToBinary(str) {
+      return Array.from(str, char => char.charCodeAt().toString(2).padStart(8, '0')).join('');
+    }
+    const encrypt = new JSEncrypt();
+    // encrypt.setPublicKey('MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgFiOVmIaIca2/o1E6Ucgh9uvIcSuAot3i00QCSI+1+oTndNIu02xeMYqEpQsZiteUMQJwqouBojJgK3iVNnScPA7a6uKFDlWWIkhTcrW8YhSrFImUr6VW8BFRtIOsSO4jYfcAeU7z1If7Z9UVawlXKDzb6sA3Kh3X8R0F0MGj9XJAgMBAAE=');
+    // const encrypted = encrypt.encrypt('123456');
+    // console.info('encrypted', encrypted)
+
+    const decrypt = new JSEncrypt({
+      name: 'RSA',
+      hash: 'sha256'
+    });
+    console.info('decrypt', decrypt)
+    decrypt.setPrivateKey('MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCpNJ49Dian7Yqbd/Cu7fvN4/O3WGnAkaHeWHkqTvWDvOfPcGAq6wbHuNcYn0k+jRlNu3MBM5FDHyyJ0ctwqgaFGW7mdLWbCfeoeIiWRXsAO7y9U/VLekzZandRO29yp0rgCEyuDg1ibD0QCSogXdOWvGopNQV/LpzBkDQIZsFZP91QDvupa/e4LVPL9NWVx/OB7iONCD0e2mPF8efxOD4NFktBGUB73Z6Lt5xMEIvL9f0aIp5pdaEyct20dEiuTc1mdH8IM3se34pis5aLKqkXCQ5nbHnruYcjVKSjJsOp8C2AaMwQxIzJkdghWqhjbFFx5xArqL/1n4Q0BCBE1BWtAgMBAAECggEABXc6qVQ8sW397Tm5n5z2Zlc3tzN27w6FQQ5wk4pLaf7/KfdCVACVjnwNDrGOhyO9roIgm+hTh+yI3sbVIIWNgl0o9O7OMvzmcB28o8YIzCAh36fHo7GGq/tBcXFPD1ASHhyGhZTUn9pJOqxhHPyK6jKZ50zcKZiS3bnPxHm1QzG8brqrEUQj1XDb7eTpVlPp1fkjP+LZnLf4iZu5oG6BkAIW3gh/Xc1W7BqrU67lWgkIIguy3ijJsJFThZpfiVF2ue1BT0AkDCr3n+ZNV4qxC+KdvR13BUvLUqoDYuj4r/CzJ/5cHkGsdLKq3HjVNfHirEnGTZqDuMv319Q83EhZ4QKBgQDkGwYpyoWdzAmaDt5Oo8J0cT+qvjHdZX56iJYhp03DGrOcf9SRBWX0JSPsG++Gu3WiQkfZr7yMeFzXNB6OI6RdvFzUKIjA3ZyULVq4yjJUqg7wVCmBmF/lwjTQRZPE7IJ05EX/SY5K2TXyqyuCCisIVKaMpJq20Tb3Ff+iDSP2FQKBgQC95bHmEsB9SJBkovy98A5s0a6v04qdNN/uXpTSuaKmqOeYXm2CkCOnzr5Sq3JHGSljilyIR5xRoWpMxIy7qtP/J/p+6p3flWyV2LoPtwzQ6NiLqqLZCOHWxe+S9DRb3RB5w/qjlr7wRN8Ig2bvWrHK97X7cLSh1Xs3pa/C9h7fOQKBgQCWDAjD2MqIAD2Yr4sgo6w4OH6u7CmU/zxxkgNf49PNMXVQzu2e77QfI4c7uyyWrh01PPBSi701kb9QeKJY0a0/U7akgH1kkOJ8vlDdGXR+KNdm05Xx/6+lTVi8X+hSM1mlVruMsG//YF6SYHJgOhwQgM6F2YlEFN9ZLYlYqdgr+QKBgQCGRFxOsr+LVb1SirNtkMiCRJfhFg+SLAqRPiq3/C127UIjR9DiWgv74IBNb4+zmaTcDr5yVT+/sAO7F9Xx801FwfyptDXAGqTWJpEX/3N+WsSRrCrMji0wcG9+VlCXC21Uyy7yb+m9dNTF7jLf1h6TxiXUDNKLAqjGpc3qaZ9WcQKBgQCf3i6DUUmWvYGhCJofqbFbD/M8WWFaDrS4FqUk9+3hqI+8prpMOg/AH7wq2I/FS3zeelBy99ApZrH3elkrjv4sZhYXzAQABcKQwBST2GwDGVdIjpi3cSU6MFNk8he3SPEJdtN2iWCRc2dvZYgdmdYXMrqmKdCRvLQjs+ZVC2fHtA==')
+    const uncrypted = decrypt.decrypt('X1U7enaTcxZkNWEmg0iNssCTiVihiOv3CkA7RjEVyW/Vc0+iwsBVtSg7olbOJyPTZKXAfCyrKrxXBuQatis5X7TNRU+7ORQmnWIJQKo1ZhfjYuetSkmIB8EUWZh3W9Hgu2qwp24eJ3V+NtMA1jjj+eyJRTyps6EOaVF4xgm1vgHyUyRf+pbHCpKp6ddv+nk47u4V38KZx6icR0dftifI/PlWap4ZzMIIieU3WNnKy5EDIslVZeeiN3WGFr6ikguBRw6DGeRLKuums9worAg59ThIJyvyz98MB/8EURUqoQpX+fJedhd+hbiW64SFASlk77LEItpOKCltnQRAJFnSeg==');
+    console.info(uncrypted)
+    // console.info(encodeURIComponent(uncrypted))
+    // console.info(btoa(unescape(encodeURIComponent(uncrypted))))
+    // console.info('XNX1dBUeoRGB/PDq4oZFoQ==', unescape(btoa('XNX1dBUeoRGB/PDq4oZFoQ==')))
+    
+  </script>
+   
+</head>
+<body>
+  <img
+  src="https://test1-trade.shanghaishulian.com/dg-base-api/file/original/1861958423675101185.png?sign=1.0oz7PAhOUv%2FgLRXFVEcI0ZNgldr37v4kzyFlZWoxghz%2F2opI%2BSLgBPmZJO%2F%2BdkoOc0LMwa5PLEzGMY8QUumKIY%2FxZ5WHOuaMIkVyk1hk0fBwA%2BQ0rFmYlfaQ9QnIilQkGc8tsVUk07eHmRmiR2D6e3Kp1f2nQFzcTH6Px%2FVC8qIndJn%2FS4gqyDJ9LNamvlfFbsoUnMnVvIax1ZPLaEBmioNkBFVy4UAhUJZxh5exBiwWhSw0WdwbF1PXW8dlog0wi&confidentialityLevel=CONFIDENTIAL"
+  style="width: 20px;height: 20px"
+/>
+</body>
+<script>
+  function hookImg() {
+    console.info("hook img");
+    // 监听 img 标签的属性变化
+    const observer = new MutationObserver((mutationsList) => {
+    
+      for (let mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.target instanceof Image) {
+          const img = mutation.target;
+          const src = img.src;
+          const tempImage = new Image();
+          tempImage.src = src;
+          tempImage.onerror = () => {
+            console.info("error", src);
+          }
+          console.info("src----src", src);
+        }
+      }
+    });
+
+    // // 设置观察目标（页面中的所有 <img> 标签）
+    const imgElements = document.querySelectorAll('img');
+    imgElements.forEach((img) => {
+      observer.observe(img, {
+        attributes: true // 观察属性变化
+      });
+    });
+    
+    // // 如果新添加的 img 标签还需要监听，可以通过 MutationObserver 观察 DOM 的变化
+    const bodyObserver = new MutationObserver(() => {
+      const imgElements = document.querySelectorAll('img');
+      imgElements.forEach((img) => {
+        if (!img.hasAttribute('data-observed')) {
+          observer.observe(img, { attributes: true });
+          img.setAttribute('data-observed', 'true');
+        }
+      });
+    });
+    // console.log(document.querySelector("html"))
+    bodyObserver.observe(document.body, { childList: true, subtree: true });
+  }
+  hookImg()
+</script>
+</html>

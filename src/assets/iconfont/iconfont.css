@@ -1,0 +1,25 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1601342781628'); /* IE9 */
+  src: url('iconfont.eot?t=1601342781628#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAPMAAsAAAAACOAAAAN+AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqFRIUTATYCJAMMCwgABCAFhG0HORvcBxHVm5XIfiTGtmmyRhZ8lhxRmpogoDqrerqjyRI8ObsH+AVNjsTTfsFPOKZOK3yFIAPUBSve55NnnNvtyPGvBAgo/p9jqRelB5b/2g4kUs8wIy0s8da453sDiygskAFvgLhh7PIin4cAdCJIQ9Q1adUJKwr9NAGI4UMG9cGacKMqegVWBOaCa1WQWIIJqzZXuwks9v5efCZHWEHDJNFf1G5gfX+q3m19P04aLoPu0sAYLgiwm0ACaYAC0bMw3BkZlNOQ6LJZVbeaUQi0oXIuF3hqxWpe6D+eBsKMbnaD2CSnxkFpLC4EvB+nghaO/yYwAz4gvEDkQqzf3hLPuLAwN53JS3lNdIof4RSbUlbt8vOY5/fwod8KMPxXPnKstHvO3x24P9IpOs3TPe4/Tll3KGD14dD9Tzp6zl/pvxI0w2/Fir6Nq52r5vl1arBJKwx/RyfSyvmBjY7h1c6ARgxdn9f3Jrt9fsTfgByDdtuJ+/y+1cs6isaghAPVyY/sYvJSE5VxQfead0mYnJft3vMvlt49p8mrt6Us7P/3dk0snSaM6LomQgMBpUX675owvJOlhWXV8/6FUrZIFaLyXevumb9kYqL81dB7vqsWRwe8iOySH3FzwNGAXz16OLwueDvcQPceAxDRy9Ed6UAMUOYbvTM9PH9TaLOZbc3nFNp0Q3YZOj9SiExDf1X4qo+YagZXf74OTr2A8nEhhGXWtF6g25zKUus1m20urqq5/MHNTnGaKg0i9kWcttxEehF6o58oL2k7XC5QLbSdv9Dr2D5yfn4vz7JvVrsC4MWaQ+VI3ywK1hscEfDDBFVzl+5XLRQb2KIkE5VqrSY5gefrcKErMVzocR9ed7f4D652olb8I9CwEA4SK3FIhU0DE3bywIyVStBJpenNdnwZi0QoG5DCTAACLw6DhgeXQeLFLaTCvgITAXwFM15Cgo7ckO897SSIxdUqvCFR+NMS5WTTZ87vvWF6717jOo/0gpYlR13dpmtXnNAhLiifqTdjYpWDRvAy7LtQVlkRrZ7N8tA0XPRNdZSjctRS4BlIiOCPWETixM7WxmV+/wYmbztPKybKvC+gimX/REdN2wB5NZ+NJi7l4OJj0mMM45OYEgdihEHYjbIgcvFRK4hMzdyhmA00aBY3NdfTW4/7uwvQ0R8thSakUKi+Pm6XYfgH8ZqqCgAA') format('woff2'),
+  url('iconfont.woff?t=1601342781628') format('woff'),
+  url('iconfont.ttf?t=1601342781628') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1601342781628#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-back:before {
+  content: "\e6a1";
+}
+
+.icon-keyboard:before {
+  content: "\e778";
+}
+

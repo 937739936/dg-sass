@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>数链科技-大宗商品数字供应链服务平台</title>
+  <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+  <meta name="keywords" content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+
+  <script src="../../jquery.min.js"></script>
+  <script src="../../echarts.min.js"></script>
+  <script src="../../china.js"></script>
+  <style>
+    .one-line {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    body,
+    html {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      background-color: #07124A;
+    }
+
+    body {
+      background-image: url('../imgs/bg.png');
+      background-size: 100% 100%;
+    }
+
+    #main-box {
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 0 0;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      padding: 0 30px 30px 30px;
+      box-sizing: border-box;
+    }
+
+    .left-content {
+      width: 630px;
+    }
+
+    .title {
+      font-size: 36px;
+      color: #fff;
+      height: 96px;
+      width: 100%;
+      background-image: url('../imgs/title-bg.png');
+      background-size: cover;
+      text-align: center;
+      line-height: 80px;
+    }
+    .bottom-content {
+      display: flex;
+      margin-top: 20px;
+    }
+    .fund-content {
+      margin-bottom: 24px;
+      width: 100%;
+      height: 280px;
+      background-image: url('../imgs/section-bg.png');
+      background-size: 100% 100%;
+      padding: 18px;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .buy-content,.sell-content {
+      margin-bottom: 24px;
+      width: 100%;
+      height: 366px;
+      background-image: url('../imgs/section-bg.png');
+      background-size: 100% 100%;
+      padding: 18px;
+      box-sizing: border-box;
+    }
+    .supplier-delivery-detail,.terminal-delivery-detail {
+      width: 100%;
+      height: 242px;
+      background-image: url('../imgs/section-bg.png');
+      background-size: 100% 100%;
+      padding: 18px;
+      box-sizing: border-box;
+    }
+    
+    #chartBuy,#chartSell{width:65%;height:280px;float: left;margin: 20px 0 10px;}
+    .chartDelivery{width:35%;height:100%;float: left;position: relative;}
+    #chartAllFund{width:100%;height:100%;position: relative;box-sizing:border-box;}
+    .chartYuan-inner {
+      position: absolute;
+      left: 70px;
+      top:110px;
+      color:#fff;
+      text-align: center;
+      width:100px;
+    }
+    .fund-content .chartYuan-inner {width:50%;top:130px;color:#fff;left:30%;}
+    .fund-content .chartYuan-inner span {color:rgba(255,255,255,0.45);display: block;font-size:14px;}
+    .fund-content .chartYuan-inner strong {font-size: 20px;line-height: 35px;}
+    .chartDeliveryDetail{overflow: hidden;}
+
+    .mid-content {
+      width: 552px;
+      height: 920px;
+      margin-left: 25px;
+      margin-right: 25px;
+    }
+    .mid-data-content {
+      margin-bottom: 24px;
+      width: 100%;
+      height: 280px;
+      background-image: url('../imgs/section-bg.png');
+      background-size: 100% 100%;
+      padding: 10px 20px;
+      box-sizing: border-box;
+    }
+
+    .mid-num-content {
+      display: flex;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .mid-num-content:last-child {
+      margin-bottom: 0;
+    }
+    .mid-num-content .mid-num-title{
+      font-size: 24px;
+      color: #02F2F6;
+      margin-right:50px;
+      line-height:80px;
+    }
+    .mid-num-content .mid-num-item{
+      flex:1;
+    }
+    .mid-num-content .mid-num-item div{width:33%;float: left;}
+    .mid-num-content .mid-num-item div span{font-size: 16px;color: #02F2F6;}
+    .mid-num-content .mid-num-item div strong{display: block; font-size: 36px; color: #FFFFFF;}
+
+    .delivery-map-content {
+      width: 100%;
+      height: 632px;
+      background-image: url('../imgs/section-bg.png');
+      background-size: 100% 100%;
+      padding: 18px;
+      box-sizing: border-box;
+    }
+    .mid-title {
+      font-size: 20px;
+      color: #fff;
+      font-family: PingFangSC-Medium;
+    }
+    .mid-title .totalDeliveryQuantity{
+      display: inline-block;
+      font-size: 14px;
+      color: #A9C2FF;
+      font-family: PingFangSC-Regular;
+      margin: 0 0 0 10px;
+      position: relative;
+      top: -2px;
+    }
+    .delivery-map-table-content {
+      height: 535px;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .tbl-header {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    .tbl-body {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .tablebox table {
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .mid-table .table-inner {
+      width: 100%;
+      height: 168px;
+      overflow: hidden;
+      position: relative;
+      margin-top: 24px;
+      font-size: 14px;
+    }
+
+    .mid-table {
+      color: #fff;
+    }
+
+    .mid-table td {
+      padding: 0 10px 20px 10px;
+    }
+
+    .mid-table tr {
+      height: 56px;
+    }
+
+    .right-content {
+      width: 630px;
+    }
+
+    .yue-chart {
+      height: 280px;
+      margin-top: 10px;
+    }
+
+    .locationName{
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main-box">
+    <div class="title" id="companyName">丰瑞供应链运营实况大屏</div>
+    <div class="bottom-content">
+      <div class="left-content">
+        <!-- 资金使用情况 -->
+        <div class="fund-content" id="chartFund"></div>
+        <!-- 采购情况 -->
+        <div class="buy-content">
+          <div class="mid-title">采购情况统计<span class="locationName">-<span></span></span><p class="totalDeliveryQuantity">近1年发运量：<span></span>万吨</p></div>
+          <div id="chartBuy"></div>
+          <div class="chartDelivery">
+            <div class="chartYuan-inner"></div>
+            <div class="yue-chart" id="chartYuan"></div>
+
+          </div>
+        </div>
+        <!-- 供应商近1年发运明细 -->
+        <div class="supplier-delivery-detail chartDeliveryDetail">
+          <div class="mid-title">供应商近1年发运明细<span class="locationName">-<span></span></span></div>
+          <div class="tablebox mid-table">
+            <div class="table-inner">
+              <div class="tbl-body">
+                <table cellspacing="0" cellpadding="0">
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mid-content">
+        <!-- 数据展示 -->
+        <div class="mid-data-content">
+          <div class="mid-num-content">
+            <div class="mid-num-title">
+              发运
+            </div>
+            <div class="mid-num-item">
+              <div>
+                <strong class="automobile"></strong>
+                <span>汽运(万吨)</span>
+              </div>
+              <div>
+                <strong class="train"></strong>
+                <span>火运(万吨)</span>
+              </div>
+              <div>
+                <strong class="ship"></strong>
+                <span>船运(万吨)</span>
+              </div>
+            </div>
+          </div>
+          <div class="mid-num-content">
+            <div class="mid-num-title" style="line-height:40px;">
+              资金<br/>使用
+            </div>
+            <div class="mid-num-item">
+              <div style="width:45%">
+                <strong class="amount"></strong>
+                <span>金额(万元)</span>
+              </div>
+              <div style="width:45%">
+                <strong class="num"></strong>
+                <span>笔数</span>
+              </div>
+            </div>
+          </div>
+          <div class="mid-num-content">
+            <div class="mid-num-title">
+              回款
+            </div>
+            <div class="mid-num-item">
+              <div style="width:50%">
+                <strong class="collectionAmount"></strong>
+                <span>金额(万元)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 发运地图展示 -->
+        <div class="delivery-map-content">
+          <div class="mid-title">发运情况统计 </div>
+          <div class="delivery-map-table-content">
+            <div id="deliveryMap" style="width:100%;height:100%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-content">
+        <!-- 累积资金使用情况 -->
+        <div class="fund-content">
+          <div id="chartAllFund"></div>
+          <div class="chartYuan-inner">
+            <strong></strong>
+            <span>累计融资(万元)</span>
+          </div>
+        </div>
+        <div class="sell-content">
+          <div class="mid-title">销售情况统计<span class="locationName">-<span></span></span><p class="totalDeliveryQuantity">近1年收货量：<span></span>万吨</p></div>
+          <div id="chartSell"></div>
+          <div class="chartDelivery">
+            <div class="chartYuan-inner"></div>
+            <div class="yue-chart" id="chartYuan1"></div>
+          </div>
+        </div>
+        <div class="terminal-delivery-detail chartDeliveryDetail">
+          <div class="mid-title">终端近1年收货明细<span class="locationName">-<span></span></span></div>
+          <div class="tablebox mid-table">
+            <div class="table-inner">
+              <div class="tbl-body">
+                <table cellspacing="0" cellpadding="0">
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    $(function () {
+      var changeSize = function () {
+        const percentW = document.documentElement.clientWidth / 1920
+        const percentH = document.documentElement.clientHeight / 1080
+        $('#main-box')[0].style.transform = 'scale(' + percentW + ',' + percentH + ')'
+      }
+
+      window.addEventListener('resize', changeSize)
+
+      changeSize()
+
+      var getQueryString = function (name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+          return unescape(r[2]);
+        }
+        return null;
+      }
+
+      var uscc = getQueryString('uscc') || ''
+      var baseUrl = '/dg-trade-api/api'
+
+
+      
+
+      var _get = function (url, callback) { // 网络请求
+        url = baseUrl + url
+        let token = null
+        try{
+            token = window.parent.sessionStorage.getItem('VUEX_ST_TOKEN')
+        }catch(e){}
+
+        $.ajax({
+            headers: {
+                'Authorization': token,
+                Source: 'PC',
+            },
+            url: url,
+            type:'GET',
+            success: callback,
+            dataType:'json',
+
+        });
+      }
+
+      var initChartFund = function () { // 资金使用情况
+        _get('/operate/data/screen/monthly/loan?uscc=' + uscc, function (res) {
+          if (res.success) {
+            var chartDom = $('#chartFund')[0];
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            var xData = []
+            var yData = []
+            let resultData = res.data
+            var bankData = []
+            var monthData = []
+            resultData.forEach((item)=>{
+              if (item) {
+                bankData.push(item.bankName)
+                monthData.push(item.monthlyList)
+              }
+            })
+
+            // 去掉前几个为0的数据最少展示3个月数据--start
+            let arr = []
+            for (i = 0; i < monthData.length; i++) {
+              let item = monthData[i]
+              let currentIndex = null
+              let length = item.length
+              for (j= 0; j < item.length; j++) {
+                let pro = item[j]
+                if (pro.loanAmount == 0) {
+                  currentIndex = j
+                  if (j == length-1) {
+                    arr.push(3)
+                  }
+                }else {
+                  currentIndex = j
+                  if (currentIndex!=null && currentIndex != 0) {
+                    arr.push(currentIndex)
+                  }
+                  break;
+                }
+              }
+            }
+            if (arr.length > 0 && arr.length == monthData.length) {
+              let minIndex = Math.min(...arr)
+              monthData.forEach(item=> {
+                item.splice(0, minIndex)
+              })
+            }
+            // 去掉前几个为0的数据最少展示3个月数据--end
+
+            if (monthData.length != 0 && bankData.length !=0) {
+              monthData[0].forEach((item)=>{
+                if (item) {
+                  xData.push(item.month)
+                }
+              })
+              
+              bankData.forEach((item)=>{
+                if (item) {
+                  let obj = {}
+                  obj.name = item
+                  obj.type = 'line'
+                  obj.data = []
+                  resultData.forEach(pro=>{
+                    if (pro.bankName === item) {
+                      pro.monthlyList.forEach((text, index) => {
+                        obj.data.push(text.loanAmount)
+                        if (index === pro.monthlyList.length -1) {
+                          yData.push(obj)
+                        } 
+                      })
+                      
+                    }
+                    
+                  })
+                }
+              })
+            }
+            option = {
+              title: {
+                text: '资金使用情况',
+                textStyle: {
+                  color: '#fff'
+                }
+              },
+              tooltip: {
+                trigger: 'axis',
+                backgroundColor:'#1740BC',
+                borderWidth: '1', //边框宽度设置1
+                borderColor: '#4079E0', //设置边框颜色
+                borderRadius: '2px',
+                textStyle: {
+                  color: '#FFFFFF'
+                },
+                formatter: function(params){ // 鼠标移入展示百分比
+                  var tip = ""
+                  if (params!=null && params.length>0){
+                    tip = params[0].name+'<br/>'
+                    var total = 0
+                    for (var i =0;i < params.length;i++) {
+                      total+=params[i].value
+                      if (i == params.length-1) {
+                        for (var j =0;j < params.length;j++) {
+                          tip += params[j].marker+params[j].seriesName +': '+(params[j].value?parseInt((params[j].value/total).toFixed(2)*100):0) +'%<br/>'
+                        }
+                      }
+                    }
+                  }
+                  return tip
+                },
+              },
+              legend: {
+                data: res.data.bankNameList,
+                textStyle: {
+                  color: 'rgba(255,255,255,0.45)'
+                },
+                top: 12,
+                right: 20,
+                selectedMode: false,
+              },
+              grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+              },
+              xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: xData,
+                axisLine: {
+                  show: false,
+                },
+                axisLabel: {
+                  color: '#70C5FF'
+                }
+              },
+              yAxis: {
+                type: 'value',
+                axisLabel: {
+                  color: '#70C5FF'
+                },
+                splitLine: {
+                  lineStyle: {
+                    color: '#3667a2ad',
+                    width: 1,
+                    type: 'solid'
+                  }
+                }
+              },
+              series: yData,
+            };
+            option && myChart.setOption(option);
+          }
+        })
+      }
+
+      var buyData = '' // 采购折线图数据
+      var buyDelivery = '' // 采购环形图数据
+      var sellData = ''; // 销售折线图数据
+      var sellDelivery = '' // 销售环形图数据
+
+      var getBuyAndSellData = function (uscc, provinceCode) {
+        _get('/operate/data/screen/dynamic/data/detail?uscc=' + uscc +(provinceCode? '&provinceCode=' + provinceCode :''), function (res) {
+          if (res.success) {
+            buyData = res.data.purchaseStatisticsInfoVo.purchaseStatisticsInfoVo
+            buyDelivery = res.data.purchaseStatisticsInfoVo.purchaseStatisticsPieChartInfoVo
+            sellData = res.data.sellerDetailStatisticInfo.sellerDetailStatisticLineChartInfoVo
+            sellDelivery = res.data.sellerDetailStatisticInfo.sellerDetailStatisticPieChartInfoVo
+            initChartBuy()
+            initChartSell()
+          }
+        })
+      }
+
+      var initChartBuy = function (locationName) { // 采购情况
+        var chartDomBuy = $('#chartBuy')[0];
+        var myChartBuy = echarts.init(chartDomBuy);
+        var optionBuy;
+        
+        // 去掉汽运、火运、船运均为0的数据 最少展示3个月数据--start
+        let maxIndex = null
+        for (let i = 0; i < buyData.length; i++) {
+          let currentIndex = 0
+          let length = buyData.length
+          let item = buyData[i]
+          if (item.automobileQuantity == 0 && item.trainQuantity == 0 && item.shipQuantity == 0) {
+            currentIndex = i
+          } else {
+            break;
+          }
+          maxIndex = Math.max(maxIndex,currentIndex)
+          if (length-(maxIndex+1) < 3) {
+            maxIndex = 2
+          }
+        }
+        if (maxIndex!=null) {
+          buyData.splice(0, maxIndex+1)
+        }
+        // 去掉汽运、火运、船运均为0的数据 最少展示3个月数据--start
+
+        optionBuy = {
+          title: {
+            text: '月度发运情况(万吨)',
+            textStyle: {
+              color: 'rgba(255,255,255,0.45)',
+              fontSize: '14px'
+            },
+            left:'left'
+          },
+          tooltip: {
+            trigger: 'axis',
+            backgroundColor:'#1740BC',
+            borderWidth: '1', //边框宽度设置1
+            borderColor: '#4079E0', //设置边框颜色
+            borderRadius: '2px',
+            textStyle: {
+              color: '#FFFFFF'
+            },
+            formatter: function(params){ // 鼠标移入展示百分比
+              var tip=""
+              params.forEach((pro)=>{
+                if (pro.seriesName =='船运') {
+                  buyData.forEach((item)=>{
+                    if (item.month == pro.name) {
+                      tip += pro.marker+pro.seriesName + parseInt(Number(item.shipRatio)*100) +'%<br/>'
+                    }
+                  })
+                }
+                if (pro.seriesName =='汽运') {
+                  buyData.forEach((item)=>{
+                    if (item.month == pro.name) {
+                      tip += pro.marker+pro.seriesName + parseInt(Number(item.automobileRatio)*100) +'%<br/>'
+                    }
+                  })
+                }
+                if (pro.seriesName =='火运') {
+                  buyData.forEach((item)=>{
+                    if (item.month == pro.name) {
+                      tip += pro.marker+pro.seriesName + parseInt(Number(item.trainRatio)*100) +'%<br/>'
+                    }
+                  })
+                }
+              })
+              return tip
+            }
+          },
+          legend: {
+            data: ['船运', '汽运', '火运'],
+            left:'right',
+            textStyle: {
+              color: 'rgba(255,255,255,0.45)',
+              fontSize: '14px'
+            },
+            selectedMode: false,
+          },
+          grid: {
+            left: '0%',
+            right: '6%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: buyData.map(d => d.month),
+            axisLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: '#70C5FF'
+            }
+
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {
+              color: '#70C5FF'
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#3667A2',
+                width: 1,
+                type: 'solid'
+              }
+            }
+          },
+          series: [
+            {
+              name: '船运',
+              type: 'line',
+              data: buyData.map(d => d.shipQuantity)
+            },
+            {
+              name: '汽运',
+              type: 'line',
+              data: buyData.map(d => d.automobileQuantity)
+            },
+            {
+              name: '火运',
+              type: 'line',
+              data: buyData.map(d => d.trainQuantity)
+            }
+          ]
+        };
+        optionBuy && myChartBuy.setOption(optionBuy);
+
+        //累计发运情况
+        var chartDomBuyDelivery = $('#chartYuan')[0];
+        var myChartBuyDelivery  = echarts.init(chartDomBuyDelivery);
+        var optionBuyDelivery;
+        var buyDeliveryItem = buyDelivery.itemInfoVoList
+        $('.buy-content .totalDeliveryQuantity span').text((buyDelivery.despatchTotalQuantity||0).toLocaleString())
+        optionBuyDelivery = {
+          title: {
+            text: '累计发运情况',
+            textStyle: {
+              color: 'rgba(255,255,255,0.45)',
+              fontSize: 14
+            },
+            left:'center'
+          },
+          tooltip: {
+            trigger: 'none',
+            show: false
+          },
+          color:['#5B8FF9','#57CE9F ','#EEB91C ','#E16447'],
+          legend: {
+            orient: 'vertical',
+            left: 'center',
+            icon: "circle",
+            bottom: '0',
+            itemWidth: 10,
+            itemHeight: 10,
+            textStyle: {
+              color: 'rgba(255,255,255,0.55)',
+              width: 120,
+              overflow: 'truncate'
+            },
+            selectedMode: false
+          },
+          series: [
+            {
+              name: '发运',
+              type: 'pie',
+              center: ['50%', '40%'],
+              radius: ['35%', '60%'],
+              avoidLabelOverlap: false,
+              hoverAnimation: false,
+              label: {
+                formatter: '{d}%',
+                position: 'inner',
+                fontSize: 10,
+                color: '#fff'
+              },
+              emphasis: {
+                label: {
+                  show: true,
+                  fontSize: '10',
+                  color: '#fff'
+                }
+              },
+              labelLine: {
+                show: false
+              },
+
+              data: buyDeliveryItem.length == 0 ? [0] : buyDeliveryItem.map(d => { return { value: d.deliverQuantity, name: d.sellerName } })
+            }
+          ]
+        };
+        optionBuyDelivery && myChartBuyDelivery.setOption(optionBuyDelivery);
+
+      }
+      var MyMarhqSupplier = '';
+      var initSupplierDeliveryDetail = function (uscc, provinceCode) { // 供应商发运明细
+        _get('/operate/data/screen/list/despatch/data/item?uscc=' + uscc +(provinceCode? '&provinceCode=' + provinceCode :''), function (res) {
+          if (res.success) {
+            $('.supplier-delivery-detail .tbl-body').css('top', '0');
+            clearInterval(MyMarhqSupplier);
+            $('.supplier-delivery-detail .tbl-body tbody').empty();
+            $('.supplier-delivery-detail .tbl-header tbody').empty();
+            var str = '';
+            var Items = res.data
+            $.each(Items, function (i, item) {
+              str = '<tr>' +
+                '<td style="position:relative;"><p style="margin:0;padding:0;height:36px;width:'+item.quantityRatio+'%;background-color:rgba(101,119,152,0.95);position:absolute;left:0;top:0;"></p><span style="display:inline-block;overflow:hidden;max-width:80%;text-overflow:ellipsis;white-space:nowrap;position:relative;z-index:10;">'+(i+1)+'.' + item.sellerName + '</span><span style="float:right;position:relative;z-index:10;">'+item.deliverQuantity+'万吨</span></td>'
+                '</tr>'
+              $('.supplier-delivery-detail .tbl-body tbody').append(str);
+              $('.supplier-delivery-detail .tbl-header tbody').append(str);
+            });
+            //内容超出高度后滚动轮播
+            var tblBodyHeight = $('.supplier-delivery-detail .mid-table .tbl-body').outerHeight()
+            var tableInnerHeight = $('.supplier-delivery-detail .mid-table .table-inner').outerHeight()
+            if (tblBodyHeight>tableInnerHeight) {
+              $('.supplier-delivery-detail .tbl-body tbody').html($('.supplier-delivery-detail .tbl-body tbody').html() + $('.supplier-delivery-detail .tbl-body tbody').html());
+              $('.supplier-delivery-detail .tbl-body').css('top', '0');
+              var tblTop = 0;
+              var speedhq = 50; // 数值越大越慢
+              var outerHeight = $('.supplier-delivery-detail .tbl-body tbody').find("tr").outerHeight();
+              function Marqueehq() {
+                if (tblTop <= -outerHeight * Items.length) {
+                  tblTop = 0;
+                } else {
+                  tblTop -= 1;
+                }
+                $('.supplier-delivery-detail .tbl-body').css('top', tblTop + 'px');
+              }
+              MyMarhqSupplier = setInterval(Marqueehq, speedhq);
+            }
+          }
+        })
+      }
+      var overTimer = null
+      var initDeliveryMap = function() { //发运情况统计 地图
+        var chartDom = $('#deliveryMap')[0];
+        var myChart = echarts.init(chartDom);
+        _get('/operate/data/screen/despatch/data/detail?uscc=' + uscc, function (res) {
+          if (res.success) {
+            var mapData = []
+            res.data.forEach(element => {
+              element.value = Number(element.quantity)
+              element.name = element.area
+              mapData.push(element)
+            })
+            var option;
+            option =  {
+              backgroundColor: 'transparent',
+              tooltip : {
+                trigger: 'item',
+                background:'#000',
+                color:'#fff',
+                formatter: function(params){
+                  clearTimeout(overTimer)
+                  if (params.data && Number(params.data.quantity) > 0) {
+                    if ($('.locationName span').html() == '' || ($('.locationName span').html()!=params.name)) {
+                      overTimer=setTimeout(function(){
+                        getBuyAndSellData(uscc,params.data.code)
+                        initSupplierDeliveryDetail(uscc,params.data.code)
+                        initTerminalDeliveryDetail(uscc,params.data.code)
+                        $('.locationName').show()
+                        $('.locationName span').html(params.name)
+                      },800)
+                    }
+                  } else {
+                    overTimer=setTimeout(function(){
+                      getBuyAndSellData(uscc,'')
+                      initSupplierDeliveryDetail(uscc, '')
+                      initTerminalDeliveryDetail(uscc, '')
+                      $('.locationName').hide()
+                      $('.locationName span').html('')
+                    },800)
+                  }
+                },
+              },
+              //左侧小导航图标
+              visualMap: {
+                  show : false,
+                  splitList: [
+                    {start: 20},{start: 15, end: 20},{start: 10, end: 15},{start: 5, end: 10},{start: 0, end: 5}
+                  ],
+                  color: [ '#07519C','#3182BD','#BBDEDE','#BDD7E7','#EFF3FF']
+              },
+              
+              //配置属性
+              series: [{
+                  name: false,
+                  type: 'map',
+                  mapType: 'china',
+                  selectedMode: false,
+                  zoom: 1.2,
+                  roam: false,
+                  itemStyle:{
+                    emphasis: {
+                      areaColor:'#0475de'
+                    }
+                  },
+                  label: {
+                      normal: {
+                          show: false  //省份名称
+                      },
+                      emphasis: {
+                          show: false
+                      }
+                  },
+                  data:mapData  //数据
+              }]
+            };
+            option && myChart.setOption(option);
+            myChart.on("mouseout",function (param) { //鼠标移出事件
+              clearTimeout(overTimer)
+              overTimer=setTimeout(function(){
+                getBuyAndSellData(uscc,'')
+                initSupplierDeliveryDetail(uscc, '')
+                initTerminalDeliveryDetail(uscc, '')
+                $('.locationName').hide()
+                $('.locationName span').html('')
+              },800)
+            })
+            myChart.on("click",function (param) { //鼠标移出事件
+              myChart.dispatchAction({
+                  type: 'downplay'
+              })
+            })
+          }
+        })
+      }
+
+      var initChartAllFund= function () { // 累积资金使用情况
+        _get('/operate/data/screen/company/loan?uscc=' + uscc, function (res) {
+          if (res.success) {
+            var chartDom = $('#chartAllFund')[0];
+            var myChart = echarts.init(chartDom);
+            var option;
+            $('.fund-content .chartYuan-inner strong').text((res.data.totalLoanAmount||0).toLocaleString())
+            option = {
+              title: {
+                text: '累计资金使用情况',
+                textStyle: {
+                  color: '#fff'
+                }
+              },
+              tooltip: {
+                trigger: 'none',
+                show: false
+              },
+              color:['#5B8FF9 ','#57CE9F ','#EEB91C ','#E16447'],
+              legend: {
+                orient: 'vertical',
+                bottom: '90',
+                left: 'right',
+                textStyle: {
+                  color: 'rgba(255,255,255,0.45)',
+                  width: 160,
+                  overflow: 'breakAll',
+                },
+                icon: "circle",
+                itemWidth: 10,
+                itemHeight: 10,
+                selectedMode: false,
+                formatter:function(name){
+                  let data = res.data.loanInfoVoList
+                  var tip = ""
+                  data.forEach(item => {
+                    if (item.bankName === name) {
+                      tip += name+'\n'+item.loanAmount
+                    }
+                  })
+                  return tip
+                }
+              },
+              series: [
+                {
+                  name: '发运',
+                  type: 'pie',
+                  center: ['25%', '60%'],
+                  radius: ['40%', '70%'],
+                  avoidLabelOverlap: false,
+                  hoverAnimation: false,
+                  label: {
+                    formatter: '{d}%',
+                    position: 'inner',
+                    fontSize: 10,
+                    color: '#fff'
+                  },
+                  emphasis: {
+                    label: {
+                      show: true,
+                      fontSize: '10',
+                    }
+                  },
+                  labelLine: {
+                    show: false
+                  },
+                  data: res.data.loanInfoVoList.length == 0 ? [0] : res.data.loanInfoVoList.map(d => { return { value: d.loanAmount, name: d.bankName } })
+                }
+              ]
+            };
+            option && myChart.setOption(option);
+          }
+        })
+      }
+
+      var initChartSell = function () { // 销售情况
+        var chartDomSell = $('#chartSell')[0];
+        var myChartSell = echarts.init(chartDomSell);
+        var optionSell;
+
+        // 去掉汽运、火运、船运均为0的数据 最少展示3个月数据--start
+        let maxIndex = null
+        for (let i = 0; i < sellData.length; i++) {
+          let currentIndex = 0
+          let length = sellData.length
+          let item = sellData[i]
+          if (item.automobileQuantity == 0 && item.trainQuantity == 0 && item.shipQuantity == 0) {
+            currentIndex = i
+          } else {
+            break;
+          }
+          maxIndex = Math.max(maxIndex,currentIndex)
+          if (length-(maxIndex+1) < 3) {
+            maxIndex = 2
+          }
+        }
+        if (maxIndex!=null) {
+          sellData.splice(0, maxIndex+1)
+        }
+        // 去掉汽运、火运、船运均为0的数据 最少展示3个月数据--start
+
+        optionSell = {
+          title: {
+            text: '月度收货情况(万吨)',
+            textStyle: {
+              color: 'rgba(255,255,255,0.45)',
+              fontSize: '14px'
+            },
+            left:'left'
+          },
+          tooltip: {
+            trigger: 'axis',
+            backgroundColor:'#1740BC',
+            borderWidth: '1', //边框宽度设置1
+            borderColor: '#4079E0', //设置边框颜色
+            borderRadius: '2px',
+            textStyle: {
+              color: '#FFFFFF'
+            },
+            formatter: function(params){ // 鼠标移入展示百分比
+              var tip=""
+              params.forEach((pro)=>{
+                if (pro.seriesName =='船运') {
+                  sellData.forEach((item)=>{
+                    if (item.month == pro.name) {
+                      tip += pro.marker+pro.seriesName + parseInt(Number(item.shipRatio)*100) +'%<br/>'
+                    }
+                  })
+                }
+                if (pro.seriesName =='汽运') {
+                  sellData.forEach((item)=>{
+                    if (item.month == pro.name) {
+                      tip += pro.marker+pro.seriesName + parseInt(Number(item.automobileRatio)*100) +'%<br/>'
+                    }
+                  })
+                }
+                if (pro.seriesName =='火运') {
+                  sellData.forEach((item)=>{
+                    if (item.month == pro.name) {
+                      tip += pro.marker+pro.seriesName + parseInt(Number(item.trainRatio)*100) +'%<br/>'
+                    }
+                  })
+                }
+              })
+              return tip
+            }
+          },
+          legend: {
+            data: ['船运', '汽运', '火运'],
+            left:'right',
+            textStyle: {
+              color: 'rgba(255,255,255,0.45)',
+              fontSize: '14px'
+            },
+            selectedMode: false,
+          },
+          grid: {
+            left: '0%',
+            right: '6%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: sellData.map(d => d.month),
+            axisLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: '#70C5FF'
+            }
+
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {
+              color: '#70C5FF'
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#3667A2',
+                width: 1,
+                type: 'solid'
+              }
+            }
+          },
+          series: [
+            {
+              name: '船运',
+              type: 'line',
+              data: sellData.map(d => d.shipQuantity)
+            },
+            {
+              name: '汽运',
+              type: 'line',
+              data: sellData.map(d => d.automobileQuantity)
+            },
+            {
+              name: '火运',
+              type: 'line',
+              data: sellData.map(d => d.trainQuantity)
+            }
+          ]
+        };
+        optionSell && myChartSell.setOption(optionSell);
+
+        //收货情况
+        var chartDomSellDelivery = $('#chartYuan1')[0];
+        var myChartSellDelivery  = echarts.init(chartDomSellDelivery);
+        var optionSellDelivery;
+        var sellDeliveryItem = sellDelivery.itemInfoVoList
+        $('.sell-content .totalDeliveryQuantity span').text((sellDelivery.despatchTotalQuantity ||0).toLocaleString())
+        optionSellDelivery = {
+          title: {
+            text: '收货情况',
+            textStyle: {
+              color: 'rgba(255,255,255,0.45)',
+              fontSize: '14px'
+            },
+            left:'center'
+          },
+          tooltip: {
+            trigger: 'none',
+            show: false
+          },
+          color:['#5B8FF9 ','#57CE9F ','#EEB91C ','#E16447'],
+          legend: {
+            orient: 'vertical',
+            left: 'center',
+            bottom: '0',
+            textStyle: {
+              color: 'rgba(255,255,255,0.55)',
+              width: 120,
+              overflow: 'truncate'
+            },
+            icon: "circle",
+            itemWidth: 10,
+            itemHeight: 10,
+            selectedMode: false
+          },
+          series: [
+            {
+              name: '发运',
+              type: 'pie',
+              center: ['50%', '40%'],
+              radius: ['35%', '60%'],
+              avoidLabelOverlap: false,
+              hoverAnimation: false,
+              label: {
+                formatter: '{d}%',
+                position: 'inner',
+                fontSize: 10,
+                color: '#fff'
+              },
+              emphasis: {
+                label: {
+                  show: true,
+                  fontSize: '10',
+                  color: '#fff'
+                }
+              },
+              labelLine: {
+                show: false
+              },
+
+              data: sellDeliveryItem.length == 0 ? [0] : sellDeliveryItem.map(d => { return { value: d.receiveQuantity, name: d.terminalName } })
+            }
+          ]
+        };
+        optionSellDelivery && myChartSellDelivery.setOption(optionSellDelivery);
+      }
+      var MyMarhqTerminal= '';
+      var initTerminalDeliveryDetail = function (uscc, provinceCode) { // 终端收货明细
+        _get('/operate/data/screen/list/terminal/data/item?uscc=' + uscc +(provinceCode? '&provinceCode=' + provinceCode :''), function (res) {
+          clearInterval(MyMarhqTerminal);
+          if (res.success) {
+            $('.terminal-delivery-detail .tbl-body').css('top', '0');
+            $('.terminal-delivery-detail .tbl-body tbody').empty();
+            $('.terminal-delivery-detail .tbl-header tbody').empty();
+            var str = '';
+            var Items = res.data
+            $.each(Items, function (i, item) {
+              str = '<tr>' +
+                '<td style="position:relative;"><p style="margin:0;padding:0;height:36px;width:'+item.quantityRatio+'%;background-color:rgba(91,143,249,0.95);position:absolute;left:0;top:0;"></p><span style="display:inline-block;overflow:hidden;max-width:80%;text-overflow:ellipsis;white-space:nowrap;position:relative;z-index:10;">'+(i+1)+'.' + item.terminalName + '</span><span style="float:right;position:relative;z-index:10;">'+item.receiveQuantity+'万吨</span></td>'
+                '</tr>'
+              $('.terminal-delivery-detail .tbl-body tbody').append(str);
+              $('.terminal-delivery-detail .tbl-header tbody').append(str);
+            });
+            //内容超出高度后滚动轮播
+            var tblBodyHeight = $('.terminal-delivery-detail .mid-table .tbl-body').outerHeight()
+            var tableInnerHeight = $('.terminal-delivery-detail .mid-table .table-inner').outerHeight()
+            if (tblBodyHeight>tableInnerHeight) {
+              $('.terminal-delivery-detail .tbl-body tbody').html($('.terminal-delivery-detail .tbl-body tbody').html() + $('.terminal-delivery-detail .tbl-body tbody').html());
+              $('.terminal-delivery-detail .tbl-body').css('top', '0');
+              var tblTop = 0;
+              var speedhq = 50; // 数值越大越慢
+              var outerHeight = $('.terminal-delivery-detail .tbl-body tbody').find("tr").outerHeight();
+              function Marqueehq() {
+                if (tblTop <= -outerHeight * Items.length) {
+                  tblTop = 0;
+                } else {
+                  tblTop -= 1;
+                }
+                $('.terminal-delivery-detail .tbl-body').css('top', tblTop + 'px');
+              }
+              MyMarhqTerminal = setInterval(Marqueehq, speedhq);
+            }
+            
+          }
+        })
+      }
+
+      var initDataDetail = function () {
+        _get('/operate/data/screen/static/data/detail?uscc=' + uscc, function (res) {
+          if (res.success) {
+            $('.mid-num-content:eq(0)').find('.mid-num-item .automobile').text((res.data.automobileQuantity || 0).toLocaleString())
+            $('.mid-num-content:eq(0)').find('.mid-num-item .train').text((res.data.trainQuantity || 0).toLocaleString())
+            $('.mid-num-content:eq(0)').find('.mid-num-item .ship').text((res.data.shipQuantity || 0).toLocaleString())
+            $('.mid-num-content:eq(1)').find('.mid-num-item .amount').text((res.data.capitalUsedAmount || 0).toLocaleString())
+            $('.mid-num-content:eq(1)').find('.mid-num-item .num').text((res.data.capitalUsedCount || 0).toLocaleString())
+            $('.mid-num-content:eq(2)').find('.mid-num-item .collectionAmount').text((res.data.repayAmount|| 0).toLocaleString())
+          }
+        })
+      }
+
+      initChartFund() // 资金使用情况
+      getBuyAndSellData(uscc,'') // 采购、销售情况统计
+      initSupplierDeliveryDetail(uscc,'') // 供应商近1年发运明细
+      initTerminalDeliveryDetail(uscc,'') // 终端近1年收货明细
+      initDataDetail() // 获取中间统计数据
+      initDeliveryMap() // 获取发运情况统计-地图数据
+      initChartAllFund() // 累积资金使用情况
+    })
+  </script>
+</body>
+
+</html>

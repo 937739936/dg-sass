@@ -1,0 +1,4 @@
+[submodule "submodules"]
+	path = submodules
+	url = git@gitlab.shanghaishulian.com:saber-frontend/submodules.git
+	branch = master

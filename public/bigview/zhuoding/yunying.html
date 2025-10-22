@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>数链科技-大宗商品数字供应链服务平台</title>
+    <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。">
+    <meta name="keywords"
+        content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+    <link rel="stylesheet" href="./css/yunying.css" />
+    <script src="../../jquery.min.js"></script>
+    <script src="../../echarts.min.js"></script>
+    <script src="../../china.js"></script>
+    <script src="../../countUp.js"></script>
+    <script src="./js/mian.js"></script>
+    <script src="./js/main-img_9Qn1f.js"></script>
+    <script src="./js/main-img_NWes7.js"></script>
+    <script src="./js/main-img_r9XmK.js"></script>
+    <script src="./js/main-img_4nNux.js"></script>
+    <script src="./js/main-img_3Yl35.js"></script>
+    <script src="./js/main-img_2Am3K.js"></script>
+    <script src="./js/main-num.js"></script>
+</head>
+
+<body>
+    <div class="absolute body"></div>
+    <div class="absolute comTit"></div>
+    <!-- 融资情况 -->
+    <div class="absolute main-img_9Qn1f">
+        <div class="main" id="main-img_9Qn1f-main"></div>
+    </div>
+    <!-- 合同发运融资情况 -->
+    <div class="absolute main-img_N2tcx"></div>
+    <div class="absolute main-img_NWes7"></div>
+    <div class="absolute main-img_NWes7-main" id="main-img_NWes7-main"></div>
+    <!-- 融资情况统计 -->
+    <div class="absolute main-img_r9XmK"></div>
+    <div class="absolute main-img_r9XmK-main" id="main-img_r9XmK-main"></div>
+    <!-- 终端客户累计发运量 -->
+    <div class="absolute main-img_4nNux"></div>
+    <div class="absolute main-img_4nNux-title"></div>
+    <div class="absolute main-img_4nNux-main" id="main-img_4nNux-main"></div>
+    <!-- 终端客户累计发运量 -->
+    <div class="absolute main-img_3Yl35">
+        <div class="main" id="main-img_3Yl35-main"></div>
+    </div>
+    <div class="absolute main-img_3Yl35-title"></div>
+    <!-- 累计发运量-地图 -->
+    <div class="absolute main-img_2Am3K">
+        <div class="main main-img_2Am3K-main" id="main-img_2Am3K-main"></div>
+    </div>
+    <div class="absolute main-img_2Am3K-nanhai"></div>
+    <div class="main-num">
+        <div class="absolute"
+            style="width: 300px; height: 56px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 582px; top: 108px;">
+            <div
+                style="width: 300px; height: 56px; pointer-events: auto; display: flex; align-items: center; justify-content: center; color: rgb(15, 179, 255); font-weight: bold; font-size: 26px; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                累计发运</div>
+        </div>
+        <div class="absolute"
+            style="width: 300px; height: 56px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 582px; top: 224px;">
+            <div
+                style="width: 300px; height: 56px; pointer-events: auto; display: flex; align-items: center; justify-content: center; color: rgb(15, 179, 255); font-weight: bold; font-size: 26px; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                累计融资</div>
+        </div>
+        <div class="absolute"
+            style="width: 300px; height: 56px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 580px; top: 330px;">
+            <div
+                style="width: 300px; height: 56px; pointer-events: auto; display: flex; align-items: center; justify-content: center; color: rgb(15, 179, 255); font-weight: bold; font-size: 26px; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                累计回款</div>
+        </div>
+        <div class="absolute"
+            style="width: 300px; height: 56px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 774px; top: 84px;">
+            <div
+                style="width: 300px; height: 56px; pointer-events: auto; display: flex; align-items: center; justify-content: center; color: rgb(255, 255, 255); font-weight: normal; font-size: 20px; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                汽运(万吨)</div>
+        </div>
+        <div class="absolute"
+            style="width: 252px; height: 76px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 882px; top: 132px;">
+            <div
+                style="width: 252px; height: 76px; pointer-events: auto; display: block; align-items: start; flex-direction: column; --prefix-num-margin-right: 0px; --num-suffix-margin-left: 0px;">
+                <div id="topic4_fy_qy"
+                    style="display: flex; align-items: baseline; color: rgb(168, 7, 26); text-align: center; white-space: nowrap; justify-content: flex-start; width: 252px; height: 76px; background-color: rgba(0, 0, 0, 0);">
+                </div>
+            </div>
+        </div>
+        <div class="absolute"
+            style="width: 300px; height: 56px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 992px; top: 84px;">
+            <div
+                style="width: 300px; height: 56px; pointer-events: auto; display: flex; align-items: center; justify-content: center; color: rgb(255, 255, 255); font-weight: normal; font-size: 20px; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                火运(万吨)</div>
+        </div>
+        <div class="absolute"
+            style="width: 192px; height: 64px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 1096px; top: 128px;">
+            <div
+                style="width: 192px; height: 64px; pointer-events: auto; display: block; align-items: start; flex-direction: column; --prefix-num-margin-right: 0px; --num-suffix-margin-left: 0px;">
+                <div id="topic4_fy_hy"
+                    style="display: flex; align-items: baseline; color: rgb(245, 34, 45); text-align: center; white-space: nowrap; justify-content: flex-start; width: 192px; height: 64px; background-color: rgba(0, 0, 0, 0);">
+                </div>
+            </div>
+        </div>
+        <div class="absolute"
+            style="width: 300px; height: 56px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 774px; top: 194px;">
+            <div
+                style="width: 300px; height: 56px; pointer-events: auto; display: flex; align-items: center; justify-content: center; color: rgb(255, 255, 255); font-weight: normal;font-size: 20px; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                金额(万元)</div>
+        </div>
+        <div class="absolute"
+            style="width: 240px; height: 64px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 878px; top: 242px;">
+            <div
+                style="width: 240px; height: 64px; pointer-events: auto; display: block; align-items: start; flex-direction: column; --prefix-num-margin-right: 0px; --num-suffix-margin-left: 0px;">
+                <div id="topic4_rz_finAmount"
+                    style="display: flex; align-items: baseline; color: rgb(207, 19, 34); text-align: center; white-space: nowrap; justify-content: flex-start; width: 240px; height: 64px; background-color: rgba(0, 0, 0, 0);">
+                </div>
+            </div>
+        </div>
+        <div class="absolute"
+            style="width: 300px; height: 56px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 966px; top: 194px;">
+            <div
+                style="width: 300px; height: 56px; pointer-events: auto; display: flex; align-items: center; justify-content: center; color: rgb(255, 255, 255); font-weight: normal;font-size: 20px; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                笔数</div>
+        </div>
+        <div class="absolute"
+            style="width: 222px; height: 64px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 1096px; top: 242px;">
+            <div
+                style="width: 222px; height: 64px; pointer-events: auto; display: block; align-items: start; flex-direction: column; --prefix-num-margin-right: 0px; --num-suffix-margin-left: 0px;">
+                <div id="topic4_rz_finCount"
+                    style="display: flex; align-items: baseline; color: rgb(207, 19, 34); text-align: center; white-space: nowrap; justify-content: flex-start; width: 222px; height: 64px; background-color: rgba(0, 0, 0, 0);">
+
+                </div>
+            </div>
+        </div>
+        <div class="absolute"
+            style="width: 300px; height: 56px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 774px; top: 304px;">
+            <div
+                style="width: 300px; height: 56px; pointer-events: auto; display: flex; align-items: center; justify-content: center; color: rgb(255, 255, 255); font-weight: normal;font-size: 20px; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                金额(万元)</div>
+        </div>
+        <div class="absolute"
+            style="width: 248px; height: 72px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 878px; top: 344px;">
+            <div
+                style="width: 248px; height: 72px; pointer-events: auto; display: block; align-items: start; flex-direction: column; --prefix-num-margin-right: 0px; --num-suffix-margin-left: 0px;">
+                <div id="topic4_hk_hk_amount"
+                    style="display: flex; align-items: baseline; color: rgb(168, 7, 26); text-align: center; white-space: nowrap; justify-content: flex-start; width: 248px; height: 72px; background-color: rgba(0, 0, 0, 0);">
+                </div>
+            </div>
+        </div>
+        <div class="absolute"
+            style="width: 300px; height: 56px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 966px; top: 302px;">
+            <div
+                style="width: 300px; height: 56px; pointer-events: auto; display: flex; align-items: center; justify-content: center; color: rgb(255, 255, 255); font-weight: normal;font-size: 20px; writing-mode: horizontal-tb; letter-spacing: 0px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                笔数</div>
+        </div>
+        <div class="absolute"
+            style="width: 200px; height: 54px; z-index: 0; transform: rotate(0deg); opacity: 1; pointer-events: none; left: 1096px; top: 344px;">
+            <div
+                style="width: 200px; height: 54px; pointer-events: auto; display: block; align-items: start; flex-direction: column; --prefix-num-margin-right: 0px; --num-suffix-margin-left: 0px;">
+                <div id="topic4_hk_hk_count"
+                    style="display: flex; align-items: baseline; color: rgb(207, 19, 34); text-align: center; white-space: nowrap; justify-content: flex-start; width: 200px; height: 54px; background-color: rgba(0, 0, 0, 0);">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+</script>
+
+</html>

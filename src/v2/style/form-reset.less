@@ -1,0 +1,26 @@
+.form-wrap {
+  /deep/.ant-form-item-label {
+    line-height: 20px;
+  }
+  /deep/.ant-form-item-label > label {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  /deep/ .ant-form-item {
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  /deep/ .ant-radio-checked .ant-radio-inner {
+    background: @primary-color;
+    position: relative;
+  }
+  /deep/ .ant-radio-checked .ant-radio-inner::after {
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    margin-top: -3px;
+    left: 50%;
+    margin-left: -3px;
+  }
+}

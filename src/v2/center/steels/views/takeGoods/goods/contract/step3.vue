@@ -1,0 +1,47 @@
+<!--
+ * @Author: liupengbo liupengbo@shdatalink.com
+ * @Description: file content
+-->
+<template>
+	<div>
+		<a-result
+			status="success"
+			title="操作完成"
+			sub-title=""
+		>
+			<template #extra>
+				<a-button
+					key="console"
+					type="primary"
+					@click="again"
+				>
+					再次申请提货
+				</a-button>
+				<a-button
+					key="buy"
+					@click="record"
+				>
+					查看提货记录
+				</a-button>
+			</template>
+		</a-result>
+	</div>
+</template>
+
+<script>
+export default {
+	methods: {
+		again() {
+			this.$emit('next', {
+				view: 0,
+				id: ''
+			});
+		},
+		record() {
+			this.$router.back();
+		}
+	}
+};
+</script>
+
+<style></style>

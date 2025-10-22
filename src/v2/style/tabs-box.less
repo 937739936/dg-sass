@@ -1,0 +1,45 @@
+.tabs-box {
+  position: relative;
+  ::v-deep.ant-tabs-bar {
+    padding-right: 90px;
+  }
+  .export-box {
+    position: absolute;
+    right: 0;
+    top: 16px;
+    text-align: right;
+    cursor: pointer;
+    .export-icon {
+      width: 14px;
+      height: 14px;
+      margin-right: 5px;
+      position: relative;
+      top: -2px;
+    }
+    .export-text {
+      font-family: PingFangSC-Regular, PingFang SC;
+      color: @primary-color;
+      line-height: 20px;
+    }
+  }
+  ::v-deep.ant-tabs-ink-bar {
+    bottom: 1.5px;
+  }
+}
+
+.table-box.fixedBottom {
+  .new-table {
+    margin-bottom: 2px;
+  }
+  .slPagination {
+    margin-top: 10px;
+    width: calc(100% - 254px);
+    min-width: 1186px;
+    background: #fff;
+    padding: 10px 30px;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    left: 228px;
+  }
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>易煤app下载</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        body{
+            font-size: 16px;
+            font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+            background: #52a3fc;
+        }
+        #appDownload{
+            max-width: 960px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        #appDownload .appLogo{
+            width: 6rem;
+            height: 6rem;
+            margin: 0 auto;
+            margin-top: 1rem;
+            background: url("./yimeiAppLogo.png") no-repeat center center;
+            background-size:100% 100%;
+        }
+        #appDownload h2{
+            font-size: 2rem;
+            margin:0;
+            margin-top: 6px;
+            color:#fff;
+            font-weight: normal;
+        }
+        #appDownload p{
+            font-size: 1rem;
+            margin:16px 0;
+            color:#fff;
+            font-weight: normal;
+        }
+        #appDownload img{
+            width: 90%;
+            margin: 1rem 0;
+        }
+        #appDownload .downloadBtn{
+            background: #fff;
+            color:#52a3fc;
+            font-size: 1.5rem;
+            display: inline-block;
+            width: 90%;
+            text-decoration: none;
+            border-radius: 30px;
+            padding:.5rem 0;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="appDownload">
+        <div class="appLogo"></div>
+        <h2>易 煤</h2>
+        <p>版本号：V<span id="version">0.00</span></p>
+        <img src="./downloadBg.png" alt="">
+        <a href="" id="androidDownloadBtn" class="downloadBtn">安卓下载</a>
+    </div>
+    <script>
+        $(function () {
+            var url = "";
+            if(window.location.href.indexOf("trade-web-staging.yimei180.com") > -1){
+                url = "https://trade-api-staging.yimei180.com/ccs-trade-api/"
+            }else if(window.location.href.indexOf("trade-web-test.yimei180.com") > -1){
+                url = "https://trade-api-test.yimei180.com/ccs-trade-api/"
+            }else if(window.location.href.indexOf("localhost") > -1){
+                url = "https://trade-api-staging.yimei180.com/ccs-trade-api/"
+            }else{
+                url = "https://trade-api.yimei180.com/ccs-trade-api/"
+            }
+            $.ajax({
+                url: url + 'api/app/version/getNewList',
+                success:function (res) {
+                    if(res.success){
+                        $.each(res.result,function (index) {
+                            if(res.result[index].platform == 1){
+                                $("#androidDownloadBtn").attr("href",url + res.result[index].downloadUrl);
+                                $("#version").text(res.result[index].versionName);
+                            }
+                        })
+                    }
+                }
+            });
+
+            function isWeiXin() {
+                var ua = window.navigator.userAgent.toLowerCase();
+                if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+            $("#androidDownloadBtn").on("click",function(){
+                if(isWeiXin()){
+                    alert("点击右上角按钮，然后在弹出的菜单中，点击在浏览器打开，即可安装");
+                    return;
+                }
+            })
+        })
+    </script>
+</body>
+</html>

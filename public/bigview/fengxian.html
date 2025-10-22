@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>数链科技-大宗商品数字供应链服务平台</title>
+  <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+  <meta name="keywords" content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+
+  <script src="../jquery.min.js"></script>
+  <script src="../echarts.min.js"></script>
+  <style>
+    .one-line {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    body,
+    html {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      background-color: #07124A;
+    }
+
+    body {
+      background-image: url('./imgs/bg.png');
+      background-size: 100% 100%;
+    }
+
+    #main-box {
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 0 0;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .left-content {
+      width: 650px;
+    }
+
+    .title {
+      font-size: 36px;
+      color: #fff;
+      height: 96px;
+      width: 100%;
+      background-image: url('./imgs/title-bg.png');
+      background-size: cover;
+      text-align: center;
+      line-height: 80px;
+    }
+
+    .bottom-content {
+      display: flex;
+      margin-top: 5px;
+    }
+
+    .kucun-content {
+      overflow: hidden;
+      display: flex;
+    }
+
+    .kucun-item {
+      position: relative;
+      background-image: url('./imgs/item-bg.png');
+      background-size: 100% 100%;
+      width: 440px;
+      height: 170px;
+      overflow: hidden;
+    }
+
+    .kucun-title {
+      font-size: 20px;
+      color: #fff;
+      margin-top: 15px;
+      margin-left: 15px;
+    }
+
+    .kucun-item .box {
+      width: 46px;
+      height: 85px;
+      background-color: #5D7092;
+      position: relative;
+    }
+
+    .kucun-bottom {
+      display: flex;
+      padding: 22px;
+      margin-left: 20px;
+    }
+
+    .kucun-item .box-inner {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /* height: 60px; */
+      background-color: #5AD8A6;
+    }
+
+    .kucun-item .dot-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-top: 2px dashed red;
+      background-color: #5AD8A6;
+      height: 0;
+    }
+
+    .kucun-item .num {
+      font-size: 40px;
+      height: 52px;
+      color: #fff;
+      margin-left: 20px;
+      max-width: 150px;
+    }
+
+    .kucun-item .num-tips {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #02F2F6;
+      margin-left: 20px;
+    }
+
+    .kucun-item .time {
+      position: absolute;
+      font-size: 13px;
+      color: #02F2F6;
+      right: 20px;
+      top: 17px;
+    }
+
+    .kucun-item .persent {
+      position: absolute;
+      font-size: 16px;
+      color: #E8684A;
+      right: 59px;
+      top: 86px;
+    }
+
+    .yuan-item {
+      width: 184px;
+      height: 170px;
+      background-image: url('./imgs/item-bg.png');
+      background-size: 100% 100%;
+      margin-left: 19px;
+      text-align: center;
+    }
+
+    .yuan-title {
+      font-size: 20px;
+      color: #fff;
+      margin-top: 13px;
+    }
+
+    .yuan-bottom {
+      height: 110px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .zoushi-content {
+      margin-top: 10px;
+      width: 100%;
+      height: 366px;
+      background-image: url('./imgs/section-bg.png');
+      background-size: 100% 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .mid-content {
+      width: 760px;
+      height: 920px;
+      background-image: url('./imgs/section-big-bg.png');
+      background-size: 100% 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-left: 25px;
+      margin-right: 25px;
+    }
+
+    .mid-title {
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .mid-num-content {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .mid-num-item .num {
+      font-size: 40px;
+      color: #fff;
+      height: 52px;
+    }
+
+    .mid-num-item .info {
+      font-size: 16px;
+      color: #02f2f6b8;
+      margin-top: 11px;
+    }
+
+    .mid-chart-content {
+      margin-top: 20px;
+      height: 300px;
+    }
+
+    .mid-table-content {
+      height: 350px;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+      padding-left: 0;
+      padding-right: 0;
+
+    }
+
+    .tbl-header {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    .tbl-body {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .tablebox table {
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .mid-table .table-inner {
+      width: 100%;
+      height: 350px;
+      overflow: hidden;
+      position: relative;
+      margin-top: 24px;
+    }
+
+    .mid-table {
+      color: #02F2F6;
+      text-align: left;
+    }
+
+    .mid-table td:nth-child(2n) {
+      text-align: center;
+    }
+
+    .mid-table td:nth-child(3n) {
+      text-align: center;
+    }
+
+    .mid-table td {
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .mid-table tr {
+      height: 45px;
+    }
+
+    .right-content {
+      width: 410px;
+
+    }
+
+    .yue-content {
+      width: 406px;
+      height: 479px;
+      background-image: url('./imgs/section-b-bg.png');
+      background-size: 100% 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .yue-title {
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .yue-chart {
+      height: 280px;
+      margin-top: 10px;
+    }
+
+    .deliveryRealityQuantity-inner {
+      position: absolute;
+      left: 99px;
+      top: 175px;
+      text-align: center;
+    }
+
+    .deliveryRealityQuantity-inner-text {
+      font-size: 12px;
+      color: #ffffffa1;
+    }
+
+    .deliveryRealityQuantity-inner-value {
+      font-size: 20px;
+      color: #fff;
+      width: 102px;
+    }
+
+    .fayun-item {
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .jihua-item {
+      height: 32px;
+      background-color: #657798;
+      line-height: 32px;
+      margin-bottom: 20px;
+      text-indent: 5px;
+      overflow: visible;
+      white-space: nowrap;
+    }
+
+    .shiji-item {
+      height: 32px;
+      line-height: 32px;
+      background-color: #5AD2A5;
+      margin-bottom: 20px;
+      width: 0;
+      display: flex;
+    }
+
+    .shiji-item .zaitu-item {
+      background-color: #5AD2A5;
+    }
+
+    .shiji-item .daoda-item {
+      background-color: #5B8FF9;
+    }
+
+    .fayun-text {
+      display: flex;
+    }
+
+    .daoda-s {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #5B8FF9;
+      margin-top: 5px;
+      margin-left: 8px;
+      margin-right: 3px;
+    }
+
+    .zaitu-s {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #5AD2A5;
+      margin-top: 5px;
+      margin-left: 17px;
+      margin-right: 3px;
+    }
+
+    .law-content {
+      margin-top: 10px;
+      width: 406px;
+      height: 428px;
+      background-image: url('./imgs/section-b-bg.png');
+      background-size: 100% 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .law-title {
+      font-size: 20px;
+      color: #a0a0a0;
+      display: inline-block;
+      margin-right: 10px;
+      ;
+    }
+
+    .law-title.active {
+      color: #fff;
+    }
+
+    .law-item {
+      font-size: 16px;
+      margin-bottom: 30px;
+
+      color: #fff;
+    }
+
+    .law-warp {
+      margin-top: 30px;
+      height: 338px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main-box">
+    <div class="title" id="companyName"></div>
+    <div class="bottom-content">
+      <div class="left-content">
+        <div class="kucun-content">
+          <div class="kucun-item">
+            <div class="time"><span id="currentInventoryDate"></span></div>
+            <div class="kucun-title">
+              库存（吨）
+            </div>
+            <div class="kucun-bottom">
+              <div class="box">
+                <div class="box-inner">
+                  <div class="dot-line"></div>
+                </div>
+              </div>
+              <div>
+                <div class="num one-line"><span id="inventoryQuantityCurrentMonthEnd"></span></div>
+                <div class="num-tips">安全库存：<span id="safeQuantity"></span></div>
+              </div>
+            </div>
+            <div class="persent"><span id="rate"></span></div>
+          </div>
+          <div class="yuan-item">
+            <div class="yuan-title">
+              原料产出比
+            </div>
+            <div class="yuan-bottom" id="chartZhizhen">
+
+            </div>
+          </div>
+        </div>
+        <div class="zoushi-content" id="chartZoushi"></div>
+        <div class="zoushi-content" id="chartYuanZoushi"></div>
+      </div>
+      <div class="mid-content">
+        <div class="mid-title">
+          资金监控
+        </div>
+        <div class="mid-num-content">
+          <div class="mid-num-item">
+            <div class="num"><span id="paymentAmount"></span></div>
+            <div class="info">累计回款(万元)</div>
+          </div>
+          <div class="mid-num-item">
+            <div class="num"><span id="rePaymentAmount"></span></div>
+            <div class="info">累计还款(万元)</div>
+          </div>
+        </div>
+        <div class="mid-chart-content" id="midChart"></div>
+        <div class="mid-title" style="margin-top:20px">
+          回款流水
+        </div>
+        <div class="mid-table-content">
+          <div class="tablebox mid-table">
+            <!-- 表头容器 -->
+            <div class="tbl-header">
+              <table cellspacing="0" cellpadding="0">
+                <thead>
+                  <tr>
+                    <td>回款企业</td>
+                    <td>回款金额(元)</td>
+                    <td>回款时间</td>
+                  </tr>
+                </thead>
+                <tbody style="opacity:0;"></tbody>
+              </table>
+            </div>
+            <!-- 表格内容容器-->
+            <div class="table-inner">
+              <div class="tbl-body">
+                <table cellspacing="0" cellpadding="0">
+
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-content">
+        <div class="yue-content">
+          <div class="yue-title">
+            本月发运执行情况
+          </div>
+          <div class="deliveryRealityQuantity-inner">
+            <div class="deliveryRealityQuantity-inner-text">实际发运(吨)</div>
+            <div class="deliveryRealityQuantity-inner-value deliveryRealityQuantity one-line"></div>
+          </div>
+          <div class="yue-chart" id="chartYue"></div>
+          <div class="fayun-item">
+            <div class="jihua-item">发运计划(吨)：<span id="deliveryPlanQuantity"></span></div>
+            <div class="shiji-item">
+              <div class="zaitu-item"></div>
+              <div class="daoda-item"></div>
+            </div>
+            <div class="fayun-text">实际发运(吨)：<span class="deliveryRealityQuantity"></span><span
+                class="daoda-s"></span>到达(吨)：<span id="arriveQuantity"></span><span class="zaitu-s"></span>在途(吨)：<span
+                id="onWayQuantity"></span></div>
+          </div>
+
+        </div>
+        <div class="law-content">
+          <div class="law-title active law-title-b">
+            变更记录
+          </div>
+          <div class="law-title law-title-f">
+            法律风险
+          </div>
+          <div class="law-warp">
+            <div class="law-inner">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    $(function () {
+
+      var changeSize = function () {
+        // 视觉搞尺寸1920*1080
+        const percentW = document.documentElement.clientWidth / 1920
+        const percentH = document.documentElement.clientHeight / 1080
+        $('#main-box')[0].style.transform = 'scale(' + percentW + ',' + percentH + ')'
+      }
+      window.addEventListener('resize', changeSize)
+      changeSize()
+
+      var getQueryString = function (name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+          return unescape(r[2]);
+        }
+        return null;
+      }
+
+      var uscc = getQueryString('uscc') || ''
+      var baseUrl = '/dg-trade-api/api'
+
+
+      
+
+      var _get = function (url, callback) {
+        url = baseUrl + url
+        let token = null
+        try{
+            token = window.parent.sessionStorage.getItem('VUEX_ST_TOKEN')
+        }catch(e){}
+
+        $.ajax({
+            headers: {
+                'Authorization': token,
+                Source: 'PC',
+            },
+            url: url,
+            type:'GET',
+            success: callback,
+            dataType:'json',
+
+        });
+      }
+
+      _get('/cinda/operateStatus/list?uscc=' + uscc, function (data) {
+
+        $('#companyName').html(data.data[0].companyName)
+      })
+
+
+
+      var initYuanliao = function () {
+        _get('/cinda/riskMonitor/inventory/statistics?companyUscc=' + uscc, function (data) {
+
+
+          var maxHeight = $('.kucun-bottom .box').height()
+          var inventoryQuantityCurrentMonthEnd = data.data.inventoryQuantityCurrentMonthEnd
+          var safeQuantity = data.data.safeQuantity
+
+          $('.kucun-bottom .box-inner').height(inventoryQuantityCurrentMonthEnd * maxHeight / 90000)
+          $('.kucun-bottom .dot-line').height(safeQuantity * maxHeight / 90000)
+
+          $('#safeQuantity').text(safeQuantity)
+          $('#rate').text(data.data.rate)
+          $('#currentInventoryDate').text(data.data.currentInventoryDate)
+          $('#inventoryQuantityCurrentMonthEnd').text(data.data.inventoryQuantityCurrentMonthEnd)
+
+
+
+        })
+      }
+
+
+      var initChartZhizhen = function () {
+        var chartDom = $('#chartZhizhen')[0];
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        _get('/cinda/riskMonitor/material/icor?companyUscc=' + uscc, function (data) {
+
+          option = {
+            series: [{
+              type: 'gauge',
+              min: 0,
+              max: 2,
+              radius: '99%',
+              axisLine: {
+                lineStyle: {
+                  width: 10,
+                  color: [
+                    [0.3, '#67e0e3'],
+                    [0.7, '#37a2da'],
+                    [1, '#fd666d']
+                  ]
+                }
+              },
+              pointer: {
+                icon: 'image://./imgs/pointer.png',
+                length: '99%',
+                width: 15,
+                offsetCenter: [2, 10],
+                itemStyle: {
+                  color: 'auto'
+                }
+              },
+              axisTick: {
+                distance: -30,
+                length: 8,
+                lineStyle: {
+                  color: '#fff',
+                  width: 0
+                }
+              },
+              axisLabel: {
+                show: false
+              },
+              splitLine: {
+                distance: -30,
+                length: 30,
+                lineStyle: {
+                  color: '#fff',
+                  width: 0
+                }
+              },
+              detail: {
+
+                valueAnimation: true,
+                fontSize: 12,
+                offsetCenter: [0, '60%'],
+                color: '#fff'
+              },
+              data: [{
+
+                value: data.data.rate
+              }]
+            }]
+          };
+
+          option && myChart.setOption(option);
+
+        })
+
+
+      }
+      var initChartZoushi = function () {
+        var chartDom = $('#chartZoushi')[0];
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        _get('/cinda/riskMonitor/inventory/trend?companyUscc=' + uscc, function (data) {
+
+
+          var safeQuantity = data.data.safeQuantity
+
+          option = {
+            title: {
+              text: '库存走势',
+              textStyle: {
+                color: '#fff'
+              }
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: ['安全库存'],
+              textStyle: {
+                color: '#fff'
+              },
+              right: 20,
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: data.data.data.map(d => d.dateTime),
+              axisLine: {
+                show: false,
+              },
+              axisLabel: {
+                color: '#70c5ff7a'
+              }
+
+            },
+            yAxis: {
+              type: 'value',
+              axisLabel: {
+                color: '#70c5ff7a'
+              },
+              splitLine: {
+                lineStyle: {
+                  color: '#3667a2ad',
+                  width: 1,
+                  type: 'solid'
+                }
+              }
+            },
+            series: [
+              {
+                name: '安全库存',
+                type: 'line',
+                data: data.data.data.map(d => d.quantity),
+                symbol: function (a, b, c) {
+
+                  if (a < safeQuantity) {
+                    return 'image://./imgs/error.png'
+                  }
+
+                  return 'emptyCircle'
+                },
+                symbolSize: function (a, b, c) {
+                  if (a < safeQuantity) {
+                    return 10
+                  }
+                  return 5
+                },
+
+                markLine: {
+                  symbol: 'none',
+                  label: {
+                    show: false,
+                  },
+                  lineStyle: {
+                    color: 'red',
+                    width: 2,
+                  },
+                  data: [
+                    {
+                      name: 'Y 轴值为 100 的水平线',
+                      yAxis: safeQuantity
+                    },
+                  ]
+                }
+              },
+
+
+            ]
+          };
+
+          option && myChart.setOption(option);
+
+
+
+        })
+
+
+      }
+      var initChartYuanZoushi = function () {
+        var chartDom = $('#chartYuanZoushi')[0];
+        var myChart = echarts.init(chartDom);
+        var option;
+        _get('/cinda/riskMonitor/material/change?companyUscc=' + uscc, function (data) {
+
+
+          option = {
+            title: {
+              text: '原料产出变化',
+              textStyle: {
+                color: '#fff'
+              }
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: [data.data[0].putProductName, data.data[0].outProductName, '产出比'],
+              textStyle: {
+                color: '#fff'
+              },
+              right: 20,
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            xAxis: [{
+              type: 'category',
+              data: data.data.map(d => d.dateTime),
+              axisLine: {
+                show: false,
+              },
+              axisLabel: {
+                fontSize: 11,
+                color: '#70c5ff7a'
+              }
+
+            }],
+            yAxis: [{
+              type: 'value',
+              axisLabel: {
+                color: '#70c5ff7a'
+              },
+              splitLine: {
+                lineStyle: {
+                  color: '#3667a2ad',
+                  width: 1,
+                  type: 'solid'
+                }
+              }
+            }, {
+              type: 'value',
+              axisLabel: {
+                color: '#70c5ff7a'
+              },
+              splitLine: {
+                lineStyle: {
+                  color: '#3667a2ad',
+                  width: 1,
+                  type: 'solid'
+                }
+              }
+            }],
+            series: [
+              {
+                name: data.data[0].putProductName,
+                type: 'bar',
+                color: '#5B8FF9',
+                data: data.data.map(d => d.materialUseQuantity)
+              },
+              {
+                name: data.data[0].outProductName,
+                type: 'bar',
+                color: '#5AD8A6',
+                data: data.data.map(d => d.outputQuantity)
+              },
+              {
+                name: '产出比',
+                type: 'line',
+                yAxisIndex: 1,
+                color: '#fff',
+                data: data.data.map(d => d.rate)
+              },
+
+            ]
+          };
+
+          option && myChart.setOption(option);
+
+        })
+
+
+      }
+      var initChartMid = function () {
+        var chartDom = $('#midChart')[0];
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        _get('/cinda/riskMonitor/funds/monitor/payment/trend?companyUscc=' + uscc, function (data) {
+
+
+
+          option = {
+
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: ['回款', '还款'],
+              textStyle: {
+                color: '#fff'
+              },
+              top: 12,
+              right: 20,
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: data.data.map(d => d.dateTime),
+              axisLine: {
+                show: false,
+              },
+              axisLabel: {
+                color: '#70c5ff7a'
+              }
+
+            },
+            yAxis: {
+              type: 'value',
+              axisLabel: {
+                color: '#70c5ff7a'
+              },
+              splitLine: {
+                lineStyle: {
+                  color: '#3667a2ad',
+                  width: 1,
+                  type: 'solid'
+                }
+              }
+            },
+            series: [
+              {
+                name: '回款',
+                type: 'line',
+                data: data.data.map(d => d.paymentAmount)
+              },
+              {
+                name: '还款',
+                type: 'line',
+                data: data.data.map(d => d.rePaymentAmount)
+              },
+
+            ]
+          };
+
+          option && myChart.setOption(option);
+
+
+        })
+
+
+      }
+      var initZijin = function () {
+        _get('/cinda/riskMonitor/funds/monitor/payment/statistics?companyUscc=' + uscc, function (data) {
+
+          $('.mid-num-content #paymentAmount').text(data.data.paymentAmount)
+          $('.mid-num-content #rePaymentAmount').text(data.data.rePaymentAmount)
+
+        })
+      }
+      var initTable = function () {
+        _get('/cinda/riskMonitor/funds/monitor/payment/list', function (data) {
+
+          var MyMarhq = '';
+          clearInterval(MyMarhq);
+          $('.tbl-body tbody').empty();
+          $('.tbl-header tbody').empty();
+          var str = '';
+
+          var Items = data.data
+
+          $.each(Items, function (i, item) {
+            str = '<tr>' +
+              '<td>' + item.companyName + '</td>' +
+              '<td>' + item.tradingAmount + '</td>' +
+              '<td>' + item.tradingHour + '</td>' +
+              '</tr>'
+
+            $('.tbl-body tbody').append(str);
+            $('.tbl-header tbody').append(str);
+          });
+
+          if (Items.length > 8) {
+            $('.tbl-body tbody').html($('.tbl-body tbody').html() + $('.tbl-body tbody').html());
+            $('.tbl-body').css('top', '0');
+            var tblTop = 0;
+            var speedhq = 50; // 数值越大越慢
+            var outerHeight = $('.tbl-body tbody').find("tr").outerHeight();
+            function Marqueehq() {
+              if (tblTop <= -outerHeight * Items.length) {
+                tblTop = 0;
+              } else {
+                tblTop -= 1;
+              }
+              $('.tbl-body').css('top', tblTop + 'px');
+            }
+
+            MyMarhq = setInterval(Marqueehq, speedhq);
+
+          }
+
+        })
+
+
+
+      }
+
+      var initChartYue = function () {
+        var chartDom = $('#chartYue')[0];
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        _get('/cinda/riskMonitor/waybill/month/distribute?companyUscc=' + uscc, function (data) {
+
+          option = {
+            tooltip: {
+              trigger: 'none',
+              show: false
+            },
+
+            legend: {
+              orient: 'vertical',
+              left: 'right',
+              top: 90,
+              textStyle: {
+                color: '#fff'
+              },
+            },
+            series: [
+              {
+                name: '发运',
+                type: 'pie',
+                center: ['35%', '50%'],
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                hoverAnimation: false,
+                label: {
+                  formatter: '{d}%',
+                  position: 'inner',
+                  fontSize: 10,
+                },
+                emphasis: {
+                  label: {
+                    show: true,
+                    fontSize: '10',
+                  }
+                },
+                labelLine: {
+                  show: false
+                },
+                data: data.data.length == 0 ? [0] : data.data.map(d => { return { value: d.deliveryQuantity, name: d.companyName } })
+              }
+            ]
+          };
+          option && myChart.setOption(option);
+
+
+        })
+
+        _get('/cinda/riskMonitor/waybill/month/execute?companyUscc=' + uscc, function (data) {
+
+
+
+          var maxWidth = $('.jihua-item').width()
+          var deliveryPlanQuantity = data.data.deliveryPlanQuantity
+          if (deliveryPlanQuantity == 0) {
+            $('.jihua-item').width(5)
+            $('.shiji-item').width(5)
+
+          }
+          var deliveryRealityQuantity = data.data.deliveryRealityQuantity
+          var width = maxWidth * deliveryRealityQuantity / deliveryPlanQuantity
+          var onWayQuantity = data.data.onWayQuantity
+          var arriveQuantity = data.data.arriveQuantity
+          $('.shiji-item').width(width)
+          $('.zaitu-item').width(width * (onWayQuantity / deliveryRealityQuantity))
+          $('.daoda-item').width(width * (arriveQuantity / deliveryRealityQuantity))
+          $('.fayun-item #deliveryPlanQuantity').text(deliveryPlanQuantity)
+          $('.yue-content .deliveryRealityQuantity').text(deliveryRealityQuantity)
+          $('.fayun-item #arriveQuantity').text(arriveQuantity)
+          $('.fayun-item #onWayQuantity').text(onWayQuantity)
+        })
+
+
+      }
+      var scollFalvAndBiangengTimer = null
+      var scollFalvAndBiangeng = function(items){
+
+          clearInterval(scollFalvAndBiangengTimer)
+          if (items.length > 7) {
+            $('.law-inner').html($('.law-inner').html() + $('.law-inner').html());
+            $('.tbl-body').css('transform', 'translateY(0)');
+            var tblTop = 0;
+            var speedhq = 50; // 数值越大越慢
+            var outerHeight = $('.law-inner').find(".law-item").outerHeight();
+            function Marqueehq() {
+              if (tblTop <= -outerHeight * items.length) {
+                tblTop = 0;
+              } else {
+                tblTop -= 1;
+              }
+              $('.law-inner').css('transform', 'translateY('+tblTop+'px)');
+            }
+
+            scollFalvAndBiangengTimer = setInterval(Marqueehq, speedhq);
+
+          }
+      }
+      var initBiangeng = function () {
+        _get('/cinda/riskMonitor/funds/monitor/changeRecord?companyUscc=' + uscc, function (data) {
+
+          $('.law-inner').html('')
+          data.data.forEach(item => {
+            $('.law-inner').append('<div class="law-item one-line">' + item + '</div>')
+          })
+
+          scollFalvAndBiangeng(data.data)
+
+        })
+
+
+      }
+
+      var initFalv = function () {
+        _get('/cinda/riskMonitor/funds/monitor/legalRisks?companyUscc=' + uscc, function (data) {
+
+          $('.law-inner').html('')
+          data.data.forEach(item => {
+            $('.law-inner').append('<div class="law-item one-line">' + item + '</div>')
+          })
+          scollFalvAndBiangeng(data.data)
+        })
+      }
+
+      $('.law-title').click(function (e) {
+
+        $(e.target).siblings().removeClass('active')
+        $(e.target).addClass('active')
+
+        if ($(e.target).hasClass('law-title-f')) {
+          initFalv()
+        } else {
+          initBiangeng()
+        }
+
+      })
+
+
+      initYuanliao()
+      initChartZhizhen()
+      initChartZoushi()
+      initChartYuanZoushi()
+      initChartMid()
+      initZijin()
+      initTable()
+      initChartYue()
+      initBiangeng()
+    })
+  </script>
+</body>
+
+</html>

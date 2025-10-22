@@ -1,0 +1,133 @@
+.search-form {
+  margin-top: -20px;
+  .filter-more {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  .filter-more-text,.filter-more-text:hover {
+    width: 94px;
+    height: 34px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .filter-more-text {
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #8b9db8;
+  }
+  .filter-more-text:hover {
+    width: 94px;
+    height: 34px;
+    background: #F5F8FD;
+    border-radius: 4px;
+    background: #F5F8FD;
+    color: #8495AA;
+  }
+  .more-icon {
+    margin-right: 5px;
+  }
+  .more-icon-up {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background: url("~@/v2/assets/imgs/invoicetools/up.png");
+    background-size: 14px 14px;
+  }
+  .more-icon-down {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background: url("~@/v2/assets/imgs/invoicetools/up.png");
+    background-size: 14px 14px;
+    transform: rotate(180deg);
+  }
+  .search-form-tag-list {
+    width: 80%;
+    button {
+      color: #8191A9;
+    }
+  }
+  .form-item-wrap {
+    /deep/ .ant-tag {
+      width: auto;
+      height: 30px;
+      line-height: 30px;
+      background: #fff;
+      border-radius: 4px;
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 14px;
+      font-weight: 400;
+      padding: 0 10px;
+      i {
+        font-weight: 500;
+        margin-left: 13px;
+      }
+    }
+  }
+  .search-form-tag-list,.form-item-wrap {
+    /deep/ .ant-tag-checkable-checked {
+      width: auto;
+      height: 30px;
+      line-height: 30px;
+      background: #F5F8FD;
+      border-radius: 4px;
+      color: #8191A9;
+      font-size: 12px;
+      font-weight: 400;
+      padding: 0 10px;
+      i {
+        font-weight: 500;
+        margin-left: 13px;
+      }
+    }
+  }
+  p {
+    .search-input {
+      width: 230px;
+    }
+  }
+  .form-item-wrap {
+    /deep/ .ant-input-sm {
+      width: 200px;
+      height: 30px;
+      background: #FFFFFF;
+      border-radius: 4px;
+      border: 1px solid rgba(129,145,169,0.3);
+      padding-right: 10px;
+    }
+    /deep/ .ant-calendar-picker-input {
+      width: 250px;
+    }
+  }
+  .search-form-tag-list {
+    /deep/ .ant-tag {
+      width: auto;
+      height: 30px;
+      line-height: 30px;
+      background: #F5F8FD;
+      border-radius: 4px;
+      color: #8191A9;
+      font-size: 12px;
+      font-weight: 400;
+      padding: 0 10px;
+      i {
+        font-weight: 500;
+        margin-left: 13px;
+      }
+    }
+  }
+  /deep/ input[type=text]:focus {
+    outline: 1px solid #fff;
+    border: 1px solid #4682F3;
+    box-shadow: none;
+  }
+}

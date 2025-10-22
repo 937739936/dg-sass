@@ -1,0 +1,157 @@
+.lay-container-invoice {
+  .method-btn-wrap {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .invoice-add-button, .invoice-export-button {
+    width: 126px;
+    height: 44px;
+    line-height: 44px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    border: 1px solid #4682F3;
+    color: #4682F3;
+    font-size: 14px;
+    margin-left: 20px;
+    padding-left: 50px;
+  }
+  .invoice-add-button {
+    background-image: url("~@/v2/assets/imgs/invoicetools/add-hover.png");
+    background-size: 18px 18px;
+    background-position: 20px;
+    background-repeat: no-repeat;
+  }
+  .invoice-add-button:hover, .invoice-export-button:hover {
+    background: #4682F3;
+    color: #fff;
+    cursor: pointer;
+  }
+  .invoice-add-button:hover {
+    background-image: url("~@/v2/assets/imgs/invoicetools/add.png");
+    background-size: 18px 18px;
+    background-position: 20px;
+    background-repeat: no-repeat;
+  }
+  .invoice-export-button {
+    background-image: url("~@/v2/assets/imgs/invoicetools/export-hover.png");
+    background-size: 18px 18px;
+    background-position: 20px;
+    background-repeat: no-repeat;
+  }
+  .invoice-export-button:hover {
+    background-image: url("~@/v2/assets/imgs/invoicetools/export.png");
+    background-size: 18px 18px;
+    background-position: 20px;
+    background-repeat: no-repeat;
+  }
+  .width126px-height44px-button {
+    width: 126px;
+    height: 44px;
+    border-radius: 6px;
+  }
+  .pagination-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+    .total {
+      font-size: 14px;
+      color: #9197AB;
+    }
+  }
+}
+
+.new-modal {
+  /deep/ .ant-modal {
+    .ant-modal-content {
+      border-radius: 20px;
+      overflow: hidden;
+      padding-bottom: 20px;
+    }
+    .ant-modal-header {
+      background: #F5F7FA;
+      border-bottom: none;
+    }
+    .ant-modal-footer {
+      width: 100%;
+      height: 52px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      border-top: none;
+    }
+    .ant-modal-body {
+      padding-bottom: 0;
+    }
+    .ant-modal-footer button + button {
+      margin-left: 18px;
+    }
+    .ant-modal-header {
+      font-weight: 500;
+      color: rgba(0,0,0,0.8);
+    }
+  }
+}
+
+.batch-relation {
+  width: 126px;
+  height: 44px;
+  text-align: center;
+  line-height: 44px;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #4682F3;
+  color: #4682F3;
+  padding-left: 30px;
+  position: relative;
+}
+.batch-relation:hover {
+  width: 126px;
+  height: 44px;
+  text-align: center;
+  line-height: 44px;
+  display: inline-block;
+  border-radius: 4px;
+  color: #fff;
+  padding-left: 30px;
+  position: relative;
+  background: #4682F3;
+  cursor: pointer;
+}
+
+.batch-relation::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-image: url("~@/v2/assets/imgs/invoicetools/relation-hover.png");
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 20px;
+  top: 13px;
+}
+
+.batch-relation:hover::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-image: url("~@/v2/assets/imgs/invoicetools/relation.png");
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 20px;
+  top: 13px;
+}
+
+/deep/ .new-pagination {
+  .ant-pagination-item {
+    margin: 0 7px;
+  }
+}

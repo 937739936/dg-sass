@@ -1,0 +1,124 @@
+* { 
+  -webkit-touch-callout:none;
+  -webkit-text-size-adjust: none;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-font-smoothing: antialiased;
+}
+body,
+dl,
+dd,
+ul,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+input,
+textarea,
+header,
+footer,
+p,
+div {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+html {
+  -ms-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  overflow: hidden;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: PingFangSC-Regular;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+i {
+  font-style: normal;
+}
+
+html,
+body {
+  background:#f9f9f9;
+}
+
+.amap-logo, .amap-copyright {
+  display: none !important; 
+}
+
+
+.router-fade-enter-active, .router-fade-leave-active {
+  transition: opacity .3s;
+}
+.router-fade-enter {
+  opacity: 0;
+}
+.router-fade-leave-active {
+  opacity: 0;
+}
+.red-sim {
+  font-family: SimSun, sans-serif;
+  color:red;
+  position: relative;
+  font-size: 14px;
+}
+/*单行文本超出截取*/
+.one-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/*货值计算下拉框padding*/
+.ant-select-dropdown-menu-item{
+  padding: 5px 8px;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing:0;
+}
+body{
+  position: relative;
+}
+.ant-modal-wrap {
+  position: absolute!important;
+}
+.ant-modal-mask {
+  position: absolute!important;
+}
+.menu-box-invoice {
+  width: 104px;
+  height: 104px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  color: #000;
+}
+.ant-tabs-ink-bar {
+  border-radius: 2px;
+}

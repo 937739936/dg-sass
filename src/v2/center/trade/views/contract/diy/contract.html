@@ -1,0 +1,543 @@
+<html>
+
+<head>
+    <title></title>
+    <style type="text/css">
+        span {
+            background-color: #fff !important;
+        }
+
+        @page {
+            size: A4;
+            margin: 70px 70px 50px 70px;
+            padding-top: 10px;
+
+            @top-right {
+                content: "[[${mainContractNo != null ? '合同编号：'+mainContractNo : ''}]]";
+                font-family: 'STXihei';
+                font-size: 12px;
+                padding-top: 50px;
+            }
+
+            border-top: 1px solid black;
+
+            @bottom-center {
+                content: counter(page) "/" counter(pages);
+            }
+        }
+
+        * {
+            font-family: 'STXihei' !important;
+        }
+
+        html,
+        body {
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+            font-family: 'STXihei';
+        }
+
+        table {
+            margin-right: auto;
+            margin-left: auto;
+            width: 100%;
+            font-size: 14px;
+            border-collapse: collapse;
+            -fs-table-paginate: paginate;
+        }
+
+        td,
+        th {
+            padding: 6px;
+            border: 1px solid #000000;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        table.rich-table,
+        table.rich-table tr {
+            page-break-inside: auto;
+            page-break-after: auto;
+            page-break-before: auto;
+        }
+
+        table.rich-table th {
+            border: 1px solid #000000;
+            border-bottom: 2px solid #000000;
+        }
+
+        table.rich-table td,
+        table.rich-table th {
+            padding: 0;
+            min-width: 35px;
+            min-height: 30px;
+            text-align: center;
+            page-break-inside: auto;
+            page-break-after: auto;
+            page-break-before: auto;
+            line-height: 19px;
+        }
+
+        .align-center {
+            margin: 4px 0px 4px 2em;
+        }
+
+        .align-center table td {
+            text-align: center;
+        }
+
+        div {
+            text-indent: 2em;
+            line-height: 28px;
+        }
+
+        table div {
+            text-indent: 0px;
+            max-width: 330px;
+            padding: 0px;
+            margin: 0px;
+            word-break: break-all;
+            line-height: 18px;
+        }
+
+        table td.nowrap div {
+            width: 300px;
+        }
+
+        .table-template {
+            border-left: 1px solid #000000;
+            border-top: 1px solid #000000;
+            text-align: center;
+        }
+
+        .table-template > table {
+            table-layout: fixed;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        .table-template > td {
+            line-height: 25px;
+            padding: 10px;
+            border-bottom: 1px solid #000000;
+            border-right: 1px solid #000000;
+            text-align: center;
+        }
+
+        .table-template > td > div {
+            overflow-wrap: break-word;
+            word-break: break-all;
+        }
+
+        .table-template div {
+            word-wrap: break-word;
+        }
+
+        .table-template .row {
+            line-height: 50px;
+            border-bottom: 1px solid #000000;
+            text-align: center;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .table-template .no-border-bottom {
+            border-bottom: 0;
+        }
+
+        .table-template .row > div {
+            float: left;
+        }
+
+        .table-template .border-right {
+            border-right: 1px solid #000000;
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <div style="text-align: center;font-weight: bold;" th:text="${contractName}"></div>
+    <table cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td class="nowrap">
+                <div>甲方(买方)：<span th:text="${buyerCompanyName}"></span>
+                </div>
+            </td>
+            <td>
+                <div>签订时间：&nbsp;<span th:text="${signTime}"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="nowrap">
+                <div>乙方(卖方)：<span th:text="${sellerCompanyName}"></span>
+                </div>
+            </td>
+            <td>
+                <div>签订地点：<span th:text="${signLocation}"></span>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        买卖双方本着平等自愿、互惠互利和共同发展的原则，根据《中华人民共和国民法典》等有关法律法规，就买方向卖方购买标的货物的相关事宜达成以下一致意见，特签订本合同，以资各方共同遵守。
+    </div>
+    <div>
+        <strong>第一条 合同标的</strong>
+    </div>
+    <div>1.1货物品种/品名：<span th:text="${goodsName}"></span>
+    </div>
+    <div th:if="${isQuantityOffsetEmpty} == false">1.2数量：
+        <span th:text="${quantity}"></span>
+        <sapn>(</sapn>
+        <span>±</span>
+        <span th:text="${quantityOffset}"></span>
+        <span>%</span>
+        <span>)</span>
+        <span>吨，最终结算数量以双方实际验收数量为准。</span>
+    </div>
+    <div th:if="${isQuantityOffsetEmpty} == true">1.2基准数量：<span th:text="${quantity}"></span>吨，最终结算数量以双方实际验收数量为准。
+    </div>
+    <div th:if="${indicatorExists} == true">1.3基准质量：</div>
+    <div class="table-template" th:if="${isMultiGoodsName} == false">
+        <div>
+            <table cellspacing="0" cellpadding="0" width="100%" th:each="indicator : ${indicatorList}">
+                <tr>
+                    <td th:each="obj : ${indicator}" th:style="|width:${obj.width};|">
+                        <div th:utext="${obj.name}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td th:each="obj : ${indicator}" th:style="|width:${obj.width};|">
+                        <div th:text="${obj.value}"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="table-template" th:if="${isMultiGoodsName} == true">
+        <div th:each="indicator : ${indicatorList}">
+            <table style="width: 100%;">
+                <tbody>
+                <tr style="background-color: #c1c1c1">
+                    <td colspan="6"
+                        style="text-align: center; height: 28px; line-height: 28px; box-sizing: border-box;">
+                        <strong>品类</strong>
+                        <strong th:utext="${indicator.index}"></strong>
+                    </td>
+                </tr>
+                <tr class="table-goods-name">
+                    <td style="width: 16.6%;">品名</td>
+                    <td style="width: 16.6%;" th:text="${indicator.goodsName}"></td>
+                    <td style="width: 16.6%;">基准价格(含税)(元/吨)</td>
+                    <td style="width: 16.6%;" th:text="${indicator.basePrice}"></td>
+                    <td style="width: 16.6%;">基准价格(不含税)(元/吨)</td>
+                    <td style="width: 16.6%;" th:text="${indicator.excludeTaxBasePrice}"></td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="text-align: center;">基准质量指标</td>
+                </tr>
+                </tbody>
+            </table>
+            <table th:each="target : ${indicator.indicatorTableDTOList}">
+                <tr>
+                    <td th:each="obj : ${target}"
+                        style="width: 16.6%; text-align: center;border-top: 0;">
+                        <div th:utext="${obj.name}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td th:each="obj : ${target}"
+                        style="width: 16.6%; text-align: center;border-top: 0;">
+                        <div th:utext="${obj.value}"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:if="${indicatorExists} == true">
+    注：本基准质量指标仅作为卖方交货的参考和考核基准，最终结算按照双方实际验收质量为准。
+</div>
+<div>
+    <strong>第二条 交（提）货地点、方式、期限</strong>
+</div>
+<div>2.1交（提）货地点：<span th:text="${deliveryPickUpPlace}"></span>（以下简称“交货地”或“仓储地”）。</div>
+<div th:if="${transportModeIsNone} == false">
+    <div th:if="${isTransportResponsibilityOther} == true">
+        <div><span th:if="${isDeliveryModeOther} == true">
+                    2.2运输及交（提）货方式：<span th:text="${transportModeName}"></span>，由<span
+                th:text="${transportResponsibilityOther}"></span>负责运输事宜，按照<span
+                th:text="${deliveryGoodsClause}"></span>方式交货。
+                </span>
+            <span th:if="${isDeliveryModeOther} == false">
+                    2.2运输及交（提）货方式：<span th:text="${transportModeName}"></span>，由<span
+                    th:text="${transportResponsibilityOther}"></span>负责运输事宜，按照<span
+                    th:text="${deliveryModeName}"></span>方式交货。
+                </span>
+        </div>
+    </div>
+    <div th:if="${isTransportResponsibilityOther} == false">
+        <div><span th:if="${isDeliveryModeOther} == true">
+                    2.2运输及交（提）货方式：<span th:text="${transportModeName}"></span>，由<span
+                th:text="${transportResponsibility}"></span>负责运输事宜，按照<span
+                th:text="${deliveryGoodsClause}"></span>方式交货。
+                </span>
+            <span th:if="${isDeliveryModeOther} == false">
+                    2.2运输及交（提）货方式：<span th:text="${transportModeName}"></span>，由<span
+                    th:text="${transportResponsibility}"></span>负责运输事宜，按照<span
+                    th:text="${deliveryModeName}"></span>方式交货。
+                </span>
+        </div>
+    </div>
+</div>
+<div th:if="${transportModeIsNone} == true">
+    2.2交货方式：按照<span th:text="${deliveryModeName}"></span>方式交货。
+</div>
+<div>2.3交（提）货期限：<span th:text="${deliveryStartDate}"></span>至<span
+        th:text="${deliveryEndDate}"></span>止。如因特殊情况需要调整，经双方协商，另行签订补充协议。
+</div>
+<div>2.4风险承担：在卖方交货前货物毁损、灭失的风险由卖方承担。</div>
+<div th:if="${transportModeIsNone} == false">
+    <div th:if="${isFreightPayModeOther} == true">
+        <div>2.5运费支付方式：<span th:text="${freightPayModeOther}"></span>。</div>
+    </div>
+    <div th:if="${isFreightPayModeOther} == false">
+        <div>2.5运费支付方式：<span th:text="${freightPayModeName}"></span>。</div>
+    </div>
+</div>
+<div>
+    <strong>第三条 质量、数量验收</strong>
+</div>
+<div th:utext="${qualityExamineWayHtmlStr}"></div>
+<div>
+    <strong>第四条 合同价格</strong>
+</div>
+<div th:utext="${makePriceWayHtmlStr}"></div>
+<div>
+    <strong>第五条 结算及付款方式</strong>
+</div>
+<div th:utext="${settleWayHtmlStr}"></div>
+<div>
+    <strong>第六条 有关执行本合同的特别约定</strong>
+</div>
+<div>
+    6.1卖方保证其向买方交付的标的货物所有权合法、完整、无瑕疵且不存在抵押、留置等任何第三方权利。如遇货物所有权而引起的有关争议，卖方应负责解决并承担由此产生的费用，还应赔偿由此给买方造成的所有损失。买方拥有向卖方追索已付货款本金、资金利息（按照日万分之五计息）及其它一切损失的权利。
+</div>
+<div>
+    6.2执行本合同过程中，卖方（包括卖方法定代表人、股东、实际控制人、员工、授权代表等相关方）所欠其它任何第三方（包括但不限于卖方的上游供货方、运输承运方、撮合交易方、仓储管理方等）的债务与买方无关，若因为任何第三方向卖方主张债权，而导致卖方已经交付给买方的货物被司法冻结、限制权利、不能正常出库的（包括合法途径或者非法途径），或导致相关权力部门（包括但不限于法院、公安机关、检察机关、纪检机关等）要求买方协助执行等情况，买方首先有权停止继续向卖方支付货款，其次买方有权积极配合执行相关权力机关的合法要求/通知，最后对于给买方造成的所有损失，买方有权直接从应向卖方支付的款项中直接扣除，不足部分或没有应付款项的，买方有权要求卖方承担相应赔偿责任。
+</div>
+<div>
+    6.3针对场地入库交货方式：执行本合同应由卖方负责标的货物的运输并承担及时向运输承运方结清全部运输费用的义务。若因卖方未及时向承运方结清相关运输费用，而导致承运方通过各种途径向买方主张任何权利（包括合法途径或非法途径）或导致仓储地管理方限制买方货物的正常出入库等情况，买方首先有权停止继续向卖方支付货款，同时对于给买方造成的所有损失，买方有权直接从应向卖方支付的款项中直接扣除，不足部分或没有应付款项的，买方有权要求卖方承担相应赔偿责任。
+</div>
+<div>
+    6.4针对场地货转交货方式：交货前标的在仓储地产生的所有费用（包括但不限于装卸作业费、港建费、堆存费、代发费用等）均由卖方承担，如应由卖方缴纳但未缴纳的费用，卖方负有向有关方缴纳的义务。若相关收费方催收，卖方应立即缴纳，若因卖方未及时缴纳应缴纳费用，影响买方正常进出库、仓储的，视为卖方违约，由此给买方造成的损失，由卖方承担。当买方为了保障自身权益而不得不代为缴纳时，买方有权向卖方追索。
+</div>
+<div>6.5关于卖方税务异常处理的特别约定</div>
+<div>
+    本合同约定的价格为含税价，在合同履行过程中卖方负有严格遵守国家有关税收征收管理和发票管理规定向买方开具增值税专用发票的义务，若出现以下情况，构成卖方税务异常：
+</div>
+<div>（1）未按照本合同约定及时向买方开具增值税专用发票；</div>
+<div>（2）卖方给买方开具的增值税专用发票存在涉嫌虚开增值税专用发票、税务异常或无法认证；</div>
+<div>（3）卖方自己的进项税票存在涉嫌虚开增值税专用发票或被税局认定为税务异常；</div>
+<div>（4）未经买方同意，卖方擅自作废给买方开具的增值税专用税票；</div>
+<div>（5）因卖方存在未按时向税局进行纳税申报、未及时缴纳税款、欠税、失联等情况，导致卖方被主管税局认定为税务异常或经营异常；
+</div>
+<div>（6）其它因卖方在税务方面存在异常情况导致买方接收卖方的进项税票被认定为异常的情况。</div>
+<div>
+    买方进项税票被认定异常不以买方获取买方主管税局的书面通知、被买方主管税局要求实际划转税款或补缴税款为前提条件，只要买方收到买方主管税局的口头通知、税局系统截图或税局网站显示卖方状态为“非正常户”、“异常”、“欠税”等情形，就视为卖方税务异常。
+</div>
+<div>
+    出现上述卖方税务异常的情况后，买方有权立即停止向卖方支付任何款项，若因卖方存在税务异常导致买方被主管税局要求暂停或限制领取发票、接受税务协查、划转税款、补缴税款、罚款等通知，买方产生的进项税转出、补税、罚款等责任均由卖方承担。其中，因卖方未向买方开具税票或卖方虽向买方开具了税票但被认定为税务异常导致买方被税局要求做进项税转出给买方造成的损失按以下方式合并核算：
+</div>
+<div>
+    <table cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td colspan="2">
+                <div style="max-width: 500px;">设卖方未开票金额或被认定为税务异常的卖方开票金额为X，则</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>卖方应向买方承担的增值税潜在损失</div>
+            </td>
+            <td>
+                <div>X/1.13*0.13</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>卖方应向买方承担的附加税潜在损失</div>
+            </td>
+            <td>
+                <div>X/1.13*0.13*0.12</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>卖方应向买方承担的所得税潜在损失</div>
+            </td>
+            <td>
+                <div>X/1.13*0.25</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>上述损失或潜在损失不以买方实际向税局支付为准，只要出现卖方税务异常，买方就有权从应向卖方支付的货款中扣除。而若卖方税务异常情况解除且买方也未实际向税局支付上述损失，则买方应返还因税务异常扣除卖方的潜在损失款。
+</div>
+<div>
+    对于除上述三项损失之外的买方其他损失，包括但不限于买方被税局暂停领取税票导致买方下游应收账款（除了卖方向买方供货产生下游应收账款外，还包括其它供货商向买方供货而产生的所有下游应收账款）回款延期、买方被税局要求支付罚款或滞纳金、买方因解决卖方税务异常问题而产生的各种费用及因卖方税务异常丧失的机会收益等损失，均由卖方承担赔偿责任，买方有权从应向卖方支付的货款中扣除（如有）或依法另行向卖方追索。其中，下游应收账款回款延期产生的损失按“下游应收账款金额*年化18%利率*延期时间”核算。
+</div>
+<div>
+    <strong>卖方对上述特别约定完全认可，不因此向买方提出任何异议或主张任何权利。</strong>
+</div>
+<div>
+    6.6卖方（包括但不限于为卖方提供运输服务的司机、卖方员工及卖方其他相关人员）保证严格遵守仓储地关于安全健康以及疫情防控的相关规定（包括但不限于佩戴口罩、提供健康证明、提供行程码或健康码等），并承诺按照仓储地的规定积极配合进行相关健康检查。如卖方违反上述规定，由此引发的一切法律责任和损失（包括但不限于仓储地就相应行为出具的经济处罚以及由此引起的相关法律责任）由卖方自行承担，买方有权从应向卖方支付的款项中直接扣除，不足部分有权继续追偿。
+</div>
+<div>
+    6.7对于卖方超期或超量供应的货物，买方有权拒收，拒收不成的，买方不再负有按照本合同约定的付款方式向卖方付款的义务。在买方同意接收的前提下，由买方出具书面同意接收的通知或双方另行签订补充协议；若买方不同意接收，只有买方将货物全部变现后，买方有权根据买方实际变现情况单方面另行向卖方办理结算，且结算付款方式不受本合同有关的约束。
+</div>
+<div>
+    6.8若卖方所供货物的质量验收不符合买方要求，买方有权拒收。但实际操作过程中，符合拒收的货物已经卸至仓储地且可能会出现货物混合、混堆，会导致买方拒收不成。对于拒收不成的货物，买方不再负有继续向卖方支付货款的义务且有权单方面解除合同。鉴于双方友好合作，如果买方同意谅解卖方并将单个合同周期内卖方供应的所有货物全部销售且收到货款后，买方可根据实际变现情况单方面另行向卖方办理结算，但结算付款方式不再受本合同有关的约束
+</div>
+<div>6.9若卖方违反以上违约条款或存在其他违约行为，应在收到买方通知后一个工作日内退回买方已付的款项，同时卖方应赔偿由此给买方造成的相应费用和损失包括但不限于运费损失、滞期费损失、另行采购货物而多支付的差价金额等。
+</div>
+<div>
+    <strong>第七条 其他约定</strong>
+</div>
+<div th:utext="${otherAppointHtmlStr}"></div>
+<div>
+    <strong>第八条 通知与送达</strong>
+</div>
+<div>
+    8.1买卖双方关于合同履行及相关事宜的通知，通过下述方式进行，自短信、微信、电子邮件、传真发送当日或邮寄发出第二日均视为送达。
+</div>
+<div>买方联系人：<span th:text="${buyContactName}"></span>，电话(同微信号) ：<span th:text="${buyContactPhone}"></span>，联系地址：<span
+        th:text="${buyContactArea}"></span>,<span th:text="${buyContactAddress}"></span>，电子邮件：<span
+        th:text="${buyContactEmail}"></span>。
+</div>
+<div>卖方联系人：<span th:text="${sellerContactName}"></span>，电话(同微信号) ：<span
+        th:text="${sellerContactPhone}"></span>，联系地址：<span th:text="${sellerContactArea}"></span>,<span
+        th:text="${sellerContactAddress}"></span>，电子邮件：<span th:text="${sellerContactEmail}"></span>。
+</div>
+<div>
+    8.2上述地址适用于双方接收各项法律文书（包括但不限于诉讼/仲裁通知书、开庭通知等），以特快专递邮寄相关法律文书的，不论双方是否签收，均视为已经通知并送达，并承担一切法律后果。
+</div>
+<div>
+    8.3买卖双方提供的上述联系人或联系方式变更的，应在变更后三日内书面通知对方，否则按原联系方式发出的通知或其它文书，即使变更方没有收到，仍视为送达。
+</div>
+<div>
+    <strong>第九条 争议解决方式</strong>
+</div>
+<div>
+    本合同履行过程中如发生争议，由买卖双方本着友好合作态度先协商解决。如经双方协商未能解决，由本合同签订地有管辖权法院诉讼解决。诉讼所涉及的费用由败诉方承担，但诉讼裁定另有说明的除外。在诉讼过程中，合同中未提交诉讼的部分，
+    双方应继续执行。
+</div>
+<div>
+    <strong>第十条 不可抗力</strong>
+</div>
+<div>
+    10.1不可抗力是指任何不能预见、不能克服、不能避免的事件和因素，包括但不限于洪水、地震及其他自然灾害、战争、疫情、骚乱、火灾、政府征用、没收、突发停电等。
+</div>
+<div>
+    10.2发生不可抗力导致全部或部分不能履行合同时，应立即通知对方，并在10日内提供相应的证明材料，同时买卖双方协商解决方案，以减轻不可抗力产生的不利后果。
+</div>
+<div>
+    <strong>第十一条 附则</strong>
+</div>
+<div>11.1
+    本合同是由甲乙双方通过第三方供应链数字化服务平台（数链科技平台）采用电子签名技术方式签订的电子合同，自双方的电子印章加盖后生效，对双方具有法律约束力。
+</div>
+<div>11.2
+    本合同未尽事宜，由双方另行签订电子版的补充协议，约定具体运作细节，与本合同合并执行。甲乙双方一致同意，后续双方签订的补充协议以通过第三方供应链数字化服务平台（数链科技平台）采用电子印章方式签订的电子补充合同为准。
+</div>
+<div>11.3 本合同在生效后具有溯及力，合同约定事宜的约束力溯及<span th:text="${signTime}"></span>至合同生效之日，不受限于买卖双方加盖数字证书的日期。
+</div>
+<div>(以下无正文)</div>
+<table cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+        <td>
+            <div>
+                <strong>甲方(买方)：<span th:text="${buyerCompanyName}"></span>
+                </strong>
+            </div>
+        </td>
+        <td>
+            <div>
+                <strong>乙方(卖方)：<span th:text="${sellerCompanyName}"></span>
+                </strong>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <strong>法定代表人(甲方)：<span th:text="${buyPersonName}"></span>
+                </strong>
+            </div>
+        </td>
+        <td>
+            <div>
+                <strong>法定代表人(乙方)：<span th:text="${sellerPersonName}"></span>
+                </strong>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <strong>授权代表人(甲方)：<span></span>
+                </strong>
+            </div>
+        </td>
+        <td>
+            <div>
+                <strong>授权代表人(乙方)：<span></span>
+                </strong>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <strong>银行账号：<span th:text="${buyBankNo}"></span>
+                </strong>
+            </div>
+        </td>
+        <td>
+            <div>
+                <strong>银行账号：<span th:text="${sellerBankNo}"></span>
+                </strong>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <strong>开户行：<span th:text="${buySubbranchName}"></span>
+                </strong>
+            </div>
+        </td>
+        <td>
+            <div>
+                <strong>开户行：<span th:text="${sellerSubbranchName}"></span>
+                </strong>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+
+</html>

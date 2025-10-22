@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "data": {
+    "despatchTypeInfoVo": {
+      "automobileQuantity": 2393.44,
+      "trainQuantity": 1522.79,
+      "shipQuantity": 280.74
+    },
+    "capitalUsedAmount": 1926661.90,
+    "capitalUsedCount": 10965.00,
+    "repayAmount": 1752364.83
+  }
+}

@@ -1,0 +1,55 @@
+﻿<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <title>
+    </title>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 70px 70px 50px 70px;
+            padding-top: 10px;
+        }
+        html, body {
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+            font-family: 'STXihei';
+        }
+        p{
+            margin: 8px 0px;
+            line-height: 24px;
+            text-indent: 2em;
+        }
+        .textIndent0 {
+            text-indent: 0;
+        }
+        .textAlignRight {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+<p class="textAlignRight">编号：<span th:text="${serialNo}"></span></p>
+<hr/>
+<p style="text-align: center;"><strong>追加保证金通知函</strong></p>
+<p class="textIndent0">致<span th:text="${buyerName}"></span>：</p>
+<p>贵司与我司于<span th:text="${contractSignTime}"></span>签订了编号为<span th:text="${contractNo}"></span>的《<span th:text="${contractName}"></span>》（以下简称为“合同”）。根据合同约定，在合同执行期间内，如市场发生变化导致行情下跌，贵司应另行向我司追加履约保证金。</p>
+<p>现煤炭价格下跌，我司特向贵司通知，贵司应在<span th:text="${recoveryDeadline}"></span>前向我司追加履约保证金人民币<span th:text="${recoveryAmount}"></span>元。如贵司未在前述期限内向我司支付上述款项视为贵司违约，我司将按照合同约定执行。</p>
+<p>特此函告。本通知函的扫描件、复印件及传真件和原件具有同等法律效力。</p>
+<p>顺祝商祺！</p>
+<p class="textAlignRight">签署方：<span th:text="${sellerNameSign}"></span></p>
+<p class="textAlignRight">签署日期：<span th:text="${signTime}"></span></p>
+<p class="textIndent0" style="border-bottom: 1px dotted #000;"></p> 
+<p style="text-align: center;letter-spacing: 3px;">回执</p>
+<p class="textIndent0"><span th:text="${sellerName}"></span>：</p>
+<p>本回执的扫描件、复印件及传真件和原件具有同等法律效力。</p>
+<p style="font-size: 12px;">本回执自加盖电子印章后溯及至文末签署日期生效，不受限于我司加盖电子印章的日期。</p>
+<p>顺祝商祺！</p>
+<p class="textAlignRight">签署方：<span th:text="${buyerNameSign}"></span></p>
+<p class="textAlignRight">签署日期：<span th:text="${signTime}"></span></p>
+</body>
+
+</html>

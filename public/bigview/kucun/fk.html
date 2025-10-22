@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>蓉欧瑞易供应链管理平台</title>
+    <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+    <meta name="keywords"
+        content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: '2a9b356fdcf67a0c59ba0ba6da137539',
+        }
+    </script>
+    <script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.15&key=c4aeac2b33af41a72874473226613edb"></script>
+    <script src="https://webapi.amap.com/js/marker.js"></script>
+    <script src="../../jquery.min.js"></script>
+    <!-- <script src="../../echarts.min.js"></script> -->
+    <!-- <script src="../../china.js"></script> -->
+    <link rel="stylesheet" href="../../swiper-bundle.min.css" />
+    <script src="../../swiper-bundle.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            /* Firefox */
+            -webkit-box-sizing: border-box;
+            /* Safari */
+        }
+
+        html {}
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #101216;
+        }
+
+        body {
+            background-image: url('../imgs/smbg.png');
+            background-size: 100% 100%;
+        }
+
+        #main-box {
+            width: 100%;
+            height: 100%;
+            transform-origin: 0 0;
+            position: relative;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            box-sizing: border-box;
+        }
+
+        .marker-label {
+            width: 36px;
+            height: 28px;
+            background: rgba(244, 75, 66, 0.3);
+            border: 1px solid #F44B42;
+            border-radius: 50%;
+            /* display: flex;
+            align-items: center;
+            justify-content: center; */
+
+        }
+
+        .marker-label-2 {
+            width: 20px;
+            height: 16px;
+            background: #F44B42;
+            border-radius: 50%;
+
+        }
+
+        .amap-marker-label {
+            background: inherit;
+            border: 0;
+        }
+
+        @keyframes identifier {
+            from {
+                width: 22px;
+                height: 22px;
+            }
+
+            to {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        .marker-box {
+            position: relative;
+            z-index: 1000;
+        }
+
+        .marker-box-3 {
+            position: absolute;
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #FF7223;
+            border-radius: 50%;
+            right: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .marker-box-2 {
+            width: 22px;
+            height: 22px;
+            background: rgba(244, 75, 66, 0.3);
+            border: 1px solid #FF7223;
+            border-radius: 50%;
+            right: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .marker-box-1 {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 114, 35, 0.1);
+            border-radius: 50%;
+            right: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            /* display: flex;
+            align-items: center;
+            justify-content: center; */
+            animation-name: identifier;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+
+        .amap-marker-content {
+            white-space: inherit !important;
+            cursor: pointer;
+
+        }
+
+        /* 窗体 */
+        .info-window {
+            width: 380px;
+            height: 442px;
+            background: rgba(45, 51, 72, 0.95);
+            box-shadow: 0px 0px 8px rgba(38, 38, 57, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .amap-info-content {
+            padding: 0;
+            background: inherit;
+        }
+
+        .amap-info-sharp,
+        .amap-info-close {
+            display: none;
+        }
+
+        .info-window .title {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 22px;
+            color: #99B8F3;
+            padding-bottom: 20px;
+        }
+
+        .info-window .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            flex: 1;
+        }
+
+        .info-window .content p {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #99B8F3;
+        }
+
+        .info-window .content .label {
+            margin-right: 20px;
+            width: 98px;
+            display: block;
+        }
+
+        .info-window .label-info {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+        }
+
+        /* 右侧样式 */
+        .right-content {
+            position: fixed;
+            right: 20px;
+            top: 35px;
+            width: 400px;
+            /* height: 55%; */
+            background: linear-gradient(162.61deg, #2D3348 1.43%, #151B2F 98.65%);
+            border-radius: 8px;
+            box-sizing: border-box;
+            padding: 0 20px;
+            padding-top: 14px;
+
+        }
+
+        .right-content .top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .right-content .top-1 {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .right-content .dot {
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: #F44B42;
+            border-radius: 50%;
+            box-shadow: 0px 0px 8px #FD6B63;
+        }
+
+        .right-content .title {
+            font-size: 18px;
+            color: #FFFFFF;
+            margin: 0 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            flex: 1;
+        }
+
+        .right-content .date {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+
+        }
+
+        .mid-box {
+            color: #fff;
+
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .mid-box .mid {
+            width: 170px;
+            height: 80px;
+            background: linear-gradient(102deg, #FF3636 0%, #FF1593 93.75%);
+            mix-blend-mode: normal;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            padding-top: 16px;
+            padding-left: 16px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .mid-box .mid-2 {
+            background: linear-gradient(102.49deg, #00A3FF 0%, #004EE6 100%);
+        }
+
+        .mid-box .mid-3 {
+            background: linear-gradient(102.49deg, #FF4D00 0%, #E68A00 100%);
+        }
+
+        .mid-box .mid-4 {
+
+            background: linear-gradient(103deg, #9EB166 2.26%, #4DCA9E 97.13%);
+        }
+
+        .mid-icon {
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            bottom: 10px;
+            right: 7px;
+        }
+
+        .fot {
+            margin-top: 20px;
+        }
+
+        .fot-title {
+            height: 40px;
+            width: 100%;
+            background: #343D59;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #99B8F3;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 0 12px;
+        }
+
+        .fot-title span {
+            flex: 1;
+            text-align: left;
+        }
+
+        #fot_content_box {
+            height: 380px;
+            overflow: hidden;
+            overflow-y: auto;
+            position: relative;
+
+        }
+
+        .fot-content-box {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+
+        }
+
+        .fot-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+
+        }
+
+        .fot-content span {
+            flex: 1;
+            text-align: left;
+            line-height: 40px;
+            color: #99B8F3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .bottom-content {
+            position: fixed;
+            height: 200px;
+            background: linear-gradient(157.54deg, #2D3348 0%, #151B2F 100%);
+            mix-blend-mode: normal;
+            border-radius: 8px;
+            bottom: 40px;
+            right: 20px;
+            width: calc(100% - 40px);
+            padding: 20px;
+            box-sizing: border-box;
+
+
+        }
+
+        .bottom-content-title {
+            height: 40px;
+            background: #343D59;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            /* line-height: 20px; */
+            /* identical to box height */
+            color: #99B8F3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            padding: 0 12px;
+        }
+
+        .bottom-content-title span {
+            flex: 1;
+            text-align: left;
+        }
+
+        #bottom_content_box {
+            height: 120px;
+            overflow: hidden;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .bottom-content-box {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 0 12px;
+            box-sizing: border-box;
+        }
+
+        .bottom-content-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bottom-content-item span {
+            flex: 1;
+            text-align: left;
+            line-height: 40px;
+            color: #99B8F3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        @media screen and (max-height: 650px) {
+            .right-content {
+                width: 332px;
+            }
+
+            .right-content .top .title {
+                font-size: 14px !important;
+
+            }
+
+            .mid-box .mid {
+                width: 136px;
+                padding-left: 8px;
+                padding-top: 8px;
+                font-size: 12px;
+                height: 64px;
+            }
+
+            .mid-title {
+                font-size: 12px !important;
+            }
+
+            .fot-title {
+                font-size: 12px !important;
+            }
+
+            .fot-title-wieght {
+                flex: 1.5 !important;
+                text-align: center !important;
+            }
+
+            .actualWeight {
+                text-align: center;
+            }
+
+            .bottom-content {
+                height: 136px;
+            }
+
+            #bottom_content_box {
+                height: 70px;
+            }
+
+            #fot_content_box {
+                height: 140px !important;
+            }
+        }
+
+        div::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 1px;
+            -webkit-box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.1);
+            opacity: 0.2;
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.1);
+            border-radius: 0;
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-box">
+        <div id="container" style="width: 100%;height:100%"></div>
+        <div class="right-content">
+            <div class="top">
+                <!-- <span class="dot"></span>
+                <span class="title">河南物产库存总览</span>
+                <span class="date">2023-01-11</span> -->
+            </div>
+            <div class="mid-box">
+                <!-- <div class="mid mid-1">
+                    <p style="font-size: 14px">总库存量（吨）</p>
+                    <div style="margin-top:4px">
+                        <p style="font-size: 20px">22,923.32</p>
+                        <img class="mid-icon" src="../imgs/nk-content-one-icon-1.png" alt="">
+                    </div>
+                </div>
+                <div class="mid mid-2">
+                    <p style="font-size: 14px">总库存量（吨）</p>
+                    <div style="margin-top:4px">
+                        <p style="font-size: 20px">22,923.32</p>
+                        <img class="mid-icon" src="../imgs/nk-content-one-icon-1.png" alt="">
+                    </div>
+                </div>
+                <div class="mid mid-3">
+                    <p style="font-size: 14px">总库存量（吨）</p>
+                    <div style="margin-top:4px">
+                        <p style="font-size: 20px">22,923.32</p>
+                        <img class="mid-icon" src="../imgs/nk-content-one-icon-1.png" alt="">
+                    </div>
+                </div>
+                <div class="mid mid-4">
+                    <p style="font-size: 14px">总库存量（吨）</p>
+                    <div style="margin-top:4px">
+                        <p style="font-size: 20px">22,923.32</p>
+                        <img class="mid-icon" src="../imgs/nk-content-one-icon-1.png" alt="">
+                    </div>
+                </div> -->
+            </div>
+            <div class="fot">
+                <div class="fot-title">
+                    <span>仓库简称</span>
+                    <span>理论重量(吨)</span>
+                    <span class="fot-title-wieght">实际库存重量(吨)</span>
+                </div>
+                <div id="fot_content_box">
+                    <div class="fot-content-box">
+                        <!-- <div class="fot-content">
+                            <span>仓库简称仓库简称仓库简称仓库简称仓库简称</span>
+                            <span>20.400040004000</span>
+                            <span>4000.4000400040004000</span>
+                        </div> -->
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="bottom-content">
+            <div class="bottom-content-title">
+                <span>仓库简称</span>
+                <span>货主</span>
+                <span>品名</span>
+                <span>规格</span>
+                <span>厂家</span>
+                <span>材质</span>
+                <span>捆包号</span>
+                <span>理论库存（吨）</span>
+            </div>
+            <div id="bottom_content_box">
+                <div class="bottom-content-box">
+                    <!-- <div class="bottom-content-item">
+                        <span>仓库简称仓库简称仓库简称仓库简称仓库简称</span>
+                        <span>20.400040004000</span>
+                        <span>4000.</span>
+                        <span>4000.</span>
+                        <span>4000.</span>
+                        <span>4000.</span>
+                        <span>4000.</span>
+                        <span>4000.</span>
+                        <span>4000.</span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var changeSize = function () {
+                let rightContentHeight = $('.right-content').outerHeight()
+
+                const percentH = document.documentElement.clientHeight
+                $('#fot_content_box')[0].style = `height:calc(${percentH}px - 600px)`
+
+                // const percentW = document.documentElement.clientWidth / 1920
+                // const percentH = document.documentElement.clientHeight / 1080
+                // $('#main-box')[0].style.transform = 'scale(' + percentW + ',' + percentH + ')'
+            }
+            window.addEventListener('resize', changeSize)
+            changeSize()
+            // var getQueryString = function (name) {
+            //     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            //     var r = window.location.search.substr(1).match(reg);
+            //     if (r != null) {
+            //         return unescape(r[2]);
+            //     }
+            //     return null;
+            // }
+            var baseUrl = '/dg-steel-api/api'
+            // var uscc = getQueryString('uscc') || ''
+            var _get = (url, callback) => { // 网络请求
+                url = baseUrl + url
+                let token = null
+                try {
+                    token = window.parent.sessionStorage.getItem('VUEX_ST_TOKEN') || localStorage.getItem('VUEX_ST_TOKEN')
+                } catch (e) { }
+
+                $.ajax({
+                    headers: {
+                        'Authorization': token,
+                        Source: 'PC',
+                    },
+                    url: url,
+                    type: 'GET',
+                    success: callback,
+                    dataType: 'json',
+
+                });
+            }
+
+
+
+
+            // 渲染地图
+            var map = new AMap.Map('container', {
+                resizeEnable: true,
+                zoom: 4,
+                mapStyle: 'amap://styles/81f797e779d5b4db0f0a32e32e07a10c'
+            })
+            // 自定义窗体
+            var infoWindow = new AMap.InfoWindow({
+                content: '',
+                offset: new AMap.Pixel(-230, 150),
+            });
+            //  添加点
+            const addMarker = (item) => {
+                let marker = new AMap.Marker({
+                    map: map,
+                    position: item.position,
+                    zIndex: 1000,
+                    clickable: true,
+                    offset: new AMap.Pixel(3, 0),
+                    content: `
+                    <div class='marker-box' info-id=${item.id} >
+                        <div class='marker-box-1'></div>
+                        <div  class='marker-box-2'></div>
+                        <div  class='marker-box-3'></div>
+                    </div>
+                    `,
+
+                })
+                marker.id = item.id;
+                marker.on('click', function (e) {
+                    // 点击之后 过滤数据
+                    const content = `<div class="info-window">
+                        <p class='title'>${item.warehouseAbbreviation}</p>
+                        <div class='content'>
+                            <p>
+                                <span class='label'>仓储方联系人</span>
+                                <span>${item.warehousePartyContacts}</span>
+                            </p>
+                            <p>
+                                <span  class='label'>仓储方联系电话</span>
+                                <span>${item.warehousePartyTel}</span>
+                            </p>
+                            <p>
+                                <span  class='label'>仓储方电子邮箱</span>
+                                <span>${item.warehousePartyEmail}</span>
+                            </p>
+                            <p>
+                                <span  class='label'>仓储方联系地址</span>
+                                <span class='label-info'>${item.warehousePartyAddr}</span>
+                            </p>
+                            <p>
+                                <span  class='label'>期限</span>
+                                <span>${item.startDate} - ${item.endDate}</span>
+                            </p>
+                            <p>
+                                <span  class='label'>理论库存(吨)</span>
+                                <span>${item.theoryWeight || '0'}</span>
+                            </p>
+                            <p>
+                                <span  class='label'>实际库存(吨)</span>
+                                <span>${item.actualWeight || '0'}</span>
+                            </p>
+                            <p>
+                                <span  class='label'>当日入库重量</span>
+                                <span>${item.todayInboundWeight || '0'}</span>
+                            </p>
+                            <p>
+                                <span  class='label'>当日出库重量</span>
+                                <span>${item.todayOutboundWeight || '0'}</span>
+                            </p>
+                        </div>
+                    </div>`
+                    const list = goodsList.filter(el => el.warehouseId == item.id) || []
+                    renderBot(list)
+                    infoWindow.setContent(content)
+                    infoWindow.open(map, marker.getPosition());
+                })
+                marker.setExtData(marker.id)
+            }
+            // 获取当前日期
+            const getCurrentDate = () => {
+                var date = new Date();
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                month = (month > 9) ? month : ("0" + month);
+                day = (day < 10) ? ("0" + day) : day;
+                var today = year + "-" + month + "-" + day;
+                return today
+            }
+            var scrollRightTimer = null
+            const scrollRight = () => {
+                // 右侧 滚动
+                let rightContentOuter = $('#fot_content_box').outerHeight()
+                let rightContentIn = $('.fot-content-box').outerHeight()
+                let rightContentHeight = $('.right-content').outerHeight()
+
+                $('#fot_content_box')[0].style = `height:calc(${rightContentHeight}px - 300px )`
+                $('#fot_content_box .fot-content-box').css('top', '0');
+                let tblTop1 = 0;
+                let speedhq1 = 50; // 数值越大越慢
+                let outerHeight1 = rightContentOuter - rightContentIn - 50
+
+                scrollRightTimer = setInterval(() => {
+                    if (tblTop1 <= outerHeight1) {
+                        tblTop1 = 0;
+                    } else {
+                        tblTop1 -= 1;
+                    }
+                    $('#fot_content_box .fot-content-box').css('top', tblTop1 + 'px');
+                }, speedhq1);
+            }
+            document.querySelector('.fot-content-box').onmouseenter = () => {
+
+                clearInterval(scrollRightTimer)
+            }
+            document.querySelector('.fot-content-box').onmouseleave = () => {
+
+                scrollRight()
+
+            }
+
+            // 渲染右侧
+            const renderRightContent = (info) => {
+                var topStr = `
+                    <div class='top-1'>
+                        <span class="dot"></span>
+                        <span class="title">${info.title}</span>
+                    </div>
+
+                    <span class="date">${info.currentDate}</span>
+                `
+                $('.top')[0].innerHTML = topStr
+
+                var midStr = `
+                    <div class="mid mid-1">
+                        <p style="font-size: 14px" class='mid-title'>总库存量（吨）</p>
+                        <div style="margin-top:4px">
+                            <p style="font-size: 20px">${info.totalInventoryWeight}</p>
+                            <img class="mid-icon" src="../imgs/kucun/kucun-1.png" alt="">
+                        </div>
+                    </div>
+                    <div class="mid mid-2">
+                        <p style="font-size: 14px" class='mid-title'>当日总入库重量（吨）</p>
+                        <div style="margin-top:4px">
+                            <p style="font-size: 20px">${info.inboundWeight}</p>
+                            <img class="mid-icon" src="../imgs/kucun/kucun-2.png" alt="">
+                        </div>
+                    </div>
+                    <div class="mid mid-3">
+                        <p style="font-size: 14px" class='mid-title'>当日总出库重量（吨）</p>
+                        <div style="margin-top:4px">
+                            <p style="font-size: 20px">${info.outboundWeight}</p>
+                            <img class="mid-icon" src="../imgs/kucun/kucun-3.png" alt="">
+                        </div>
+                    </div>
+                    <div class="mid mid-4">
+                        <p style="font-size: 14px" class='mid-title'>有库存仓库（个）</p>
+                        <div style="margin-top:4px">
+                            <p style="font-size: 20px">${info.inStockWarehouse}</p>
+                            <img class="mid-icon" src="../imgs/kucun/kucun-4.png" alt="">
+                        </div>
+                    </div>
+                `
+                $('.mid-box')[0].innerHTML = midStr
+                // 渲染右侧
+                $('#fot_content_box .fot-content-box').empty()
+                var str = ''
+                info.warehouseList?.forEach((item) => {
+                    str += `
+                    <div class="fot-content" id='${item.id}'>
+                        <span>${item.warehouseAbbreviation}</span>
+                        <span>${item.theoryWeight}</span>
+                        <span class='actualWeight'>${item.actualWeight || '0'}</span>
+                    </div>`
+                })
+                $('#fot_content_box .fot-content-box').append(str)
+                $('.fot-content').on('click', function (e) {
+
+                    const id = $(this).attr('id')
+
+                    window.open(`/center/steelStorage/stock/monitoring?id=${id}`)
+
+                })
+                scrollRight()
+            }
+
+            // / 渲染底部
+            const renderBot = (list) => {
+                clearInterval(scrollRIght)
+                $('#bottom_content_box .bottom-content-box').empty()
+                var str = ''
+                list.forEach(item => {
+                    str += `
+                        <div class="bottom-content-item">
+                            <span>${item.warehouseAbbr}</span>
+                            <span>${item.companyName}</span>
+                            <span>${item.materialName}</span>
+                            <span>${item.specs}</span>
+                            <span>${item.placeOfOrigin}</span>
+                            <span>${item.materialTexture}</span>
+                            <span>${item.baleNo || '-'}</span>
+                            <span>${item.theoryWeight}</span>
+                        </div>
+                    `
+
+                })
+                $('#bottom_content_box .bottom-content-box').append(str)
+                // 右侧 滚动
+                scrollBot()
+                // let rightContentOuter = $('#fot_content_box').outerHeight()
+
+            }
+            var scrollRIght = null
+            const scrollBot = () => {
+                let botContentOuter = $('#bottom_content_box').outerHeight()
+                let botContentIn = $('.bottom-content-box').outerHeight()
+                $('#bottom_content_box .bottom-content-box').css('top', '0');
+                let tblTop2 = 0;
+                let speedhq2 = 50; // 数值越大越慢
+                let outerHeight2 = botContentOuter - botContentIn - 50
+                scrollRIght = setInterval(() => {
+                    if (tblTop2 <= outerHeight2 || botContentIn <= botContentOuter) {
+                        tblTop2 = 0;
+                    } else {
+                        tblTop2 -= 1;
+                    }
+                    $('#bottom_content_box .bottom-content-box').css('top', tblTop2 + 'px');
+                }, speedhq2);
+            }
+
+
+
+            var goodsList = []
+
+            _get('/warehouse/inventory/overview', function (result) {
+
+                var res = result.data || {};
+                // 渲染地图
+
+                const warehouseList = res.warehouseList || []
+                if (warehouseList.length) {
+                    const firstItem = warehouseList[0] || {}
+                    map.setCenter([firstItem.longitude, firstItem.latitude])
+                    // 仓库列表
+                    warehouseList.forEach(el => {
+                        el.position = [el.longitude, el.latitude]
+                        if (el.longitude && el.latitude) {
+                            addMarker(el)
+                        }
+                    })
+                }
+                goodsList = res.goodsList || []
+                renderRightContent(res)
+                renderBot(goodsList)
+            })
+            // 关闭窗体
+            map.on('click', () => {
+                infoWindow && infoWindow.close()
+                renderBot(goodsList)
+            })
+
+        })
+    </script>
+</body>
+
+</html>

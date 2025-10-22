@@ -1,0 +1,589 @@
+a:focus{
+    text-decoration none
+}
+.s-eye
+    position absolute
+    right 12px
+    top 0
+    color rgba(0,0,0,0.30)
+.s-title
+    flex-row(space-between, center)
+    height: 60px
+    border-bottom: 1px solid #D8D8D8
+    p
+        flex-row(flex-start, center)
+        height: 100%
+        img
+            width: 10px
+            height: 16px
+            margin-right: 14px
+    span
+        font-size: 18px
+        font-weight: 500
+.s-form-items
+    flex-row(flex-start, center)
+    width: 100%
+    margin: 32px 0
+    &>div
+        flex-row(flex-start, center)
+        flex: 1
+        label
+            text-align right
+            padding-right 30px
+        &>i
+            margin-left: 10px
+        &>label
+            min-width: 120px
+        &>p
+            width: 258px
+            flex-row(space-between, center)
+            .ant-input-affix-wrapper,
+            .ant-calendar-picker-input,
+            .ant-input:not(textarea),
+            .ant-select,
+            .ant-select-selection,
+            .ant-calendar-picker-input,
+            .ant-calendar-picker,
+            .ant-btn,
+            .ant-select-selection__rendered
+            .ant-calendar-picker>div
+                width: 100% !important
+                // height: 40px
+            &>i
+                margin: 0 2px
+            .ant-select + .ant-select,
+            .ant-btn
+                margin-left: 10px
+        .single
+            width: 600px
+            .ant-select
+                margin-right: 10px
+
+.title
+    font-size 16px
+    font-family PingFangSC-Medium
+    text-align: left
+.des
+    font-family PingFangSC-Regular
+    font-size 12px
+    text-align: left
+
+.s-list
+    width: 100%
+    color: rgba(0,0,0,0.65)
+    font-family: PingFangSC-Regular
+    font-size: 14px
+    .ant-table-wrapper
+        a
+            display inline-block
+            margin-right 8px
+        a:last-child
+            margin-right 0
+    .s-list-header
+        height: 54px
+        flex-row(flex-start, center)
+        background: #FAFAFA
+        border-bottom: 1px solid rgba(0,0,0,0.09)
+        li
+            // width: 200px
+            flex-row(flex-start, center)
+            margin-left: 15px
+            font-size 13px
+    .s-list-info
+        width: 100%
+        flex-row(space-between, center)
+        height: 105px
+        li
+            margin-left: 15px
+            height: 100%
+            flex-column(center, flex-start)
+            .red
+                color: #F5222D
+        .status
+            flex-row(flex-start, center)
+            .wait
+                width: 6px
+                height: 6px
+                border-radius: 6px
+                background: #F5222D
+                margin-right: 8px
+            .success
+                width: 6px
+                height: 6px
+                border-radius: 6px
+                background: #52C41A
+                margin-right: 8px
+        li:first-child
+            h3
+                font-family: PingFangSC-Medium
+                font-size: 18px
+                color: #333333
+                line-height: 22px
+                margin-bottom: 10px
+        .s-btn
+            width: 300px
+            flex-row(center, center)
+            a
+                // width: 70px
+                //flex: 1
+                color $mainColor
+                padding: 0 10px
+                line-height: 22px
+                font-size: 14px
+                text-align center
+.no-data
+    width: 100%
+    height: 100px
+    flex-row(center, center)
+    font-size: 24px
+    color: #999999
+/* 分页边距 */
+.s-pagination
+    width: 100%
+    flex-row(center, center)
+    margin: 50px 0
+
+/* 自定义卡片 */
+.s-card
+    width: 100%
+.s-card-title
+    flex-row(flex-start, center)
+    font-size: 18px
+    color: #565656
+    font-family: PingFang-SC-Medium
+    border-left: 2px solid $mainColor
+    padding-left: 8px
+    margin: 20px 0 20px 16px;
+    line-height: 22px
+.s-card-content
+    width: 100%
+    padding:14px 16px 32px 16px
+    background: #fff
+.divider
+    background: #f4f5f8;
+    height: 1px;
+    margin-top:20px;
+
+/* 提示 */
+.s-tips
+    flex-row(space-between, center)
+    background: #fffbe6
+    height: 40px
+    border: 1px solid #FFE58F
+    border-radius: 4px
+    padding: 0 20px
+    span
+     font-size: 14px
+     color:rgba(0,0,0,0.65)
+
+.font-14
+    font-size 14px
+.font-12
+    font-size 12px
+
+/* 修正步骤条样式 */
+//.ant-steps-item-content
+//  display flex
+//  flex-direction column
+//  justify-content flex-start
+//  align-items flex-start
+.ant-tabs-nav, .ant-tabs-tabpane
+    display flex !important
+
+
+/* 登录框的tab切换 */
+.login .center .ant-tabs-bar, .login .center .ant-tabs-ink-bar
+  border: 0 !important
+  background-color: #ffffff
+
+.placeholder
+    position: absolute
+    left: 40px
+    color: #cccccc
+
+.wrap .ant-steps-label-vertical .ant-steps-item-tail
+  top 40px !important
+  width 80%
+  left 50px
+.wrap .ant-steps-label-vertical .ant-steps-item-content
+    width 140px !important
+
+
+
+.ant-menu-inline
+    border:none!important
+
+//文字两端对齐
+.text-justify{
+    text-align justify
+    text-justify distribute-all-lines/*ie6-8*/
+    text-align-last justify/* ie9*/
+    -moz-text-align-last justify/*ff*/
+    -webkit-text-align-last justify/*chrome 20+*/
+}
+//公用分页样式
+.table-wrap
+    .ant-pagination
+        width 100%
+        display flex
+        margin 50px 0 20px 0
+        .ant-pagination-total-text
+            flex-grow 1
+
+.pagination-wrap
+    padding 30px 0
+    .ant-pagination
+        display flex
+        flex-direction row
+        .ant-pagination-total-text
+            flex-grow 1
+
+.txt-center
+    text-align center!important
+
+//列表记录
+.ant-table-placeholder
+    border none
+.record-list
+    .ant-table-wrapper
+        a
+            display inline-block
+            margin-right 8px
+        a:last-child
+            margin-right 0
+    .list-block
+        display flex
+        flex-direction column
+        .list-head
+            ul
+                background #fafafa
+                display flex
+                flex-direction row
+                color rgba(0,0,0,0.65)
+                padding-left 15px
+                li
+                    /*width:25%;*/
+                    margin-right 20px
+                    height 54px
+                    line-height 54px
+                    font-size 14px
+        .list-content
+            ul
+                display flex
+                flex-direction row
+                align-items center
+                justify-content center
+                padding 20px 0
+                padding-left 15px
+                li
+                    width 25%
+                    font-size 14px
+                    text-align left
+                    &.w10
+                        width 10%
+                    &.w15
+                        width 15%
+                    &.w20
+                        width 20%
+                    &.w25
+                        width 25%
+                    &.w40
+                        width 40%
+                    &.txt-center
+                        text-align center
+                        a
+                            margin-right 10px
+                    &.mr0 margin-right0
+                    &.status
+                        p
+                            margin-bottom 5px
+                            font-weight bold
+                            color#666
+                            &:before
+                                content  ''
+                                width 5px
+                                height 5px
+                                display  inline-block
+                                vertical-align middle
+                                margin-right 5px
+                                border-radius 50%
+                                background #ccc
+                        .status-release-complete
+                            &:before
+                                background #0090fa
+                        .status-receive-complete
+                            &:before
+                                background #3fc534
+
+                        .status-wait
+                            &:before
+                                background #ff1f36
+
+                        .status-part
+                            &:before
+                                background #ffad36
+//pdf弹窗
+.modal-pdf
+    width 1000px!important
+//无内边距弹窗
+.modal-none-padding
+    .ant-modal-body
+        padding 0
+
+//列表搜索框样式
+.main-content
+
+    input::placeholder
+        color:rgba(0,0,0,0.25);
+        font-size:14px;
+    .ant-row
+        h3:before
+            content:'';
+            height: 20px;
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+            width: 2px;
+            background:#0053db
+.search-wrap
+    padding:20px 0px 20px;
+    .order-wrap
+        flex-grow 1
+        display flex
+        flex-direction row
+        flex-wrap wrap
+        .ant-form-item-control-wrapper
+            flex-grow 1
+        label
+            display inline-block
+            width 70px
+            margin-right 30px
+            color rgba(0,0,0,0.65)
+        input
+            width 258px
+    .range-input
+        input
+            width 115px
+    .range-text
+        display inline-block
+        vertical-align top
+        padding 0 7px
+    .row
+        margin-bottom 24px
+    .search-btn
+        margin-right 20px
+    .ant-calendar-picker-input
+        input
+            width 112px
+            text-align center
+    .ant-select
+        width 258px
+
+.flex-search-wrap
+    padding:15px 0px 15px;
+    .ant-form-item
+        display:flex
+        .ant-form-item-label
+            flex-shrink:0
+        .ant-form-item-control-wrapper
+            flex:1
+//表单底部按钮
+.btn-wrap
+    width 100%
+    text-align center
+    margin-top 30px
+    padding-left 40px
+    .ant-btn
+        width 96px
+        height 34px
+        margin-left 15px
+        margin-right 15px
+
+.pickup-btn-wrap
+    text-align center
+    padding 30px 0
+    .ant-btn
+        width 96px
+        height 34px
+.receive-btn-wrap,.goodsTrans-btn-wrap,.settle-btn-wrap,depositApplyBtnWrap
+    .ant-btn
+        width 96px
+        height 34px
+.s-form-items.btn-search
+    padding-left:120px
+
+//  “至”的间距
+.s-form-items
+    .ant-input-number
+        width 115px
+    .rangetext
+        display inline-block
+        padding 0 5px
+.ant-form
+    .rangetext
+        display inline-block
+        padding 0 5px
+
+//操作步骤1，2，3样式
+.steps-wrap
+    padding  50px 0 18px 0
+    width 92%
+    .ant-steps-item-wait
+        .ant-steps-item-icon
+            margin-right 20px
+            background #ffffff !important
+            color rgba(0,0,0,.25)
+            border 1px solid rgba(0,0,0,0.25)
+        .ant-steps-item-title
+            color rgba(0,0,0,.45)!important
+            font-size 16px
+//弹出框显示优先级控制
+.ant-message
+    z-index 9999
+    top 30%!important
+
+//下拉框弹出更多
+.select-show-all{
+    width:100%;
+    text-align : center;
+    .more-btn{
+        width:100%;
+    }
+}
+i.required{
+    margin-right:4px;
+    color:#f5222d;
+    font-size:14px;
+    padding-top:10px;
+}
+
+
+//弹窗样式车皮信息 火运 首尾
+.sw{
+    .ant-form-item-label{
+        label{
+            width: 100px!important;
+        }
+    }
+}
+//列表字体
+.ant-table-tbody > tr {
+    >td{
+       color:#333;
+       font-family: PingFangSC-Regular, sans-serif;
+    }
+}
+.ant-table-body{
+   tr{
+        th{
+           color:#666;
+           font-family: PingFangSC-Medium, sans-serif;
+        }
+        td{
+           color:#333;
+           font-family: PingFangSC-Regular, sans-serif;
+        }
+   }
+}
+//左侧菜单栏样式
+.lay-content .side-menu{
+    margin:0!important;
+}
+.lay-wrapper-normal .ant-menu-inline  .ant-menu-submenu-title,#left-menu>.ant-menu-item{
+    font-size: 14px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(0,0,0,0.8);
+    line-height: 20px;
+}
+//取消按钮,重置按钮样式
+.btnDark{
+    border: 1px solid #0053DB;
+    color: #0053DB;
+}
+
+
+/* 单行溢出隐藏 */
+.ellipsis
+    overflow: hidden;
+    letter-spacing:0;
+    white-space: nowrap;
+    max-width: 100%;
+    width: auto;
+    display: inline-block;
+    text-overflow: ellipsis;
+.tc
+    text-align: center;
+.tr
+    text-align: right;
+.fl
+    float: left;
+.fr
+    float: right;
+.cp
+    cursor: pointer;
+.mr8
+    margin-right: 8px;
+.mt8
+    margin-top: 8px;
+.mb8
+    margin-bottom: 8px;
+.mr16
+    margin-right: 16px;
+.mb16
+    margin-bottom: 16px;
+.mt16
+    margin-top: 16px;
+.search-form-wrapper
+    .ant-form-item
+        margin-bottom: 14px;
+.custom-card-title
+    position: relative;
+    margin-bottom: 16px;
+    .ant-card-head-title
+        font-size: 16px;
+        color: #141517;
+        line-height: 24px;
+        // font-weight: 600;
+        position: relative;
+.custom-form-style
+    .ant-form-item
+        display: block;
+        margin-bottom: 14px;
+      .ant-form-item-label
+        padding-right: 30px;
+      .ant-calendar-picker
+        width: 100%;
+.background-wrapper
+    background-color: #f4f5f8;
+    margin: -10px -20px;
+
+.custom-main-content-inner
+    flex:1;
+    margin: -10px -30px -20px;
+    // background-color: #f4f5f8;
+    .page-title
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding: 16px 30px;
+        font-size: 16px;
+        color: #141517;
+        line-height: 24px;
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        background-color:#fff;
+
+    .page-title:before
+        position: absolute;
+        content: '';
+        width: 2px;
+        height: 15px;
+        left: 20px;
+        top:50%;
+        transform:translateY(-50%);
+        background: #0053db;

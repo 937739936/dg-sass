@@ -1,0 +1,227 @@
+const obj = {
+	// 煤种id
+	coalTypeDict: {
+		STEAM_COAL: 'STEAM_COAL', //动力煤
+		COKING_COAL: 'COKING_COAL', //焦煤
+		COKE: 'COKE', //焦炭
+		SEMI_COKE: 'SEMI_COKE', //兰炭
+		SMOKELESS_COAL: 'SMOKELESS_COAL', //无烟煤
+		INJECTION_COAL: 'INJECTION_COAL' //喷吹煤
+	},
+	//运输负责方
+	transportResponsibilityList: [
+		{ text: '卖方', value: '卖方' },
+		{ text: '买方', value: '买方' },
+		{ text: '其他', value: '其他' }
+	],
+	contractTemplateDict: {
+		// 合同模版id
+		COKING_001: 'COKING_001', //焦炭合同模版001
+		COKING_002: 'COKING_002', //焦炭合同模版002
+		COKING_003: 'COKING_003', //焦炭合同模版003
+		COKING_004: 'COKING_004', //焦炭合同模版004
+		COKING_005: 'COKING_005', //焦炭合同模版005
+		COKING_006: 'COKING_006', //焦炭合同模版006
+		COKING_007: 'COKING_007', //焦炭合同模板007(泰佳翔与铁投专用)(销售、采购)
+		COKING_000: 'COKING_000', //焦炭合同模版000(通用)
+		COKING_COAL_001: 'COKING_COAL_001', //焦煤合同模版001
+		COKING_COAL_003: 'COKING_COAL_003', //焦煤合同模版003
+		COKING_COAL_004: 'COKING_COAL_004', //焦煤合同模版004(嘉瑞-陕煤)
+		COKING_COAL_000: 'COKING_COAL_000', //焦煤合同模版000(通用)
+		STEAM_COAL_001: 'STEAM_COAL_001', //动力煤合同模版001
+		STEAM_COAL_011: 'STEAM_COAL_011', // 动力煤合同模板011（无承诺函）
+		STEAM_COAL_002: 'STEAM_COAL_002', //动力煤合同模版002
+		// "STEAM_COAL_003": "STEAM_COAL_003", //动力煤合同模版003
+		STEAM_COAL_004: 'STEAM_COAL_004', //动力煤合同模版004
+		STEAM_COAL_005: 'STEAM_COAL_005', //动力煤合同模版005
+		// "STEAM_COAL_006": "STEAM_COAL_006", //动力煤合同模版006(和辉与铁投专用)
+		// "STEAM_COAL_007": "STEAM_COAL_007", //动力煤合同模版007(晋和与铁投专用)
+		STEAM_COAL_008: 'STEAM_COAL_008', //动力煤合同模版008(德胜)
+		STEAM_COAL_009: 'STEAM_COAL_009', //动力煤合同模版009
+		STEAM_COAL_010: 'STEAM_COAL_010', //动力煤合同模版010
+		STEAM_COAL_1001: 'STEAM_COAL_1001', //动力煤合同模版1001(销售)
+		STEAM_COAL_012: 'STEAM_COAL_012', //动力煤000（其他类型）
+		SEMI_COKE_001: 'SEMI_COKE_001', //兰炭合同模版001
+		SEMI_COKE_000: 'SEMI_COKE_000', //兰炭合同模版000(通用)
+		SMOKELESS_COAL_001: 'SMOKELESS_COAL_001', //无烟煤合同模版001
+		INJECTION_COAL_001: 'INJECTION_COAL_001', //喷吹煤合同模版001
+		OFFLINE: 'OFFLINE', //线下合同模板
+		STEAM_COAL_013: 'STEAM_COAL_013', //采购-动力煤合同模版012-仓押
+		COKING_COAL_005: 'COKING_COAL_005', //采购-焦煤合同模版004-仓押
+		COKING_008: 'COKING_008', //采购-焦炭合同模版008-仓押
+		SEMI_COKE_002: 'SEMI_COKE_002', //采购-兰炭合同模版002-仓押
+		INJECTION_COAL_002: 'INJECTION_COAL_002', //采购-无烟煤合同模版002-仓押
+		SMOKELESS_COAL_002: 'SMOKELESS_COAL_002', //采购-喷吹煤合同模版002-仓押
+
+		STEAM_COAL_1004: 'STEAM_COAL_1004', //销售-动力煤合同模版1004-仓押
+		COKING_COAL_1004: 'COKING_COAL_1004', //销售-焦煤合同模版1004-仓押
+		COKING_1004: 'COKING_1004', //销售-焦炭合同模版1004-仓押
+		SEMI_COKE_1004: 'SEMI_COKE_1004', //销售-兰炭合同模版1004-仓押
+		INJECTION_COAL_1004: 'INJECTION_COAL_1004', //销售-无烟煤合同模版1004-仓押
+		SMOKELESS_COAL_1004: 'SMOKELESS_COAL_1004', //销售-喷吹煤合同模版1004-仓押
+
+		STEAM_COAL_1003: 'STEAM_COAL_1003', //销售-动力煤合同模版1003-代采
+		COKING_COAL_1003: 'COKING_COAL_1003', //销售-焦煤合同模版1003-代采
+		COKING_1003: 'COKING_1003', //销售-焦炭合同模版1003-代采
+		SEMI_COKE_1003: 'SEMI_COKE_1003', //销售-兰炭合同模版1003-代采
+		INJECTION_COAL_1003: 'INJECTION_COAL_1003', //销售-无烟煤合同模版1003-代采
+		SMOKELESS_COAL_1003: 'SMOKELESS_COAL_1003' //销售-喷吹煤合同模版1003-代采
+	},
+	transportModeDict: {
+		TRAIN: 'TRAIN', //火运
+		AUTOMOBILE: 'AUTOMOBILE', //汽运
+		SHIP: 'SHIP', //船运
+		AUTOMOBILE_AND_TRAIN: 'AUTOMOBILE_AND_TRAIN' //汽运和火运
+	},
+	// 发运方式
+	despatchModeDict: {
+		TRAIN: 'TRAIN', //火运
+		AUTOMOBILE: 'AUTOMOBILE', //汽运
+		SHIP: 'SHIP' //船运
+	},
+	serviceFeePayModeDict: {
+		BUYER_AND_SELLER_ALL_PAY: 'BUYER_AND_SELLER_ALL_PAY', //3买卖双方支付
+		BUYER_PAY: 'BUYER_PAY', //2买方付款
+		SELLER_PAY: 'SELLER_PAY' //1卖方付款
+	},
+	orderStatusDict: {
+		APPROVAL_FAIL: 'APPROVAL_FAIL', //"退回"2,
+		AUDITING: 'AUDITING', //"审批中"3,
+		CANCELLATION: 'CANCELLATION', //"作废"7,
+		COMPLETED: 'COMPLETED', //"已完成"6,
+		DRAFT: 'DRAFT', //"草稿"1,
+		EXECUTING: 'EXECUTING', //"执行中"5,
+		REJECT: 'REJECT', //"驳回"8,
+		WAIT_CONFIRM: 'WAIT_CONFIRM', //"待确认"9 4,
+		CONFIRM_WAIT_SIGN_SEAL: 'CONFIRM_WAIT_SIGN_SEAL', //确认待盖章
+		WAIT_SIGN_SEAL: 'WAIT_SIGN_SEAL' //"待签约"10 11
+	},
+	orderTypeDict: {
+		BUY: 'BUY', //采购订单,
+		SELL: 'SELL' //销售订单
+	},
+	fileType: {
+		MANUAL_STATEMENT: '结算单',
+		MANUAL_PAYMENT_AGENT_CERTIFICATION: '代发证明',
+		MANUAL_PAYMENT_ENTRUSTED_SETTLEMENT_LETTER: '委托结算函',
+		MANUAL_CONTRACT_OTHER_MATERIALS: '上游其他材料',
+		MANUAL_TERMINAL_CONTRACT_OTHER_MATERIALS: '下游其他材料',
+		MANUAL_PAYMENT_ACCOUNTING_TABLE: '核算表',
+		MANUAL_RECEIVE_WEIGHT_NOTES: '磅单',
+		MANUAL_RECEIVE_WEIGHT_NOTES_DETAIL: '磅单明细',
+		MANUAL_GOOD_TRANSFER_CERTIFICATION: '货权转移证明',
+		MANUAL_RECEIVE_TEST_CREDENTIALS: '化验凭证',
+		MANUAL_RECEIVE_OTHER_CREDENTIALS: '其他凭证',
+		MANUAL_RECEIVE_WEIGHT: '称重凭证',
+		MANUAL_RECEIVE_HARBOR_TRANSFER_VOUCHER: '港口货转凭证',
+		MANUAL_DELIVER_CREDENTIALS: '运输凭证',
+		MANUAL_DELIVER_WEIGHT: '称重凭证',
+		MANUAL_DELIVER_OTHER_CREDENTIALS: '其他凭证',
+		MANUAL_DELIVER_BIG_TICKET: '大票',
+		MANUAL_DELIVER_CAR_NUMBER_TABLE: '车号表',
+		CONTRACT: '合同',
+		CONTRACT_SUPPLEMENT: '补充文档',
+		TERMINAL_CONTRACT: '下游合同',
+		TERMINAL_CONTRACT_SUPPLEMENT: '下游合同补充文档',
+		TERMINAL_CONTRACT_BID_PROOF: '中标佐证',
+		ASSET_TRADE_BACKGROUND_CONTRACT: '贸易背景合同',
+		DELIVER_CREDENTIALS: '运输凭证',
+		DELIVER_BIG_TICKET: '大票',
+		DELIVER_CAR_NUMBER_TABLE: '车号表',
+		DELIVER_OTHER_CREDENTIALS: '其他凭证',
+		RECEIVE_WEIGHT: '称重凭证', // 收货
+		DELIVER_WEIGHT: '称重凭证', // 发货
+		RECEIVE_WEIGHT_NOTES: '磅单',
+		RECEIVE_WEIGHT_NOTES_DETAIL: '磅单明细',
+		RECEIVE_OTHER_CREDENTIALS: '其他凭证',
+		RECEIVE_TEST_CREDENTIALS: '化验凭证',
+		GOOD_TRANSFER_CERTIFICATION: '货权转移证明',
+		GOODS_TRANSFER: '货权转移证明',
+		PAYMENT_ACCOUNTING_TABLE: '核算表',
+		PAYMENT_ACCOUNTING_TABLE_PIC: '核算表（截图）',
+		PAYMENT_ACCOUNTING_TABLE_EXCEL: '核算表（Excel表格）',
+		ASSET_CONFIRMATION_LETTER: '应付账款确认函',
+		PAYMENT_AGENT_CERTIFICATION: '代发证明',
+		PAYMENT_ENTRUSTED_SETTLEMENT_LETTER: '委托结算函',
+		CONTRACT_OTHER_MATERIALS: '上游其他材料',
+		TERMINAL_CONTRACT_OTHER_MATERIALS: '下游其他材料',
+		DELIVER_EXPERIMENT_REPORT: '化验报告',
+		RECEIVE_HARBOR_TRANSFER_VOUCHER: '港口货转凭证',
+		ASSET_INVOICE: '合并发票',
+		ASSET_INVOICE_RESULT: '发票查验结果',
+		ASSET_AJXT_MATERIALS: '爱建材料',
+		PAYMENT_ACCOUNTING_PDF: '核算表盖章版',
+		RECEIVE_STATEMENT: '贸易结算单',
+		ONLINE_CONTRACT: '在线合同',
+		ONLINE_CONTRACT_SUPPLEMENT: '在线合同补充文档',
+		DOWN_CONTRACT: '下游补录合同',
+		DOWN_CONTRACT_SUPPLEMENT: '下游补录合同补充文档',
+		DOWN_CONTRACT_BID_PROOF: '下游补录合同中标佐证',
+		UP_CONTRACT: '上游补录合同',
+		UP_CONTRACT_SUPPLEMENT: '上游补录合同补充文档',
+		UP_CONTRACT_BID_PROOF: '上游补录合同中标佐证',
+		PAYMENT_OTHER: '其他',
+		TRAIN_TRACK: '铁路轨迹',
+		PAYABLE_VOUCHER: '付款凭证',
+		SETTLEMENT: '结算对账单',
+		STEEL_PLAN: '钢筋计划',
+		TRANSPORT: '运输凭证',
+		UP_RECEIVE_VOUCHER: '上游收货凭证',
+		DOWN_RECEIVE_VOUCHER: '下游收货凭证',
+		DOWN_GOODS_TRANSFER_PDF: '下游货权转移证明',
+		RECEIVABLE_TRANSFER_PDF: '应收账款债权转让通知书',
+		CONTRACT_OTHER_BID_PROOF: '中标佐证',
+
+		/*货物管理入库 合同合同详情 附件类型*/
+		WEIGH_VOUCHER: '称重凭证',
+		TEST_VOUCHER: '化验凭证',
+		WORK_ORDER: '作业委托单',
+		HANDING_OVER_LIST: '港航货物交接清单',
+		OTHER: '其他材料',
+
+		ASSET_INVOICE: '合并发票',
+		ASSET_RECV_MERGE: '数质凭证合并',
+		DELIVER_SHIP_HARBOR: '港口确认凭证',
+		UP_INVOICE_DETAIL: '上游发票明细表',
+		ASSET_DOWN_GOODS_TRANSFER_PDF: '下游货权转移证明',
+		TERMINAL_ONLINE_CONTRACT_OTHER_MATERIALS: '下游其他材料',
+		SHIP_TRACK: '船舶轨迹（系统生成）',
+		SHIP_TRACK_UPLOAD: '船舶轨迹',
+		POOL_INVOICE_LETTER: '发票承诺函',
+		POOL_ACCOUNTING_PDF: '核算表盖章版',
+		ASSET_TRANSFER_APPLY: '转让申请书',
+		ASSET_TRANSGER_LIST: '转让清单',
+		ASSET_ZHONGDENG_CERT: '中登网登记证明',
+		7: '下游合同补充文档', // 资产模块补协
+		501: '上游合同补充文档', // 货物管理补协
+		PAYMENT_LJQE_LETTER: '量价确认函', // 量价确认函
+		PAYMENT_DB_LETTER: '担保函', // 担保函
+		PAYMENT_BZJ_ZF_PJ: '保证金支付凭证', // 保证金支付凭证
+		CONTRACT_COMMITMENT: '承诺函',
+		WAREHOUSE_RENTAL_CONTRACT: '仓储合同',
+		DEPOSIT_PAYMENT: '保证金支付凭证',
+		ASSET_QUALITY_PROVE: '质量证明书',
+		PROOF_CREDENTIALS: '货权凭证'
+	},
+
+	isShowGoodsValue: ['ACCOUNTS_RECEIVABLE_LOANS'],
+	ajxtUscc: '91310000132202077A', // 爱建信托USCC
+	shyhUscc: '91310000132257510M', // 上海银行USCC
+	hnycUscc: '91120118MA06DFA24M', // 华能云成商业保理（天津）有限公司
+	nxyhUscc: '91641200073834073D', // 宁夏银行
+	rzlhUscc: '91371100MA3C5WY12D', // 日照蓝海村镇银行股份有限公司在业
+	ytyhUscc: '91370000267133961Y', // 烟台银行
+	nsyhUscc: '9131000066941650XP', // 南商银行
+	zhzlUscc: '91120118MA07GD9T0P', // 中航租赁
+	ghblUscc: '91370600MA7D9TJL26', // 国宏保理
+	hxyhUscc: '91410000594878354X', // 华夏银行
+	sxycUscc: '911405006744854972', // 山西邮储
+	gdyhUscc: '9141010073247261XM', // 中国光大银行股份有限公司郑州东风支行
+	sxyhUscc: '91140100578450710J', // 山西银行
+	jxjjUscc: '91360100563829867U', // 江西九江银行
+	jhblUscc: '91460200MABQXEQ12U', // 金航保理
+	shccsUscc: '913101150935451053', // 上海瑞茂通
+	wwylUscc: '91654004MACNA8B65D' // 万物易链保理
+};
+
+export default obj;

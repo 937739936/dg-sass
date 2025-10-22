@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>服务费结算到作废协议</title>
+    <style type="text/css">
+        @page {
+            size: A4;
+        }
+
+        html, body {
+            font-family: STXihei;
+            padding: 0;
+            margin: 0;
+            color: #000000;
+            page-break-after: avoid
+        }
+        p {
+            text-indent: 25px;
+            line-height: 28px;
+        }
+        .indent {
+            text-indent: 0;
+        }
+        .footer {
+            text-indent:0;
+            width:50%;
+            font-size:16px;
+            float: left;
+        }
+        .textRight {
+            text-align: right;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="title">[[${settlementCompanyName}]]服务费结算单作废协议</p>
+        <p class="textRight">协议编号：<span th:text="${serialNo}"/></p>
+        <p class="textRight">签订时间：<span th:text="${signDate}"/></p>
+        <p class="indent">甲方（付款单位）：[[${companyName}]] </p>
+        <p class="indent">乙方（结算单位）：[[${settlementCompanyName}]] </p>
+        <p>鉴于双方于<span th:text="${statementDate}"/>就双方合作中甲方应向乙方支付的信息技术服务费的相关内容达成一致，确认了结算单号为<span th:text="${statementSerialNo}"/>的服务费结算单（以下简称为“原结算单”）。现因为原结算单部分信息错误，故双方协商一致达成如下约定：</p>
+        <p><strong>1.</strong>双方确认，结算日期为<span th:text="${statementDate}"/>、服务费结算单号为<span th:text="${statementSerialNo}"/>的原结算单部分信息错误，自本协议生效之日起，原结算单溯及至原结算单确认之日起自始无效。</p>
+        <p><strong>2.</strong>有关原结算单及本协议发生的争议，甲乙双方应协商解决，协商不一致的，任何一方均应向乙方所在地有管辖权的人民法院提起诉讼解决。</p>
+        <p><strong>3.</strong>本协议如果通过线下书面方式签订，自甲乙双方加盖公章或合同专用章之日起生效，线下书面协议一式四份，双方各执两份。本协议的传真件、扫描件及复印件与原件具有同等法律效力。</p>
+        <p><strong>4.</strong>本协议如果为通过数链科技平台<strong>【https://www.shdatalink.com】</strong>【采用电子签名方式签订的互联网线上电子合同，自双方在线加盖电子印章后合同立即生效，对双方具有法律约束力。经双方加盖电子印章后，电子合同的传真件、扫描件及复印件与原件具有同等法律效力。</p>
+        <p>（以下无正文）</p>
+        <p class="footer">甲方（签章）：</p>
+        <p class="footer">乙方（签章）：</p>
+    </div>
+</body>
+</html>

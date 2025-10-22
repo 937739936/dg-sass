@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>数链科技-大宗商品数字供应链服务平台</title>
+    <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+    <meta name="keywords"
+        content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+
+    <script src="../../jquery.min.js"></script>
+    <script src="../../echarts.min.js"></script>
+    <script src="../../china.js"></script>
+    <link rel="stylesheet" href="../../swiper-bundle.min.css" />
+    <script src="../../swiper-bundle.min.js"></script>
+    <style>
+        .one-line {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            /* Firefox */
+            -webkit-box-sizing: border-box;
+            /* Safari */
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #101216;
+        }
+
+        #main-box {
+            width: 1920px;
+            height: 1080px;
+            transform-origin: 0 0;
+            overflow: hidden;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            box-sizing: border-box;
+        }
+
+        .main-bg {
+            position: absolute;
+            width: 1216px;
+            height: 1041px;
+            background-image: url('../imgs/map-bg-transport.png');
+            background-size: 100% 100%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            bottom: 40px;
+        }
+
+        .main-con {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .title {
+            color: #fff;
+            height: 81px;
+            width: 100%;
+            padding: 8px 0;
+            background-image: url('../imgs/sm-title-bg-k.png');
+            background-size: 100% 100%;
+            text-align: center;
+            font-size: 36px;
+            color: #FFFFFF;
+            line-height: 47px;
+        }
+
+
+        .titleTime {
+            position: absolute;
+            height: 24px;
+            left: 20px;
+            top: 10px;
+            font-family: PingFang SC;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 22.4px;
+            text-align: left;
+            color: #74E9FF;
+        }
+
+        .titleTime div {
+            display: inline-block;
+        }
+
+        .titleTimeDate {
+            padding-right: 8px;
+        }
+
+        .titleTimeItem {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 3px;
+            text-align: center;
+            margin: 0 4px;
+            background: linear-gradient(180deg, rgba(86, 207, 255, 0.5) 0%, rgba(51, 124, 153, 0) 100%);
+            border: 0.75px solid #75EFFF5C
+        }
+
+        .main-content {
+            position: relative;
+            height: 999px;
+        }
+
+        .main-content>.content-map {
+            position: absolute;
+            width: 780px;
+            height: 900px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            top: -40px;
+        }
+
+        .map-tooltip {
+            border-radius: 3px;
+            border: 1px solid #74E9FF;
+            background: linear-gradient(180deg, rgba(1, 71, 79, 0.0380939) 0.47%, rgba(89, 188, 255, 0.522258) 97.93%);
+            backdrop-filter: blur(40px);
+            padding: 10px;
+            color: #fff;
+            margin-top: -50px;
+        }
+
+        .map-tooltip-tit {
+            font-family: PingFang SC;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 25.2px;
+            text-align: left;
+            margin-bottom: 4px;
+        }
+
+        .map-tooltip-capacity {
+            font-family: PingFang SC;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 19.6px;
+            text-align: left;
+
+        }
+
+        .main-content>.content-table {
+            width: 760px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            bottom: 167px;
+        }
+
+        .content-left {
+            position: absolute;
+            width: 520px;
+            height: 848px;
+            left: 20px;
+            bottom: 167px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+        }
+
+        .content-right {
+            position: absolute;
+            width: 520px;
+            height: 848px;
+            right: 20px;
+            bottom: 167px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+        }
+
+
+        .content-one {
+            width: 100%;
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+        }
+
+        .content-one-title {
+            width: 100%;
+            height: 37px;
+            padding: 6px 15px;
+            background-image: url('../imgs/sm-yy-content-one-title.png');
+            background-size: 332px 100%;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 22px;
+        }
+
+        .content-map-title {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            dispiay: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+            white-space: nowrap;
+            position: absolute;
+            width: 760px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            top: 45px;
+        }
+
+        .content-map-title-main {
+            width: 198px;
+            height: 88px;
+            border-radius: 3px;
+            padding: 14px 18px 11px;
+            backdrop-filter: blur(40px);
+        }
+
+        .content-map-title-main-title {
+            font-family: PingFang SC;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 26px;
+            margin-bottom: 5px;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .content-map-title-main-con {
+            font-family: PingFang SC;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 34px;
+            color: #74E9FF;
+        }
+
+        .content-map-title-main:nth-child(1) {
+            border: 0.8px solid rgba(76, 157, 173, 1);
+            background: linear-gradient(180deg, rgba(1, 71, 79, 0.0380939) 0.47%, rgba(89, 188, 255, 0.522258) 97.93%);
+        }
+
+        .content-map-title-main:nth-child(2) {
+            border: 0.8px solid rgba(82, 111, 210, 1);
+            background: linear-gradient(180deg, rgba(110, 221, 255, 0.0380939) 0.47%, rgba(89, 115, 255, 0.522258) 97.93%);
+
+        }
+
+        .content-map-title-main:nth-child(3) {
+            border: 0.8px solid rgba(44, 152, 98, 1);
+            background: linear-gradient(180deg, rgba(1, 71, 79, 0.0380939) 0.47%, rgba(94, 255, 125, 0.522258) 97.93%);
+        }
+
+        .content-one-main {
+            width: 100%;
+            height: 135px;
+            color: #fff;
+            padding: 0px 0 20px;
+            background-image: url('../imgs/sm-content-one-table-bg.png');
+            background-size: 100% 100px;
+            background-repeat: no-repeat;
+            background-position: 0% 100%;
+        }
+
+        .content-two-main {
+            width: 100%;
+            height: 100%;
+        }
+
+        .content-one-main-table {
+            display: inline-block;
+            width: 442px;
+            background: rgba(19, 135, 228, 0.3);
+            font-family: PingFang SC;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 32px;
+            color: #fff;
+
+        }
+
+        .content-one-main-table-item {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .content-one-main-table-item:nth-child(2n+1) {
+            overflow: hidden;
+            background: rgba(19, 135, 228, 0.3);
+        }
+
+        .content-one-main-table-item:nth-child(2n) {
+            background: rgba(19, 135, 228, 0.4);
+        }
+
+        .content-one-main-table-title {
+            font-family: PingFang SC;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 32px;
+            color: rgba(116, 233, 255, 1);
+            display: inline-block;
+            width: 100px;
+            padding: 0 20px 0 16px;
+        }
+
+        .content-one-main-video {
+            display: inline-block;
+            width: 228px;
+            height: 100%;
+            float: right;
+            background: #010101;
+        }
+
+        .content-one-main-video img,
+        .content-one-main-video video {
+            width: 100%;
+            height: 100%;
+        }
+
+        .content-one-main .content-one-main-span {
+            width: 100%;
+            height: 100%;
+            padding: 7px 30px 16px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            color: #74E9FF;
+            font-family: PingFang SC;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 56px;
+            text-align: left;
+
+        }
+
+        .content-one-main .content-one-main-span .content-one-main-span-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .content-one-main .content-one-main-span .main-table-title-img {
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+            background-image: url('../imgs/sm-content-one.png');
+            background-size: 100% 100%;
+            margin-right: 18px;
+        }
+
+        .content-gap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-gap-d {
+            width: 4px;
+            height: 4px;
+            background: #80D0FE;
+        }
+
+        .content-gap-c {
+            width: 512px;
+            height: 1px;
+            background: linear-gradient(270deg, rgba(183, 234, 255, 0) 0%, #99DCFE 53%, rgba(128, 208, 254, 0) 100%);
+            opacity: 0.26;
+        }
+
+        .content-one-main .content-map-detail {
+            width: 100%;
+            height: 100%;
+        }
+
+        .content-one-main .content-map-detail .content-table-title {
+            width: 100%;
+            height: 32px;
+            padding-left: 40px;
+            background-image: url('../imgs/sm-table-title.png');
+            background-size: 100% 100%;
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 32px;
+            letter-spacing: 1px;
+            text-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-one-main .content-map-detail .content-map-detail-main {
+            margin-top: 10px;
+            width: 100%;
+            height: 188px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-map-detail-main>.content-map-detail-title {
+            min-width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 36px;
+            width: 100%;
+            font-size: 14px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: #E7FFCA;
+            line-height: 20px;
+            z-index: 20;
+        }
+
+        .content-map-detail-title>.detail-title {
+            height: 100%;
+            min-width: 100%;
+            background: rgba(97, 218, 215, 0.25);
+            color: #FFFFFF;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            dispiay: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .content-map-detail-title>.detail-title>div {
+            padding: 0 12px;
+        }
+
+        .content-map-detail-main>#content-map-detail1 {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .content-map-detail-main>#content-map-detail2 {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+
+        .content-bottom {
+            position: absolute;
+            width: 1880px;
+            height: 80px;
+            box-shadow: inset 0px 1px 13px 0px #469AB7;
+            left: 0;
+            right: 0;
+            margin: auto;
+            bottom: 57px;
+            padding: 0 30px 0 7px;
+            display: flex;
+            align-items: center;
+        }
+
+        .content-bottom .content-bottom-title {
+            font-family: PingFang SC;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 22px;
+            color: #fff;
+            position: relative;
+            padding-left: 8.5px;
+            flex: 0 0 110px;
+        }
+
+        .content-bottom .content-bottom-title::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            left: 0;
+            content: '';
+            width: 4.5px;
+            height: 9px;
+            background-image: url("../imgs/transport-icon.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        .content-bottom .content-bottom-main {
+            white-space: nowrap;
+            overflow: hidden;
+            flex: 1 1 auto;
+        }
+
+        .content-bottom .content-bottom-main-animation {
+            width: max-content;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(calc(1733px - 100%));
+            }
+        }
+
+        .content-bottom .content-bottom-main-item {
+            padding: 9px 20px;
+            background: #12426A;
+            font-family: PingFang SC;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22px;
+            color: #74E9FF;
+            margin-right: 30px;
+            display: inline-block;
+        }
+
+        .sm-bottom-tag {
+            width: 100%;
+            height: 37px;
+            background-image: url('../imgs/sm-bottom-tag.png');
+            background-size: 100% 100%;
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-box">
+        <div class="main-bg"></div>
+        <div class="main-con">
+            <div class="title">陕西陕煤供应链运输监管实况</div>
+            <div class="titleTime">
+                <div id="titleTimeDate"></div>
+                <div id="titleTimeTime"></div>
+            </div>
+            <div class="main-content">
+                <div class="content-map" id="content-map"></div>
+                <div class="content-map-title">
+                    <div class="content-map-title-main">
+                        <div class="content-map-title-main-title">
+                            库存量（吨）
+                        </div>
+                        <div class="content-map-title-main-con" id="inventoryTotal">
+                        </div>
+                    </div>
+                    <div class="content-map-title-main">
+                        <div class="content-map-title-main-title">
+                            入库量（吨）
+                        </div>
+                        <div class="content-map-title-main-con" id="inInventory">
+                        </div>
+                    </div>
+                    <div class="content-map-title-main">
+                        <div class="content-map-title-main-title">
+                            出存量（吨）
+                        </div>
+                        <div class="content-map-title-main-con" id="outInventory">
+                        </div>
+                    </div>
+                </div>
+                <div class="content-table">
+                    <div class="content-one">
+                        <div class="content-one-title">巡库信息</div>
+                        <div class="content-one-main" style="padding:11px 30px 20px;height: 160px;">
+                            <div class="content-one-main-table">
+                                <div class="content-one-main-table-item">
+                                    <span class="content-one-main-table-title">巡库人</span>
+                                    <span id="supervisorUserName"></span>
+                                </div>
+                                <div class="content-one-main-table-item">
+                                    <span class="content-one-main-table-title">巡库时间</span>
+                                    <span id="supervisorTime"></span>
+                                </div>
+                                <div class="content-one-main-table-item">
+                                    <span class="content-one-main-table-title">巡库结果</span>
+                                    <span id="supervisorResultStatusDesc"></span>
+                                </div>
+                                <div class="content-one-main-table-item">
+                                    <span class="content-one-main-table-title">巡库定位</span>
+                                    <span id="supervisorLocationAddress"></span>
+                                </div>
+                            </div>
+                            <div class="content-one-main-video">
+                                <video autoplay loop muted id="attachment"></video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-left">
+                    <div class="content-one">
+                        <div class="content-one-title">中转发运</div>
+                        <div class="content-one-main">
+                            <div class="content-one-main-span">
+                                <div class="content-one-main-span-item">
+                                    <div class="main-table-title-img"></div>
+                                    <span>中转在途量(吨)：</span>
+                                    <span id="transferStaticInTransitQuantity"></span>
+                                </div>
+                                <div class="content-one-main-span-item">
+                                    <div class="main-table-title-img"></div>
+                                    <span>中转到货量(吨)：</span>
+                                    <span id="transferStaticArrivedQuantity"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-gap">
+                        <div class="content-gap-d"></div>
+                        <div class="content-gap-c"></div>
+                        <div class="content-gap-d"></div>
+                    </div>
+                    <div class="content-one">
+                        <div class="content-one-title">物流轨迹</div>
+                        <div class="content-one-main" style="padding:26px 30px;height: 285px;">
+                            <div class="content-map-detail">
+                                <div class="content-table-title">
+                                    批次号:<span id="batchNo1"></span>
+                                </div>
+                                <div class="content-map-detail-main">
+                                    <div class="content-map-detail-title" id="content-map-detail-title1">
+                                        <div class="detail-title" id="detailTitle1">
+                                        </div>
+                                    </div>
+                                    <div id="content-map-detail1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-gap">
+                        <div class="content-gap-d"></div>
+                        <div class="content-gap-c"></div>
+                        <div class="content-gap-d"></div>
+                    </div>
+                    <div class="content-one">
+                        <div class="content-one-title">运输量统计</div>
+                        <div class="content-one-main" style="padding:0px 10px 14px;height: 285px;margin-top:-20px">
+                            <div class="content-two-main" id="content-two-main1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <div class="content-one">
+                        <div class="content-one-title">终端发运</div>
+                        <div class="content-one-main">
+                            <div class="content-one-main-span">
+                                <div class="content-one-main-span-item">
+                                    <div class="main-table-title-img"></div>
+                                    <span>终端在途量(吨)：</span>
+                                    <span id="terminalStaticInTransitQuantity"></span>
+                                </div>
+                                <div class="content-one-main-span-item">
+                                    <div class="main-table-title-img"></div>
+                                    <span>终端到货量(吨)：</span>
+                                    <span id="terminalStaticArrivedQuantity"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-gap">
+                        <div class="content-gap-d"></div>
+                        <div class="content-gap-c"></div>
+                        <div class="content-gap-d"></div>
+                    </div>
+                    <div class="content-one">
+                        <div class="content-one-title">物流轨迹</div>
+                        <div class="content-one-main" style="padding:26px 30px;height: 285px;">
+                            <div class="content-map-detail">
+                                <div class="content-table-title">
+                                    批次号:<span id="batchNo2"></span>
+                                </div>
+                                <div class="content-map-detail-main">
+                                    <div class="content-map-detail-title" id="content-map-detail-title2">
+                                        <div class="detail-title" id="detailTitle2">
+                                        </div>
+                                    </div>
+                                    <div id="content-map-detail2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-gap">
+                        <div class="content-gap-d"></div>
+                        <div class="content-gap-c"></div>
+                        <div class="content-gap-d"></div>
+                    </div>
+                    <div class="content-one">
+                        <div class="content-one-title">运输量统计</div>
+                        <div class="content-one-main" style="padding:0px 10px 14px;height: 285px;margin-top:-20px">
+                            <div class="content-two-main" id="content-two-main2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bottom">
+                    <div class="content-bottom-title">预警信息</div>
+                    <div class="content-bottom-main">
+                        <div class="content-bottom-main-animation">
+                        </div>
+                    </div>
+                </div>
+                <div class="sm-bottom-tag"></div>
+            </div>
+            <script>
+                $(function () {
+                    function updateClock() {
+                        let now = new Date(); // 获取当前时间
+                        let year = now.getFullYear();
+                        let month = now.getMonth() + 1;
+                        let da = now.getDate();
+                        let hours = now.getHours(); // 获取小时
+                        let minutes = now.getMinutes(); // 获取分钟
+                        let seconds = now.getSeconds(); // 获取秒
+                        // 确保小时、分钟和秒都是两位数
+                        month = month < 10 ? '0' + month : month;
+                        da = da < 10 ? '0' + da : da;
+                        hours = hours < 10 ? '0' + hours : hours;
+                        minutes = minutes < 10 ? '0' + minutes : minutes;
+                        seconds = seconds < 10 ? '0' + seconds : seconds;
+                        $('#titleTimeDate').html(`${year}年${month}月${da}日`); // 更新页面上的时间
+                        $('#titleTimeTime').html(`<span class="titleTimeItem">${hours}</span>:<span class="titleTimeItem">${minutes}</span>:<span class="titleTimeItem">${seconds}</span>`); // 更新页面上的时间
+                    }
+                    // 设置计时器每1000毫秒（即1秒）更新一次时间
+                    setInterval(updateClock, 1000);
+                    updateClock()
+                    let changeSize = function () {
+                        const percentW = document.documentElement.clientWidth / 1920
+                        const percentH = document.documentElement.clientHeight / 1080
+                        $('#main-box')[0].style.transform = 'scale(' + percentW + ',' + percentH + ')'
+                    }
+                    function formatWithCommas(number) {
+                        // 将数字转换为字符串
+                        const numberStr = number.toString();
+                        // 检查是否包含小数点
+                        const decimalIndex = numberStr.indexOf('.');
+                        let integerPart = numberStr;
+                        if (decimalIndex !== -1) {
+                            // 如果有小数部分，则分割整数和小数部分
+                            integerPart = numberStr.substring(0, decimalIndex);
+                        }
+                        // 使用正则表达式每隔三位添加逗号
+                        const formattedWithCommas = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        // 如果原始数字有小数部分，重新附加小数部分
+                        if (decimalIndex !== -1) {
+                            return formattedWithCommas + numberStr.substring(decimalIndex);
+                        }
+                        return formattedWithCommas;
+                    }
+                    //夹角计算
+                    const getAngle = ({ x: x1, y: y1 }, { x: x2, y: y2 }) => {
+                        const dot = x1 * x2 + y1 * y2
+                        const det = x1 * y2 - y1 * x2
+                        const angle = Math.atan2(det, dot) / Math.PI * 180
+                        return (angle + 360) % 360
+                    }
+                    window.addEventListener('resize', changeSize)
+                    changeSize()
+                    var getQueryString = function (name) {
+                        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+                        var r = window.location.search.substr(1).match(reg);
+                        if (r != null) {
+                            return unescape(r[2]);
+                        }
+                        return null;
+                    }
+                    var baseUrl = '/dg-trade-api/api'
+                    var uscc = getQueryString('uscc') || ''
+                    var _get = function (url, callback) { // 网络请求
+                        url = baseUrl + url + "?uscc=" + uscc
+                        let token = null
+                        try {
+                            token = window.parent.sessionStorage.getItem('VUEX_ST_TOKEN')
+                        } catch (e) { }
+
+                        $.ajax({
+                            headers: {
+                                'Authorization': token,
+                                Source: 'PC',
+                            },
+                            url: url,
+                            type: 'GET',
+                            success: callback,
+                            dataType: 'json',
+
+                        });
+                    }
+                    let MyMarhq1, MyMarhq2, MyMarhq3;
+                    //单位换算
+                    function unit(sum) {
+                        if (sum) {
+                            return Math.round(Number(sum) / 100) / 100
+                        } else {
+                            return 0
+                        }
+                    }
+                    //单位换算
+                    function unitTwo(sum) {
+                        if (sum) {
+                            if (Number(sum) > 100000000) {
+                                return Math.round(Number(sum) / 1000000) / 100 + '亿'
+                            } else if (Number(sum) > 10000) {
+                                return Math.round(Number(sum) / 100) / 100 + '万'
+                            } else {
+                                return Math.round(Number(sum) * 100) / 100
+                            }
+                        } else {
+                            return "0"
+                        }
+                    }
+                    //将十六进制颜色值转换为rgba
+                    var HexToRGB = function (color, opacity) {
+                        let newColor = 'rgba(';
+                        //判断是三位还是六位
+                        if (color.length === 4) {
+                            let arry = [];
+                            for (let i = 1; i < color.length; i++) {
+                                arry.push(parseInt("0x" + color[i] + color[i]));
+                            }
+                            arry.forEach(function (item) {
+                                newColor += item + ', ';
+                            });
+                            newColor += opacity + ')';
+                            return newColor;
+                        } else {
+                            let arry = [];
+                            for (let i = 1; i < color.length; i += 2) {
+                                arry.push(parseInt("0x" + color.slice(i, i + 2)));
+                            }
+                            arry.forEach(function (item) {
+                                newColor += item + ', ';
+                            });
+                            newColor += opacity + ')';
+                            return newColor;
+                        }
+                    }
+                    mapSetOption()
+                    function mapSetOption() {
+                        // 渲染地图
+                        let map = $('#content-map')[0];
+                        //地图标注图标
+                        let smMapTip1 = 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAh1BMVEXZ2dkAAADZ2dnY2Nja2trs7Oz+/v75+fna2trb29ve3t7Z2dn////7+/vv7+/m5uba2tr6+vrY2Nj9/f319fX09PTi4uLc3Nz9/f38/Pz29vb29vbf39/V1dX///8oif/k8P82kf/y+P+Gvf9ep/+UxP95tf9DmP+u0/9rrv9Qn//X6f/J4f9Lo0v3AAAAHnRSTlNDADoGK2bnrSEZFTLz0HJbJbkR6JWJTx3c3JWJTx73n2uSAAACyklEQVRYw72Z6XqiMBSGDwn7ooALOm0DqN1m5v6vb+y0j5gvCSEV+/7W9/nCCVkO5I3D08bPGKMzjGV+XHNvHBqVlYwUmJ/ybwlrn5EJP3UV8hhsCEu4XYg6izKeLExAZ045ScgzmozP7cIG4jmGRCEvyZFyVMgZOcM4CMF3q5HAd7ORwHezkcB3gxGFJl+wrnYrcWZVROvAbEShfr4solxIhJXeWaIw0eoKoWG3IQ2NLORsXAcxl4ZBD0KfkG0kRoi2hGSDUDfgZQgKe8hkEKoVDnJhIQ/UQV+EMQEbMYEHAuIvoVqRQEwi0EUkzRNc5tOE+VITkdQnuA3FRMItRPwUpiQTiclEJFP/F/owYKHSnfr21AmVBewxH0JOMpoBP/ftBy+qslDKQl5qmzF/f7dfvL7ZIqYe4Yj38I/DsR2AkGrE8ixko1PwrW9lnjEi1JngEVZQjFbh9c9YoTnVUBIsBoLjzuEhUmwc8eFSDCXkwfgCPpFck7UYeAGN4UH+kmciZca3pDcLezFQSYKM5CIXYqAdQQzs5DKDcOUuDEEoIzTC46UE3VEjFKCwC7urws8ivJoj3SzCYze813bh7EUB4d5dWIAwg7XBWRjBxIZXz12Ir14Di4PjPMTFISbYAXLXeRjCvocLbOQ6DytYYHELWLjOwwC3ADwLF27L1w425mEbVSOezML3y4826jbKmSFi1xsDdoaSED8LvcwUsXvvtbqrQ8lScxTx6vkOS6n2OPd463HOi+c6cCZ3OhKrEelhim9jPLR7fJ5rxT0vPl5GyKPr1czHy6NDyGJhvTx6DWnY7C06HLD9Ah5UEDOPFtYLOA4aneuo+GwR7Ctzi2D2JsbcbZa5G0Gzt6ru30wbcG/3cUtDMmFO8Z7mbZlm/Keausi0tjN3aYwnzFmHQiT1zTa//ubHBZ9pbKXbxwWU1vH1548GZCr/AIGrBj8y2ALLAAAAAElFTkSuQmCC'
+                        let smMapTip2 = 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAV1BMVEUAAAAoif8oh/8khP8piv8oif8oiv8piv8oiv8riv8oif8nif8oh/8oif/////k8P/y+P95tv9ep/+Gvf9rrv/J4f+u0/9MnP/X6f+82/+TxP+hy/82kP8sDE+MAAAADXRSTlMA3yAQ75Cfz2AwoM9g4NL0wAAAAO5JREFUOMuFk9kSgyAMRVMDSG1ZWrdu//+d1Sp4U8fhPIXkQjIkoQ225qKcUxdjmfZUWrkNU5GEtftDs7h+cjtO8MgZ4qA4y/vHbzDGpWKpQ7tD9C8BetoYX3iekxiXufd+InTiCc6Hz9uvDGPyKSab7C74TLglr80ZXl7Qpj+nerW8JK7umhQKwkz8makIciB4LmYPAicE/WI+USBTxDAjU2CRSC6yAUFsbxNtBIEhC4JhMQcQXInVJgjdfaILIODc7YcXhJQht3sMGH+Mqd2FgSmOXGloS2NfXJzy6iFVA1GlK9rD16ae178W6/8FUVcp5EFwsZsAAAAASUVORK5CYII='
+                        // 地图背景
+                        let areaColorBg = document.createElement('img');
+                        areaColorBg.src = "../imgs/map-bg-trans.png"
+
+                        let geo = [];
+                        [
+                            {
+                                itemStyle: {
+                                    borderColor: "rgba(35, 99, 164,0)",
+                                    shadowColor: "rgba(189, 219, 255,0.8)",
+                                    shadowOffsetY: 5,
+                                    shadowBlur: 15,
+                                    areaColor: {
+                                        type: 'linear',
+                                        x: 0,
+                                        y: 0,
+                                        x2: 800,
+                                        y2: 800,
+                                        colorStops: [{
+                                            offset: 0, color: 'rgba(0, 12, 42, 0.8)' // 0% 处的颜色
+                                        }, {
+                                            offset: 1, color: 'rgba(0, 12, 42, 1)' // 100% 处的颜色
+                                        }],
+                                        global: true
+                                    },
+                                }, layoutCenter: ["50%", "47%"], zlevel: -2
+                            },
+                            {
+                                itemStyle: {
+                                    borderColor: "rgba(55, 155, 253,0.63)",
+                                    shadowColor: "rgba(55, 155, 253,0.63)",
+                                    shadowOffsetY: 5,
+                                    shadowBlur: 15,
+                                    areaColor: {
+                                        type: 'linear',
+                                        x: 0,
+                                        y: 0,
+                                        x2: 800,
+                                        y2: 800,
+                                        colorStops: [{
+                                            offset: 0, color: 'rgba(55, 155, 253,0.635)' // 0% 处的颜色
+                                        }, {
+                                            offset: 1, color: 'rgba(55, 155, 253,0.63)' // 100% 处的颜色
+                                        }],
+                                        global: true
+                                    },
+                                }, layoutCenter: ["50%", "48%"], zlevel: -3
+                            }].forEach(item => {
+                                geo.push({
+                                    type: "map",
+                                    map: "china",
+                                    aspectScale: 0.8,
+                                    zoom: 1,
+                                    zlevel: item.zlevel,
+                                    layoutCenter: item.layoutCenter,
+                                    layoutSize: "100%",
+                                    label: {
+                                        show: false,
+                                    },
+                                    itemStyle: item.itemStyle,
+                                    emphasis: {
+                                        disabled: true,
+                                    },
+                                    silent: true
+                                })
+                            })
+                        let option = {
+                            tooltip: {
+                                trigger: 'item',
+                                enterable: true,
+                                backgroundColor: "rgba(0,0,0,0)",
+                                borderColor: "rgba(0,0,0,0)",
+                                padding: 0,
+                                borderWidth: 0,
+                                position: 'left',
+                                extraCssText: 'box-shadow: 0 0 0px rgba(0, 0, 0, 0);',
+                                formatter: function (params) { // 鼠标移入展示百分比
+                                    let tip = '';
+                                    let content = {};
+                                    if (params.data && params.data.content) {
+                                        content = params.data.content
+                                    } else {
+                                        content = mapData[params.dataIndex].content
+                                    }
+                                    if (content) {
+                                        tip += `<div class="map-tooltip">`;
+                                        tip += `<div class="map-tooltip-tit">${content.name}</div>`
+                                        tip += `<div class="map-tooltip-capacity">库存:${content.sum}吨</div>`
+                                        tip += `</div>`;
+                                    }
+                                    return tip
+                                },
+                            },
+                            legend: {
+                                show: false,
+                            },
+                            geo: geo,
+                            series: [
+                                {
+                                    type: "map",
+                                    map: "china",
+                                    aspectScale: 0.8,
+                                    zoom: 1, //缩放
+                                    showLegendSymbol: false,
+                                    label: {
+                                        normal: {
+                                            show: false,
+                                        },
+                                        emphasis: {
+                                            show: false,
+                                        },
+                                    },
+                                    emphasis: {
+                                        disabled: true,
+                                    },
+                                    itemStyle: {
+                                        areaColor: {
+                                            image: areaColorBg,
+                                            repeat: 'repeat' // 是否平铺，可以是 'repeat-x', 'repeat-y', 'no-repeat'
+                                        },
+                                        borderColor: "RGBA(171, 198, 241, 1)",
+                                        borderWidth: 1,
+                                    },
+                                    layoutCenter: ["50%", "45%"],
+                                    layoutSize: "100%",
+                                    silent: true
+                                },
+                                {
+                                    name: "库点",
+                                    type: "scatter",
+                                    coordinateSystem: "geo",
+                                    label: {
+                                        formatter: "{b}",
+                                        position: "bottom",
+                                        fontSize: 14,
+                                        lineHeight: 20,
+                                        fontFamily: "PingFangSC-Medium, PingFang SC",
+                                        color: "#8BFBFF",
+                                        show: false,
+                                    },
+                                    data: [],
+                                    symbol: (params) => {
+                                        if (params[3] == 1) {
+                                            return smMapTip1
+                                        } else {
+                                            return smMapTip2
+                                        }
+                                    },
+                                    symbolSize: (params) => {
+                                        if (params[3] == 1) {
+                                            return [46, 46]
+                                        } else {
+                                            return [27, 27]
+                                        }
+                                    },
+                                    itemStyle: {
+                                        opacity: 1
+                                    },
+                                    animation: false,
+                                    emphasis: {
+                                        scale: false
+                                    },
+                                    z: 10
+                                }, {
+                                    type: "lines",
+                                    zlevel: 2,
+                                    effect: {
+                                        show: true,
+                                        period: 1,
+                                        trailLength: 0.7,
+                                        color: '#fff',
+                                        symbolSize: 3
+                                    },
+                                    lineStyle: {
+                                        normal: {
+                                            color: '#00BFFF',
+                                            width: 0,
+                                            curveness: 0.2
+                                        }
+                                    },
+                                    data: [],
+                                },
+                            ],
+                        };
+                        let mapDiv = echarts.init(map);
+                        mapDiv.setOption(option);
+                        let mapData = [];
+                        _get('/data/screen/getTransMonitorFacts/stationInfo', function (res) {
+                            if (res.success) {
+                                mapData = res.result.innerStationScreenVOList;
+                                //渲染图表
+                                reportTagEcharts();
+                                // 巡库记录
+                                setSupervisorTaskVO(res.result.supervisorTaskVO)
+                                // 设置统计数值
+                                setTransferWarehouseInventoryVO(res.result.transferWarehouseInventoryVO)
+                                // 预警信息
+                                setWarnDataList(res.result.warnDataList)
+                                // 渲染批次轨迹
+                                setLogisticsTrajectory({
+                                    terminal: (res.result.terminalLogisticsTrajectory || []).slice(0, 5),
+                                    transfer: (res.result.transferLogisticsTrajectory || []).slice(0, 5)
+                                })
+                                // 渲染全部轨迹
+                                let mapDataLine = [];
+                                (res.result.terminalLogisticsTrajectory || []).forEach(item => {
+                                    let { destination, origin } = item
+                                    if (origin?.lat && destination?.lat) {
+                                        mapDataLine.push({
+                                            coords: [[origin.lon, origin.lat], [destination.lon, destination.lat]]
+                                        })
+                                    }
+                                });
+                                (res.result.transferLogisticsTrajectory || []).forEach(item => {
+                                    let { destination, origin } = item
+                                    if (origin?.lat && destination?.lat) {
+                                        mapDataLine.push({
+                                            coords: [[origin.lon, origin.lat], [destination.lon, destination.lat]]
+                                        })
+                                    }
+                                });
+                                option.series[2].data = mapDataLine;
+                                //渲染地图
+                                mapDiv.setOption(option);
+                            }
+                        });
+                        // 预警信息
+                        function setWarnDataList(warnDataList) {
+                            let animation = $('.content-bottom-main-animation')
+                            let htmlMain = ''
+                            warnDataList.map(item => {
+                                htmlMain += '<div class="content-bottom-main-item">';
+                                htmlMain += item;
+                                htmlMain += '</div>';
+                                return
+                            })
+                            animation.html(htmlMain)
+                            // 设置动画
+                            $(function () {
+                                animation.css({
+                                    'animation': `marquee ${animation.width() / 40}s linear infinite`
+                                })
+                            })
+                        }
+                        // 设置统计数值
+                        function setTransferWarehouseInventoryVO(transferWarehouseInventoryVO) {
+                            $('#inInventory').text(formatWithCommas(transferWarehouseInventoryVO.inInventory || 0))
+                            $('#inventoryTotal').text(formatWithCommas(transferWarehouseInventoryVO.inventoryTotal || 0))
+                            $('#outInventory').text(formatWithCommas(transferWarehouseInventoryVO.outInventory || 0))
+                        }
+                        // 巡库记录
+                        function setSupervisorTaskVO(supervisorTaskVO) {
+                            if (!supervisorTaskVO) {
+                                return
+                            }
+                            $('#supervisorUserName').text(supervisorTaskVO.supervisorUserName)
+                            $('#supervisorTime').text(supervisorTaskVO.supervisorTime)
+                            $('#supervisorResultStatusDesc').text(supervisorTaskVO.supervisorResultStatusDesc)
+                            $('#supervisorLocationAddress').text(supervisorTaskVO.supervisorLocationAddress)
+                            if (supervisorTaskVO.attachment.previewUrl || (!supervisorTaskVO.attachment.isVideo && supervisorTaskVO.attachment.path)) {
+                                $('#attachment').attr({
+                                    poster: window.location.origin + '/dg-admin-api/' + (supervisorTaskVO.attachment.previewUrl || supervisorTaskVO.attachment.path),
+                                })
+                            }
+                            if (supervisorTaskVO.attachment.path) {
+                                $('#attachment').attr({
+                                    src: window.location.origin + '/dg-admin-api/' + supervisorTaskVO.attachment.path
+                                })
+                            }
+                        }
+                        function reportTagEcharts() {
+                            var convertData = function (data) {
+                                var res = [];
+                                for (let i = 0; i < data.length; i++) {
+                                    res.push({
+                                        name: data[i].name,
+                                        value: [data[i].longitude, data[i].latitude],//经纬度
+                                        content: {
+                                            name: data[i].name,
+                                            sum: formatWithCommas(data[i].inventory),
+                                        }
+                                    });
+                                }
+                                return res;
+                            };
+                            mapData = convertData(mapData);
+                            option.series[1].data = mapData;
+                            mapDiv.setOption(option);
+                            // 鼠标划入
+                            mapDiv.on('mouseover', (params) => {
+                                mapDiv.dispatchAction({
+                                    type: 'showTip',
+                                    seriesIndex: 1,
+                                    dataIndex: params.dataIndex
+                                });
+                                let newMapData = mapData.map(item => {
+                                    if (item.name == params.name) {
+                                        item.value[3] = 1
+                                    } else {
+                                        item.value[3] = 0
+                                    }
+                                    return item
+                                })
+                                option.series[1].data = newMapData
+                                mapDiv.setOption(option, true)
+                                mapDiv.dispatchAction({
+                                    type: 'showTip',
+                                    seriesIndex: 1,
+                                    dataIndex: params.dataIndex
+                                });
+                            });
+                            //鼠标划出
+                            mapDiv.on('mouseout', (params) => {
+                                let newMapData = mapData.map(item => {
+                                    item.value[3] = 0
+                                    return item
+                                })
+                                option.series[1].data = newMapData
+                                mapDiv.setOption(option, true);
+                            });
+                        }
+                        //渲染地图 --end
+                    }
+
+                    // 渲染轨迹
+                    let smMapTip3 = 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAAXNSR0IArs4c6QAACFZJREFUaN7tmnl0VPUVx639o1ItisCRakIPlFrkVAilLWBPjpQEOahR3AsWLJ5iEamiFj1ia2NRKwLZMPs6ZickYUlmspEJScFGpIQoZJlkZrJN3kxmIJBIQwO5vffl95v85uUlmSEJS9s553O+N7/fXd+8eXkvmZtu+v/rf/BVcRbmldpha5kDspCKMjsYkC6GQV6jPfQh3+tyiMNn4H69HSL1DjCXOqAXtbeUYxfUrljr9zVRbIkV5l77Qc7Bjw51QPIhO/Sg9mMXVJ2Lgl4sZTYpDpZMOa/6IHqAW0rsEIp0lXTABdRvZBVtUjVG8C/ugG7KTTWuyjB4NO/BBg5j4S4Ci5/nKtrOfUFLFGsjUE61xnUYPM8XF3WAAenkFAtarFgbg30D1RyXYYolWFRoBWthBzgKbXBG1qtAkQ2kQjssHNNhCh3gjclPF9jA5gYdgnYo1kbGynxJmY0HsIZ6GJthJLhVJ4EeE0syVkERraCEzgbtXIkCZnN/lxw2tmcb8BdzaJkfW9NTL6MeSGuDYJ0V2rRDgIWcymwLV0aboG06QXWKtSHyOZV6Gd3nxg735UvQlG+FFq0EzTI2QZF8aUDzmQ9X2WaxpDLcllxjeT6XGoqcedgL9XTFAx2UIAGTmBETU9E2KWzV/XxB1SDffA/yo2/CFQ2js8PPcaDGg+0IV9GWxgZssoGrbLeztWHqUW8eD3SgHXYekKDeYyyCWhRr7uy3g8Gpoi3GY28eDbMH4Nv72+Ef+y1Qi1rjVDVEHxX/dYFB0lTvWb1Ktu0tayK/D7L15k074yycjUh6XWfdsPmxN+rR7YHyLLBgXzt8LWOBU04VbWF/1dsfSNPn+PSILFuzwUH7S1etP3PL9yaByE/9As7z+OfefF9S7r8Vn2Merh5pLvbo9kC5EmzGgGoipx1OchVtvk/4rXrJITY0YeKdfZ9ov6gnyBb3vnvH1L5Q/ana3HaMRd5L1TUqB1q58W2rmH8INnsyUHBOG5wYgipBq3YW/bNmwu2TXZp+8JkX7OQzZ9GSLmWzK158zSrmS67tPBnw0puSyMs74sxD1eM2DuT+76RsC2iy2+A440tBB+H7xG/syqZ/4vvQufn+j3Yq14n5fo92PvD4KseQBPRr3AmpivLnWPrrkDL7OLM1bg+U1QoH97bCF+4wa/6ibrXGRwOdpunGi8coPx7cSq4E9lbJ1g64P1AblCNHiT2t8DlXNe6Y5tU71gN9f+bsHp5/r6CiTT26f9luAS0GHiEyW+HvXJntVCKjpe9IZnOfrERIheHYbZPvuqRs8t20ourMVvRDX64ZPE6IJ1usNxTUo9sDZbSCJqMFytXIbIHDXNVY+PAzVpWj3jfp7un/dod30oqqeI1h67dCktsDYdAODCol0ltAz1W01fa3phcfH+3pFlxuOMpy6zMG6gyql9Hswd0CBmzBwBJPmTHvF+eUDS59/vdN72VVVP4lezALA561KH5HXU5v6itJa4bikWpRj24PlNoE/qnNUOgWTVBEujZw99eqRx2vWBMmTu7zus/nvDLWxy/A5S7h7nvndntQ19/tgVIMMDG1BfJTmkGHwVquok3K0MZ8dbZoitfMnpFOJ781G42p5j5tYu03hb5PrzMr9+f+6hEpxczymvuRa5ld66e1QF6KAyZ6dIOa0gTbkYPJTRjMVLRJub1s7SaDsrl7fjzv/BTvH/5LuT77AX+b12yfQafm/UtWSOFfSoUsr0t+sX6yWdZPPH58SDbCYxi4X4NwFe1kxt+KTxXfOmmq8jLdtyW5sHzXEVPBDJ9FjuHeNYp96o1t1RqhhmaYejLYm8cDhRngOxoTxGvMkJNkglxS4jNmkxJ4mrQOupte/kQz94839OQuWP5ks9ow+Bhx4Z095Ye4r5zXzPKjirbgE0+9XdFTa6IRliWZIQvZyzRLI+ir0bllyiZvu/Ou3u1l9flJRoxB3tAUlE79wb2qt0d4U3t55evbTrD8Miy/rKLt3PfkYqD2oJdogpAEE2QmMfDnDNL4hkuZ+Dk5q2xy2YuvV8t+xssZy9f/8SQ1PdLF4meP/LoxprYni9dRqydrEwR79GCn+i6ZYHaCEZKxSJrIk1s+rBx0Ck2f1R35VVfmR/q63JkLfjnowW2mz2Lra4l5Rd5z5g/6XM2Yt9i282hztrKOE+yBehmTPzZiwgfloZB4I6SEHbNlTJo2fdAVbPX74RUvfBynv32aV4/i7vny0t++WhVjuJRCOcKru9J8/B83KuOneM/qfitNnxfHavF6bJglY/rn4LhGWB1ngiQslrT98+b0jRHZOhei9ukiT1/47JWI7AL6mZR4GfnTvsrcWCNoiHhB/xCXr+V+nM2JBXm0R3UI8qXaY/7HegC4GZO/EtsICWMJHqR4rqLt3G+ATVR7XP4DQR/ImEbYENsAsTicTHTDgMq2oAT6x3EV7VjBxwXjgMabYMOoLwLuDBVtgN9FN0KUTANEO7WfKEGjFGsj77NcMUZYP+7DiKdfVCOsQ8KVRBoggqs7iDGCvW7cTrOhXoGBcHOkEdZENsDuiAYII1XFIKhBsaayH2WEtVd9GHGoiHpYjQ2FcMIFDVesyXY9hHJlhDjVAM9Tzmv6r308mt/61ADPYjNBauDeLq6yXcfWUF3sBnjumg8jDrW7Hp5CdigJFzRcscZtvNl8mnJcV98mkYeqg5Vh9fCxJ+Dnb+V1N4zisSMAB/sI9UMilNmkos32A26ILzDhQCtC6+Gvw1IHD99Q38oKq4GHgmsgMLgO4coIqYHlN+RXzfBd8AuuhT+7cHoUD2jXwwvfnSW7auHdoBrYSvZ/xZcCg+rAN+gU+I53nf8ALV0HmOo5C5kAAAAASUVORK5CYII='
+                    let smMapTip4 = 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAGqADAAQAAAABAAAAGgAAAABMybYKAAAE5klEQVRIDc1Vb0xbVRQ/97W8ttBCaeeAUQEdI25IAmHgtjjNnMumi4nGmZgli18WdAFJNhcTs8yY6AcSE404MqdGF3UfjMs0McGxuGyYCC6Mf3MbcxtuOAcItNDR0lL67vWc+3orxULwm+flvXPv+fe759x77mOwDBJdR6vAAs+B4E8CsCIQwgOMBQDEHyDYWXxPsZp9vUuFYkspxYUjZWC1vI2BnwImGAYUkqd3aoW4OMweabieTr0okOg68jRoWgtmkZXO8V8yhqEEhHFR9aymoXWhPi2Q6G7ZgU4fkyeWKuGjxsTT0Hy1xupYdf3p+VYqSlKGIKW4qpMocKTgYN0QFMMRR1JlJE5EUgXGIIKCXQh2U+rwY1WDJOfiIHpouNlRM2giUDKzxNokw09iKv3VGHcS56/hu0/FVSo5Fxc/rMBVfaqUKRyPAj4MHzMDNTaDppgmJwz2svWv/krzBRmJR1GGaRPRGgQc/uSs76u2nkIpmvcp8LqiHcde6Se73W99XdZ5eSh3S/Vq/2dvPD9omgkBnG3GcRogLh7Gk4YlU8SgttznP97aXTgRDNsrSwsCzz6+boS0+R5XbGPdRxW+/JyZkfFpfTQQsmfq1lncX3OhGi5U8HIVSVMDyRlzomE08UaIt/cOZhFIVqYea9i14dqJM32rTrT1Fdau9Y1f+n3UbdW0uTvjQTv5lxTkBjHBqHwJkDGXip9aOiEsWAozI4apC8Y+b+1ZQ8bhmZi+t+nbTcrx+45r2ZwLrcDrvDc+GS4m+QM+D94WzMxIyNOZTCQViGljIIxcGQwPHsfnzZee6LDrVuOn/lv5OU5HzJvtiGba9fhczJAHCS+MmBBojLSueKUf/f8pPWOTMhZ+UoE4/xNlDqnEjG4PTzpC0VljYGjMdar9qqz3nh1VXcV51sj4VFjazRk8TvZWixZfW7wigGsziaA5UDxJqUDA+7Cu90sNHuOT568UvXP8/NaErWRfnu6tocG2mgfxxAEYhjFH3JuTGQSeOAgkkICij4ZEyRrKmQ49KArJOhs8enD35kvBHw41vbi1op30LoctFGw71ESvPxi103x0MmQj3crcrIBscmp0+WphkPFIu6B0rGr/lOj44GfQRC31R2f/UG7Pjbve7uvDPjLmgrPtB77Y7s22T1c/tOpmZWne4IWBu6tJl+dxTuB5ptvEbOi41sVq90+Rjig1I5Lcx87hlTYMjEfq3v3umdePntkz9Few0O2y+90uhz8wHbV73c5Ac+POdpueEb5ya6wML26+pbJkAPsbWwKwl2BExqF4CZInR00UF73vu2GOvfDb0ITHt8I1iz1kmGuiwqu1cei8esdtxLmW73ZGS4u8M9KfypYhvqHqqHjE0wKRQnS85wHNshNEXDYj3hh4pXAmORksJNJZLBGI81a26QD2UyotCkRmMrMY24Zlt4PGEQjvFeKSsLcBE8V/vCSO+2ODHxdmYiqXyEgZiF+as3G/HpNgSkjcQBALghDnYhYybO1sQ+O9+Sbzx0tmpAzFuRYnZEQ2QoZFBwNLRKQS0hDE5ehk5fXYFovTsoDIXVw8lglGuBoMoctw1Oocb2urvYetf9k8CFKR/rNsIHLHA4K/d46/Eq4D12NY0su48Yn/V3oAJf1PQBLsRrMNpngJuLXbbE3jrAr0v+F/A/G473gYxIwGAAAAAElFTkSuQmCC'
+                    let mapline1 = $('#content-map-detail1')[0];
+                    let mapLineDiv1 = echarts.init(mapline1);
+                    let mapline2 = $('#content-map-detail2')[0];
+                    let mapLineDiv2 = echarts.init(mapline2);
+
+                    function setLogisticsTrajectory(obj) {
+                        let { terminal, transfer } = obj
+                        clearInterval(MyMarhq3);
+                        let i = 0;
+                        MarqueehqMap();
+                        function MarqueehqMap() {
+                            if (i < 4) {
+                                i++;
+                            } else {
+                                i = 0;
+                            }
+                            function setOptionline(type) {
+                                let info = obj[type][i % obj[type].length];
+                                let waybillStationTraceInfo = [], waybillStationTraceInfoLoc = {
+                                    L: [],
+                                    R: [],
+                                    T: [],
+                                    B: [],
+                                };
+                                let maplineData = [];
+                                let widthList = [], heightList = [];//统计坐标带范围值
+                                (info.traceInfos || []).forEach((item) => {
+                                    //保证前后两个坐标不重复
+                                    if ((!waybillStationTraceInfo.length) || item.stationName !== waybillStationTraceInfo[waybillStationTraceInfo.length - 1].name) {
+                                        let value = [Number(item.lon), Number(item.lat)]
+                                        waybillStationTraceInfo.push({
+                                            name: item.name,
+                                            value: value
+                                        })
+
+                                    }
+                                });
+                                waybillStationTraceInfo.forEach((item, index) => {
+                                    widthList.push(item.value[0]);
+                                    heightList.push(item.value[1]);
+                                    let value = item.value
+                                    maplineData.push(value)
+                                    if (!item.name) {
+                                        return
+                                    }
+                                    let loc = "L"//文字位置
+                                    switch (index) {
+                                        case 0:
+                                            //第一个点位置,如果下一个点的坐标在当前的右侧，则文字展示在左侧
+                                            if (waybillStationTraceInfo[index + 1] && (waybillStationTraceInfo[index + 1].value[0] > value[0])) {
+                                                loc = "L"
+                                            } else {
+                                                loc = "R"
+                                            }
+                                            break;
+                                        case waybillStationTraceInfo.length - 1:
+                                            //最后一个点位置如果上一个点的坐标在当前的右侧，则文字展示在左侧
+                                            if (waybillStationTraceInfo[index - 1].value[0] > value[0]) {
+                                                loc = "L"
+                                            } else {
+                                                loc = "R"
+                                            }
+                                            break;
+                                        default:
+                                            //其他点位置
+                                            //根据夹角计算所属象限
+                                            let angle1 = getAngle({ x: 0, y: 1 }, { x: waybillStationTraceInfo[index - 1].value[0] - value[0], y: waybillStationTraceInfo[index - 1].value[1] - value[1] })
+                                            let angle = getAngle({ x: waybillStationTraceInfo[index - 1].value[0] - value[0], y: waybillStationTraceInfo[index - 1].value[1] - value[1] }, { x: waybillStationTraceInfo[index + 1].value[0] - value[0], y: waybillStationTraceInfo[index + 1].value[1] - value[1] })
+                                            if (angle < 180) {
+                                                angle1 = angle1 + angle * 0.5 + 180
+                                            } else {
+                                                angle1 = angle1 + angle * 0.5
+                                            }
+                                            let aa = Math.round(angle1 % 360 / 90);
+                                            switch (aa) {
+                                                case 1:
+                                                    loc = "L";
+                                                    break;
+                                                case 2:
+                                                    loc = "B";
+                                                    break;
+                                                case 3:
+                                                    loc = "R";
+                                                    break;
+                                                default:
+                                                    loc = "T";
+                                            }
+                                    }
+                                    waybillStationTraceInfoLoc[loc].push({
+                                        name: item.name,
+                                        value: value
+                                    })
+                                })
+                                let widthLine = Math.max(...widthList) - Math.min(...widthList);
+                                let heightLine = Math.max(...heightList) - Math.min(...heightList);
+                                let zoom = 3;//地图加载比例；
+                                zoom = Math.round(20 / (widthLine > heightLine ? widthLine : heightLine)) || 1;
+                                let center = [];
+                                let linesData = []
+                                if (maplineData.length) {
+                                    center = [maplineData.reduce((prev, next) => {
+                                        return prev + next[0];
+                                    }, 0) / maplineData.length, maplineData.reduce((prev, next) => {
+                                        return prev + next[1];
+                                    }, 0) / maplineData.length]
+                                    linesData = [{
+                                        coords: maplineData
+                                    }]
+                                }
+                                return {
+                                    geo: {
+                                        map: "china",
+                                        aspectScale: 0.9, //长宽比
+                                        zoom: zoom,
+                                        roam: false,
+                                        center,
+                                        label: {
+                                            normal: {
+                                                show: false,
+                                                color: "#ffffff"
+                                            },
+                                        },
+                                        itemStyle: {
+                                            areaColor: "RGBA(4, 57, 78, 1)",
+                                            borderColor: "RGBA(140, 215, 255, 1)",
+                                            shadowColor: 'rgba(231, 255, 202, 0.5)',
+                                            shadowBlur: 50
+                                        },
+                                    },
+                                    legend: {
+                                        show: false,
+                                    },
+                                    series: [
+                                        {
+                                            type: `map`,
+                                            map: `china`,
+                                            aspectScale: 0.9, //长宽比
+                                            zoom: zoom,
+                                            center,
+                                            roam: false,
+                                            itemStyle: {
+                                                normal: {
+                                                    areaColor: "RGBA(4, 57, 78, 1)",
+                                                    borderColor: "RGBA(140, 215, 255, 1)",
+                                                },
+                                                emphasis: {
+                                                    areaColor: "RGBA(4, 57, 78, 1)",
+                                                    borderColor: "RGBA(140, 215, 255, 1)",
+                                                    label: {
+                                                        show: false,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        {
+                                            type: "lines",
+                                            polyline: true,
+                                            lineStyle: {
+                                                color: 'rgba(231, 255, 202, 1)',
+                                                width: 2,
+                                                cap: "round",
+                                                opacity: 0.9,
+                                                shadowColor: 'rgba(231, 255, 202, 0.5)',
+                                                shadowBlur: 15
+                                            },
+                                            label: {
+                                                show: true,
+                                            },
+                                            symbol: 'circle',
+                                            symbolSize: 14,
+                                            data: linesData,
+                                            z: 10
+                                        }, {
+                                            name: "中间站上",
+                                            type: "scatter",
+                                            symbolSize: 6,
+                                            coordinateSystem: "geo",
+                                            itemStyle: {
+                                                color: 'rgba(231, 255, 202, 1)',
+                                                opacity: 1,
+                                            },
+                                            label: {
+                                                formatter: "{b}",
+                                                position: "top",
+                                                fontSize: 8,
+                                                lineHeight: 10,
+                                                fontWeight: 400,
+                                                fontFamily: "PingFangSC-Medium, PingFang SC",
+                                                color: "#FFF",
+                                                show: true,
+                                            },
+                                            data: waybillStationTraceInfoLoc.T,
+                                            z: 20
+                                        }, {
+                                            name: "中间站下",
+                                            type: "scatter",
+                                            symbolSize: 6,
+                                            coordinateSystem: "geo",
+                                            itemStyle: {
+                                                color: 'rgba(231, 255, 202, 1)',
+                                                opacity: 1,
+                                            },
+                                            label: {
+                                                formatter: "{b}",
+                                                position: "bottom",
+                                                fontSize: 8,
+                                                lineHeight: 10,
+                                                fontWeight: 400,
+                                                fontFamily: "PingFangSC-Medium, PingFang SC",
+                                                color: "#FFF",
+                                                show: true,
+                                            },
+                                            data: waybillStationTraceInfoLoc.B,
+                                            z: 20
+                                        }, {
+                                            name: "中间站右",
+                                            type: "scatter",
+                                            symbolSize: 6,
+                                            coordinateSystem: "geo",
+                                            itemStyle: {
+                                                color: 'rgba(231, 255, 202, 1)',
+                                                opacity: 1,
+                                            },
+                                            label: {
+                                                formatter: "{b}",
+                                                position: "right",
+                                                fontSize: 8,
+                                                lineHeight: 10,
+                                                fontWeight: 400,
+                                                fontFamily: "PingFangSC-Medium, PingFang SC",
+                                                color: "#FFF",
+                                                show: true,
+                                            },
+                                            data: waybillStationTraceInfoLoc.R,
+                                            z: 20
+                                        }, {
+                                            name: "中间站左",
+                                            type: "scatter",
+                                            symbolSize: 6,
+                                            coordinateSystem: "geo",
+                                            itemStyle: {
+                                                color: 'rgba(231, 255, 202, 1)',
+                                                opacity: 1,
+                                            },
+                                            label: {
+                                                formatter: "{b}",
+                                                position: "left",
+                                                fontSize: 8,
+                                                lineHeight: 10,
+                                                fontWeight: 400,
+                                                fontFamily: "PingFangSC-Medium, PingFang SC",
+                                                color: "#FFF",
+                                                show: true,
+                                            },
+                                            data: waybillStationTraceInfoLoc.L,
+                                            z: 20
+                                        }, {
+                                            name: "发站",
+                                            type: "scatter",
+                                            coordinateSystem: "geo",
+                                            label: {
+                                                show: false,
+                                            },
+                                            data: waybillStationTraceInfo.length ? [waybillStationTraceInfo[0]] : [],
+                                            symbol: smMapTip3,
+                                            symbolSize: [16, 16],
+                                            symbolOffset: [0, '-70%'],
+                                            itemStyle: {
+                                                opacity: 1
+                                            },
+                                            z: 30
+                                        }, {
+                                            name: "到站",
+                                            type: "scatter",
+                                            coordinateSystem: "geo",
+                                            label: {
+                                                show: false,
+                                            },
+                                            data: waybillStationTraceInfo.length ? [waybillStationTraceInfo[waybillStationTraceInfo.length - 1]] : [],
+                                            symbol: smMapTip4,
+                                            symbolSize: [16, 16],
+                                            symbolOffset: [0, '-70%'],
+                                            itemStyle: {
+                                                opacity: 1
+                                            },
+                                            z: 30
+                                        }
+                                    ],
+                                };
+                            }
+                            mapLineDiv1.clear();
+                            mapLineDiv1.setOption(setOptionline('transfer'));
+                            clearInterval(MyMarhq1);
+                            // 发收站信息
+                            let transferi = i % transfer.length
+                            $('#batchNo1').empty();
+                            $('#batchNo1').append(transfer[transferi].batchNo);
+                            $('#detailTitle1').empty();
+                            let detailTitle = "";
+                            detailTitle += `<div>${transfer[transferi].origin?.name || ''}-${transfer[transferi].destination?.name || ''}</div>` +
+                                `<div>${transfer[transferi].deliverDate}</div>` +
+                                `<div>${formatWithCommas(transfer[transferi].deliverQuantity)}吨</div>`
+                            $('#detailTitle1').append(detailTitle);
+                            //内容超出高度后滚动轮播
+                            $(function () {
+                                let detailTitleWidth1 = $('#detailTitle1').outerWidth()
+                                let contentDetailMainWidth1 = $('#content-map-detail-title1').outerWidth()
+                                if (detailTitleWidth1 > contentDetailMainWidth1) {
+                                    $('#content-map-detail-title1').css('left', '0');
+                                    let left = 0;
+                                    let speedhq = 50; // 数值越大越慢
+                                    let outerwidth = contentDetailMainWidth1 - detailTitleWidth1
+                                    function MarqueehqWidth1() {
+                                        if (left <= outerwidth) {
+                                            left = 0;
+                                        } else {
+                                            left -= 1;
+                                        }
+                                        $('#content-map-detail-title1').css('left', left + 'px');
+                                    }
+                                    MyMarhq1 = setInterval(MarqueehqWidth1, speedhq);
+                                } else {
+                                    $('#content-map-detail-title1').css('left', '0');
+                                }
+                            })
+                            mapLineDiv2.clear();
+                            mapLineDiv2.setOption(setOptionline('terminal'));
+                            clearInterval(MyMarhq2);
+                            // 发收站信息
+                            let terminali = i % terminal.length
+                            $('#batchNo2').empty();
+                            $('#batchNo2').append(terminal[terminali].batchNo);
+                            $('#detailTitle2').empty();
+                            let detailTitle2 = "";
+                            detailTitle2 += `<div>${terminal[terminali].origin?.name || ''}-${terminal[terminali].destination?.name || ''}</div>` +
+                                `<div>${terminal[terminali].deliverDate}</div>` +
+                                `<div>${formatWithCommas(terminal[terminali].deliverQuantity)}吨</div>`
+                            $('#detailTitle2').append(detailTitle2);
+                            //内容超出高度后滚动轮播
+                            $(function () {
+                                let detailTitleWidth2 = $('#detailTitle2').outerWidth()
+                                let contentDetailMainWidth2 = $('#content-map-detail-title2').outerWidth()
+                                if (detailTitleWidth2 > contentDetailMainWidth2) {
+                                    $('#content-map-detail-title2').css('left', '0');
+                                    let left = 0;
+                                    let speedhq = 50; // 数值越大越慢
+                                    let outerwidth = contentDetailMainWidth2 - detailTitleWidth2
+                                    function MarqueehqWidth2() {
+                                        if (left <= outerwidth) {
+                                            left = 0;
+                                        } else {
+                                            left -= 1;
+                                        }
+                                        $('#content-map-detail-title2').css('left', left + 'px');
+                                    }
+                                    MyMarhq2 = setInterval(MarqueehqWidth2, speedhq);
+                                } else {
+                                    $('#content-map-detail-title2').css('left', '0');
+                                }
+                            })
+                        }
+                        MyMarhq3 = setInterval(MarqueehqMap, 5000);
+                    }
+                    // 运输数量统计
+                    _get('/data/screen/getTransMonitorFacts/transInfo', function (result) {
+                        if (!result.success) {
+                            return
+                        }
+                        let res = result.result || {};
+                        let { terminalStatic, transferStatic } = res
+                        $('#transferStaticInTransitQuantity').text(formatWithCommas(transferStatic.inTransitQuantity || 0))
+                        $('#transferStaticArrivedQuantity').text(formatWithCommas(transferStatic.arrivedQuantity || 0))
+                        $('#terminalStaticInTransitQuantity').text(formatWithCommas(terminalStatic.inTransitQuantity || 0))
+                        $('#terminalStaticArrivedQuantity').text(formatWithCommas(terminalStatic.arrivedQuantity || 0))
+
+                        let Data1 = { xAxis: [], data: [[], []] };
+                        transferStatic.transQuantityStaticList.forEach((item) => {
+                            Data1.xAxis.push(item.month)
+                            Data1.data[0].push(item.trainDeliverQuantity)
+                            Data1.data[1].push(item.shipDeliverQuantity)
+                        });
+                        let Data2 = { xAxis: [], data: [[], []] };
+                        terminalStatic.transQuantityStaticList.forEach((item) => {
+                            Data2.xAxis.push(item.month)
+                            Data2.data[0].push(item.trainDeliverQuantity)
+                            Data2.data[1].push(item.shipDeliverQuantity)
+                        });
+                        function contentTwoMainOption(data) {
+                            return {
+                                color: ["#388BFF", "#F6931C", "#FFD52E"],
+                                grid: {
+                                    left: "10",
+                                    right: "20",
+                                    top: "40",
+                                    bottom: "0",
+                                    containLabel: true,
+                                },
+                                legend: {
+                                    show: true,
+                                    x: "right",
+                                    y: "0",
+                                    icon: "stack",
+                                    itemWidth: 10,
+                                    itemHeight: 10,
+                                    textStyle: {
+                                        color: "#80D0FE",
+                                        fontSize: 14,
+                                        fontWeight: "normal",
+                                    },
+                                    data: ["火运", "船运"],
+                                },
+                                tooltip: {
+                                    trigger: 'axis',
+                                    backgroundColor: 'rgba(89, 188, 255, 0.53)',
+                                    borderWidth: '1', //边框宽度设置1
+                                    borderColor: '#81D1FF', //设置边框颜色
+                                    borderRadius: '12',
+                                    extraCssText: "background: linear-gradient(180deg, rgba(1, 71, 79, 0.04) 0%, rgba(89, 188, 255, 0.53) 100%);",
+                                    textStyle: {
+                                        color: '#FFFFFF'
+                                    },
+                                    formatter: function (params) { // 鼠标移入展示百分比
+                                        let tip = ""
+                                        if (params != null && params.length > 0) {
+                                            tip = params[0].name + '<br/>'
+                                            var total = 0
+                                            for (var i = 0; i < params.length; i++) {
+                                                total += params[i].value
+                                                if (i == params.length - 1) {
+                                                    for (var j = 0; j < params.length; j++) {
+                                                        tip += params[j].marker + params[j].seriesName + ': ' + formatWithCommas(params[j].value) + '吨<br/>'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        return tip
+                                    },
+                                },
+                                xAxis: [
+                                    {
+                                        type: "category",
+                                        boundaryGap: false,
+                                        axisLabel: {
+                                            color: "#00B6E4",
+                                            showMinLabel: true,
+                                            showMaxLabel: true,
+                                            fontSize: "16px",
+                                        },
+                                        axisTick: {
+                                            show: false,
+                                        },
+                                        axisLine: {
+                                            show: true,
+                                            lineStyle: {
+                                                color: "#5A91AB",
+                                            },
+                                        },
+                                        data: data.xAxis
+                                    },
+                                ],
+                                yAxis: [
+                                    {
+                                        type: "value",
+                                        name: "",
+                                        nameTextStyle: {
+                                            color: "#00B6E4",
+                                            align: "left",
+                                        },
+                                        axisTick: {
+                                            show: false,
+                                        },
+                                        axisLabel: {
+                                            formatter: "{value}",
+                                            textStyle: {
+                                                color: "#00B6E4",
+                                                fontSize: "16px",
+                                            },
+                                        },
+                                        axisLine: {
+                                            show: false,
+                                        },
+                                        splitLine: {
+                                            show: false,
+                                        },
+                                    },
+                                ],
+                                series: [
+                                    {
+                                        name: "火运",
+                                        type: "bar",
+                                        barWidth: "16px",
+                                        data: data.data[0],
+                                        itemStyle: {
+                                            normal: {
+                                                color: {
+                                                    type: "linear",
+                                                    x: 0,
+                                                    y: 0,
+                                                    x2: 0,
+                                                    y2: 1,
+                                                    colorStops: [
+                                                        {
+                                                            offset: 0,
+                                                            color: "rgba(23, 153, 254, 1)",
+                                                        },
+                                                        {
+                                                            offset: 1,
+                                                            color: "rgba(23, 153, 254, 0.2)",
+                                                        },
+                                                    ],
+                                                    globalCoord: false,
+                                                },
+                                            },
+                                        },
+                                    },
+                                    {
+                                        name: "船运",
+                                        type: "bar",
+                                        barWidth: "16px",
+                                        data: data.data[1],
+                                        itemStyle: {
+                                            normal: {
+                                                color: {
+                                                    type: "linear",
+                                                    x: 0,
+                                                    y: 0,
+                                                    x2: 0,
+                                                    y2: 1,
+                                                    colorStops: [
+                                                        {
+                                                            offset: 0,
+                                                            color: "rgba(165, 255, 253, 1)",
+                                                        },
+                                                        {
+                                                            offset: 1,
+                                                            color: "rgba(94, 210, 207, 0.2)",
+                                                        },
+                                                    ],
+                                                    globalCoord: false,
+                                                },
+                                            },
+                                        },
+                                    },
+                                ],
+                            }
+                        };
+                        let contentTwoMain1 = $('#content-two-main1')[0];
+                        let contentTwoMainDiv1 = echarts.init(contentTwoMain1);
+                        contentTwoMainDiv1.setOption(contentTwoMainOption(Data1));
+                        let contentTwoMain2 = $('#content-two-main2')[0];
+                        let contentTwoMainDiv2 = echarts.init(contentTwoMain2);
+                        contentTwoMainDiv2.setOption(contentTwoMainOption(Data2));
+                    })
+                })
+            </script>
+</body>
+
+</html>

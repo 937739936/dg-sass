@@ -1,0 +1,61 @@
+.tips-common-wrap {
+  width: 100%;
+  min-height: 40px;
+  height: auto;
+  padding: 0 14px;
+  padding-left: 40px;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+  line-height: 22px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 4px;
+  position: relative;
+}
+
+.tips-common-wrap-before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  margin-right: 10px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.tips-error-wrap:extend(.tips-common-wrap) {
+  border: 1px solid rgba(255, 184, 184, 1);
+  background: rgba(255, 248, 248, 1);
+}
+
+.tips-error-wrap::before:extend(.tips-common-wrap-before) {
+  background-image: url('~v2/assets/imgs/common/red_error_icon.png');
+  background-size: 14px 14px;
+  background-position: center;
+}
+
+.tips-info-wrap:extend(.tips-common-wrap) {
+  border: 1px solid rgba(229, 230, 235, 1);
+  background: rgba(243, 247, 255, 1);
+  background-position: center;
+}
+.tips-info-wrap::before:extend(.tips-common-wrap-before) {
+  background-image: url('~v2/assets/imgs/common/info_icon.png');
+  background-size: 14px 14px;
+  background-position: center;
+}
+
+.tips-warn-wrap:extend(.tips-common-wrap) {
+  border: 1px solid rgba(255, 194, 121, 1);
+  background: rgba(255, 243, 231, 1);
+  background-position: center;
+}
+.tips-warn-wrap::before:extend(.tips-common-wrap-before) {
+  background-image: url('~v2/assets/imgs/common/warning_tip_icon.png');
+  background-size: 14px 14px;
+  background-position: center;
+}

@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+
+current_branch=$(git symbolic-ref --short HEAD)
+
+protected_branch="feature-gbb-hook"
+
+
+cd submodules
+
+
+sub_branch=$(git symbolic-ref --short HEAD)
+
+
+cd ..
+
+
+
+
+
+# echo "当前子仓库分支和主仓库分支必须都处于master分才可以提交 $main_branch branch $current_branch"
+
+if [ "$current_branch" != "$sub_branch" ] ; then
+
+  echo "\033[31m 当前子仓库分支和主仓库分支，不一致,禁止提交，当前主仓库分支$current_branch, 当前子仓库分支 $sub_branch \033[0m"
+  exit 1
+fi

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>数链科技-大宗商品数字供应链服务平台</title>
+  <meta name="description" content="打造全球领先的大宗商品数字供应链服务平台：依托大宗商品实时交易数字化，构建可信的数字资产，实现资产和资金的精准对接。
+">
+  <meta name="keywords" content="数链科技,数字供应链,金融科技,大宗商品,产业数字化,人工智能,大数据,区块链,供应链金融,大宗融资,贸易融资,煤炭托盘,煤炭仓储,钢材托盘,钢材垫资,钢材仓储,煤炭应收,钢材代采,煤炭仓押,钢铁代采,钢铁资金预付,钢材资金预付,煤炭垫资,钢铁托盘,钢铁仓押,煤炭应收账款,煤炭资金预付,煤炭预付,煤炭代采,钢材预付,钢铁预付,钢材仓押,钢铁垫资,钢铁仓储">
+
+  <script src="../jquery.min.js"></script>
+  <script src="../echarts.min.js"></script>
+  <style>
+    body,
+    html {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      background-color: #07124A;
+    }
+
+    body {
+      background-image: url('./imgs/bg.png');
+      background-size: 100% 100%;
+    }
+
+    #main-box {
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 0 0;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .title {
+      font-size: 36px;
+      color: #fff;
+      height: 96px;
+      width: 100%;
+      background-image: url('./imgs/title-bg.png');
+      background-size: cover;
+      text-align: center;
+      line-height: 80px;
+    }
+
+    .number-list {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .number-item {
+      display: flex;
+      width: 439px;
+      height: 150px;
+      ;
+      flex-direction: column;
+      text-align: center;
+      background-image: url('./imgs/num-bg.png');
+      background-size: 100% 100%;
+      justify-content: center;
+    }
+
+    .number-item-text {
+      font-size: 40px;
+      color: #fff;
+      margin-bottom: 14px;
+      ;
+    }
+
+    .number-item-info {
+      font-size: 16px;
+      color: #02F2F6;
+
+    }
+
+    .chart-list {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .chart-item {
+      width: 917px;
+      height: 356px;
+      background-image: url('./imgs/section-bg.png');
+      background-size: 100% 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    #chartItem4 {
+      width: 100%;
+      height: 100%;
+      margin-top: -20px;
+    }
+
+    .f-title {
+      font-size: 18px;
+      color: #fff;
+      font-weight: bold;
+      margin-left: 5px;
+      display: flex;
+      line-height: 30px;
+      position: relative;
+      z-index: 99999;
+    }
+
+    .f-title .text {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .left-icon {
+      width: 30px;
+      height: 30px;
+      background-image: url('./imgs/up-circle.png');
+      background-size: cover;
+      transform: rotateY(180deg);
+    }
+
+    .right-icon {
+      width: 30px;
+      height: 30px;
+      background-image: url('./imgs/up-circle.png');
+      background-size: cover;
+    }
+
+    .up-icon {
+      display: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main-box">
+    <div class="title" id="companyName"></div>
+    <div class="number-list">
+      <div class="number-item">
+        <div class="number-item-text" id="shipmentPlanThisMonth">
+          0
+        </div>
+        <div class="number-item-info">
+          当月发运计划（万吨）
+        </div>
+      </div>
+      <div class="number-item">
+        <div class="number-item-text" id="actualShipmentThisMonth">
+          0
+        </div>
+        <div class="number-item-info">
+          当月实际发运（万吨）
+        </div>
+      </div>
+      <div class="number-item">
+        <div class="number-item-text" id="paymentThisMonth">
+          0
+        </div>
+        <div class="number-item-info">
+          当月回款（亿）
+        </div>
+      </div>
+      <div class="number-item">
+        <div class="number-item-text" id="rawMaterialInventory">
+          0
+        </div>
+        <div class="number-item-info">
+          上月库存（万吨）
+        </div>
+      </div>
+    </div>
+    <div class="chart-list">
+      <div class="chart-item" id="chartItem1">
+
+      </div>
+      <div class="chart-item" id="chartItem2">
+
+      </div>
+
+    </div>
+    <div class="chart-list">
+      <div class="chart-item" id="chartItem3">
+
+      </div>
+      <div class="chart-item chart-item-4">
+        <div class="f-title">
+          <div class="left-icon up-icon"></div>
+          <div class="text">-</div>
+          <div class="right-icon up-icon"></div>
+        </div>
+        <div id="chartItem4">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    $(function () {
+      var changeSize = function () {
+        const percentW = document.documentElement.clientWidth / 1920
+        const percentH = document.documentElement.clientHeight / 1080
+        $('#main-box')[0].style.transform = 'scale(' + percentW + ',' + percentH + ')'
+      }
+
+      window.addEventListener('resize', changeSize)
+
+      changeSize()
+
+      var getQueryString = function (name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+          return unescape(r[2]);
+        }
+        return null;
+      }
+
+      var baseUrl = '/dg-trade-api/api'
+
+      var _get = function (url, callback) {
+
+
+        let token = null
+        try{
+            token = window.parent.sessionStorage.getItem('VUEX_ST_TOKEN')
+        }catch(e){}
+
+        $.ajax({
+            headers: {
+                'Authorization': token,
+                Source: 'PC',
+            },
+            url: baseUrl + url,
+            type:'GET',
+            success: callback,
+            dataType:'json',
+
+        });
+      }
+
+      var uscc = getQueryString('uscc') || ''
+
+      _get('/cinda/operateStatus/list?uscc=' + uscc, function (data) {
+
+        $('#companyName').html(data.data[0].companyName)
+      })
+
+
+
+
+
+
+      var initTop = function () {
+        _get('/cinda/operateStatus/businessSummaryData/' + uscc, function (data) {
+
+
+          $('#shipmentPlanThisMonth').text(data.data.shipmentPlanThisMonth)
+          $('#actualShipmentThisMonth').text(data.data.actualShipmentThisMonth)
+          $('#paymentThisMonth').text(data.data.paymentThisMonth.toFixed(3))
+          $('#rawMaterialInventory').text(data.data.rawMaterialInventory)
+
+        })
+      }
+
+      var initChart1 = function () {
+        var chartDom = $('#chartItem1')[0];
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        _get('/cinda/operateStatus/inOutWarehouseData/' + uscc, function (data) {
+
+
+          option = {
+            title: {
+              text: '出入库数据',
+              textStyle: {
+                color: '#fff'
+              }
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: [data.data.intoWarehouseName, data.data.outWarehouseName],
+              textStyle: {
+                color: '#fff'
+              },
+              right: 20,
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: data.data.intoWarehouseList.map(d => d.key),
+              axisLine: {
+                show: false,
+              },
+              axisLabel: {
+                fontSize: 11,
+                color: '#70c5ff7a'
+              }
+
+            },
+            yAxis: {
+              type: 'value',
+              axisLabel: {
+                color: '#70c5ff7a'
+              },
+              splitLine: {
+                lineStyle: {
+                  color: '#3667a2ad',
+                  width: 1,
+                  type: 'solid'
+                }
+              }
+            },
+            series: [
+              {
+                name: data.data.intoWarehouseName,
+                type: 'line',
+                data: data.data.intoWarehouseList.map(d => d.value)
+              },
+              {
+                name: data.data.outWarehouseName,
+                type: 'line',
+                data: data.data.outWarehouseList.map(d => d.value)
+              },
+
+            ]
+          };
+
+          option && myChart.setOption(option);
+        })
+      }
+      var initChart2 = function () {
+        var chartDom = $('#chartItem2')[0];
+        var myChart = echarts.init(chartDom);
+        var option;
+        _get('/cinda/operateStatus/fundFlowData/' + uscc, function (data) {
+
+
+
+
+          option = {
+            title: {
+              text: '资金流水数据（万元）',
+              textStyle: {
+                color: '#fff'
+              }
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: ['回款', '还款'],
+              textStyle: {
+                color: '#fff'
+              },
+              right: 20,
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: data.data.paymentList.map(d => d.key),
+              axisLine: {
+                show: false,
+              },
+              axisLabel: {
+                color: '#70c5ff7a'
+              }
+
+            },
+            yAxis: {
+              type: 'value',
+              axisLabel: {
+                color: '#70c5ff7a'
+              },
+              splitLine: {
+                lineStyle: {
+                  color: '#3667a2ad',
+                  width: 1,
+                  type: 'solid'
+                }
+              }
+            },
+            series: [
+              {
+                name: '回款',
+                type: 'line',
+                smooth: true,
+                data: data.data.paymentList.map(d => d.value)
+              },
+              {
+                name: '还款',
+                type: 'line',
+                smooth: true,
+                data: data.data.repaymentList.map(d => d.value)
+              },
+
+            ]
+          };
+
+          option && myChart.setOption(option);
+        })
+      }
+      var initChart3 = function () {
+        var chartDom = $('#chartItem3')[0];
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        _get('/cinda/operateStatus/overallShippingData/' + uscc, function (data) {
+
+
+
+
+
+          option = {
+            title: {
+              text: '整体发运数据',
+              textStyle: {
+                color: '#fff'
+              }
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: ['铁路计划', '实际发运'],
+              textStyle: {
+                color: '#fff'
+              },
+              right: 20,
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            xAxis: [{
+              type: 'category',
+              data: data.data.railwayPlanData.map(d => d.key),
+              axisLine: {
+                show: false,
+              },
+              axisLabel: {
+                fontSize:11,
+                color: '#70c5ff7a'
+              }
+
+            }],
+            yAxis: [{
+              type: 'value',
+              axisLabel: {
+                color: '#70c5ff7a'
+              },
+              splitLine: {
+                lineStyle: {
+                  color: '#3667a2ad',
+                  width: 1,
+                  type: 'solid'
+                }
+              }
+            }],
+            series: [
+              {
+                name: '铁路计划',
+                type: 'bar',
+                color: '#5B8FF9',
+                data: data.data.railwayPlanData.map(d => d.value)
+              },
+              {
+                name: '实际发运',
+                type: 'bar',
+                color: '#5AD8A6',
+                data: data.data.actualShipmentData.map(d => d.value)
+              },
+
+            ]
+          };
+
+          option && myChart.setOption(option);
+        })
+      }
+      var initChart4 = function () {
+        var chartDom = $('#chartItem4')[0];
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+          title: {
+            show: false,
+            text: '',
+            textStyle: {
+              color: '#fff'
+            }
+          },
+          tooltip: {
+            // show: false,
+            trigger: 'axis'
+          },
+          legend: {
+            data: ['铁路计划', '实际发运'],
+            textStyle: {
+              color: '#fff'
+            },
+            right: 20,
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: [{
+            type: 'category',
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            axisLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: '#70c5ff7a'
+            }
+
+          }],
+          yAxis: [{
+            type: 'value',
+            axisLabel: {
+              color: '#70c5ff7a'
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#3667a2ad',
+                width: 1,
+                type: 'solid'
+              }
+            }
+          }],
+          series: [
+            {
+              name: '铁路计划',
+              type: 'bar',
+              color: '#5D7092',
+              data: [120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+              name: '实际发运',
+              type: 'bar',
+              color: '#5AD8A6',
+              data: [220, 182, 191, 234, 290, 330, 310]
+            },
+
+          ]
+        };
+
+        _get('/cinda/operateStatus/overallShippingData/list/' + uscc, function (data) {
+
+          var k = 0
+          var ispause = false
+          var loopChange = function () {
+
+            var cur = data.data[k]||{}
+            $('.f-title .text').text(cur.terminalCompany)
+            option.xAxis[0].data = cur.railwayPlanData.map(d => d.key)
+            option.series[0].data = cur.railwayPlanData.map(d => d.value)
+            option.series[1].data = cur.actualShipmentData.map(d => d.value)
+            option && myChart.setOption(option);
+
+          }
+          var timer = setInterval(function () {
+            if (ispause) return
+
+
+            $('.right-icon').click()
+
+          }, 5000)
+
+          $('.chart-item-4').hover(function () {
+            ispause = true
+            $('.up-icon').show()
+          }, function () {
+            ispause = false
+            $('.up-icon').hide()
+          })
+
+          $('.left-icon').click(function () {
+            if (k == 0) {
+              k = data.data.length - 1
+            } else {
+              k--
+            }
+            loopChange()
+          })
+          $('.right-icon').click(function () {
+            if (k == data.data.length - 1) {
+              k = 0
+            } else {
+              k++
+            }
+
+            loopChange()
+          })
+
+
+
+          loopChange()
+
+
+
+        })
+
+
+      }
+
+      initTop()
+      initChart1()
+      initChart2()
+      initChart3()
+      initChart4()
+    })
+  </script>
+</body>
+
+</html>
