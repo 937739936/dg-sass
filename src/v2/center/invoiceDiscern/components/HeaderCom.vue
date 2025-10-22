@@ -748,7 +748,6 @@ export default {
 		},
 		reloadPage() {
 			window.location.reload();
-			// window.location.href = "/center/workbench/myToDoList";
 		},
 		getNoteList() {
 			API_GetNoticeList({

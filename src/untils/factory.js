@@ -354,7 +354,7 @@ export async function getPersonalDetail(callback) {
 				const { companyType } = currentLoginCompany;
 				if (companyType == 'CORE_COMPANY') {
 					if (auth) {
-						callback('/center/workbench/myToDoList');
+						callback('/');
 					} else {
 						callback('/center/account/person/info');
 					}

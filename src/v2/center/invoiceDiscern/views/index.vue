@@ -18,7 +18,7 @@ export default {
 	async created() {
 		const flag = await this.isShowTool();
 		if (!flag) {
-			this.$router.push('/center/workbench/myToDoList');
+			this.$router.push('/');
 		}
 	},
 	mounted() {

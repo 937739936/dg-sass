@@ -1,6 +1,5 @@
 // 通过路由查找代码路径
 return {
-  "center/workbench/myToDoList": "v2/center/workbench/views/index",
   // 数字供应链
   // 合同管理-电子合同
   "center/contract/buy/list": "v2/center/trade/views/contract/online/List.vue",
@@ -265,7 +264,7 @@ return {
   "center/financing/financingSign": "v2/center/financing/views/financing/accounts/FinancingSign.vue",
   "center/financing/financingDetailAudit": "v2/center/financing/views/financing/accounts/FinancingDetailAudit.vue",
   "center/financing/financingAuditSign": "v2/center/financing/views/financing/accounts/FinancingAuditSign.vue",
-  // 预付融资	
+  // 预付融资
   "center/financing/financingAdvanceList": "v2/center/financing/views/financing/advance/FinancingAdvanceList.vue",
   "center/financing/financingAdvanceApply": "v2/center/financing/views/financing/advance/FinancingAdvanceApply.vue",
   "center/financing/financingAdvanceSign": "v2/center/financing/views/financing/advance/FinancingAdvanceSign.vue",
@@ -273,7 +272,7 @@ return {
   "center/financing/financingAdvanceRDRegis": "v2/center/financing/views/financing/advance/FinancingAdvanceRDRegis.vue",
   "center/financing/financingAdvanceDetailAudit": "v2/center/financing/views/financing/advance/FinancingAdvanceDetailAudit.vue",
   "center/financing/financingAdvanceAuditSign": "v2/center/financing/views/financing/advance/FinancingAdvanceAuditSign.vue",
-  // 货押融资	
+  // 货押融资
   "center/financing/financingPledgeListMAINLOG": "v2/center/financing/views/financing/pledge/FinancingPledgeListMAINLOG.vue",
   "center/financing/financingPledgeList": "v2/center/financing/views/financing/pledge/FinancingPledgeList.vue",
   "center/financing/financingPledgeApply": "v2/center/financing/views/financing/pledge/FinancingPledgeApply.vue",
@@ -291,7 +290,7 @@ return {
   "center/loan/loanApplySh": "v2/center/financing/views/loan/accounts/sh/LoanApplySH.vue",
   "center/loan/loanApplyNS": "v2/center/financing/views/loan/accounts/ns/LoanApplyNS.vue",
   "center/loan/loanApply": "v2/center/financing/views/loan/accounts/LoanApply.vue",
-  "center/loan/loanReceivableHuan": "v2/center/financing/views/loan/accounts/LoanHuan.vue",  
+  "center/loan/loanReceivableHuan": "v2/center/financing/views/loan/accounts/LoanHuan.vue",
   "center/loan/loanReceipt": "v2/center/financing/views/loan/accounts/LoanReceipt.vue",
   "center/loan/loanApplyDetail": "v2/center/financing/views/loan/accounts/LoanApplyDetail.vue",
   // 预付放还款
