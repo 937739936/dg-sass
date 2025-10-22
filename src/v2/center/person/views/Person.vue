@@ -1,12 +1,19 @@
 <template>
 	<div class="person slMain">
 		<a-card :bordered="false">
-			<div class="loading-wrap" v-if="loading">
+			<div
+				class="loading-wrap"
+				v-if="loading"
+			>
 				<a-spin />
 			</div>
 			<div v-else>
-				<NoAuth v-if="!auth && !authAuditStatus"/>
-				<Info v-else :personalInfo="personalInfo" v-on:update="initData" />
+				<NoAuth v-if="!auth && !authAuditStatus" />
+				<Info
+					v-else
+					:personalInfo="personalInfo"
+					v-on:update="initData"
+				/>
 			</div>
 			<!-- <Auth /> -->
 			<!-- <Authed /> -->
@@ -20,7 +27,6 @@ import ENV from '@/v2/config/env';
 import { API_PERSONALMODIFY, API_PersonalModifyMobileValid, API_GetRealNameAuthDetail } from '@/v2/api/account';
 import { mapGetters, mapMutations } from 'vuex';
 import { API_UPLOAD } from '@/v2/center/person/api';
-import { cancelUnset } from '@/v2/center/home/lib/rem';
 import NoAuth from './components/NoAuth';
 import Auth from './components/Auth';
 import Authed from './components/Authed';
@@ -63,7 +69,6 @@ export default {
 	},
 	watch: {},
 	mounted() {
-		cancelUnset();
 		this.initData();
 	},
 	methods: {
@@ -139,7 +144,9 @@ export default {
 	.title {
 		height: 33px;
 		font-size: 24px;
-		font-family: PingFangSC-Medium, PingFang SC;
+		font-family:
+			PingFangSC-Medium,
+			PingFang SC;
 		font-weight: 500;
 		color: rgba(0, 0, 0, 0.8);
 		line-height: 33px;

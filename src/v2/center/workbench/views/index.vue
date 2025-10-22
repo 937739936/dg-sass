@@ -356,7 +356,7 @@
 												v-for="(item, index) in bankUsccListOne"
 												:key="index"
 											>
-												{{ item.bankName.replace('郑州'+systemConfig.name+'有限公司', '供应链资金') }}
+												{{ item.bankName.replace('郑州' + systemConfig.name + '有限公司', '供应链资金') }}
 											</a-select-option>
 										</a-select>
 										<span
@@ -571,7 +571,10 @@
 			</div>
 		</a-modal>
 		<!-- 铁瑞系公司跳转导航 -->
-		<TieRuiGuide ref="tieRuiGuide" v-if="isBelongTieRui"/>
+		<TieRuiGuide
+			ref="tieRuiGuide"
+			v-if="isBelongTieRui"
+		/>
 	</div>
 </template>
 <script>
@@ -602,8 +605,7 @@ import DatePicker2 from '../components/DatePicker2.vue';
 import systemConfig from '@/v2/config/common';
 import { hasAuth } from '@/v2/utils/checkAuth';
 import moment from 'moment';
-import TieRuiGuide from "@/components/TieRuiGuide/index.vue";
-import { cancelUnset } from '@/v2/center/home/lib/rem';
+import TieRuiGuide from '@/components/TieRuiGuide/index.vue';
 function getTextWidth(text, fontSize) {
 	// 创建一个canvas元素用于测量文本
 	const canvas = document.createElement('canvas');
@@ -980,7 +982,7 @@ export default {
 			VUEX_ST_COMPANYSUER: 'VUEX_ST_COMPANYSUER'
 		}),
 		isBelongTieRui() {
-			return this.VUEX_ST_COMPANYSUER?.company?.group?.code === 'JT0051'
+			return this.VUEX_ST_COMPANYSUER?.company?.group?.code === 'JT0051';
 		},
 		bankUsccListOne() {
 			return this.bankUsccList;
@@ -1022,19 +1024,23 @@ export default {
 	},
 	beforeRouteLeave(to, from, next) {
 		// 铁瑞系公司登录系统-非账户中心菜单下展示提示弹窗
-		const passFlag = to.fullPath.indexOf('/center/account') !== -1 || to.fullPath.indexOf('/center/monitoring') !== -1 || to.fullPath.indexOf('/center/assets') !== -1 || to.fullPath.indexOf('/center/financing') !== -1 || to.fullPath.indexOf('/center/financeCenter') !== -1
+		const passFlag =
+			to.fullPath.indexOf('/center/account') !== -1 ||
+			to.fullPath.indexOf('/center/monitoring') !== -1 ||
+			to.fullPath.indexOf('/center/assets') !== -1 ||
+			to.fullPath.indexOf('/center/financing') !== -1 ||
+			to.fullPath.indexOf('/center/financeCenter') !== -1;
 		if (this.isBelongTieRui) {
 			if (!passFlag) {
-				this.$refs.tieRuiGuide.showModal()
+				this.$refs.tieRuiGuide.showModal();
 			} else {
-				next()
+				next();
 			}
 		} else {
-			next()
+			next();
 		}
 	},
 	mounted: function () {
-		cancelUnset();
 		this.getGongData();
 		this.getRiskData();
 		//核心企业加载数据概览
@@ -1047,7 +1053,7 @@ export default {
 			this.getbankUsccList();
 		}
 		if (this.isBelongTieRui) {
-			this.$refs.tieRuiGuide.showModal()
+			this.$refs.tieRuiGuide.showModal();
 		}
 	},
 	methods: {
@@ -1061,7 +1067,7 @@ export default {
 		},
 		changeTab(item, e) {
 			e && $(e.target).addClass('active');
-			e &&$ (e.target).siblings().removeClass('active');
+			e && $(e.target).siblings().removeClass('active');
 			this.currentColumns = item.columns;
 			this.API_workbenchConfigList(item);
 		},

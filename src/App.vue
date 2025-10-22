@@ -18,7 +18,6 @@
 				class="searchDeliverTrain"
 				:style="contactStyle"
 			>
-				<ContactUs />
 				<!-- <img
           @click="jumpUrl"
           src="./assets/imgs/travel/search_icon.png"
@@ -38,7 +37,6 @@ import ENV from 'api/env.js';
 import { getQueryVariable } from '@/untils/factory.js';
 import ReconnectingWebSocket from 'reconnectingwebsocket';
 import storage from '@sub/utils/storage';
-import ContactUs from '@/v2/center/home/components/ContactUs.vue';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 // import Guide from "@/v2/center/trade/views/contract/guide/index.vue";
 import Online from '@/v2/components/Online';
@@ -52,8 +50,6 @@ export default {
 		};
 	},
 	components: {
-		ContactUs,
-		// Guide,
 		Online
 	},
 

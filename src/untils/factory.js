@@ -320,11 +320,6 @@ export async function getPersonalDetail(callback) {
 	const currentLoginCompany = store.getters['user/VUEX_ST_COMPANYSUER'];
 	let nowAuthCode = storage.session.get('nowAuthCode');
 	let switchCompany = storage.session.get('switchCompany');
-	// 如果是在帮助中心切换账户 跳转帮助中心首页
-	if (['/center/help/classify', '/center/help'].includes(window.location.pathname)) {
-		window.location.href = '/center/help';
-		return;
-	}
 	if (switchCompany && switchCompany == 'true') {
 		storage.session.set('switchCompany', false);
 		// 切换的铁瑞系公司特殊处理

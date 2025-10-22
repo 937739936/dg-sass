@@ -1215,7 +1215,6 @@
         renderAfterElementExists: '#app',
         routes: [
           '/',
-          '/home',
           '/case',
           '/solution',
           '/solution/tab=1',

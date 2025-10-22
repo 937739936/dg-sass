@@ -78,7 +78,6 @@ module.exports = {
 					// 对应自己的路由文件，比如a有参数，就需要写成 /a/param1。
 					routes: [
 						'/',
-						'/home',
 						'/case',
 						'/solution',
 						'/solution/tab=1',

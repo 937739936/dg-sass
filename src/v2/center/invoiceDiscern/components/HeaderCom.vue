@@ -439,9 +439,7 @@
 					<img
 						class="avatar"
 						:src="
-							VUEX_ST_PERSONALLINFO.picUrl
-								? VUEX_ST_PERSONALLINFO.picUrl
-								: require('@/v2/assets/imgs/person/default-avatar.png')
+							VUEX_ST_PERSONALLINFO.picUrl ? VUEX_ST_PERSONALLINFO.picUrl : require('@/v2/assets/imgs/person/default-avatar.png')
 						"
 					/>
 				</div>
@@ -480,7 +478,7 @@ import VerifyJoinCompany from '@/v2/center/person/components/VerifyJoinCompany.v
 import { getPersonalDetail } from 'untils/factory.js';
 import { filterCodeByKey } from '@sub/utils/globalCode.js';
 import personValid from '@/v2/components/personValid';
-import storage from "@sub/utils/storage";
+import storage from '@sub/utils/storage';
 import Login from '@/components/common/modules/Login';
 import CurrentDirector from '@/components/common/modules/CurrentDirector';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
@@ -931,13 +929,13 @@ export default {
 						path: '/center/message/index'
 					});
 				}
-			} else if (['YJSF0016', 'YJSF0017'].includes(record.ruleNo)){ 
+			} else if (['YJSF0016', 'YJSF0017'].includes(record.ruleNo)) {
 				// 陕煤物流监管-预警
 				this.$router.push({
 					path: '/center/message/riskControlLogisticSuperviseDetail',
 					query: {
 						id: record.id,
-						ruleNo:  record.ruleNo,
+						ruleNo: record.ruleNo
 					}
 				});
 			} else {
@@ -1013,40 +1011,6 @@ header {
 		display: block;
 		margin-top: 3px;
 		object-fit: cover;
-	}
-	.notice-icon {
-		width: 18px;
-		height: 18px;
-		background-image: url(~@/v2/assets/imgs/home/notice_icon.png);
-		margin-right: 24px;
-		background-size: cover;
-		position: relative;
-		margin-top: 9px;
-		.notice-count {
-			height: 16px;
-			padding: 0 5px;
-			position: absolute;
-			font-size: 12px;
-			line-height: 16px;
-			font-weight: 500;
-			color: #ffffff;
-			top: -5px;
-			left: 18px;
-			background: #e8372b;
-			border-radius: 8px 8px 8px 0px;
-		}
-		&:hover {
-			background-image: url(~@/v2/assets/imgs/home/notice_icon_hover.png);
-		}
-	}
-	.notice-icon.has {
-		width: 21px;
-		height: 23px;
-		background-image: url(~@/v2/assets/imgs/home/notice_icon_has.png);
-		margin-top: 4px;
-		&:hover {
-			background-image: url(~@/v2/assets/imgs/home/notice_icon_has_hover.png);
-		}
 	}
 
 	.nickname {

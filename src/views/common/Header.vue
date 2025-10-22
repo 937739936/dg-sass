@@ -8,11 +8,11 @@
 							to="/home"
 							class="experience-btn"
 						>
-							<img
+							<!-- <img
 								class="logo-img"
 								src="../../assets/imgs/home/menu/shulian-logo.png"
 								alt=""
-							/>
+							/> -->
 						</router-link>
 					</div>
 					<div class="menu-block">

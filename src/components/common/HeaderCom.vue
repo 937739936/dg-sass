@@ -47,9 +47,6 @@
 					</ul>
 				</div>
 				<div class="right-content">
-					<span class="center-help-btn">
-						<span @click="openHelpCenter">帮助中心</span>
-					</span>
 					<div
 						:class="'notice-icon ' + (totalNoticeNum || totalWarningNum ? 'has' : '')"
 						@mouseenter="hoverNoticeIcon"
@@ -286,11 +283,6 @@ export default {
 		...mapActions({
 			VUEX_USER_LOGOUT: 'user/VUEX_USER_LOGOUT'
 		}),
-		openHelpCenter() {
-			const code = reportCode.helpCenter.entry;
-			window.reportUtil.reportEvent(code, {});
-			window.open('/center/help');
-		},
 		hasAuth,
 		setActiveTab(item) {
 			const currentPathFlag = this.$route.path?.split('/')[2] || '';
@@ -612,38 +604,6 @@ header {
 			line-height: 23px;
 			color: rgba(0, 0, 0, 0.8);
 			font-family: PingFangSC-Medium;
-		}
-	}
-	.notice-icon {
-		width: 18px;
-		height: 18px;
-		background-image: url(~@/v2/assets/imgs/home/notice_icon.png);
-		background-size: cover;
-		position: relative;
-		.notice-count {
-			height: 16px;
-			padding: 0 5px;
-			position: absolute;
-			font-size: 12px;
-			line-height: 16px;
-			font-weight: 500;
-			color: #ffffff;
-			top: -5px;
-			left: 18px;
-			background: #e8372b;
-			border-radius: 8px 8px 8px 0px;
-		}
-		&:hover {
-			background-image: url(~@/v2/assets/imgs/home/notice_icon_hover.png);
-		}
-	}
-	.notice-icon.has {
-		width: 21px;
-		height: 23px;
-		background-image: url(~@/v2/assets/imgs/home/notice_icon_has.png);
-		// margin-top: 4px;
-		&:hover {
-			background-image: url(~@/v2/assets/imgs/home/notice_icon_has_hover.png);
 		}
 	}
 
